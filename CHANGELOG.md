@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-07-26: Installable skill separated from repository documentation
+
+### Changed
+
+- Moved `SKILL.md` and `agents/openai.yaml` into the
+  `scoville-anti-ai-coding-slop/` directory. The installable directory now
+  contains only runtime skill files, while README, changelog, license, and the
+  embeddable `AGENTS-SECTION.md` remain at the repository root.
+- Updated installation instructions and the rules link to target the named
+  skill directory. Its parent directory continues to match the frontmatter
+  name.
+
 ## 2026-07-26: Runtime-neutral operations, interactive asking, validation floor
 
 ### Added

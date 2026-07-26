@@ -44,16 +44,16 @@ Usually, let your coding agent install the skill. Send it this prompt:
 
 ```text
 Install this Agent Skill from GitHub and make it available for my coding work:
-https://github.com/benjaminstelzer/scoville-anti-ai-coding-slop
+https://github.com/benjaminstelzer/scoville-anti-ai-coding-slop/tree/main/scoville-anti-ai-coding-slop
 ```
 
 Add "for all my projects" or "only for this project" when the installation
 scope matters. The agent should choose its supported skills directory,
-install the repository under the unchanged name
+install the skill directory under the unchanged name
 `scoville-anti-ai-coding-slop`, and refresh its skill list.
 
-If your agent cannot install skills itself, clone or copy the repository so the
-final path is:
+If your agent cannot install skills itself, copy the repository's
+`scoville-anti-ai-coding-slop/` directory so the final path is:
 
 ```text
 <skills-dir>/scoville-anti-ai-coding-slop/SKILL.md
@@ -144,7 +144,8 @@ The file is regenerated whenever `SKILL.md` changes.
   single step. Without version control every edit counts as irreversible: read
   before overwriting, preserve untouched content.
 
-The full rules live in [SKILL.md](SKILL.md).
+The full rules live in
+[SKILL.md](scoville-anti-ai-coding-slop/SKILL.md).
 
 ## Design
 
@@ -189,10 +190,11 @@ The skill draws from the following sources:
 
 ## Status
 
-Minimal single-skill repo: `SKILL.md`, the embeddable `AGENTS-SECTION.md`
-variant, agent metadata (`agents/openai.yaml`), changelog, and license. No
-bundled scripts, references, assets, runtime dependencies, or stack-specific
-rules.
+The installable `scoville-anti-ai-coding-slop/` directory contains only
+`SKILL.md` and agent metadata. Repository documentation, the embeddable
+`AGENTS-SECTION.md` variant, changelog, and license remain at the root. The
+skill has no bundled scripts, references, assets, runtime dependencies, or
+stack-specific rules.
 
 Benchmark and small-model validation results published for earlier versions
 were removed from this README: they measured the previous rule set and will be
