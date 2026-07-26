@@ -69,10 +69,11 @@ behavior or contract effect, and how should it be validated?"* When neither user
 nor repository rules replace Scoville's defaults, you should get **Develop**
 with at most one existing focused check: no plan, no new test, no broad suite.
 
-**What it costs.** `SKILL.md` currently contains roughly 1,700 words. A
-compatible agent loads the instructions when the skill triggers, although exact
-context accounting depends on the agent. Installing it per project limits where
-it is available; it does not reduce the cost of an individual invocation.
+**What it costs.** `SKILL.md` currently contains 1,953 words of rules plus 64
+words of frontmatter. A compatible agent loads the instructions when the skill
+triggers, although exact context accounting depends on the agent. Installing it
+per project limits where it is available; it does not reduce the cost of an
+individual invocation.
 
 ## Use via AGENTS.md instead of a skill
 
@@ -89,9 +90,11 @@ instruction file: `AGENTS.md` for Codex, `CLAUDE.md` for Claude Code.
 > delivery mechanism is enough. Two copies can drift apart, and when the skill
 > triggers, the same rules load into context twice and cost additional tokens.
 
-`AGENTS-SECTION.md` contains the same rules as `SKILL.md`; only the packaging
-differs, so both delivery forms enforce identical behavior. The file is
-regenerated whenever `SKILL.md` changes.
+`AGENTS-SECTION.md` carries the same rule text as `SKILL.md`, verified
+character for character from the first heading onward; only the packaging and
+the opening scope paragraph differ. What differs is when the rules arrive: the
+skill loads on demand, the embedded section is active from the first action.
+The file is regenerated whenever `SKILL.md` changes.
 
 ## What it enforces
 
@@ -103,25 +106,43 @@ regenerated whenever `SKILL.md` changes.
   check could plausibly change the implementation or completion decision, and
   behavior that was not observed is never claimed. A failed check is presumed
   substantive and caused by the change unless specific evidence shows it is
-  pre-existing or environmental. An infrastructure failure permits one
-  different substitute check rather than an environment-probing loop. Decisive
-  evidence ends validation for that behavior and leads to one coherent final
-  Git inspection. Two consecutive failed attempts against the same substantive
-  check force a change of approach instead of a third blind patch.
-- **Modes instead of one ceremony.** Advisory, Review, Explore, Develop, and
-  Harden separate answering, inspecting, experimenting, ordinary delivery, and
+  pre-existing or environmental. An infrastructure failure permits the
+  project's documented setup step once and one different substitute check,
+  rather than an environment-probing loop. Changing the behavior or signature
+  of a symbol used elsewhere requires at least one check that exercises one of
+  those uses. Decisive
+  evidence ends validation for that behavior and leads to one final inspection
+  of the scoped change. Two consecutive failed attempts against the same
+  substantive check force a change of approach instead of a third blind patch.
+- **Modes instead of one ceremony.** Advise, Explore, Develop, and Harden
+  separate answering or reviewing, experimenting, ordinary delivery, and
   release gating. Touching a central file, public API, or existing test suite
   alone never escalates Develop to Harden, and prototype code kept beyond an
-  experiment must meet Develop validation before completion is claimed.
+  experiment must meet Develop validation before completion is claimed. Modes
+  and risk flags stay internal: they select behavior and are never announced as
+  a preamble, heading, or checklist.
 - **A hard integrity floor.** Misleading wrappers, silent fallbacks, lossy
   projections, progress published before the work is durable, and duplicate
-  owners that bypass canonical invariants are never introduced. Maintainability
+  owners that bypass canonical invariants are never introduced, each with a
+  worked example so the rule is recognizable in real code. Maintainability
   smells are review signals resolved when the active change worsens them
   materially, not automatic blockers.
 - **No artifact economy.** No automatic plan files or decision logs. Material
   decisions go into the project's existing plan, ADR, or pull-request
   mechanism; a handoff across interruption or compaction records only the
   requested outcome, current state, decisive evidence, and next concrete step.
+- **Asking scales with the setting.** Work that does not depend on the open
+  question happens first. When you are present, one specific question beats a
+  wrong guess; when the agent runs unattended, it does not block but names the
+  assumption it took in the report. Materially different product outcomes,
+  irreversible loss, weakened guarantees, new external cost, and scope
+  expansion are always worth asking about.
+- **Runtime-neutral operations.** The rules say what to establish, not which
+  commands to type. Under version control the agent closes with one inspection
+  of the complete scoped change and the working-tree state; in Git that is
+  typically `git diff --check`, the scoped diff, and `git status --short` in a
+  single step. Without version control every edit counts as irreversible: read
+  before overwriting, preserve untouched content.
 
 The full rules live in [SKILL.md](SKILL.md).
 

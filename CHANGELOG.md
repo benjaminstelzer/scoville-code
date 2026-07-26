@@ -1,5 +1,75 @@
 # Changelog
 
+## 2026-07-26: Runtime-neutral operations, interactive asking, validation floor
+
+### Added
+
+- Modes, risk flags, and the framing questions are internal selectors and must
+  never appear in output as a preamble, heading, or checklist. Without this the
+  skill invites its own ceremony: an agent that has been handed a rubric tends
+  to perform it visibly, which is the Goodhart failure the goal-first rewrite
+  set out to remove.
+- A validation floor against silent regressions: when a change alters the
+  behavior or signature of a symbol used elsewhere, at least one check must
+  exercise one of those uses. The surrounding rules all push toward stopping
+  early, and nothing previously stopped a focused check on the owner from
+  passing while its callers broke. The rule is scoped to behavior and signature
+  so that a purely local rename still needs nothing beyond one existing check.
+- An infrastructure failure now permits the project's documented setup step
+  once before the single substitute check. A missing dependency in a fresh
+  environment is routine and cheap to fix; treating it as a reason to report
+  unverified was an escape hatch, not restraint.
+- A rule for projects without version control: every edit is irreversible, so
+  read a file before overwriting it and preserve content the request does not
+  touch. This case was previously unhandled, and it is the case with the least
+  margin for error.
+- Worked examples for all five integrity-floor failures. The goal-first rewrite
+  removed the SC1-SC10 examples and left the file almost entirely abstract;
+  examples are what makes an abstract rule recognizable in real code.
+
+### Changed
+
+- Asking now scales with the setting. Work that does not depend on the answer
+  happens first; then the agent asks once and specifically, before the
+  dependent work. When the user is present, one question beats a wrong guess;
+  when running unattended, the agent does not block but names the assumption it
+  took. The previous single rule was tuned for unattended batches and made
+  interactive agents guess at material product ambiguity.
+- The final inspection is stated as an outcome, not a command line. It requires
+  one inspection of the complete scoped change and the working-tree state using
+  whatever the runtime provides, and applies only when the project is under
+  version control. Prescribing `git diff --check`, the scoped diff, and
+  `git status --short` in one command put runtime specifics into a principles
+  document and sent agents looking for Git in directories that have none. The
+  concrete Git form moved to the README.
+- `Advisory` and `Review` merged into one `Advise` mode; they differed in label
+  only. Four modes remain: Advise, Explore, Develop, Harden.
+- `Workflow inheritance` became `Precedence` and moved to the top, where the
+  ordering it defines actually applies. Its first tier now names system and
+  safety instructions explicitly, which the section header previously carried
+  only in the intro paragraph.
+- The integrity failures became their own top-level section instead of a tail
+  of `Risk flags`. They are absolute, not risk-selected safeguards.
+- The prompt-injection rule moved from `Locate proportionately` to
+  `Version control and safety`, next to the other rules it belongs with.
+- The frontmatter description now names triggering situations instead of
+  values, and states what the skill is not needed for.
+- Removed three internal duplicates: the prohibition on competing plans and
+  logs stated three times, the precedence rule stated twice, and the
+  test-only/refactor-only/documentation-only rule stated twice.
+
+### Note
+
+- `SKILL.md` grew from 1,866 to 1,953 words of rules. The deduplication and
+  tighter phrasing did not offset the added examples and rules, and the README
+  word count was corrected from its stale "roughly 1,700".
+- The README claim that both delivery forms "enforce identical behavior" was
+  narrowed to identical rule text, verified character for character from the
+  first heading onward. Loading time differs by construction, so the behavioral
+  claim was never established.
+- `AGENTS-SECTION.md` was regenerated from the new `SKILL.md`; both file hashes
+  change and pinned benchmark arms must re-pin.
+
 ## 2026-07-22: Compaction-safe handoff record
 
 ### Changed
