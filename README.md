@@ -69,7 +69,7 @@ behavior or contract effect, and how should it be validated?"* When neither user
 nor repository rules replace Scoville's defaults, you should get **Develop**
 with at most one existing focused check: no plan, no new test, no broad suite.
 
-**What it costs.** `SKILL.md` currently contains 1,953 words of rules plus 64
+**What it costs.** `SKILL.md` currently contains 1,953 words of rules plus 62
 words of frontmatter. A compatible agent loads the instructions when the skill
 triggers, although exact context accounting depends on the agent. Installing it
 per project limits where it is available; it does not reduce the cost of an
@@ -90,11 +90,10 @@ instruction file: `AGENTS.md` for Codex, `CLAUDE.md` for Claude Code.
 > delivery mechanism is enough. Two copies can drift apart, and when the skill
 > triggers, the same rules load into context twice and cost additional tokens.
 
-`AGENTS-SECTION.md` carries the same rule text as `SKILL.md`, verified
-character for character from the first heading onward; only the packaging and
-the opening scope paragraph differ. What differs is when the rules arrive: the
-skill loads on demand, the embedded section is active from the first action.
-The file is regenerated whenever `SKILL.md` changes.
+`AGENTS-SECTION.md` carries the same rule text as `SKILL.md`, verified character
+for character from `Treat AI slop` onward. Its opening scope paragraph replaces
+the skill frontmatter. What differs is when the rules arrive: the skill loads on
+demand, the embedded section is active from the first action.
 
 ## What it enforces
 
@@ -127,8 +126,8 @@ The file is regenerated whenever `SKILL.md` changes.
   worked example so the rule is recognizable in real code. Maintainability
   smells are review signals resolved when the active change worsens them
   materially, not automatic blockers.
-- **No artifact economy.** No automatic plan files or decision logs. Material
-  decisions go into the project's existing plan, ADR, or pull-request
+- **No parallel process artifacts.** No automatic plan files or decision logs.
+  Material decisions go into the project's existing plan, ADR, or pull-request
   mechanism; a handoff across interruption or compaction records only the
   requested outcome, current state, decisive evidence, and next concrete step.
 - **Asking scales with the setting.** Work that does not depend on the open
@@ -183,8 +182,9 @@ The skill draws from the following sources:
 - [OWASP Top 10 for LLM Applications 2025](https://genai.owasp.org/llm-top-10/): prompt injection, sensitive-information disclosure, supply-chain risk, improper output handling, and excessive agency.
 - [OWASP LLM01 Prompt Injection](https://genai.owasp.org/llmrisk/llm01-prompt-injection/) and [LLM06 Excessive Agency](https://genai.owasp.org/llmrisk/llm062025-excessive-agency/): least privilege, human approval for high-risk actions, untrusted external content, and deterministic safeguards.
 - [Andrej Karpathy on vibe coding](https://x.com/karpathy/status/1886192184808149383): natural-language software construction is powerful, but production engineering still needs scope, review, testing, taste, and ownership.
-- Simon Willison's distinction between vibe coding and reviewed, tested,
-  understood AI-assisted coding: Scoville is for the latter.
+- [Simon Willison's distinction between vibe coding and reviewed, tested,
+  understood AI-assisted coding](https://simonwillison.net/2025/Mar/19/vibe-coding/):
+  Scoville is for the latter.
 - Martin Fowler on [internal quality](https://martinfowler.com/articles/is-quality-worth-cost.html) and [technical debt](https://martinfowler.com/bliki/TechnicalDebt.html): maintainability is a delivery property, not polish.
 - Recent research on AI/vibe-coding quality: [Vibe Coding in Practice](https://arxiv.org/abs/2510.00328), [VibeContract](https://arxiv.org/abs/2603.15691), and [Is Vibe Coding Safe?](https://arxiv.org/abs/2512.03262).
 

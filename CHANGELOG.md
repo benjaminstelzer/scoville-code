@@ -1,5 +1,19 @@
 # Changelog
 
+## 2026-08-02: README factual and clarity corrections
+
+### Changed
+
+- Corrected the documented frontmatter size from 64 words to 62.
+- Anchored the exact `SKILL.md` and `AGENTS-SECTION.md` rule-text comparison at
+  `Treat AI slop`, after their intentionally different openings.
+- Removed the unsupported claim that `AGENTS-SECTION.md` is regenerated whenever
+  `SKILL.md` changes.
+- Replaced the opaque `No artifact economy` label with a direct description of
+  the rule against parallel process artifacts.
+- Linked Simon Willison's primary source for the distinction between vibe coding
+  and reviewed, tested, understood AI-assisted coding.
+
 ## 2026-07-26: Installable skill separated from repository documentation
 
 ### Changed
