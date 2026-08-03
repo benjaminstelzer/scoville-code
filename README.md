@@ -76,26 +76,6 @@ loads the full instructions when a relevant task triggers the skill. The exact
 token cost depends on the agent. Installing it for one project limits where it
 is available but does not make each use smaller.
 
-## Use via AGENTS.md instead of a skill
-
-Skills load on demand: the agent first sees only the skill's name and short
-description, then reads the full rules when a task is relevant. If your agent
-does not support skills, or you want Scoville active from the first action in
-every task, place the rules directly in your project instructions instead.
-
-Append the content of [AGENTS-SECTION.md](AGENTS-SECTION.md) to your project's
-instruction file: `AGENTS.md` for Codex, `CLAUDE.md` for Claude Code.
-
-> [!WARNING]
-> Do not install the skill and embed the section in the same project: one
-> delivery mechanism is enough. Two copies can drift apart, and when the skill
-> triggers, the same rules load into context twice and cost additional tokens.
-
-`AGENTS-SECTION.md` contains the same rules as `SKILL.md`; the only different
-part is its opening explanation. The delivery method changes when the agent sees
-the rules: the skill loads for relevant tasks, while the embedded section is
-active from the first action in every task.
-
 ## What it enforces
 
 - **Deliver the result you asked for.** The agent spends its effort on the
@@ -143,7 +123,7 @@ active from the first action in every task.
 The full rules live in
 [SKILL.md](scoville-code-anti-ai-slop/SKILL.md).
 
-## Use with Scoville UI and Scribe
+## Use with the Scoville family
 
 Use [Scoville UI Anti-AI-Slop](https://github.com/benjaminstelzer/scoville-ui-anti-ai-slop)
 when an engineering task also changes interface hierarchy, layout, interaction
@@ -194,14 +174,15 @@ The skill draws from the following sources:
 - Martin Fowler on [internal quality](https://martinfowler.com/articles/is-quality-worth-cost.html) and [technical debt](https://martinfowler.com/bliki/TechnicalDebt.html): maintainability is a delivery property, not polish.
 - Recent research on AI/vibe-coding quality: [Vibe Coding in Practice](https://arxiv.org/abs/2510.00328), [VibeContract](https://arxiv.org/abs/2603.15691), and [Is Vibe Coding Safe?](https://arxiv.org/abs/2512.03262).
 
-## Status
+## Repository contents
 
 The directory you install, `scoville-code-anti-ai-slop/`, contains only the
 skill instructions and a small metadata file that helps agents display the
-skill. The repository's README, embeddable instructions, changelog, and license
-stay outside that directory. The skill installs no scripts, libraries, or other
-software and contains no rules tied to a particular programming language or
-framework.
+skill. The repository's README, changelog, and license stay outside that
+directory. The skill installs no scripts, libraries, or other software and
+contains no rules tied to a particular programming language or framework.
+
+## Status
 
 Test results published for earlier versions were removed from this README
 because they measured a different set of rules. The same tests must be run

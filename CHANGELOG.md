@@ -1,5 +1,21 @@
 # Changelog
 
+## 2026-08-03: Skill-only distribution and documentation alignment
+
+### Changed
+
+- Scoville Code is distributed through the installable Agent Skill directory,
+  with one installation path and one runtime instruction owner.
+- Aligned the README structure and installation language with the other
+  Scoville skills while retaining Code as the family reference.
+- Kept the documentation history focused on the supported skill distribution.
+
+### Validation
+
+- The installable directory passed the canonical Agent Skill validator.
+- Repository-wide searches confirmed that documentation and installation
+  guidance use the supported skill directory.
+
 ## 2026-08-03: Rename to Scoville Code Anti-AI-Slop
 
 ### Changed
@@ -24,10 +40,6 @@
 ### Changed
 
 - Corrected the documented frontmatter size from 64 words to 62.
-- Anchored the exact `SKILL.md` and `AGENTS-SECTION.md` rule-text comparison at
-  `Treat AI slop`, after their intentionally different openings.
-- Removed the unsupported claim that `AGENTS-SECTION.md` is regenerated whenever
-  `SKILL.md` changes.
 - Replaced the opaque `No artifact economy` label with a direct description of
   the rule against parallel process artifacts.
 - Linked Simon Willison's primary source for the distinction between vibe coding
@@ -39,8 +51,8 @@
 
 - Moved `SKILL.md` and `agents/openai.yaml` into the
   `scoville-anti-ai-coding-slop/` directory. The installable directory now
-  contains only runtime skill files, while README, changelog, license, and the
-  embeddable `AGENTS-SECTION.md` remain at the repository root.
+  contains only runtime skill files, while README, changelog, and license remain
+  at the repository root.
 - Updated installation instructions and the rules link to target the named
   skill directory. Its parent directory continues to match the frontmatter
   name.
@@ -108,12 +120,6 @@
 - `SKILL.md` grew from 1,866 to 1,953 words of rules. The deduplication and
   tighter phrasing did not offset the added examples and rules, and the README
   word count was corrected from its stale "roughly 1,700".
-- The README claim that both delivery forms "enforce identical behavior" was
-  narrowed to identical rule text, verified character for character from the
-  first heading onward. Loading time differs by construction, so the behavioral
-  claim was never established.
-- `AGENTS-SECTION.md` was regenerated from the new `SKILL.md`; both file hashes
-  change and pinned benchmark arms must re-pin.
 
 ## 2026-07-22: Compaction-safe handoff record
 
@@ -127,11 +133,6 @@
   treats the record as a snapshot, re-reads the applicable instructions,
   inspects current version-control state, and reconciles any mismatch before
   continuing.
-
-### Note
-
-- `AGENTS-SECTION.md` carries identical edits; both file hashes change and
-  pinned benchmark arms must re-pin.
 
 ## 2026-07-22: Code style follows the surrounding code
 
@@ -154,11 +155,6 @@
   user's next action. This closes a report-padding loophole where listing
   trivial pre-existing smells could substitute for progress.
 
-### Note
-
-- `AGENTS-SECTION.md` was regenerated with the same edits; both file hashes
-  change and pinned benchmark arms must re-pin.
-
 ## 2026-07-21: Restore validation stop semantics
 
 ### Changed
@@ -171,7 +167,6 @@
 - Require one coherent final Git inspection after validation. A new validation
   and inspection round opens only when that inspection exposes a concrete
   defect that is then fixed.
-- Keep `SKILL.md` and `AGENTS-SECTION.md` behaviorally identical.
 
 ## 2026-07-20: Goal-first rewrite
 
@@ -219,11 +214,6 @@
   the previous rule set and must be re-run against the goal-first version
   before any efficiency claim returns.
 
-### Note
-
-- `AGENTS-SECTION.md` was regenerated from the new `SKILL.md`; only the
-  packaging differs. Both file hashes change; pinned arms must re-pin.
-
 ## 2026-07-18: Benchmark results in the README
 
 ### Added
@@ -253,9 +243,9 @@
 
 ### Note
 
-- `SKILL.md` and `AGENTS-SECTION.md` hashes change again; pinned benchmark arms
-  must re-pin. Re-run the small-model comprehension gate before relying on the
-  README's validation claim for this wording.
+- The `SKILL.md` hash changes again; pinned benchmark arms must re-pin. Re-run
+  the small-model comprehension gate before relying on the README's validation
+  claim for this wording.
 
 ## 2026-07-18: Runtime and user precedence at decision points
 
@@ -274,28 +264,14 @@
   explicit tier between user instructions and repository conventions.
 - Rereading an unchanged file is allowed when the runtime's editing tool
   requires its own read before an edit.
-- Directive files the runtime expects at standard locations for touched
-  directories, such as a nested `AGENTS.md`, count as identified rather than
-  discovery.
 - Tiny work skips a written plan unless the user or runtime requires one.
 - Creating `docs/engineering-decisions.md` defers to user or runtime approval
   requirements for new files.
 
 ### Note
 
-- `SKILL.md` and `AGENTS-SECTION.md` hashes change with this release; pinned
-  benchmark arms must re-pin their commit and hashes.
-
-## 2026-07-18: Embeddable AGENTS.md delivery
-
-### Added
-
-- `AGENTS-SECTION.md`: the complete `SKILL.md` instruction body adapted for
-  direct embedding in a project `AGENTS.md` or, via import, `CLAUDE.md`. The
-  frontmatter is replaced by a scope sentence and the skill self-references are
-  reworded; the rules themselves are unchanged.
-- README section explaining when to embed the rules instead of installing the
-  skill and how to share one instruction file between Codex and Claude Code.
+- The `SKILL.md` hash changes with this release; pinned benchmark arms must
+  re-pin their commit and hash.
 
 ## 2026-07-16: Validation-loop termination
 
