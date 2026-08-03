@@ -97,51 +97,46 @@ demand, the embedded section is active from the first action.
 
 ## What it enforces
 
-- **Goal-first delivery.** After safety and explicit constraints, the agent
-  optimizes for the requested observable outcome. When work starts producing
-  only tests, process artifacts, documentation, or internal cleanup without
-  advancing the outcome or closing a named risk, that line of work stops.
-- **Evidence over claims.** Validation continues exactly as long as another
-  check could plausibly change the implementation or completion decision, and
-  behavior that was not observed is never claimed. A failed check is presumed
-  substantive and caused by the change unless specific evidence shows it is
-  pre-existing or environmental. An infrastructure failure permits the
-  project's documented setup step once and one different substitute check,
-  rather than an environment-probing loop. Changing the behavior or signature
-  of a symbol used elsewhere requires at least one check that exercises one of
-  those uses. Decisive
-  evidence ends validation for that behavior and leads to one final inspection
-  of the scoped change. Two consecutive failed attempts against the same
-  substantive check force a change of approach instead of a third blind patch.
-- **Modes instead of one ceremony.** Advise, Explore, Develop, and Harden
-  separate answering or reviewing, experimenting, ordinary delivery, and
-  release gating. Touching a central file, public API, or existing test suite
-  alone never escalates Develop to Harden, and prototype code kept beyond an
-  experiment must meet Develop validation before completion is claimed. Modes
-  and risk flags stay internal: they select behavior and are never announced as
-  a preamble, heading, or checklist.
-- **A hard integrity floor.** Misleading wrappers, silent fallbacks, lossy
-  projections, progress published before the work is durable, and duplicate
-  owners that bypass canonical invariants are never introduced, each with a
-  worked example so the rule is recognizable in real code. Maintainability
-  smells are review signals resolved when the active change worsens them
-  materially, not automatic blockers.
-- **No parallel process artifacts.** No automatic plan files or decision logs.
-  Material decisions go into the project's existing plan, ADR, or pull-request
-  mechanism; a handoff across interruption or compaction records only the
-  requested outcome, current state, decisive evidence, and next concrete step.
-- **Asking scales with the setting.** Work that does not depend on the open
-  question happens first. When you are present, one specific question beats a
-  wrong guess; when the agent runs unattended, it does not block but names the
-  assumption it took in the report. Materially different product outcomes,
-  irreversible loss, weakened guarantees, new external cost, and scope
-  expansion are always worth asking about.
-- **Runtime-neutral operations.** The rules say what to establish, not which
-  commands to type. Under version control the agent closes with one inspection
-  of the complete scoped change and the working-tree state; in Git that is
-  typically `git diff --check`, the scoped diff, and `git status --short` in a
-  single step. Without version control every edit counts as irreversible: read
-  before overwriting, preserve untouched content.
+- **Deliver the result you asked for.** The agent spends its effort on the
+  requested behavior. Plans, tests, documentation, and refactors are used when
+  they help deliver that behavior or prevent a specific problem. The checklist
+  is not the feature.
+- **Prove results before claiming them.** The agent runs the smallest useful
+  checks and reports only what they actually show. A failed check counts as a
+  real problem unless evidence shows that it was already there or comes from
+  the tooling or setup. When the tooling fails, the agent may run the project's
+  documented setup once or try one genuinely different check; it does not shop
+  around for a friendlier test environment. If a function or API changes, at
+  least one real use of it is checked. Once the behavior is proven, testing
+  stops; after two failed fixes for the same problem, the agent changes its
+  approach instead of applying patch number three with renewed optimism.
+- **Match the process to the job.** The agent can advise without editing,
+  explore an idea without calling the prototype finished, develop an ordinary
+  change with focused checks, or harden work for a release or serious risk. A
+  one-line rename does not become a launch rehearsal. These modes guide the
+  agent internally rather than appearing as ceremony in its answer.
+- **Do not make unsafe behavior look safe.** A helper called `safe_delete` must
+  actually be safe. A timeout must not return old or empty data as though it
+  were fresh. Distinct errors must not be reduced to one yes-or-no value when
+  callers need the reason. Work is not reported as saved or published before
+  the underlying operation has completed, and a new shortcut must not bypass
+  the project's existing safety checks. Existing untidiness is reported rather
+  than pulled into the task unless the current change makes it worse or cannot
+  work correctly without fixing it.
+- **Use the project's existing records.** Important decisions belong in the
+  plan, architecture record, or pull request the project already uses. The
+  agent does not create a second planning diary to document the first one. A
+  handoff records only what another agent needs to continue correctly.
+- **Ask when the answer changes the outcome.** The agent first completes work
+  that does not depend on the question. It asks before choosing different
+  product behavior, accepting irreversible loss, weakening a protection,
+  adding external cost, or expanding the scope. When nobody is present to
+  answer, it takes the smallest reversible option and reports the assumption.
+- **Fit the tools already in use.** Scoville defines what must be established,
+  not a universal list of commands. In a version-controlled project, the agent
+  finishes by inspecting the complete relevant change and repository state.
+  Without version control, it reads before overwriting and preserves everything
+  outside the requested edit.
 
 The full rules live in
 [SKILL.md](scoville-anti-ai-coding-slop/SKILL.md).
