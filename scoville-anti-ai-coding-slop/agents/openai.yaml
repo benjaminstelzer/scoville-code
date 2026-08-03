@@ -1,4 +1,0 @@
-interface:
-  display_name: "Scoville Engineering Guardrail"
-  short_description: "Goal-first engineering guardrail against AI coding slop"
-  default_prompt: "Use $scoville-anti-ai-coding-slop to deliver the requested observable outcome while preserving safety, canonical ownership, boundary semantics, and truthful evidence."

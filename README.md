@@ -1,4 +1,4 @@
-# Scoville Anti-AI-Coding-Slop
+# Scoville Code Anti-AI-Slop
 
 Sharpens the output. Turns down the slop.
 
@@ -44,19 +44,19 @@ Usually, let your coding agent install the skill. Send it this prompt:
 
 ```text
 Install this Agent Skill from GitHub and make it available for my coding work:
-https://github.com/benjaminstelzer/scoville-anti-ai-coding-slop/tree/main/scoville-anti-ai-coding-slop
+https://github.com/benjaminstelzer/scoville-code-anti-ai-slop/tree/main/scoville-code-anti-ai-slop
 ```
 
 Add "for all my projects" or "only for this project" when the installation
 scope matters. The agent should choose its supported skills directory,
 install the skill directory under the unchanged name
-`scoville-anti-ai-coding-slop`, and refresh its skill list.
+`scoville-code-anti-ai-slop`, and refresh its skill list.
 
 If your agent cannot install skills itself, copy the repository's
-`scoville-anti-ai-coding-slop/` directory so the final path is:
+`scoville-code-anti-ai-slop/` directory so the final path is:
 
 ```text
-<skills-dir>/scoville-anti-ai-coding-slop/SKILL.md
+<skills-dir>/scoville-code-anti-ai-slop/SKILL.md
 ```
 
 For Claude Code, `<skills-dir>` is `~/.claude/skills/` for all projects or
@@ -141,7 +141,17 @@ active from the first action in every task.
   outside the requested edit.
 
 The full rules live in
-[SKILL.md](scoville-anti-ai-coding-slop/SKILL.md).
+[SKILL.md](scoville-code-anti-ai-slop/SKILL.md).
+
+## Use with Scoville UI and Scribe
+
+Use [Scoville UI Anti-AI-Slop](https://github.com/benjaminstelzer/scoville-ui-anti-ai-slop)
+when an engineering task also changes interface hierarchy, layout, interaction
+presentation, responsive behavior, or rendered UI evidence. Use
+[Scoville Scribe Anti-AI-Slop](https://github.com/benjaminstelzer/scoville-scribe-anti-ai-slop)
+when it changes reader-facing wording. Code keeps the implementation scoped and
+proven; UI preserves the product's design language and interface quality;
+Scribe preserves meaning, terminology, and factual wording.
 
 ## Design
 
@@ -186,7 +196,7 @@ The skill draws from the following sources:
 
 ## Status
 
-The directory you install, `scoville-anti-ai-coding-slop/`, contains only the
+The directory you install, `scoville-code-anti-ai-slop/`, contains only the
 skill instructions and a small metadata file that helps agents display the
 skill. The repository's README, embeddable instructions, changelog, and license
 stay outside that directory. The skill installs no scripts, libraries, or other

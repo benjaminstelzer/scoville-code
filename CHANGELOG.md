@@ -1,5 +1,24 @@
 # Changelog
 
+## 2026-08-03: Rename to Scoville Code Anti-AI-Slop
+
+### Changed
+
+- Renamed the repository and installable skill from
+  `scoville-anti-ai-coding-slop` to `scoville-code-anti-ai-slop` so the Code,
+  Scribe, and UI skills use the same family naming scheme.
+- Updated the skill name and heading, display metadata, installation URL,
+  documented paths, current repository links, and family cross-references.
+  Historical changelog entries retain the names that were current when those
+  changes shipped.
+
+### Migration
+
+- Replace existing installations under `scoville-anti-ai-coding-slop/` with a
+  folder named `scoville-code-anti-ai-slop/`. Do not keep both names installed.
+- GitHub redirects the previous repository URL, but skill discovery still
+  requires the installation directory and `SKILL.md` frontmatter name to match.
+
 ## 2026-08-02: README factual and clarity corrections
 
 ### Changed

@@ -1,5 +1,5 @@
 ---
-name: scoville-anti-ai-coding-slop
+name: scoville-code-anti-ai-slop
 description: >-
   Goal-first engineering guardrail. Use when planning, implementing, fixing,
   refactoring, testing, reviewing, or removing code or engineering artifacts, or
@@ -9,7 +9,7 @@ description: >-
   general questions unrelated to a codebase.
 ---
 
-# Scoville Engineering Guardrail
+# Scoville Code Anti-AI-Slop
 
 Treat AI slop as work that does not advance the requested outcome: scope drift,
 tests or refactors instead of behavior, speculative architecture, hidden
