@@ -82,6 +82,14 @@ material sequencing, or work that must survive handoff or compaction. Keep one
 behavior-complete item active at a time and continue to the next in-scope item
 without treating every checkpoint as a separate task.
 
+When ReasonKeep or another authoritative repository plan separates lifecycle
+Work Items from subordinate Steps, create a Work Item only for an independently
+resumable outcome with its own acceptance boundary. Put implementation order,
+verification commands, review passes, and documentation needed to finish that
+same outcome in Steps or the Work Item's acceptance evidence. Do not create
+separate process-only Work Items merely so planning, coding, testing, review,
+and documentation can each change status.
+
 For work that resumes after interruption, handoff, or compaction, record only
 the requested outcome with its binding constraints, current state, decisive
 evidence so far, next concrete step, and any unrecorded material decision.
@@ -225,12 +233,24 @@ If two consecutive attempts fail to fix the same failing check, stop patching:
 re-read the owner's contract and the failing evidence, then change the approach
 or narrow the change before editing again.
 
+When a test runner emits a large diagnostic snapshot such as a rendered DOM,
+retain the first complete failure once. On an unchanged repeat, report only the
+stable failure signature, the changed assertion or source location, and any
+meaningful delta; do not reload or repeat the same full diagnostic. Inspect the
+focused owner that can explain the failure before another edit.
+
 After decisive evidence passes for a behavior, run no broader, repeated, or
 similar check for that behavior. Proceed to final inspection unless a separate
 changed behavior, named risk, or higher-priority requirement remains
 unverified. Do not fix unrelated suite failures unless they block the requested
 outcome or the user expands the scope. Never claim behavior that was not
 observed.
+
+If production code, a test, or the test harness changes after the last aggregate
+check that supported the completion claim, that evidence is stale. Rerun the
+smallest aggregate check covering the late change, or explicitly narrow the
+completion claim to the focused evidence that remains valid. Do not cite an
+earlier full-suite pass as proof of code it never exercised.
 
 ## Inspect and complete
 

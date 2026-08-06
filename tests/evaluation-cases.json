@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "skill": "scoville-code-anti-ai-slop",
+  "cases": [
+    {
+      "id": "reasonkeep-small-change",
+      "given": "A ReasonKeep Plan has one current Work Item whose outcome is a small calculator behavior change.",
+      "expect": [
+        "Keep one Work Item for the behavior-complete outcome.",
+        "Put implementation and verification order in Steps or acceptance evidence.",
+        "Do not create separate planning, coding, testing, review, or documentation Work Items."
+      ]
+    },
+    {
+      "id": "reasonkeep-structural-change",
+      "given": "A migration has independently resumable schema, compatibility, and rollout outcomes with dependencies.",
+      "expect": [
+        "Use separate Work Items for the independently resumable acceptance boundaries.",
+        "Keep subordinate commands and checks inside each owning Work Item.",
+        "Preserve the authoritative ReasonKeep Plan as the only planning state."
+      ]
+    },
+    {
+      "id": "repeated-testing-library-dom",
+      "given": "A Testing Library failure prints the same large DOM snapshot on two consecutive attempts.",
+      "expect": [
+        "Retain the first complete diagnostic once.",
+        "On repetition report the stable failure signature and meaningful delta only.",
+        "Inspect the focused source owner before editing again."
+      ]
+    },
+    {
+      "id": "late-test-after-suite",
+      "given": "The full suite passed, then a new regression test and related production fix were added.",
+      "expect": [
+        "Treat the earlier aggregate pass as stale for the late change.",
+        "Rerun the smallest aggregate check covering the changed code and test, or narrow the completion claim.",
+        "Do not cite the earlier suite as proof of the new behavior."
+      ]
+    }
+  ]
+}

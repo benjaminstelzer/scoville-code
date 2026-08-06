@@ -1,5 +1,24 @@
 # Changelog
 
+## 2026-08-06: ReasonKeep composition and compact validation evidence
+
+### Changed
+
+- Mapped independently resumable outcomes to ReasonKeep Work Items while
+  keeping implementation, review, testing, and documentation steps inside the
+  same behavior-complete item.
+- Required repeated large diagnostics to be reduced to their stable failure
+  signature and meaningful delta after the first complete capture.
+- Made aggregate evidence stale when later code, tests, or harness changes
+  affect the completion claim; the affected aggregate check must be rerun or
+  the claim must be narrowed.
+
+### Validation
+
+- Evaluation fixtures cover a small ReasonKeep change, a structural multi-item
+  change, repeated Testing Library DOM output, and a test added after the last
+  aggregate suite.
+
 ## 2026-08-06: Acceptance-path coverage before validation stops
 
 ### Changed
