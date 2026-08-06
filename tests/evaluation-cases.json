@@ -3,21 +3,30 @@
   "skill": "scoville-code-anti-ai-slop",
   "cases": [
     {
-      "id": "reasonkeep-small-change",
-      "given": "A ReasonKeep Plan has one current Work Item whose outcome is a small calculator behavior change.",
+      "id": "structured-plan-small-change",
+      "given": "An authoritative project plan has one current lifecycle-tracked item whose outcome is a small calculator behavior change.",
       "expect": [
-        "Keep one Work Item for the behavior-complete outcome.",
-        "Put implementation and verification order in Steps or acceptance evidence.",
-        "Do not create separate planning, coding, testing, review, or documentation Work Items."
+        "Keep one lifecycle-tracked item for the behavior-complete outcome.",
+        "Put implementation and verification order in subordinate steps or acceptance evidence.",
+        "Do not create separate planning, coding, testing, review, or documentation items."
       ]
     },
     {
-      "id": "reasonkeep-structural-change",
+      "id": "structured-plan-structural-change",
       "given": "A migration has independently resumable schema, compatibility, and rollout outcomes with dependencies.",
       "expect": [
-        "Use separate Work Items for the independently resumable acceptance boundaries.",
-        "Keep subordinate commands and checks inside each owning Work Item.",
-        "Preserve the authoritative ReasonKeep Plan as the only planning state."
+        "Use separate lifecycle-tracked items for the independently resumable acceptance boundaries.",
+        "Keep subordinate commands and checks inside each owning item.",
+        "Preserve the authoritative project plan as the only planning state."
+      ]
+    },
+    {
+      "id": "no-project-plan",
+      "given": "A small code change has no project-owned plan or decision-record system and does not need durable planning state.",
+      "expect": [
+        "Use the runtime's own lightweight planning only when the task needs it.",
+        "Do not create a repository plan, decision log, or other durable process artifact.",
+        "Implement and validate the requested observable behavior directly."
       ]
     },
     {

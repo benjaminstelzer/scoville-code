@@ -82,13 +82,13 @@ material sequencing, or work that must survive handoff or compaction. Keep one
 behavior-complete item active at a time and continue to the next in-scope item
 without treating every checkpoint as a separate task.
 
-When ReasonKeep or another authoritative repository plan separates lifecycle
-Work Items from subordinate Steps, create a Work Item only for an independently
+When an authoritative project plan distinguishes lifecycle-tracked work
+items from subordinate steps, create a tracked item only for an independently
 resumable outcome with its own acceptance boundary. Put implementation order,
 verification commands, review passes, and documentation needed to finish that
-same outcome in Steps or the Work Item's acceptance evidence. Do not create
-separate process-only Work Items merely so planning, coding, testing, review,
-and documentation can each change status.
+same outcome in subordinate steps or the owning item's acceptance evidence. Do
+not create separate process-only items merely so planning, coding, testing,
+review, and documentation can each change status.
 
 For work that resumes after interruption, handoff, or compaction, record only
 the requested outcome with its binding constraints, current state, decisive

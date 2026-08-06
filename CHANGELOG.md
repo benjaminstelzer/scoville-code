@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-08-06: Standalone authoritative-plan terminology
+
+### Changed
+
+- Generalized plan-composition guidance and evaluation fixtures so the Skill
+  works with any authoritative project plan without implying a dependency
+  on a particular planning product.
+
+### Validation
+
+- The canonical Skill validator and evaluation JSON parser pass; standalone
+  fixtures cover both authoritative-plan and no-plan operation.
+
 ## 2026-08-06: ReasonKeep composition and compact validation evidence
 
 ### Changed

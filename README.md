@@ -70,7 +70,7 @@ project has stricter rules, the agent should make only that change. It should
 run at most one existing quick check and stop—no plan, new test, or full test
 suite for a harmless rename.
 
-**What it costs.** `SKILL.md` currently contains 1,953 words of rules plus 62
+**What it costs.** `SKILL.md` currently contains 2,215 words of rules plus 62
 words for the name and description at the top of the file. A compatible agent
 loads the full instructions when a relevant task triggers the skill. The exact
 token cost depends on the agent. Installing it for one project limits where it
@@ -124,6 +124,9 @@ The full rules live in
 [SKILL.md](scoville-code-anti-ai-slop/SKILL.md).
 
 ## Use with the Scoville family
+
+Code works independently. When companion Skills are installed, combine them
+only for the concerns they own.
 
 Use [Scoville UI Anti-AI-Slop](https://github.com/benjaminstelzer/scoville-ui-anti-ai-slop)
 when an engineering task also changes interface hierarchy, layout, interaction
