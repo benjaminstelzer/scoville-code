@@ -190,6 +190,14 @@ demonstrated and another check would not plausibly change the implementation or
 completion decision. When the change alters the behavior or signature of a
 symbol used elsewhere, at least one check must exercise one of those uses.
 
+Before treating evidence as decisive, map each explicit acceptance behavior and
+each concrete coupling that can make a required path behave differently to an
+exercised check. A check for one interface, input path, or state transition
+cannot close a different path or the handoff between them when the
+implementation makes that handoff behaviorally distinct. This is a coverage
+boundary, not a reason to add an unrelated broad suite or a combinatorial
+matrix.
+
 - **Explore:** The cheapest decisive observation. Add no regression, stress,
   repetition, or matrix work unless the hypothesis requires it.
 - **Develop:** Prefer an existing focused test, typecheck, lint, build, or direct

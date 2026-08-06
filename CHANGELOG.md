@@ -1,5 +1,23 @@
 # Changelog
 
+## 2026-08-06: Acceptance-path coverage before validation stops
+
+### Changed
+
+- Required decisive evidence to cover every explicit acceptance behavior and
+  each concrete coupling that can make a required path behave differently
+  before validation stops.
+- Clarified that a passing check for one interface, input path, or state
+  transition cannot prove a behaviorally distinct path or handoff.
+- Preserved the existing ban on unrelated broad suites and combinatorial test
+  matrices.
+
+### Validation
+
+- The installable directory passed the canonical Agent Skill validator.
+- A history review confirmed that the July validation-economy changes remain
+  intact while acceptance-path coverage is restored before the stop decision.
+
 ## 2026-08-03: Skill-only distribution and documentation alignment
 
 ### Changed
