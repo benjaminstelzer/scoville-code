@@ -21,6 +21,9 @@
   Change plus Validation, and the full structural route.
 - The full UI/Code/Scribe composition and the source-only Scribe opt-out case
   passed with only their required references.
+- The same six standalone cases passed with `gpt-5.6-terra` at medium
+  reasoning. Both composition cases also preserved the intended ownership,
+  validation, fixed-label, and sibling opt-out boundaries.
 - Direct-reference, diff, encoding, and host-neutrality checks pass.
 
 ## 2026-08-06: Standalone authoritative-plan terminology
