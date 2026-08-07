@@ -70,11 +70,10 @@ project has stricter rules, the agent should make only that change. It should
 run at most one existing quick check and stop—no plan, new test, or full test
 suite for a harmless rename.
 
-**What it costs.** `SKILL.md` currently contains 2,215 words of rules plus 62
-words for the name and description at the top of the file. A compatible agent
-loads the full instructions when a relevant task triggers the skill. The exact
-token cost depends on the agent. Installing it for one project limits where it
-is available but does not make each use smaller.
+**What it costs.** Skill discovery exposes only the name and description. After
+activation, the core loads first and selects planning, change workflow, and
+validation guidance only when the task needs them. Provider token usage also
+depends on the host and conversation.
 
 ## What it enforces
 
@@ -138,8 +137,18 @@ Scribe preserves meaning, terminology, and factual wording.
 
 ## Design
 
-Scoville is deliberately small: this repo has no scripts or assets because the
-useful behavior fits in the instruction file.
+Scoville keeps authorization, ownership, risk selection, review scope, and
+truthful reporting in the core. It conditionally loads three focused guides:
+
+- [references/planning-and-decisions.md](scoville-code-anti-ai-slop/references/planning-and-decisions.md)
+  covers project plans, decisions, durable handoffs, and genuine decision
+  ambiguity.
+- [references/change-workflow.md](scoville-code-anti-ai-slop/references/change-workflow.md)
+  covers exploration, implementation, structural risk, and concrete patch or
+  ownership review.
+- [references/validation.md](scoville-code-anti-ai-slop/references/validation.md)
+  covers check selection, repeated failures, evidence review, and completion
+  claims.
 
 The skill does not replace your instructions, architecture documents, automated
 checks, security policy, release workflow, or human review. For each decision,
@@ -179,19 +188,20 @@ The skill draws from the following sources:
 
 ## Repository contents
 
-The directory you install, `scoville-code-anti-ai-slop/`, contains only the
-skill instructions and a small metadata file that helps agents display the
-skill. The repository's README, changelog, and license stay outside that
-directory. The skill installs no scripts, libraries, or other software and
-contains no rules tied to a particular programming language or framework.
+The directory you install, `scoville-code-anti-ai-slop/`, contains the core
+instruction file, three focused references, and a small metadata file that
+helps agents display the skill. The repository's README, changelog, and license
+stay outside that directory. The skill installs no scripts, libraries, or
+other software and contains no rules tied to a particular programming language
+or framework.
 
 ## Status
 
-Test results published for earlier versions were removed from this README
-because they measured a different set of rules. The same tests must be run
-again before this version makes claims about saving time or tokens. Reusing the
-old numbers anyway would be exactly the kind of unsupported success claim this
-skill exists to stop.
+The installable directory passes the canonical Agent Skill validator, focused
+Sol Medium routing probes, family-composition probes, and local host-neutrality
+checks. These runs validate the routing behavior in Codex CLI; the Skill text
+itself remains host-neutral, while empirical behavior in other hosts depends on
+their Agent Skills implementation.
 
 ## License
 

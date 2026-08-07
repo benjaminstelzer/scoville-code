@@ -1,5 +1,28 @@
 # Changelog
 
+## 2026-08-07: Progressive disclosure
+
+### Changed
+
+- Added focused references for planning and decisions, change workflow, and
+  validation.
+- Kept authorization, risk selection, family ownership, review-only behavior,
+  version-control boundaries, and truthful reporting in the always-loaded core.
+- Distinguished planning representation, implementation review, evidence
+  review, and combined review so each route loads only its governing detail.
+- Shortened the frontmatter description while retaining independent operation
+  and explicit opt-out containment.
+
+### Validation
+
+- The canonical Agent Skill validator passes.
+- Six focused standalone routing cases passed with `gpt-5.6-sol` at medium
+  reasoning: Core-only advice, Planning-only, Change-only, Validation-only,
+  Change plus Validation, and the full structural route.
+- The full UI/Code/Scribe composition and the source-only Scribe opt-out case
+  passed with only their required references.
+- Direct-reference, diff, encoding, and host-neutrality checks pass.
+
 ## 2026-08-06: Standalone authoritative-plan terminology
 
 ### Changed
