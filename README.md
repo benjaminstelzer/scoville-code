@@ -131,9 +131,13 @@ Use [Scoville UI Anti-AI-Slop](https://github.com/benjaminstelzer/scoville-ui-an
 when an engineering task also changes interface hierarchy, layout, interaction
 presentation, responsive behavior, or rendered UI evidence. Use
 [Scoville Scribe Anti-AI-Slop](https://github.com/benjaminstelzer/scoville-scribe-anti-ai-slop)
-when it changes reader-facing wording. Code keeps the implementation scoped and
-proven; UI preserves the product's design language and interface quality;
-Scribe preserves meaning, terminology, and factual wording.
+when it changes reader-facing wording. Use
+[Scoville Plan](https://github.com/benjaminstelzer/scoville-plan) when the
+engineering work spans dependent outcomes or must survive interruption or
+handoff. Plan owns durable direction and Work Item lifecycle; Code keeps the
+implementation scoped and proven; UI preserves the product's design language
+and interface quality; Scribe preserves meaning, terminology, and factual
+wording.
 
 ## Design
 
