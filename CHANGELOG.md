@@ -1,5 +1,23 @@
 # Changelog
 
+## 2026-08-08: Optional Scoville Plan ownership
+
+### Changed
+
+- Assigned durable Plan, Work Item, and Decision records to Scoville Plan only
+  when that sibling is independently available and applicable.
+- Preserved standalone Code behavior through the repository's existing record
+  owner when Scoville Plan is absent or inapplicable.
+- Prevented unattended implementation assumptions from crossing a durable
+  Decision owner's explicit proposal-acceptance gate.
+
+### Validation
+
+- The canonical Agent Skill validator and repository diff checks pass.
+- Fable's complete standalone and family review found no remaining Code issue,
+  hard sibling dependency, ownership gap, or cycle.
+- The tested repository copy and the locally installed Skill are byte-identical.
+
 ## 2026-08-07: Progressive disclosure
 
 ### Changed

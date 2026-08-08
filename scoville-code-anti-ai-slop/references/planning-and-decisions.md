@@ -49,6 +49,10 @@ validation limit. Decide ordinary implementation details locally.
 Record a material decision in the project's existing plan, ADR, decision log,
 authorized commit, or pull-request mechanism. When none exists, preserve it in a
 handoff only if future work depends on it. Do not invent a durable record system.
+When `scoville-plan` is independently available and applicable, it owns the
+canonical Plan, Work Item, and Decision mutation; this reference supplies only
+Code's implementation analysis. Without that Skill, keep using the repository's
+existing owner and do not require or simulate Scoville Plan.
 
 ## Resolve decision ambiguity
 
@@ -60,7 +64,9 @@ outcome and continue.
 
 Do independent work first, then ask one specific question before dependent work.
 In unattended work, state the assumption, choose the smallest reversible path,
-and record the assumption in the report.
+and record the assumption in the report unless a durable decision owner
+requires explicit acceptance. In that case, record the proposal and stop only
+the dependent work.
 
 ## Hand off and resume
 

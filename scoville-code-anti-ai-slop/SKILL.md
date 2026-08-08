@@ -31,7 +31,14 @@ This Skill owns engineering scope, canonical code, implementation integrity,
 risk, and proportionate proof. When applicable, `scoville-ui-anti-ai-slop` owns
 interactive hierarchy, framework alignment, responsive behavior, and rendered
 evidence; `scoville-scribe-anti-ai-slop` owns variable reader-facing wording,
-terminology, and fidelity. Fixed labels do not trigger Scribe.
+terminology, and fidelity. When applicable, `scoville-plan` owns durable Plan,
+Work Item, and Decision records and their lifecycle; write those records only
+through that owner. Fixed labels do not trigger Scribe.
+
+Every sibling Skill is optional. Do not require, install, or simulate Plan, UI,
+or Scribe when it is absent or inapplicable. Without Scoville Plan, reuse the
+repository's existing durable record owner and this Skill's decision guardrails;
+do not create a record system merely to replace the absent sibling.
 
 ## Optimize for the observable outcome
 
