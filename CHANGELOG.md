@@ -1,5 +1,29 @@
 # Changelog
 
+## 2026-08-10: Reliability-qualified compression
+
+### Changed
+
+- Compressed the activated Core and sharpened route precedence for bounded
+  ownership decisions, durability-before-publication reviews, and repeated
+  validation failures.
+- Preserved complete Planning, Change, Validation, risk, authority, integrity,
+  scope, and truthful-reporting behavior while loading references only for the
+  current operation.
+
+### Validation
+
+- The frozen paired benchmark passed Train 18/18, Validation 9/9, and sealed
+  Test 3/3 for both the expanded control and compressed package.
+- The compressed package passed all 30 cases with contract-correct operation
+  routing, exact-once required reads, complete provider usage, no route retry,
+  and no shell call.
+- Executor-loaded Skill instructions fell from 93,658 to 82,528 tokens across
+  the 30 cases, an 11.88% reduction; the always-loaded Core fell 15.36%.
+- The canonical Agent Skill validator passes. The benchmark used
+  `gpt-5.6-terra` at medium reasoning and does not establish equivalent
+  behavior on weaker executors or arbitrary tasks.
+
 ## 2026-08-08: Optional Scoville Plan ownership
 
 ### Changed

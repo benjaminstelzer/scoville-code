@@ -28,14 +28,14 @@ workflow requires a tracked item.
 ## Define behavior-complete work
 
 Keep one behavior-complete lifecycle item active at a time. Its outcome should
-be independently resumable and observable. Implementation steps, test commands,
-review, and documentation normally remain subordinate steps or evidence, not
-separate lifecycle items.
+be independently resumable and observable. Implementation and its verification
+for one observable behavior belong to the same behavior Work Item; test
+commands, review, and documentation remain subordinate steps or evidence.
 
-Split work only when outcomes have independent acceptance boundaries,
-dependencies, owners, rollout timing, or resumability—for example distinct
-schema, compatibility, and rollout outcomes. Keep acceptance and evidence with
-the item that owns the behavior.
+Split work only into independently resumable outcomes with distinct acceptance
+boundaries. Separate dependencies, owners, or rollout timing justify a split
+only when they create such independent outcomes. Keep acceptance and evidence
+with the item that owns the behavior.
 
 Continue to the next authorized in-scope item when its dependencies are met; do
 not treat every checkpoint as a new task.

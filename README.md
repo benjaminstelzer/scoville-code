@@ -45,6 +45,7 @@ Usually, let your coding agent install the skill. Send it this prompt:
 ```text
 Install this Agent Skill from GitHub and make it available for my coding work:
 https://github.com/benjaminstelzer/scoville-code-anti-ai-slop/tree/main/scoville-code-anti-ai-slop
+Use Terra 5.6 Medium or a comparably capable executor such as Opus 4.8; this is the minimum supported capability level for this Skill.
 ```
 
 Add "for all my projects" or "only for this project" when the installation
@@ -70,7 +71,8 @@ project has stricter rules, the agent should make only that change. It should
 run at most one existing quick check and stop—no plan, new test, or full test
 suite for a harmless rename.
 
-**What it costs.** Skill discovery exposes only the name and description. After
+**What it costs.** Compatible hosts expose compact discovery metadata before
+loading the full Skill instructions. After
 activation, the core loads first and selects planning, change workflow, and
 validation guidance only when the task needs them. Provider token usage also
 depends on the host and conversation.
@@ -201,11 +203,17 @@ or framework.
 
 ## Status
 
-The installable directory passes the canonical Agent Skill validator, focused
-Sol Medium routing probes, family-composition probes, and local host-neutrality
-checks. These runs validate the routing behavior in Codex CLI; the Skill text
-itself remains host-neutral, while empirical behavior in other hosts depends on
-their Agent Skills implementation.
+The installable directory passes the canonical Agent Skill validator. It was
+optimized with a project-local, reliability-first, token-saving extension of
+[Microsoft SkillOpt](https://github.com/microsoft/SkillOpt): `gpt-5.6-sol` at
+`xhigh` handled optimization and routing, and `gpt-5.6-terra` at `medium`
+executed the frozen A/B benchmark. Across the four-Skill program, **797 run
+artifacts** were recorded, including **742 technically valid benchmark runs**,
+before the final packages were selected. This Skill passed **30/30** final
+Train, Validation, and sealed-Test cases and loaded **11.88% fewer Skill
+instruction tokens** than its paired control. Terra 5.6 Medium or a comparably
+capable executor such as Opus 4.8 is the minimum supported level. See
+[benchmark evidence](docs/benchmark-evidence.md).
 
 ## License
 

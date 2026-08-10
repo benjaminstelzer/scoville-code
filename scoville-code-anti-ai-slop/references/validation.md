@@ -29,6 +29,15 @@ implementation or completion decision.
 - **Harden:** Run project-owned release, platform, migration, security, or broad
   suites once at the meaningful completion boundary.
 
+Choose evidence scope as an exclusive decision:
+
+1. Use a broad release, readiness, platform, or migration gate only when the
+   current task makes that completion decision or a binding project rule
+   requires it.
+2. Otherwise prove each specific changed behavior and affected boundary with
+   the narrowest decisive check.
+3. Risk selects the failure mode to exercise; it never widens scope by itself.
+
 When a change alters a symbol used elsewhere, exercise at least one affected
 use. Tests that mirror implementation without protecting behavior are not proof.
 
