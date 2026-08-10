@@ -139,8 +139,11 @@ presentation, responsive behavior, or rendered UI evidence. Use
 when it changes reader-facing wording. Use
 [Scoville Plan](https://github.com/benjaminstelzer/scoville-plan) when the
 engineering work spans dependent outcomes or must survive interruption or
-handoff. Plan owns durable Plans, Work Items, Decisions, and their lifecycle;
-Code keeps the implementation scoped and proven; UI preserves the product's design language
+handoff. Use [Scoville Handoff](https://github.com/benjaminstelzer/scoville-handoff)
+to transfer a compact continuation snapshot to another agent or session.
+Plan owns durable Plans, Work Items, Decisions, and their lifecycle; Handoff
+transfers the current state without replacing those records; Code keeps the
+implementation scoped and proven; UI preserves the product's design language
 and interface quality; Scribe preserves meaning, terminology, and factual
 wording.
 
@@ -207,9 +210,9 @@ or framework.
 ## Status
 
 [Microsoft SkillOpt](https://github.com/microsoft/SkillOpt) was extended to
-prioritize reliability before compression. Across the Scoville family, **797
-runs and supporting artifacts** were recorded, including **742 valid benchmark
-runs**. This Skill passed **30/30** final cases. Its always-loaded instructions
+prioritize reliability before compression. Across the five Scoville Skills,
+development recorded **1,019 optimization and evaluation runs**. This Skill
+passed **30/30** final cases. Its always-loaded instructions
 are **16.59% larger than pre-optimization v1.0.6** because reliability coverage
 expanded; SkillOpt compressed that strengthened version. Minimum executor:
 Terra 5.6 Medium or comparable, such as Opus 4.8. See
