@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-08-10: Clearer usage trade-offs
+
+### Changed
+
+- Explain that activating the Skill adds prompt context and is best suited to
+  work where scope control, integrity, risk handling, validation, honest
+  evidence, and maintainable source code justify the additional token cost.
+- Remove the inline verification example and clarify that the public token
+  comparison uses the pre-optimization release.
+
 ## 2026-08-10: Reliability-qualified compression
 
 ### Changed

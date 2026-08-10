@@ -64,21 +64,21 @@ For Claude Code, `<skills-dir>` is `~/.claude/skills/` for all projects or
 `.claude/skills/` inside a repository for that project only. For other agents,
 consult their documentation; paths differ per agent.
 
-**Verify it works.** Skills load when a relevant task calls for them, so try a
-small task: *"Use Scoville to rename one variable that is used only inside a
-single function and does not change what the program does."* Unless your
-project has stricter rules, the agent should make only that change. It should
-run at most one existing quick check and stop—no plan, new test, or full test
-suite for a harmless rename.
-
 **What it costs.** Compatible hosts expose compact discovery metadata before
 loading the full Skill instructions. After
 activation, the core loads first and selects planning, change workflow, and
-validation guidance only when the task needs them. Provider token usage also
-depends on the host and conversation. Compared with `v1.0.6`, the always-loaded
-core grew from 1,754 to 2,045 tokens (+16.59%) because this release adds
-reliability rules; SkillOpt compressed that strengthened version. See
-[the benchmark evidence](docs/benchmark-evidence.md) for scope and limits.
+validation guidance only when the task needs them. Compared with
+pre-optimization `v1.0.6`, the always-loaded core grew from 1,754 to 2,045
+tokens (+16.59%) because this release adds reliability rules; SkillOpt
+compressed that strengthened version.
+Activating any Skill adds instructions to the prompt and can use materially
+more tokens than working without one. That overhead buys stronger scope control,
+integrity and risk safeguards, proportionate validation, honest evidence, and
+more maintainable source code. Use Scoville Code when those safeguards matter;
+leave it inactive for a small, fast vibe-coding experiment when minimizing
+token use matters more. Provider usage also depends on the host and
+conversation. See [the benchmark evidence](docs/benchmark-evidence.md) for
+scope and limits.
 
 ## What it enforces
 
@@ -210,9 +210,9 @@ or framework.
 prioritize reliability before compression. Across the Scoville family, **797
 runs and supporting artifacts** were recorded, including **742 valid benchmark
 runs**. This Skill passed **30/30** final cases. Its always-loaded instructions
-are **16.59% larger than v1.0.6** because reliability coverage expanded;
-SkillOpt compressed that strengthened version. Minimum executor: Terra 5.6
-Medium or comparable, such as Opus 4.8. See
+are **16.59% larger than pre-optimization v1.0.6** because reliability coverage
+expanded; SkillOpt compressed that strengthened version. Minimum executor:
+Terra 5.6 Medium or comparable, such as Opus 4.8. See
 [benchmark evidence](docs/benchmark-evidence.md).
 
 ## License
