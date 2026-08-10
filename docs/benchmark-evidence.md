@@ -64,6 +64,13 @@ executor.
 Provider totals also include routing, generation, and cache behavior, so they
 are not used as the deterministic compression measure.
 
+For the public previous-release comparison, the always-loaded Core is measured
+directly with the same tokenizer: `v1.0.6` used 1,754 tokens and `v1.0.7` uses
+2,045, an increase of 291 tokens (+16.59%). The reliability-matched control used
+2,416 tokens; SkillOpt reduced that strengthened version by 15.36% before final
+selection. The release therefore improves reliability and compresses the
+expanded contract, but it is not smaller than `v1.0.6`.
+
 ## Reproducibility bindings
 
 - Promoted Core SHA-256:
