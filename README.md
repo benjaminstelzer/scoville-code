@@ -1,12 +1,13 @@
 # Scoville Code Anti-AI-Slop
 
-Keeps the requested engineering result visible through the process around it.
+The result is the point. The process earns its place by making that result
+safer, clearer, or easier to verify.
 
 Scoville Code is a goal-first Agent Skill for planning, changing, testing,
-reviewing, and removing code or engineering artifacts. It preserves canonical
-ownership, scope, risk boundaries, validation, and honest evidence. It can
-answer or diagnose without editing, and it does not turn every rename into a
-release rehearsal.
+reviewing, and removing code or engineering artifacts. It keeps canonical
+ownership, scope, risk boundaries, validation, and honest evidence visible. It
+can answer or diagnose without editing, and it does not turn every rename into
+a release rehearsal merely because a checklist was feeling ambitious.
 
 ## Why "Scoville"?
 

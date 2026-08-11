@@ -1,5 +1,23 @@
 # Changelog
 
+## 2026-08-11: README voice and structure (v1.0.12)
+
+### Changed
+
+- Reworked the public README opening in Benjamin's voice while preserving the
+  Skill's activation boundary, mechanism, evidence, sources, and measured
+  status.
+- Kept the shared Scoville section order and family copy aligned across all six
+  project READMEs.
+- Updated the Codex Skill-list description to use the same public voice.
+
+### Validation
+
+- Agent Skill package, README structure, shared-copy, internal-link, and
+  Markdown whitespace checks passed.
+- No model-behavior benchmark was run because the Skill instructions did not
+  change.
+
 ## 2026-08-11: Standalone family contract (v1.0.11)
 
 ### Changed

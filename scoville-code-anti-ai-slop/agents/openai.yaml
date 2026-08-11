@@ -1,4 +1,4 @@
 interface:
   display_name: "Scoville Code Anti-AI-Slop"
-  short_description: "Goal-first engineering guardrail against AI coding slop"
+  short_description: "Keeps the engineering result ahead of the process"
   default_prompt: "Use $scoville-code-anti-ai-slop to deliver the requested observable outcome while preserving safety, canonical ownership, boundary semantics, and truthful evidence."
