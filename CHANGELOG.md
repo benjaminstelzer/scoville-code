@@ -1,5 +1,24 @@
 # Changelog
 
+## 2026-08-11: Evidence-first slop examples (v1.0.14)
+
+### Changed
+
+- Replaced the mixed opening examples with four concrete evidence failures:
+  unrun tests, unsupported "pre-existing" diagnoses, irrelevant passing checks,
+  and weakened tests or guards.
+- Checked every Scoville README opening against its own Skill contract; the
+  other five already describe failure modes their Skills directly prevent.
+- Kept the Skill instructions, measured claims, and shared README structure
+  unchanged.
+
+### Validation
+
+- Agent Skill package, README structure, internal-link, and Markdown whitespace
+  checks passed.
+- No model-behavior benchmark was run because the Skill instructions did not
+  change.
+
 ## 2026-08-11: Concrete slop examples (v1.0.13)
 
 ### Changed
