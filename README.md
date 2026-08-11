@@ -12,10 +12,10 @@ It usually looks harmless:
 - Lint and typecheck pass, so the changed behavior is reported as verified. The
   behavior itself was not consulted.
 - A failing assertion or safety guard is weakened until CI turns green.
-  Consensus has been reached; correctness was not invited.
+  Consensus has been reached. Correctness was not invited.
 
 That is coding slop: evidence is narrated instead of observed. The report says
-fixed; the behavior remains unknown—or the check that caught the bug no longer
+fixed. The behavior remains unknown, or the check that caught the bug no longer
 does.
 
 Scoville Code is a goal-first Agent Skill for planning, changing, testing,
@@ -40,7 +40,7 @@ Use Scoville Code to implement rate limiting in the existing API owner. Keep the
 ```
 
 ```text
-Use Scoville Code to diagnose why this migration sometimes leaves consumers on the old schema. Identify the supported root cause and evidence; do not change files.
+Use Scoville Code to diagnose why this migration sometimes leaves consumers on the old schema. Identify the supported root cause and evidence. Do not change files.
 ```
 
 ```text
@@ -67,20 +67,20 @@ The final path must end in
 hosts use their supported Skills directory.
 
 **What it costs.** The strengthened 2,045-token Core is 16.59% larger than
-`v1.0.6`; workflow references load only when needed. That extra context buys
+`v1.0.6`. Workflow references load only when needed. That extra context buys
 tighter scope, risk handling, validation, and honest evidence. Use it where
-correctness and maintainability matter; skip it for a disposable vibe-coding
+correctness and maintainability matter. Skip it for a disposable vibe-coding
 experiment when token use matters more. See
 [benchmark evidence](docs/benchmark-evidence.md).
 
 ## What it enforces
 
 - **Outcome over ceremony.** Plans, tests, docs, and refactors support the
-  requested behavior; producing them is not completion by itself.
+  requested behavior. Producing them is not completion by itself.
 - **Canonical ownership.** The change fits the project's existing architecture,
   records, terminology, and workflow instead of creating a second owner.
-- **Proportionate risk.** Small reversible work stays small; destructive,
-  public, security, data, or release work receives stronger gates.
+- **Proportionate risk.** Small reversible work stays small. Destructive,
+  Public, security, data, or release work receives stronger gates.
 - **Evidence before claims.** Checks prove only what they observed. A failed
   tool is not silently promoted to a passing product.
 - **Root-cause correction.** The agent changes approach after repeated failure
@@ -95,11 +95,11 @@ The complete contract is in
 
 ## How it works
 
-The Core selects an internal mode—Advise, Explore, Develop, or Harden—then
+The Core selects an internal mode from Advise, Explore, Develop, or Harden, then
 loads only the planning, change-workflow, or validation guidance the operation
 needs. Project instructions and established owners outrank Skill defaults. The
 Skill creates no private plan or decision log and installs no executable
-software; the repository remains the source of truth, which saves everyone
+software. The repository remains the source of truth, which saves everyone
 from auditing the audit trail's audit trail.
 
 ## Scoville family
@@ -126,7 +126,7 @@ A reliability-first extension of
 [Microsoft SkillOpt](https://github.com/microsoft/SkillOpt) tested the six
 Scoville Skills across **1,201 optimization and evaluation runs**. Scoville
 Code passed **30/30 final cases**. Its Core is **16.59% larger than v1.0.6**
-because reliability coverage expanded; SkillOpt compressed the strengthened
+because reliability coverage expanded. SkillOpt compressed the strengthened
 version. See [benchmark evidence](docs/benchmark-evidence.md).
 The [family run ledger](docs/optimization-history.md) shows the complete count.
 
