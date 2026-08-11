@@ -1,5 +1,23 @@
 # Changelog
 
+## 2026-08-11: Concrete slop examples (v1.0.13)
+
+### Changed
+
+- Restored the concrete problem-first opening used by the earlier Scoville Code
+  README and adapted it to this Skill's actual failure modes.
+- Added four visible slop symptoms, their consequence, and dry humor without
+  changing the Skill contract or its measured claims.
+- Kept the shared README section order and family copy aligned across all six
+  Scoville repositories.
+
+### Validation
+
+- Agent Skill package, README structure, shared-copy, internal-link, and
+  Markdown whitespace checks passed.
+- No model-behavior benchmark was run because the Skill instructions did not
+  change.
+
 ## 2026-08-11: README voice and structure (v1.0.12)
 
 ### Changed

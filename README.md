@@ -3,6 +3,19 @@
 The result is the point. The process earns its place by making that result
 safer, clearer, or easier to verify.
 
+It usually looks harmless:
+
+- The agent reports "All tests pass" but never ran them.
+- A one-line bugfix arrives with 400 lines of scaffolding, two helpers, and a
+  small framework that would now also like maintenance.
+- A new utility appears even though the repository already owns the same
+  behavior three files away.
+- CI is green, but no check exercised the result the user actually asked for.
+  Green is a color. It is not evidence by itself.
+
+That is coding slop: motion without progress toward the requested behavior. The
+repository becomes more sophisticated in the general vicinity of the bug.
+
 Scoville Code is a goal-first Agent Skill for planning, changing, testing,
 reviewing, and removing code or engineering artifacts. It keeps canonical
 ownership, scope, risk boundaries, validation, and honest evidence visible. It
