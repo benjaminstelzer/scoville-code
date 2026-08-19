@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-08-19: Public validation wording (v1.0.17)
+
+### Changed
+
+- Removed external model-review approval from the historical validation record.
+- Kept the technical validation statements, Skill package, and behavior
+  unchanged.
+
+### Validation
+
+- Changelog no longer uses external approval as completion evidence.
+- The unchanged Agent Skill package passes canonical validation.
+
 ## 2026-08-11: Evidence-first slop examples (v1.0.14)
 
 ### Changed
@@ -140,8 +153,6 @@
 ### Validation
 
 - The canonical Agent Skill validator and repository diff checks pass.
-- Fable's complete standalone and family review found no remaining Code issue,
-  hard sibling dependency, ownership gap, or cycle.
 - The tested repository copy and the locally installed Skill are byte-identical.
 
 ## 2026-08-07: Progressive disclosure
