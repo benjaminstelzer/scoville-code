@@ -109,6 +109,8 @@ needs:
 
 - [Brainstorm](https://github.com/benjaminstelzer/scoville-brainstorm) explores
   materially different mechanisms before selection.
+- [Research](https://github.com/benjaminstelzer/scoville-research) turns web,
+  GitHub, and scholarly evidence into a decision-ready, claim-traceable result.
 - [Code](https://github.com/benjaminstelzer/scoville-code-anti-ai-slop) owns
   engineering scope, implementation, risk, and validation.
 - [UI](https://github.com/benjaminstelzer/scoville-ui-anti-ai-slop) owns
