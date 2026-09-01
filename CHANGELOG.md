@@ -1,5 +1,34 @@
 # Changelog
 
+## 2026-09-01: Maintainable file and module structure (v1.0.18)
+
+### Changed
+
+- Added a 2,000-line ceiling for hand-written source files, with project
+  precedence, concrete exceptions, and protection against metric gaming or
+  unrequested legacy refactors.
+- Added language-independent guidance for domain files, subsystem directories,
+  dependency direction, state and resource ownership, generated sources,
+  runtime compatibility, and evidence-based abstraction.
+- Added five evaluation definitions for generated files, fake splits, narrow
+  fixes in oversized code, data imports, and real module startup paths.
+- Scoped public benchmark claims to the previously qualified package.
+
+### Validation
+
+- The released package and the `v1.0.17` control each passed 8/8 open Train
+  cases under Terra 5.6 Medium.
+- Both arms passed 3/4 open Validation cases in three independent runs. Every
+  failure was the same narrow-security-fix case. Both applied and tested the
+  fix but omitted the unexplained oversized file as a remaining concern.
+- One conservative SkillOpt step proposed a change after 22 calls and
+  1,124,603 tokens. The proposal also passed only 3/4 Selection cases and was
+  rejected. No SkillOpt edit was promoted.
+- The four-case Holdout remains sealed because no candidate passed every open
+  hard gate. This release makes no new qualification claim.
+- Skill, Plan, JSON, local-link, diff, punctuation, and complete package-sync
+  checks passed for the release candidate.
+
 ## 2026-08-19: Public validation wording (v1.0.17)
 
 ### Changed

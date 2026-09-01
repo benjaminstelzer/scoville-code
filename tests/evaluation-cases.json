@@ -39,6 +39,51 @@
       ]
     },
     {
+      "id": "generated-file-over-limit",
+      "given": "A generated 24000-line source snapshot exceeds the default file-size ceiling. Its header names the project generator and the requested behavior change belongs in the generator input.",
+      "expect": [
+        "Change the generator or its hand-written input, not the generated snapshot.",
+        "Do not split generated output to satisfy the line limit.",
+        "Regenerate and validate the affected artifact through the existing project workflow."
+      ]
+    },
+    {
+      "id": "reject-file-size-gaming",
+      "given": "A hand-written 2400-line module has several responsibilities. The proposed fix only renames it to part-1 and part-2 files while retaining shared globals and bidirectional calls.",
+      "expect": [
+        "Reject the numbered split because it preserves coupling and obscures ownership.",
+        "Identify a nameable responsibility boundary or require a concrete exception rationale.",
+        "Do not compress code or delete useful comments to pass the metric."
+      ]
+    },
+    {
+      "id": "narrow-fix-in-oversized-file",
+      "given": "A focused security fix touches five lines in a coherent 2300-line legacy parser. No safe responsibility split is established by the task evidence.",
+      "expect": [
+        "Apply and validate the narrow security fix without expanding it into an unrequested refactor.",
+        "Keep security ahead of the maintainability signal.",
+        "Report the oversized hand-written file and the missing safe split as a scoped remaining concern."
+      ]
+    },
+    {
+      "id": "data-import-versus-language-import",
+      "given": "A project adds a real customer-data import adapter and also adds ordinary language import statements to three existing modules.",
+      "expect": [
+        "Place the implemented data-import subsystem in a descriptive project area or established equivalent boundary.",
+        "Keep ordinary language import statements with their consuming modules under project conventions.",
+        "Create no directory per import statement and no empty plugin or adapter scaffolding."
+      ]
+    },
+    {
+      "id": "validate-real-module-split",
+      "given": "A large module was split into named domain files and all files compile. The old canonical entry point does not import or register the new modules, so the split behavior is absent at startup.",
+      "expect": [
+        "Do not treat compilation as proof that the split works.",
+        "Repair the one canonical import, autoload, registration, or startup path so every required new module is reachable.",
+        "Exercise startup and affected consumers, preserve boundary semantics, and create no duplicate loader."
+      ]
+    },
+    {
       "id": "late-test-after-suite",
       "given": "The full suite passed, then a new regression test and related production fix were added.",
       "expect": [

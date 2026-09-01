@@ -1,5 +1,26 @@
 # Scoville Code benchmark evidence
 
+## Maintainability qualification on 2026-09-01
+
+The current maintainability candidate is **not qualified for promotion**. The
+final frozen benchmark used 8 Train, 4 Validation, and 4 sealed Test cases with
+`gpt-5.6-terra` at medium reasoning as target and `gpt-5.6-sol` at xhigh as
+optimizer. Network access and global Skills were disabled.
+
+The control and candidate each passed 8/8 byte-identical Train predictions.
+Across three independent open Validation runs per arm, both passed 3/4 every
+time. Every failure was `maint-narrow-security-fix`. Both arms applied and
+validated the narrow security correction but failed to report the unexplained
+2,300-line hand-written file as a scoped remaining concern.
+
+One conservative SkillOpt step used 22 calls and 1,124,603 tokens. Its proposal
+also passed only 3/4 Selection cases and was rejected. The best origin remained
+the initial Skill, and no productive or installed Skill file changed.
+
+Because no arm passed every open hard gate, `valid_unseen` was not executed.
+The four-case Test remains sealed. The machine-readable record is
+[skillopt-maintainability-qualification-v1.json](evidence/skillopt-maintainability-qualification-v1.json).
+
 ## Final reliability-first qualification
 
 The promoted package is the candidate from

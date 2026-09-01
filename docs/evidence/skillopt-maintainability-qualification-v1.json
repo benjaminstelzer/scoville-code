@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "record_id": "scoville-code-maintainability-qualification-v1",
+  "date": "2026-09-01",
+  "outcome": "not_qualified",
+  "reason": "The candidate and control each failed maint-narrow-security-fix in all three open Validation repetitions. SkillOpt rejected its sole proposal and retained the initial candidate.",
+  "environment": {
+    "studio_root": "Z:/Projekts/AI/SkillOpt-Studio",
+    "skillopt_commit": "ba820b500f9da96685cf2780c7dc85ed4eb6563e",
+    "codex_cli": "0.147.0-alpha.1.2",
+    "optimizer": {
+      "model": "gpt-5.6-sol",
+      "reasoning": "xhigh"
+    },
+    "target": {
+      "model": "gpt-5.6-terra",
+      "reasoning": "medium"
+    },
+    "network_access": false,
+    "global_skill_isolation": true
+  },
+  "packages": {
+    "control": {
+      "source": "v1.0.17",
+      "commit": "dff5c4101f4a93ade848dacc17366eb9d566f113",
+      "tree_sha256": "c499559a0478414973bcaefa1b6ef00500f5df32b705aea2c23bd96e710f6988"
+    },
+    "candidate": {
+      "source": "current five-file worktree package",
+      "base_commit": "dff5c4101f4a93ade848dacc17366eb9d566f113",
+      "tree_sha256": "1a5d6608c06c627b130256ab9483e677c41524b1e2f62d29df8da6d0098bacbf"
+    }
+  },
+  "benchmark": {
+    "path": "benchmarks/code-maint-v6",
+    "train_items": 8,
+    "validation_items": 4,
+    "test_items": 4,
+    "train_sha256": "66482ae29ce28e124ef8f0cb8adbeddb3b923602657f1f7a4cfca9aee46d6493",
+    "validation_sha256": "0149449822b51967792ae1c52697e7d71e25ff298ca65843c61cb0f2032a8484",
+    "test_sha256": "3afcdc76e922d69a18119e43c448fa94f5edc10be56a5348c275fbf23c3e78e4",
+    "benchmark_lock_sha256": "44d6f5e94ba013cd49198b454b0a5a85fca2feca1bc0aba0e077ef31dd5353cf",
+    "test_seal_sha256": "2d5c5eb4977321c29cc9c18aca240261a4f94cf5b9b93d4c693de470e7da8d36"
+  },
+  "open_evidence": {
+    "train": {
+      "prediction_bytes_equal_between_v5_and_v6": true,
+      "control": {
+        "run_id": "cmv5-control-train-r1",
+        "passed": 8,
+        "total": 8,
+        "agent_ok": 8
+      },
+      "candidate": {
+        "run_id": "cmv5-candidate-train-r1",
+        "passed": 8,
+        "total": 8,
+        "agent_ok": 8
+      }
+    },
+    "validation": {
+      "control": [
+        {
+          "run_id": "cmv6-control-val-r1",
+          "passed": 3,
+          "total": 4
+        },
+        {
+          "run_id": "cmv6-control-val-r2",
+          "passed": 3,
+          "total": 4
+        },
+        {
+          "run_id": "cmv6-control-val-r3",
+          "passed": 3,
+          "total": 4
+        }
+      ],
+      "candidate": [
+        {
+          "run_id": "cmv6-candidate-val-r1",
+          "passed": 3,
+          "total": 4
+        },
+        {
+          "run_id": "cmv6-candidate-val-r2",
+          "passed": 3,
+          "total": 4
+        },
+        {
+          "run_id": "cmv6-candidate-val-r3",
+          "passed": 3,
+          "total": 4
+        }
+      ],
+      "all_agent_ok": true,
+      "stable_failed_case": "maint-narrow-security-fix",
+      "failed_invariant": "expected_json_subset",
+      "observed_behavior": "Both arms applied and validated the narrow security fix but omitted the scoped oversized-file concern."
+    }
+  },
+  "skillopt": {
+    "run_id": "cmv6-candidate-skillopt-r1",
+    "epochs": 1,
+    "steps": 1,
+    "calls": 22,
+    "total_tokens": 1124603,
+    "proposal_length": 10690,
+    "proposal_selection_passed": 3,
+    "proposal_selection_total": 4,
+    "accepted_edits": 0,
+    "rejected_edits": 1,
+    "best_origin": "initial_skill",
+    "normalized_best_matches_input": true
+  },
+  "holdout": {
+    "status": "withheld_open_gate_failure",
+    "valid_unseen_runs": 0,
+    "test_seal_state": "sealed",
+    "test_items": 4
+  },
+  "source_effect": {
+    "productive_skill_changed_by_skillopt": false,
+    "codex_installation_changed_by_skillopt": false,
+    "claude_installation_changed_by_skillopt": false
+  },
+  "limits": [
+    "The result applies to the frozen cases and recorded model configuration.",
+    "The holdout proves no behavior because it was correctly withheld.",
+    "The rejected proposal is not evidence of an improved Skill."
+  ]
+}

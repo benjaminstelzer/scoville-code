@@ -66,11 +66,11 @@ The final path must end in
 `~/.claude/skills/` globally or `.claude/skills/` inside one project. Other
 hosts use their supported Skills directory.
 
-**What it costs.** The strengthened 2,045-token Core is 16.59% larger than
-`v1.0.6`. Workflow references load only when needed. That extra context buys
-tighter scope, risk handling, validation, and honest evidence. Use it where
-correctness and maintainability matter. Skip it for a disposable vibe-coding
-experiment when token use matters more. See
+**What it costs.** The historically qualified Core used 2,045 tokens and was
+16.59% larger than `v1.0.6`. Workflow references load only when needed. This
+update leaves the current Core unchanged but expands the Change reference.
+Historical token measurements remain bound to their qualified package. Use the
+Skill where correctness and maintainability matter. See
 [benchmark evidence](docs/benchmark-evidence.md).
 
 ## What it enforces
@@ -85,6 +85,10 @@ experiment when token use matters more. See
   tool is not silently promoted to a passing product.
 - **Root-cause correction.** The agent changes approach after repeated failure
   instead of applying patch number three with renewed optimism.
+- **Navigable code structure.** Hand-written source files use a default ceiling
+  of 2,000 physical lines with project priority and concrete exceptions. Domain
+  ownership, module boundaries, dependency direction, generated sources, and
+  resource cleanup remain explicit without forcing one architecture.
 - **Material questions only.** It asks when a missing choice changes behavior,
   authority, cost, reversibility, or scope, not for details the code settles.
 - **Complete handoff.** The final report names changed behavior, relevant
@@ -126,10 +130,17 @@ needs:
 
 A reliability-first extension of
 [Microsoft SkillOpt](https://github.com/microsoft/SkillOpt) tested the six
-Scoville Skills across **1,201 optimization and evaluation runs**. Scoville
-Code passed **30/30 final cases**. Its Core is **16.59% larger than v1.0.6**
-because reliability coverage expanded. SkillOpt compressed the strengthened
-version. See [benchmark evidence](docs/benchmark-evidence.md).
+Scoville Skills across **1,201 optimization and evaluation runs**. The
+previously qualified Code package passed **30/30 final cases**. Its Core was
+**16.59% larger than v1.0.6** because reliability coverage expanded. SkillOpt
+compressed that strengthened version.
+
+The new maintainability candidate and the `v1.0.17` control each passed 8/8
+open Train cases. Both passed 3/4 open Validation cases in three independent
+runs. Every failure was the same narrow-security-fix case. One conservative
+SkillOpt proposal also passed only 3/4 and was rejected. The four-case Holdout
+remains sealed, so this release makes no new qualification claim. See
+[benchmark evidence](docs/benchmark-evidence.md).
 The [family run ledger](docs/optimization-history.md) shows the complete count.
 
 ## Sources
@@ -145,6 +156,13 @@ The [family run ledger](docs/optimization-history.md) shows the complete count.
   and [technical debt](https://martinfowler.com/bliki/TechnicalDebt.html).
 - Simon Willison on
   [vibe coding versus reviewed AI-assisted engineering](https://simonwillison.net/2025/Mar/19/vibe-coding/).
+- [Google Engineering Practices](https://google.github.io/eng-practices/review/reviewer/looking-for.html)
+  for design, complexity, tests, naming, consistency, and review context.
+- [DORA code maintainability](https://dora.dev/capabilities/code-maintainability/)
+  for source discoverability, dependency traceability, and reproducible builds.
+- Configurable file-size checks in [ESLint](https://eslint.org/docs/latest/rules/max-lines)
+  and [Checkstyle](https://checkstyle.org/checks/sizes/filelength.html), whose
+  different defaults are not treated as one universal standard.
 
 ## License
 
