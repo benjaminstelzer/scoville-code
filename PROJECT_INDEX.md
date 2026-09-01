@@ -1,6 +1,6 @@
 ---
 format_version: 1
-active_plan: PLAN-0005
+active_plan: null
 ---
 
 Den aktiven Plan vor Änderungen lesen. Zugehörige Entscheidungen über den
