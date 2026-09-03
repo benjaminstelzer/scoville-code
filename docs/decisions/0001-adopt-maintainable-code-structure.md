@@ -8,71 +8,72 @@ scope: skills/maintainability
 superseded_by: ADR-0002
 ---
 
-# Wartbare Datei- und Modulstruktur als Code-Standard ergänzen
+# Add maintainable file and module structure as a code standard
 
 ## Decision
 
-Scoville Code erhält sprachunabhängige Wartbarkeitsregeln in der vorhandenen
-Change-Referenz. Handgeschriebene Quelldateien haben grundsätzlich höchstens
-1.000 physische Zeilen. Strengere Projektregeln gehen vor, kohärente Ausnahmen
-werden begründet. Ergänzt werden fachliche Datei- und Verzeichnisgrenzen,
-Abhängigkeitsrichtung, Generator-/Runtime-Grenzen, Zustands- und
-Ressourcenbesitz sowie Duplikation ohne spekulative Abstraktion.
+Scoville Code adds language-independent maintainability rules to the existing
+Change reference. Hand-written source files should generally contain no more
+than 1,000 physical lines. Stricter project rules take precedence, and coherent
+exceptions require justification. The rules also cover domain-based file and
+directory boundaries, dependency direction, generator and runtime boundaries,
+state and resource ownership, and duplication without speculative abstraction.
 
 ## Problem
 
-Der aktuelle Skill schützt Umfang, Zuständigkeit, Grenzsemantik und Nachweise,
-formuliert aber keine konkrete Dateiobergrenze und zu wenig handlungsnahe
-Regeln für Datei-, Verzeichnis- und Modulstruktur. Dadurch können große
-Sammeldateien, flacher Subsystem-Wildwuchs oder rein metrische Aufteilungen die
-vorhandenen allgemeinen Regeln passieren.
+The current Skill protects scope, ownership, boundary semantics, and evidence,
+but it defines no concrete file-size ceiling and offers too little actionable
+guidance for file, directory, and module structure. Large catch-all files,
+unstructured subsystem sprawl, or purely metric-driven splits can therefore
+pass the existing general rules.
 
 ## Drivers
 
-- Die Nutzerentscheidung verlangt die 1.000-Zeilen-Grenze mit einer Ausnahme,
-  wenn keine sinnvolle Teilung möglich ist.
-- Adapter, Plugins und Datenimport-Funktionen sollen auffindbare fachliche
-  Bereiche erhalten. Sprachliche Import-Anweisungen sind davon verschieden.
-- Fluid Base zeigt nützliche Verantwortungsgrenzen, aber auch große generierte
-  und handgeschriebene Dateien. Seine konkrete PHP-/Trait-Struktur ist keine
-  universelle Vorlage.
-- Professionelle Primärquellen stützen Kohäsion, kleine überprüfbare Änderungen,
-  nachvollziehbare Abhängigkeiten und reproduzierbare Prüfungen. Sie belegen
-  keinen universellen Dateigrenzwert.
-- Fables Planprüfung und eigene Empfehlung verlangen dieselbe Kalibrierung und
-  warnen vor Doppelregeln sowie einer langen Lehrbuch-Checkliste.
+- The user selected a 1,000-line ceiling with an exception when no meaningful
+  split is possible.
+- Adapters, plugins, and data-import functions should have discoverable domain
+  areas. Language-level import statements are a separate concern.
+- Fluid Base demonstrates useful responsibility boundaries, but also contains
+  large generated and hand-written files. Its specific PHP and trait structure
+  is not a universal template.
+- Professional primary sources support cohesion, small verifiable changes,
+  traceable dependencies, and reproducible checks. They do not establish a
+  universal file-size limit.
+- Fable's Plan review and independent recommendation call for the same
+  calibration and warn against duplicate rules and a long textbook checklist.
 
 ## Considered alternatives
 
-- Keine konkrete Grenze ergänzen. Das lässt den ausdrücklich genannten
-  Fehlmodus ungelöst.
-- Jede Datei über 1.000 Zeilen zwingend teilen. Das beschädigt generierte,
-  fremdverwaltete oder fachlich untrennbare Inhalte und erweitert kleine Fixes.
-- Eine neue allgemeine Architektur-Referenz oder feste Layer-Struktur einführen.
-  Das erhöht Lade- und Pflegekosten und übergeht Projektkonventionen.
-- Nur eine Tool-Regel empfehlen. Tool-Defaults unterscheiden sich und besitzen
-  ohne Projektkonfiguration keine Autorität.
+- Add no concrete limit. This leaves the explicitly named failure mode
+  unresolved.
+- Require every file over 1,000 lines to be split. This damages generated,
+  externally maintained, or coherently indivisible content and expands narrow
+  fixes.
+- Introduce a new general architecture reference or fixed layer structure.
+  This increases loading and maintenance costs and overrides project
+  conventions.
+- Recommend only a tool rule. Tool defaults differ and have no authority
+  without project configuration.
 
 ## Consequences
 
-Neue oder substanziell bearbeitete handgeschriebene Dateien werden früher an
-fachlichen Grenzen geteilt. Überschreitungen brauchen eine konkrete Begründung,
-lösen aber kein automatisches Bestandsrefactoring aus. Projektregeln,
-Zielversionen und Runtime-Verträge bleiben vorrangig. Die Change-Referenz wird
-größer, deshalb bleibt die Ergänzung auf entscheidungsrelevante Regeln und Fälle
-begrenzt. Historische Benchmarks belegen das geänderte Paket nicht.
+New or substantially changed hand-written files are split earlier at domain
+boundaries. Exceeding the limit requires a concrete justification but does not
+trigger automatic legacy refactoring. Project rules, target versions, and
+runtime contracts remain authoritative. The Change reference becomes larger,
+so the addition stays limited to decision-relevant rules and cases. Historical
+benchmarks do not prove the changed package.
 
 ## Confirmation
 
-Die Referenz nennt Grenze, Vorrang, Ausnahmen und verbotene Metrik-Tricks. Fünf
-Evaluationsdefinitionen decken die benannten Grenzfälle ab. Paketvalidierung,
-JSON-Prüfung, Linkprüfung, Diff-Sichtung und Bytevergleich der lokalen Kopien
-bestätigen nur Struktur und Synchronisierung. Ein Verhaltenstest muss getrennt
-als solcher durchgeführt und berichtet werden.
+The reference names the ceiling, precedence, exceptions, and prohibited metric
+tricks. Five evaluation definitions cover the named boundary cases. Package
+validation, JSON validation, link checking, diff inspection, and byte
+comparison of the local copies confirm only structure and synchronization. A
+behavioral test must be run and reported separately as such.
 
 ## Revisit when
 
-Reale Projekte zeigen wiederholt, dass die Grenze sinnvolle Änderungen
-verhindert, Ausnahmen beliebig werden, die zusätzliche Referenz die
-Entscheidungsqualität verschlechtert oder ein projektnatives Maß die Aufgabe
-nachweislich besser löst.
+Real projects repeatedly show that the limit prevents useful changes,
+exceptions become arbitrary, the additional reference reduces decision
+quality, or a project-native measure demonstrably solves the task better.

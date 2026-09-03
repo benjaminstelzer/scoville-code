@@ -8,57 +8,55 @@ scope: skills/maintainability
 supersedes: ADR-0001
 ---
 
-# Checkstyle-Wert von 2.000 Zeilen verwenden
+# Use Checkstyle's 2,000-line value
 
 ## Decision
 
-Scoville Code verwendet für handgeschriebene Quelldateien grundsätzlich eine
-Obergrenze von 2.000 physischen Zeilen. Strengere Projektregeln gehen weiterhin
-vor. Die bestehenden Ausnahmen und Schutzregeln gegen Metrik-Gaming sowie
-ungefragte Bestandsrefactorings bleiben erhalten.
+Scoville Code uses a general ceiling of 2,000 physical lines for hand-written
+source files. Stricter project rules continue to take precedence. The existing
+exceptions and safeguards against metric gaming and unrequested legacy
+refactoring remain in place.
 
 ## Problem
 
-Die zuvor ausgewählte Obergrenze von 1.000 Zeilen entspricht nicht mehr der
-aktuellen Nutzerentscheidung. Gewünscht ist der konfigurierbare Standardwert von
-2.000 Zeilen aus Checkstyle FileLength.
+The previously selected ceiling of 1,000 lines no longer reflects the current
+user decision. The requested value is the configurable 2,000-line default from
+Checkstyle FileLength.
 
 ## Drivers
 
-- Der Nutzer hat 2.000 Zeilen ausdrücklich ausgewählt.
-- Checkstyle dokumentiert 2.000 als Standardwert seiner konfigurierbaren
-  FileLength-Prüfung.
-- Die Dateigröße bleibt ein Wartbarkeitssignal. Kohäsion, Projektvorrang und
-  konkrete Ausnahmen entscheiden weiterhin über eine sinnvolle Aufteilung.
-- Ein einzelner Werkzeugwert wird nicht als universeller Industriestandard
-  dargestellt.
+- The user explicitly selected 2,000 lines.
+- Checkstyle documents 2,000 as the default value of its configurable
+  FileLength check.
+- File size remains a maintainability signal. Cohesion, project precedence,
+  and concrete exceptions still determine whether a split is useful.
+- A single tool value is not presented as a universal industry standard.
 
 ## Considered alternatives
 
-- Die bisherige Grenze von 1.000 Zeilen beibehalten. Das widerspricht der neuen
-  Nutzerentscheidung.
-- Jede Projektgrenze durch 2.000 ersetzen. Das würde strengere verbindliche
-  Projektkonventionen übergehen.
-- Die Größenregel vollständig entfernen. Das würde den zuvor bestätigten
-  Wartbarkeitsfehlmodus wieder ungeregelt lassen.
+- Keep the previous 1,000-line limit. This contradicts the new user decision.
+- Replace every project limit with 2,000. This would override stricter binding
+  project conventions.
+- Remove the size rule entirely. This would leave the previously confirmed
+  maintainability failure mode ungoverned again.
 
 ## Consequences
 
-Handgeschriebene Dateien zwischen 1.001 und 2.000 Zeilen benötigen allein wegen
-der Scoville-Vorgabe keine Ausnahme mehr. Eine klare fachliche Teilung kann
-trotzdem früher sinnvoll sein. Bestehende Dateien über 2.000 Zeilen werden nicht
-automatisch refaktoriert. Historische Plan- und Entscheidungsunterlagen behalten
-den damals gültigen Wert von 1.000 Zeilen.
+Hand-written files between 1,001 and 2,000 lines no longer require an exception
+solely because of the Scoville rule. A clear domain split can still be useful
+earlier. Existing files over 2,000 lines are not refactored automatically.
+Historical Plan and Decision records retain the 1,000-line value that applied
+at the time.
 
 ## Confirmation
 
-Die aktive Change-Referenz und aktuelle Dokumentation müssen 2.000 an den für
-die Regel relevanten Stellen nennen. Grenzfälle müssen oberhalb von 2.000
-liegen. Paket-, JSON-, Link- und Synchronisierungsprüfungen müssen bestehen.
-Fable prüft den fertigen Skill anschließend lesend.
+The active Change reference and current documentation must name 2,000 at the
+locations relevant to the rule. Boundary cases must be above 2,000. Package,
+JSON, link, and synchronization checks must pass. Fable then reviews the
+finished Skill read-only.
 
 ## Revisit when
 
-Der Nutzer wählt einen anderen Wert, ein verbindliches Projektlimit geht vor
-oder reale Einsätze zeigen, dass die Grenze die gewünschte Wartbarkeitswirkung
-nicht erreicht.
+The user selects another value, a binding project limit takes precedence, or
+real use shows that the limit does not achieve the intended maintainability
+effect.

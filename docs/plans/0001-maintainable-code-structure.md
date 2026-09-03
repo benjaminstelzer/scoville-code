@@ -3,248 +3,247 @@ format_version: 1
 id: PLAN-0001
 status: completed
 created: 2026-08-31
-updated: 2026-08-31
+updated: 2026-09-03
 ---
 
-# Wartbare Datei- und Modulstruktur in Scoville Code
+# Maintainable file and module structure in Scoville Code
 
 ## Goal
 
-Scoville Code soll konkrete, überprüfbare Regeln für wartbaren Code enthalten.
-Der Auftrag nennt höchstens 1.000 Zeilen pro Datei mit begründeten Ausnahmen,
-sinnvolle Verzeichnisse für Adapter, Plugins und Import-Funktionen sowie logisch
-benannte Dateien. Weitere relevante Lücken werden ergänzt, bereits vorhandene
-Regeln bleiben an ihrem bisherigen Ort. Ein zusätzlicher Nutzerauftrag verlangt
-den Abgleich mit professionellen sprachunabhängigen Entwicklungspraktiken.
-Fable prüft den damit ergänzten Plan, bevor der
-Skill, seine Tests, Dokumentation oder installierten Kopien geändert werden.
+Scoville Code should contain concrete, verifiable rules for maintainable code.
+The request specifies no more than 1,000 lines per file, with justified
+exceptions; meaningful directories for adapters, plugins, and import functions;
+and logically named files. Other relevant gaps will be filled while existing
+rules remain in their current locations. An additional user request requires a
+comparison with professional, language-independent development practices.
+Fable reviews the expanded Plan before the Skill, its tests, documentation, or
+installed copies are changed.
 
-Die Umsetzung betrifft das kanonische Repository
-`Z:\Projekts\AI\scoville-code-anti-ai-slop` und anschließend die vorhandenen
-lokalen Scoville-Code-Kopien für Codex und Claude. Eine Veröffentlichung ist
-nicht Teil dieses Auftrags.
+The implementation covers the canonical repository
+`Z:\Projekts\AI\scoville-code-anti-ai-slop` and then the existing local
+Scoville Code copies for Codex and Claude. Publication is not part of this task.
 
-**Geprüfter Ausgangspunkt, 2026-08-31**
+**Verified baseline, 2026-08-31**
 
-- Das Code-Repository steht ohne vorgelagerte Änderungen auf `dff5c41`.
-- Core und installierter Codex-Core sind bytegleich. Der Skill hat bereits
-  Regeln für kanonische Zuständigkeit, Umfang, Risiko, Fehlerbehandlung und
-  angemessene Tests. Konkrete Größen- und Strukturregeln fehlen.
-- `references/change-workflow.md` fordert bestehende Namenskonventionen und
-  kleine kohärente Änderungen, definiert aber weder Dateigrößen noch
-  Verzeichnisgrenzen, Funktionszuschnitt oder Abhängigkeitsrichtung.
-- Fluid Base wurde ausschließlich gelesen. Der in seinem `AGENTS.md` genannte
-  Projektpfad ist `C:\Users\benja\Desktop\DIVI5 Plugin`. Dieser Checkout und
-  `Z:\Projekts\AI\divi-5-fluid-base` stehen auf `46ee6e9b`. Die unversionierten
-  Desktop-Verzeichnisse `research/` und `workspace/` bleiben unangetastet.
+- The Code repository has no preceding changes at `dff5c41`.
+- Core and the installed Codex core are byte-identical. The Skill already has
+  rules for canonical ownership, scope, risk, error handling, and proportional
+  tests. Concrete size and structure rules are missing.
+- `references/change-workflow.md` requires existing naming conventions and
+  small, coherent changes, but defines neither file sizes nor directory
+  boundaries, function scope, or dependency direction.
+- Fluid Base was read only. The project path named in its `AGENTS.md` is
+  `C:\Users\benja\Desktop\DIVI5 Plugin`. That checkout and
+  `Z:\Projekts\AI\divi-5-fluid-base` are at `46ee6e9b`. The unversioned Desktop
+  directories `research/` and `workspace/` remain untouched.
 
-**Was Fluid Base tatsächlich zeigt**
+**What Fluid Base actually demonstrates**
 
-Die Beispiele stammen aus `src/divi-5-fluid-base/`, der Namenskonvention in
-`docs/plugin-specific/file-naming-convention.md` und dem Developer Guide.
+The examples come from `src/divi-5-fluid-base/`, the naming convention in
+`docs/plugin-specific/file-naming-convention.md`, and the Developer Guide.
 
-| Beobachtung | Beleg | Übertragbares Prinzip |
+| Observation | Evidence | Transferable principle |
 | --- | --- | --- |
-| Generisches Admin-Framework getrennt vom Produkt | `includes/dynamitec-admin-framework/` und `assets/js/dynamitec-admin-framework/` gegenüber `assets/js/admin/` | Framework und produktspezifische Adapter haben getrennte Zuständigkeiten und Verzeichnisse. |
-| Unterschiedliche Plattformeditionen getrennt | `includes/traits/edition/divi4/`, `includes/traits/edition/divi5/`, `divi5fb-trait-edition-adapters.php` | Editions- und Integrationsdetails bleiben hinter einer klaren gemeinsamen Aufrufgrenze. |
-| Konfiguration, Schema und Spezifikationen auffindbar | `includes/config/`, `includes/schema/`, `includes/overrides/` | Dateien und Verzeichnisse folgen ihrer tatsächlichen Verantwortung. |
-| Dateien tragen fachliche Namen | `divi5fb-trait-frontend-css-cache.php`, `divi5fb-trait-override-sync-jobs.php`, `dynadm-scroll-state.js` | Namen benennen Aufgabe und fachlichen Bereich statt nummerierter Dateiteile. |
-| Import/Export ist ein konkreter Funktionsbereich | `includes/traits/divi5fb-trait-import-export.php` | Das Beispiel ist eine eigene Datei, kein eigenes Import-Verzeichnis. Sprachliche Import-Anweisungen sind nicht gemeint. |
-| Generierte Inhalte können groß sein | `divi5fb-config-setup-reset-presets.php`, 28.697 Zeilen, nennt seinen Generator | Quelldaten und Generator bearbeiten, erzeugte Ergebnisse nicht zum Erfüllen einer Zeilenzahl aufteilen. |
-| Eine gute Grundstruktur garantiert keine kleinen Dateien | 17 von 115 untersuchten PHP-/JS-/CSS-Dateien über 1.000 Zeilen, ohne Vendor und minifizierte Dateien | Zeilenzahl ist ein Prüfsignal, kein Beleg für Fehler oder eine sinnvolle konkrete Aufteilung. |
+| Generic admin framework separated from the product | `includes/dynamitec-admin-framework/` and `assets/js/dynamitec-admin-framework/` versus `assets/js/admin/` | Framework and product-specific adapters have separate responsibilities and directories. |
+| Different platform editions separated | `includes/traits/edition/divi4/`, `includes/traits/edition/divi5/`, `divi5fb-trait-edition-adapters.php` | Edition and integration details remain behind one clear, shared call boundary. |
+| Configuration, schema, and specifications are discoverable | `includes/config/`, `includes/schema/`, `includes/overrides/` | Files and directories follow their actual responsibility. |
+| Files have domain-specific names | `divi5fb-trait-frontend-css-cache.php`, `divi5fb-trait-override-sync-jobs.php`, `dynadm-scroll-state.js` | Names identify the task and domain instead of using numbered file fragments. |
+| Import/export is a concrete functional area | `includes/traits/divi5fb-trait-import-export.php` | The example is a separate file, not a separate import directory. Language import statements are not meant. |
+| Generated content can be large | `divi5fb-config-setup-reset-presets.php`, 28,697 lines, names its generator | Edit source data and the generator; do not split generated output merely to satisfy a line count. |
+| A sound base structure does not guarantee small files | 17 of 115 examined PHP/JS/CSS files exceed 1,000 lines, excluding vendor and minified files | Line count is a review signal, not proof of an error or of a useful concrete split. |
 
-Die zweite große Datendatei `divi5fb-config-divi-default-baselines.php` hat
-14.099 Zeilen und Herkunftsmetadaten. Der lesbare Runtime-Code
-`assets/js/divi5fb-runtime.js` hat 4.066 Zeilen. Diese Bestandsaufnahme ist kein
-Refactoring-Auftrag und kein Urteil, dass jede dieser Dateien geteilt werden
-sollte. Produktpräfixe, PHP-Traits und konkrete Ordnernamen werden nicht zum
-universellen Scoville-Standard erklärt.
+The second large data file, `divi5fb-config-divi-default-baselines.php`, has
+14,099 lines and provenance metadata. The readable runtime code
+`assets/js/divi5fb-runtime.js` has 4,066 lines. This inventory is not a
+refactoring request and not a judgment that each of these files should be
+split. Product prefixes, PHP traits, and specific directory names do not become
+universal Scoville standards.
 
-**Vorgesehener Regelumfang**
+**Intended rule scope**
 
-| Bereich | Bereits vorhanden | Ergänzung oder Präzisierung |
+| Area | Already present | Addition or clarification |
 | --- | --- | --- |
-| Dateigröße | Keine konkrete Grenze | Handgeschriebene Quelldateien grundsätzlich höchstens 1.000 physische Zeilen in normaler Projektformatierung. Kein Zielwert und kein Schönrechnen durch Entfernen von Kommentaren oder Zusammenpressen. Sinnvolle fachliche Teilung früher vornehmen. |
-| Ausnahmen und Bestand | Kleine Änderungen, kein ungefragter Umbau | Generierte, minifizierte und fremdverwaltete Dateien sind nicht nach der Grenze zu zerlegen. Bei einer kohärenten handgeschriebenen Datei über 1.000 Zeilen begründen, warum eine konkrete Teilung Kopplung erhöht, Invarianten zerreißt oder mit einem notwendigen Format kollidiert. Bei eng begrenzten Bestandskorrekturen keine ungefragte Großaufteilung. |
-| Verzeichnisse | Bestehende Architektur respektieren | Tatsächlich implementierte Adapter-, Plugin- und Datenimport-Subsysteme in eigene aussagekräftige Verzeichnisse oder vorhandene gleichwertige Projektbereiche legen. Bestehende kleine kohärente Ein-Datei-Funktionen nicht nur für eine schematische Ordnerstruktur verschieben. Keine leeren Zukunftsordner. |
-| Import-Begriff | Nicht behandelt | Datenimporte und Integrationen sind Strukturgrenzen. Sprachliche `import`, `use` oder `require`-Anweisungen bleiben nach der bestehenden Sprach- und Toolkonvention beim konsumierenden Modul. Keine Ordnerpflicht pro Import-Anweisung. |
-| Namen und Zuständigkeiten | Namenskonventionen übernehmen | Ein nachvollziehbarer fachlicher Verantwortungsbereich pro Datei oder Modul. Bestehende präzise Namen übernehmen. Keine unspezifischen Sammeldateien, nummerierten Fragmente oder künstlichen Ein-Funktions-Dateien. |
-| Funktionen und Kontrollfluss | Nur allgemeine Kohärenz | Funktionen auf eine verständliche Aufgabe begrenzen, versteckte Nebenwirkungen und tiefe Verschachtelung reduzieren. Kleine Hilfsfunktionen nur für erkennbare Begriffe oder wiederverwendete Logik. Keine universelle zusätzliche Zeilenquote pro Funktion. |
-| Abhängigkeiten und Schnittstellen | Kanonischer Owner, keine Parallelpfade | Abhängigkeitsrichtung sichtbar halten, neue Zyklen und Zugriffe auf fremde interne Dateien vermeiden. Kleine öffentliche Moduloberflächen. Integrationsdetails gehören in Adapter, fachliche Regeln nicht in generische Framework-Helfer. Keine automatische neue Layer-Architektur. |
-| Zustand und Seiteneffekte | Erhalt relevanter Zustandssemantik | Veränderlichen Zustand einem klaren Owner geben, versteckte globale Kopplung vermeiden. Ein-/Ausgabe und Infrastruktur von berechenbarer Fachlogik trennen, soweit dadurch echte Test- oder Wartungsgrenzen entstehen. Keine allgemeine Pflicht zu DI-Containern. |
-| Verträge und Konfiguration | Bedeutung an Grenzen erhalten | Neue Einheiten und Schemas an tatsächlichen Grenzen explizit machen. Fachliche Regeln, Konfiguration und begründungsbedürftige Konstanten nicht mehrfach auseinanderlaufend pflegen. Bestehende allgemeine Grenzregeln nicht duplizieren. |
-| Ressourcen | Fehler nicht verschlucken, kein falscher Erfolg | Wer Handles, Listener, Timer oder Verbindungen anlegt, braucht einen klaren Owner für die Freigabe. Retry-, Abbruch- und Timeout-Mechanismen nur ergänzen, wenn Auftrag, bestehender Vertrag oder konkrete Fehlerspur sie verlangt. |
-| Duplikation und Abstraktion | Spekulative Helfer und Schichten bereits verboten | Belegte Duplikation fachlicher Logik im kanonischen Owner zusammenführen. Keine Abstraktion vor einem zweiten realen Nutzer oder einer belegten gemeinsamen Invariante. |
-| Generierte Quellen und Runtime | Bestehende Werkzeuge bevorzugen | Handgeschriebene Quellen von Vendor, generierten Ergebnissen und Build-Artefakten trennen. Generator statt Ausgabe ändern. Sprachsyntax und Bibliotheks-APIs müssen zur deklarierten Zielversion passen. |
-| Nachvollziehbare Abhängigkeiten und Builds | Nur teilweise konkret | Vorhandene Manifeste, Lockfiles und Build-Einstiegspunkte respektieren. Versionen berührter Abhängigkeiten nachvollziehbar halten. Keine automatische Einführung eines Paketmanagers oder einer CI-Plattform. |
-| Tests und Dokumentation | Proportionale, beobachtete Prüfungen | Nach Datei- oder Modulaufteilung reale Aufrufer, Import-/Autoload- und Startpfade prüfen. Allgemeine Test-, Lint- und Dokumentationsregeln nicht duplizieren. |
+| File size | No concrete limit | Hand-written source files should generally have no more than 1,000 physical lines in normal project formatting. This is not a target, and the limit must not be gamed by removing comments or compressing code. Split earlier when a meaningful domain boundary exists. |
+| Exceptions and legacy code | Small changes, no unsolicited restructuring | Generated, minified, and externally managed files are not to be split according to this limit. For a coherent hand-written file over 1,000 lines, explain why a concrete split would increase coupling, break invariants, or conflict with a necessary format. Do not turn a narrowly scoped legacy fix into an unsolicited large split. |
+| Directories | Respect the existing architecture | Put actual adapter, plugin, and data-import subsystems in their own clearly named directories or existing equivalent project areas. Do not move an existing small, coherent single-file capability merely to satisfy a schematic directory structure. Do not create empty future directories. |
+| Meaning of import | Not addressed | Data imports and integrations are structural boundaries. Language `import`, `use`, or `require` statements remain with the consuming module according to existing language and tool conventions. There is no directory requirement for each import statement. |
+| Names and responsibilities | Adopt naming conventions | Give each file or module one comprehensible domain responsibility. Reuse existing precise names. Avoid vague catch-all files, numbered fragments, and artificial one-function files. |
+| Functions and control flow | Only general coherence | Limit functions to one understandable task and reduce hidden side effects and deep nesting. Extract small helpers only for recognizable concepts or reused logic. Do not impose another universal line quota per function. |
+| Dependencies and interfaces | Canonical owner, no parallel paths | Keep dependency direction visible, avoid new cycles, and do not reach into another module's internal files. Keep public module surfaces small. Integration details belong in adapters; domain rules do not belong in generic framework helpers. Do not automatically add a new layered architecture. |
+| State and side effects | Preserve relevant state semantics | Give mutable state a clear owner and avoid hidden global coupling. Separate I/O and infrastructure from predictable domain logic where this creates real test or maintenance boundaries. Do not universally require dependency-injection containers. |
+| Contracts and configuration | Preserve meaning at boundaries | Make new units and schemas explicit at actual boundaries. Do not maintain domain rules, configuration, or constants requiring justification in multiple divergent places. Do not duplicate existing general boundary rules. |
+| Resources | Do not swallow errors or report false success | Any code that creates handles, listeners, timers, or connections needs a clear owner for cleanup. Add retry, cancellation, and timeout mechanisms only when required by the task, an existing contract, or a concrete failure trace. |
+| Duplication and abstraction | Speculative helpers and layers already prohibited | Consolidate demonstrated duplication of domain logic in the canonical owner. Do not abstract before a second real consumer or a demonstrated shared invariant exists. |
+| Generated sources and runtime | Prefer existing tools | Separate hand-written sources from vendor code, generated output, and build artifacts. Change the generator rather than its output. Language syntax and library APIs must match the declared target version. |
+| Traceable dependencies and builds | Only partly concrete | Respect existing manifests, lockfiles, and build entry points. Keep versions of touched dependencies traceable. Do not automatically introduce a package manager or CI platform. |
+| Tests and documentation | Proportional, observed checks | After splitting a file or module, test real callers, import/autoload paths, and startup paths. Do not duplicate general testing, linting, and documentation rules. |
 
-Die Regeln bleiben nachrangig zu expliziten Aufträgen, Runtime-Anforderungen und
-verbindlichen Projektkonventionen. Sie erweitern weder Änderungsbefugnisse noch
-automatisch die Reichweite einer Fehlerkorrektur. Strukturelle Änderungen werden
-weiterhin nach dem bestehenden Risikomodell beurteilt.
+The rules remain subordinate to explicit requests, runtime requirements, and
+binding project conventions. They neither expand change authority nor
+automatically widen the scope of a bug fix. Structural changes continue to be
+assessed under the existing risk model.
 
-**Abgleich mit professionellen Praktiken, geprüft am 2026-08-31**
+**Comparison with professional practices, checked 2026-08-31**
 
-Der folgende Abgleich ist eine Synthese der genannten Primärquellen, keine
-Behauptung, dass alle Unternehmen denselben Prozess oder dieselbe Architektur
-verwenden. Die dort genannten Werkzeuge werden hier nicht installiert.
+The following comparison is a synthesis of the named primary sources, not a
+claim that every company uses the same process or architecture. The tools named
+there are not installed here.
 
-- Google prüft unter anderem Entwurf, Funktion, Komplexität, Tests, Namen und
-  notwendige Dokumentation. Persönliche Stilpräferenzen sind von verbindlichen
-  Vorgaben zu trennen. Das stützt konkrete Review-Kriterien statt zusätzlicher
-  pauschaler Zahlenquoten. Gelesen wurden die Abschnitte Complexity bis Context
-  in [What to look for in a code review](https://google.github.io/eng-practices/review/reviewer/looking-for.html).
-- Googles [Small CLs](https://google.github.io/eng-practices/review/developer/small-cls.html)
-  fordert zusammenhängende kleine Änderungen mit zugehörigen Tests und trennt
-  umfangreiche Refactorings von fachlichen Änderungen. Die dort diskutierten
-  Zeilenzahlen betreffen Änderungsumfänge, nicht die Größe einer Quelldatei.
-  Gelesen wurden What is Small, Separate Out Refactorings und Keep related test
-  code in the same CL.
-- DORA beschreibt Auffindbarkeit, Wiederverwendung und änderbare Abhängigkeiten
-  als Wartbarkeitsmerkmale. Herkunft und genaue Versionen von Abhängigkeiten
-  sowie reproduzierbare Builds sind konkrete Ergänzungen für diesen Plan.
-  Gelesen wurden die Kriterien und der Implementierungsabschnitt von
-  [Code maintainability](https://dora.dev/capabilities/code-maintainability/).
-- Automatisierte Builds und schnelle Tests liefern laufend Rückmeldung zu
-  Änderungen. Für Scoville folgt daraus die Nutzung vorhandener projektweiter
-  Checks und ein ehrlicher Umgang mit fehlschlagenden Prüfungen, keine neue
-  Berechtigung zum Merge oder Deployment. Gelesen wurden Implementierung und
-  typische Fehler in [DORA Continuous integration](https://dora.dev/capabilities/continuous-integration/).
-- Eine universelle geeignete Dateigröße wird von der
-  [ESLint-Dokumentation zu max-lines](https://eslint.org/docs/latest/rules/max-lines)
-  ausdrücklich nicht behauptet. Die konfigurierbare Regel hat standardmäßig
-  300 Zeilen, [Checkstyle FileLength](https://checkstyle.org/checks/sizes/filelength.html)
-  dagegen 2.000. Gelesen wurden Begründung und Optionen beziehungsweise
-  Properties. Die 1.000-Zeilen-Grenze ist daher die Nutzer-/Scoville-Vorgabe mit
-  begründeten Ausnahmen, kein angeblich belegter Industriestandard.
-- DORA beurteilt lose Kopplung daran, ob Änderungen und Tests unabhängig
-  möglich sind, nicht am bloßen Einsatz einer bestimmten Technologie.
-  Gelesen wurden Einleitung und Architekturabwägung in
-  [Loosely coupled teams](https://dora.dev/capabilities/loosely-coupled-teams/).
-  Übertragung auf diesen Skill: Verzeichnisgrenzen müssen echte Modulgrenzen
-  abbilden. Eine Microservice-, Layer- oder Feature-first-Struktur wird nicht
-  für alle Projekte vorgeschrieben.
-- [NIST SSDF](https://csrc.nist.gov/projects/ssdf) integriert Sicherheit in den
-  Entwicklungsprozess und verlangt eine risikoorientierte, anwendbare Auswahl
-  statt einer blind abzuarbeitenden Checkliste. Gelesen wurden Overview,
-  SSDF Practices und SSDF Use. Die
-  [Publikationsübersicht](https://csrc.nist.gov/Projects/ssdf/publications)
-  führt Version 1.1 als final und 1.2 als Entwurf. Für diesen Plan wird kein
-  Entwurf als verbindlicher Standard behandelt. Die vorhandenen Code-Regeln zu
-  Sicherheit und Fehlernachweisen bleiben bestehen.
+- Google reviews design, functionality, complexity, tests, names, and necessary
+  documentation, among other things. Personal style preferences should be
+  separated from binding requirements. This supports concrete review criteria
+  instead of more blanket numeric quotas. The sections Complexity through
+  Context in [What to look for in a code review](https://google.github.io/eng-practices/review/reviewer/looking-for.html)
+  were read.
+- Google's [Small CLs](https://google.github.io/eng-practices/review/developer/small-cls.html)
+  calls for small, coherent changes with their associated tests and separates
+  extensive refactoring from functional changes. The line counts discussed
+  there concern change size, not source-file size. What is Small, Separate Out
+  Refactorings, and Keep related test code in the same CL were read.
+- DORA describes discoverability, reuse, and changeable dependencies as
+  maintainability characteristics. Dependency provenance and exact versions,
+  as well as reproducible builds, are concrete additions for this Plan. The
+  criteria and implementation section of
+  [Code maintainability](https://dora.dev/capabilities/code-maintainability/)
+  were read.
+- Automated builds and fast tests continuously provide feedback on changes.
+  For Scoville, this means using existing project-wide checks and honestly
+  reporting failures, not receiving new permission to merge or deploy. The
+  implementation and common pitfalls in
+  [DORA Continuous integration](https://dora.dev/capabilities/continuous-integration/)
+  were read.
+- The [ESLint documentation for max-lines](https://eslint.org/docs/latest/rules/max-lines)
+  explicitly does not claim a universally suitable file size. Its configurable
+  rule defaults to 300 lines, whereas
+  [Checkstyle FileLength](https://checkstyle.org/checks/sizes/filelength.html)
+  uses 2,000. The rationale and options or properties were read. The 1,000-line
+  limit is therefore the user/Scoville requirement with justified exceptions,
+  not a claimed industry standard.
+- DORA evaluates loose coupling by whether changes and tests can be made
+  independently, not merely by the use of a particular technology. The
+  introduction and architecture tradeoff in
+  [Loosely coupled teams](https://dora.dev/capabilities/loosely-coupled-teams/)
+  were read. Applied to this Skill, directory boundaries must reflect real
+  module boundaries. A microservice, layered, or feature-first structure is not
+  prescribed for every project.
+- [NIST SSDF](https://csrc.nist.gov/projects/ssdf) integrates security into the
+  development process and requires a risk-oriented, applicable selection rather
+  than a checklist applied blindly. Overview, SSDF Practices, and SSDF Use were
+  read. The [publication overview](https://csrc.nist.gov/Projects/ssdf/publications)
+  lists version 1.1 as final and 1.2 as a draft. This Plan does not treat a draft
+  as a binding standard. Existing Code rules for security and failure evidence
+  remain in effect.
 
-**Umsetzung in einer professionellen Entwicklungsumgebung**
+**Implementation in a professional development environment**
 
-Als Synthese lassen sich drei Arten von Regeln unterscheiden:
+As a synthesis, three kinds of rules can be distinguished:
 
-| Regelart | Beispiele | Umgang im Skill |
+| Rule type | Examples | Treatment in the Skill |
 | --- | --- | --- |
-| Verbindlicher Projektvertrag | Zielversionen, öffentliche Schnittstellen, Sicherheits- und Datenregeln, festgelegte Formate | Bestehende Vorgaben erfüllen und betroffene Verträge prüfen. Nicht für eine Stilregel brechen. |
-| Automatisierbare Projektkonvention | Formatter, Linter, Typprüfung, Build, Tests, konfigurierte Größenlimits | Vorhandene Werkzeuge nutzen. Ergebnisse genau benennen. Kein neuer universeller Tool-Stack. |
-| Begründungspflichtiges Review-Urteil | Fachliche Kohärenz, sinnvolle Dateiaufteilung, notwendige Abstraktion, Ausnahmen von der 1.000-Zeilen-Grenze | Konkrete Auswirkungen und die Alternative prüfen. Nicht allein aus Dateinamen oder einer Metrik auf Qualität schließen. |
+| Binding project contract | Target versions, public interfaces, security and data rules, fixed formats | Satisfy existing requirements and test affected contracts. Do not break them for a style rule. |
+| Automatable project convention | Formatter, linter, type checking, build, tests, configured size limits | Use existing tools. Name results precisely. Do not add a new universal tool stack. |
+| Review judgment requiring justification | Domain coherence, useful file splits, necessary abstraction, exceptions to the 1,000-line limit | Examine concrete effects and the alternative. Do not infer quality from a filename or metric alone. |
 
-Ein entsprechender Ablauf besteht aus vereinbarten Projektregeln, einer kleinen
-zusammenhängenden Änderung, passenden lokalen Prüfungen, fachlichem Review und
-den bereits eingerichteten automatisierten Integrationsprüfungen. Umfangreiche
-Umstrukturierungen werden sichtbar vom eigentlichen Fehler- oder Feature-Fix
-getrennt. Der Skill folgt den vorhandenen Zuständigkeiten und Freigaben. Ein
-externer Reviewer wird nicht für jede kleine Änderung neu vorgeschrieben.
+The corresponding workflow consists of agreed project rules, a small coherent
+change, appropriate local checks, domain review, and the already configured
+automated integration checks. Extensive restructuring is visibly separated
+from the actual bug or feature change. The Skill follows existing ownership and
+approval boundaries. It does not require a new external reviewer for every
+small change.
 
-**Fable-Abgleich vor der Umsetzung**
+**Fable comparison before implementation**
 
-Fable 5 wurde mit hoher Denkleistung in einer persistenten, lesenden Sitzung
-zweimal befragt. Das Backend meldete keinen konkreten aufgelösten Modellnamen.
-Die Prüfung dauerte 139 Sekunden, die priorisierte Folgefrage 68 Sekunden.
-Beide Antworten sind Beratung und weder Freigabe noch Verhaltenstest.
+Fable 5 was consulted twice with high reasoning in a persistent, read-only
+session. The backend did not report a concrete resolved model name. The review
+took 139 seconds and the prioritized follow-up 68 seconds. Both responses are
+advice, not approval or behavioral testing.
 
-Die Planprüfung bezeichnete den Plan als umsetzungsreif ohne notwendige weitere
-Nutzerentscheidung. Übernommen werden:
+The Plan review called the Plan implementation-ready without requiring another
+user decision. The following findings are accepted:
 
-- Ein strengeres konfiguriertes Projektlimit geht der Scoville-Grenze vor.
-- Ausnahmegründe sind Beispiele, keine geschlossene Liste.
-- Vertrags-, Test- und Dokumentationsregeln werden nicht doppelt formuliert.
-- Retry-, Abbruch- und Timeout-Regeln greifen nur bei bestehendem Auftrag,
-  Vertrag oder konkretem Fehlerbild.
-- Die Ergänzungen werden in vorhandene Abschnitte eingefaltet. Die bisherige
-  Priorität von Sicherheit und Integrität vor Wartbarkeit bleibt unverändert.
-- Belegte fachliche Duplikation wird berücksichtigt, ohne spekulative
-  Abstraktion zu fördern.
-- Die fünf Evaluationsdefinitionen behandeln generierte Großdatei,
-  Metrik-Gaming, enge Bestandskorrektur, Datenimport versus Sprachimport und
-  reale Aufrufer-/Startpfade nach einer Aufteilung.
+- A stricter configured project limit takes precedence over the Scoville limit.
+- Exception reasons are examples, not a closed list.
+- Contract, test, and documentation rules are not stated twice.
+- Retry, cancellation, and timeout rules apply only for an existing task,
+  contract, or concrete failure pattern.
+- Additions are folded into the existing sections. The current priority of
+  security and integrity over maintainability remains unchanged.
+- Demonstrated domain duplication is covered without encouraging speculative
+  abstraction.
+- The five evaluation definitions cover a large generated file, metric gaming,
+  a narrow legacy fix, data import versus language import, and real
+  caller/startup paths after a split.
 
-Fables eigene Richtlinienempfehlung nennt dieselben Bereiche als Must-have.
-Nur bedingt sinnvoll sind qualitative Funktionsaufteilung, Manifeste/Lockfiles,
-neue Einheiten/Schemas und Retry-/Abbruchregeln. Nicht universell festgelegt
-werden Funktionszeilen, Ordnerschablonen, DI-Container, Microservices,
-Kommentardichte, Coverage-Quoten, konkrete Tool-Defaults, Pflicht-Reviewer oder
-CI-Plattformen. Die Change-Referenz erhält ungefähr 25 bis 35 neue Zeilen. Die
-Zahl 1.000 erscheint in der eigentlichen Regel genau einmal.
+Fable's own guideline recommendation names the same areas as must-haves.
+Qualitative function splitting, manifests/lockfiles, new units/schemas, and
+retry/cancellation rules are useful only conditionally. Function line counts,
+directory templates, DI containers, microservices, comment density, coverage
+quotas, concrete tool defaults, mandatory reviewers, and CI platforms are not
+set universally. The Change reference receives approximately 25 to 35 new
+lines. The number 1,000 appears exactly once in the actual rule.
 
-**Geplante Dateiverteilung**
+**Planned file distribution**
 
-- Die konkrete Anleitung kommt in die bereits vor Änderungen und Reviews
-  geladene Referenz `scoville-code-anti-ai-slop/references/change-workflow.md`.
-  Ein neues Referenzsystem oder eine zusätzliche Ladepflicht ist nicht nötig.
-- Die neue Anleitung wird auf ungefähr 25 bis 35 Zeilen begrenzt und in die
-  bestehenden Abschnitte eingefaltet. Die Review-Priorität bleibt unverändert.
-- `SKILL.md` bleibt voraussichtlich unverändert. Nur eine tatsächlich nötige
-  Verknüpfung darf ergänzt werden, ohne Aktivierungs- oder Risikoregeln zu ändern.
-- `tests/evaluation-cases.json` erhält fünf Szenarien: eine generierte
-  Großdatei, Metrik-Gaming, eine enge Bestandskorrektur, Datenimport versus
-  Sprachimport sowie reale Aufrufer-/Startpfade nach einer Aufteilung. Sie
-  werden als Definitionen, nicht als bereits
-  bestandene Modelltests dokumentiert.
-- README und Changelog beschreiben die Ergänzungen und grenzen historische
-  Benchmark-Ergebnisse vom geänderten Paket ab. Alte Messungen werden weder
-  neu zugerechnet noch überschrieben.
-- Lokale Codex-/Claude-Kopien werden erst nach Fable-Abgleich und Prüfung des
-  kanonischen Ergebnisses angeglichen. Unabhängige lokale Änderungen sind vorher
-  zu prüfen und zu erhalten.
+- The concrete guidance goes into the reference loaded before changes and
+  reviews, `scoville-code-anti-ai-slop/references/change-workflow.md`. No new
+  reference system or additional loading requirement is needed.
+- The new guidance is limited to approximately 25 to 35 lines and folded into
+  existing sections. Review priority remains unchanged.
+- `SKILL.md` is expected to remain unchanged. Only an actually necessary link
+  may be added, without changing activation or risk rules.
+- `tests/evaluation-cases.json` receives five scenarios: a large generated
+  file, metric gaming, a narrow legacy fix, data import versus language import,
+  and real caller/startup paths after a split. They are documented as
+  definitions, not as model tests that have already passed.
+- README and changelog describe the additions and distinguish historical
+  benchmark results from the changed package. Old measurements are neither
+  reassigned nor overwritten.
+- Local Codex and Claude copies are synchronized only after the Fable comparison
+  and validation of the canonical result. Independent local changes must first
+  be checked and preserved.
 
-**Fragen an Fable vor der Umsetzung**
+**Questions for Fable before implementation**
 
-1. Bleibt die 1.000-Zeilen-Regel wirksam, ohne sinnlose Dateiteilung oder
-   ungefragte Refactorings auszulösen?
-2. Ist die Verzeichnisregel dem Nutzerwunsch und der tatsächlich gelesenen
-   Fluid-Base-Struktur angemessen, ohne deren konkrete Technik zu verallgemeinern?
-3. Welche der vorgeschlagenen Ergänzungen schließen echte Lücken, welche sind
-   redundant, missverständlich oder zu pauschal?
-4. Fehlen wichtige, allgemein anwendbare Wartbarkeitsregeln oder aussagekräftige
-   Grenzfälle für die Evaluationsdefinitionen?
-5. Reicht die vorhandene Change-Referenz als einziger Detail-Owner, und bleiben
-   Aktivierung, Projektvorrang, Umfang sowie Nachweisgrenzen intakt?
-6. Gibt der Quellenabgleich professionelle Praktiken zutreffend wieder und
-   trennt er belegte Prinzipien, konkrete Werkzeug-Defaults und die ausdrücklich
-   gewünschte 1.000-Zeilen-Regel sauber?
+1. Does the 1,000-line rule remain effective without causing pointless file
+   splitting or unsolicited refactoring?
+2. Is the directory rule appropriate to the user request and the Fluid Base
+   structure actually inspected, without generalizing its specific technology?
+3. Which proposed additions close real gaps, and which are redundant,
+   misleading, or too broad?
+4. Are important, generally applicable maintainability rules or meaningful edge
+   cases for the evaluation definitions missing?
+5. Is the existing Change reference sufficient as the sole detail owner, and do
+   activation, project precedence, scope, and evidence boundaries remain intact?
+6. Does the source comparison accurately represent professional practices and
+   cleanly separate evidenced principles, concrete tool defaults, and the
+   explicitly requested 1,000-line rule?
 
 ## Non-goals
 
-- Keine Änderungen, Aufteilung oder Veröffentlichung von Fluid Base.
-- Keine Änderungen an anderen Scoville-Skills oder globalen Systemprompts.
-- Keine vorgeschriebene Programmiersprache, Framework-Schichtung oder feste
-  Dateinamenstruktur für alle Projekte.
-- Keine automatischen Refactorings nur aufgrund einer Zeilenzahl und keine
-  Einführung eines neuen Linter-, Build- oder Test-Frameworks.
-- Kein Commit, Push, GitHub-Release oder Tag-Cleanup ohne eigenen Auftrag.
-- Kein behaupteter Verhaltenstest oder neuer Benchmark allein aus statischen
-  Prüfungen, Fallbeschreibungen oder Fables Planprüfung.
+- No changes, splitting, or publication of Fluid Base.
+- No changes to other Scoville Skills or global system prompts.
+- No prescribed programming language, framework layering, or fixed filename
+  structure for all projects.
+- No automatic refactoring based only on a line count, and no introduction of a
+  new linter, build, or test framework.
+- No commit, push, GitHub release, or tag cleanup without a separate request.
+- No claimed behavioral test or new benchmark based only on static checks, case
+  descriptions, or Fable's Plan review.
 
 ## Work items
 
-### W-001 Wartbarkeitsregeln nach geprüftem Plan ergänzen
+### W-001 Add maintainability rules after the reviewed Plan
 
 Status: done
 Depends on: []
 Blocked by: []
 Decisions: [ADR-0001]
-Outcome: Scoville Code enthält die abgeglichenen Regeln zu Dateigröße, Struktur, Benennung und ergänzenden Wartbarkeitsgrenzen im kanonischen Paket und den geprüften lokalen Kopien.
-Acceptance: Der Quellenabgleich trennt professionelle Prinzipien von Werkzeug-Defaults und der Nutzergrenze. Fables lesende Prüfung des ergänzten Plans liegt vor jeder Skill-Änderung vor. Bestätigte Hinweise sind im Plan berücksichtigt. Die Regeln erhalten Projektvorrang, sinnvolle Ausnahmen und enge Änderungsgrenzen. Skill-Validierung, JSON-Prüfung, Linkprüfung, vollständige Diff-Sichtung und Bytevergleich der lokalen Paketkopien sind erfolgreich. Fluid Base bleibt unverändert. Nicht durchgeführte Verhaltenstests sind benannt.
+Outcome: Scoville Code contains the compared rules for file size, structure, naming, and supplementary maintainability boundaries in the canonical package and the verified local copies.
+Acceptance: The source comparison separates professional principles from tool defaults and the user's limit. Fable's read-only review of the expanded Plan precedes every Skill change. Confirmed findings are incorporated into the Plan. The rules preserve project precedence, meaningful exceptions, and narrow change boundaries. Skill validation, JSON validation, link checking, complete diff inspection, and byte comparison of the local package copies pass. Fluid Base remains unchanged. Behavioral tests that were not run are identified.
 Steps:
-1. Den Plan mit den benannten Code- und Fluid-Base-Quellen von Fable prüfen lassen und relevante Befunde bewerten.
-2. Den noch nicht begonnenen Work Item und gegebenenfalls die dokumentierte Entscheidung entsprechend dem abgeglichenen Plan präzisieren.
-3. Nur die nach dem Fable-Abgleich bestätigten Wartbarkeitslücken in Change-Referenz, fünf Evaluationsdefinitionen und zugehöriger Dokumentation ergänzen.
-4. Das kanonische Paket prüfen und die vorhandenen lokalen Scoville-Code-Kopien ohne Verlust unabhängiger Änderungen angleichen.
-5. Nachweise, verbleibende Grenzen und Planabschluss dokumentieren.
+1. Ask Fable to review the Plan against the named Code and Fluid Base sources and assess the relevant findings.
+2. Refine the not-yet-started Work Item and, if necessary, the documented Decision according to the reviewed Plan.
+3. Add only the maintainability gaps confirmed after the Fable comparison to the Change reference, five evaluation definitions, and associated documentation.
+4. Validate the canonical package and synchronize the existing local Scoville Code copies without losing independent changes.
+5. Document evidence, remaining limits, and Plan completion.
 Evidence: [Fable plan review and prioritized guideline follow-up completed before Skill edits, Seven public primary-source pages inspected for professional-practice comparison, Fluid Base source and structure inspected read-only at 46ee6e9b, Skill validation passed for canonical Codex and Claude packages, Evaluation JSON parsed with 10 unique case definitions, Local Markdown link inspection passed across 11 files, Complete scoped diff inspected and Fluid Base tracked source remained unchanged, Canonical Codex and Claude packages match across all 5 files, No new model-behavior benchmark was run]
