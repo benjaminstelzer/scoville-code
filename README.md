@@ -117,8 +117,11 @@ needs:
   GitHub, and scholarly evidence into a decision-ready, claim-traceable result.
 - [Code](https://github.com/benjaminstelzer/scoville-code-anti-ai-slop) owns
   engineering scope, implementation, risk, and validation.
+- [Design](https://github.com/benjaminstelzer/scoville-design-anti-ai-slop) owns
+  visual definition, art direction, design systems, critique, and repair.
 - [UI](https://github.com/benjaminstelzer/scoville-ui-anti-ai-slop) owns
-  interface hierarchy, framework fit, accessibility, and rendered evidence.
+  framework-aligned implementation, interface mechanics, accessibility, and
+  rendered evidence, with a standalone design fallback.
 - [Scribe](https://github.com/benjaminstelzer/scoville-scribe-anti-ai-slop) owns
   wording, terminology, factual meaning, and source fidelity.
 - [Plan](https://github.com/benjaminstelzer/scoville-plan) owns durable Plans,
