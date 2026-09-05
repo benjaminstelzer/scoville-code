@@ -120,7 +120,7 @@ software. The repository remains the source of truth, which saves everyone
 from auditing the audit trail's audit trail.
 
 For repository structure and development tools, see
-[maintenance notes](docs/maintenance.md).
+[maintenance notes](development/docs/maintenance.md).
 
 ## Scoville family
 
@@ -154,8 +154,10 @@ was rejected. The four-case Holdout remains sealed.
 
 Earlier 30/30 results belong to the historically qualified Code package.
 Neither those scores nor instruction-size comparisons qualify the current
-maintainability extension. See [benchmark evidence](docs/benchmark-evidence.md)
+maintainability extension. See [benchmark evidence](development/docs/benchmark-evidence.md)
 for the candidates, failures, and retained history.
+
+Repository development and the current path mapping are in [development/](development/README.md).
 
 ## Sources
 
