@@ -26,7 +26,7 @@ a release rehearsal merely because a checklist was feeling ambitious.
 
 ## Why "Scoville"?
 
-The family is named for useful signal that survives dilution. In coding, the
+The family is named for useful signal that remains detectable after dilution. In coding, the
 heat is the requested behavior after plans, wrappers, tests, and confident
 status prose have all tried to become the feature.
 
@@ -52,26 +52,39 @@ support named Skill invocation.
 
 ## Install
 
-Use an Agent Skills-compatible host and Terra 5.6 Medium or a comparably
-capable executor such as Opus 4.8. Ask the agent to install:
+### Install this Skill
+
+In a local Codex or Claude Code session, ask:
 
 ```text
-Install this Agent Skill and refresh the available Skill list:
+Install this Agent Skill for all my projects from this exact package directory:
 https://github.com/benjaminstelzer/scoville-code-anti-ai-slop/tree/main/scoville-code-anti-ai-slop
-Keep the installed directory name scoville-code-anti-ai-slop. Use Terra 5.6 Medium or a comparably capable executor such as Opus 4.8.
+Preserve existing customizations and ask before overwriting conflicting files.
+Report the installed location and whether the host discovers the Skill.
 ```
 
-The final path must end in
-`<skills-dir>/scoville-code-anti-ai-slop/SKILL.md`. For Claude Code, use
-`~/.claude/skills/` globally or `.claude/skills/` inside one project. Other
-hosts use their supported Skills directory.
+The agent needs source access and permission to write to its personal Skills
+location. Manual fallback: [Codex Skills guide](https://learn.chatgpt.com/docs/build-skills)
+or [Claude Code Skills guide](https://code.claude.com/docs/en/skills).
 
-**What it costs.** The historically qualified Core used 2,045 tokens and was
-16.59% larger than `v1.0.6`. Workflow references load only when needed. This
-update leaves the current Core unchanged but expands the Change reference.
-Historical token measurements remain bound to their qualified package. Use the
-Skill where correctness and maintainability matter. See
-[benchmark evidence](docs/benchmark-evidence.md).
+Install only the linked package for the focused option.
+
+### Install the complete Scoville suite
+
+```text
+Install the complete Scoville Skill suite for all my projects. Fetch and install every exact package directory below:
+
+https://github.com/benjaminstelzer/scoville-brainstorm/tree/main/scoville-brainstorm
+https://github.com/benjaminstelzer/scoville-research/tree/main/scoville-research
+https://github.com/benjaminstelzer/scoville-code-anti-ai-slop/tree/main/scoville-code-anti-ai-slop
+https://github.com/benjaminstelzer/scoville-design-anti-ai-slop/tree/main/scoville-design-anti-ai-slop
+https://github.com/benjaminstelzer/scoville-ui-anti-ai-slop/tree/main/scoville-ui-anti-ai-slop
+https://github.com/benjaminstelzer/scoville-scribe-anti-ai-slop/tree/main/scoville-scribe-anti-ai-slop
+https://github.com/benjaminstelzer/scoville-plan/tree/main/scoville-plan
+https://github.com/benjaminstelzer/scoville-handoff/tree/main/scoville-handoff
+
+Preserve existing customizations and ask before overwriting conflicting files. Report every installed location and whether the host discovers each Skill.
+```
 
 ## What it enforces
 
@@ -80,7 +93,7 @@ Skill where correctness and maintainability matter. See
 - **Canonical ownership.** The change fits the project's existing architecture,
   records, terminology, and workflow instead of creating a second owner.
 - **Proportionate risk.** Small reversible work stays small. Destructive,
-  Public, security, data, or release work receives stronger gates.
+  public-facing, security, data, or release work receives stronger gates.
 - **Evidence before claims.** Checks prove only what they observed. A failed
   tool is not silently promoted to a passing product.
 - **Root-cause correction.** The agent changes approach after repeated failure
@@ -105,6 +118,9 @@ needs. Project instructions and established owners outrank Skill defaults. The
 Skill creates no private plan or decision log and installs no executable
 software. The repository remains the source of truth, which saves everyone
 from auditing the audit trail's audit trail.
+
+For repository structure and development tools, see
+[maintenance notes](docs/maintenance.md).
 
 ## Scoville family
 
@@ -131,20 +147,15 @@ needs:
 
 ## Status
 
-A reliability-first extension of
-[Microsoft SkillOpt](https://github.com/microsoft/SkillOpt) tested the six
-Scoville Skills across **1,201 optimization and evaluation runs**. The
-previously qualified Code package passed **30/30 final cases**. Its Core was
-**16.59% larger than v1.0.6** because reliability coverage expanded. SkillOpt
-compressed that strengthened version.
+The maintainability candidate and v1.0.17 control each passed 8/8 open Train
+cases and 3/4 open Validation cases in three runs. Every failure concerned the
+same narrow security fix. A conservative SkillOpt proposal also scored 3/4 and
+was rejected. The four-case Holdout remains sealed.
 
-The new maintainability candidate and the `v1.0.17` control each passed 8/8
-open Train cases. Both passed 3/4 open Validation cases in three independent
-runs. Every failure was the same narrow-security-fix case. One conservative
-SkillOpt proposal also passed only 3/4 and was rejected. The four-case Holdout
-remains sealed, so this release makes no new qualification claim. See
-[benchmark evidence](docs/benchmark-evidence.md).
-The [family run ledger](docs/optimization-history.md) shows the complete count.
+Earlier 30/30 results belong to the historically qualified Code package.
+Neither those scores nor instruction-size comparisons qualify the current
+maintainability extension. See [benchmark evidence](docs/benchmark-evidence.md)
+for the candidates, failures, and retained history.
 
 ## Sources
 
@@ -169,4 +180,4 @@ The [family run ledger](docs/optimization-history.md) shows the complete count.
 
 ## License
 
-MIT - see [LICENSE](LICENSE).
+MIT. See [LICENSE](LICENSE).

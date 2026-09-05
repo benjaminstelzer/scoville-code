@@ -1,5 +1,12 @@
 # Changelog
 
+## v1.0.19 - 2026-09-05
+
+- Shortened the README, moved contributor layout notes to docs/maintenance.md, and made agent installation the primary path. Safety and evidence limits remain explicit.
+- Added separate prompts for this Skill and the complete live-verified Scoville suite.
+- Included the repository license in the copied Skill package. Engineering instructions and routing are unchanged.
+- Archived four completed, unreferenced pre-release Plans. Decisions, the latest release Plan and the failed SkillOpt qualification evidence remain unchanged.
+
 ## 2026-09-01: Maintainable file and module structure (v1.0.18)
 
 ### Changed
