@@ -59,6 +59,7 @@ In a local Codex or Claude Code session, ask:
 ```text
 Install this Agent Skill for all my projects from this exact package directory:
 https://github.com/benjaminstelzer/scoville-code-anti-ai-slop/tree/main/scoville-code-anti-ai-slop
+https://github.com/benjaminstelzer/scoville-design-anti-ai-slop/tree/main/scoville-design-anti-ai-slop
 Preserve existing customizations and ask before overwriting conflicting files.
 Report the installed location and whether the host discovers the Skill.
 ```
@@ -77,6 +78,7 @@ Install the complete Scoville Skill suite for all my projects. Fetch and install
 https://github.com/benjaminstelzer/scoville-brainstorm/tree/main/scoville-brainstorm
 https://github.com/benjaminstelzer/scoville-research/tree/main/scoville-research
 https://github.com/benjaminstelzer/scoville-code-anti-ai-slop/tree/main/scoville-code-anti-ai-slop
+https://github.com/benjaminstelzer/scoville-design-anti-ai-slop/tree/main/scoville-design-anti-ai-slop
 https://github.com/benjaminstelzer/scoville-ui-anti-ai-slop/tree/main/scoville-ui-anti-ai-slop
 https://github.com/benjaminstelzer/scoville-scribe-anti-ai-slop/tree/main/scoville-scribe-anti-ai-slop
 https://github.com/benjaminstelzer/scoville-plan/tree/main/scoville-plan
@@ -132,6 +134,8 @@ needs:
   GitHub, and scholarly evidence into a decision-ready, claim-traceable result.
 - [Code](https://github.com/benjaminstelzer/scoville-code-anti-ai-slop) owns
   engineering scope, implementation, risk, and validation.
+- [Design](https://github.com/benjaminstelzer/scoville-design-anti-ai-slop) owns
+  visual definition, art direction, design systems, critique, and repair.
 - [UI](https://github.com/benjaminstelzer/scoville-ui-anti-ai-slop) owns
   framework-aligned implementation, interface mechanics, accessibility, and
   rendered evidence, with a standalone design fallback.
