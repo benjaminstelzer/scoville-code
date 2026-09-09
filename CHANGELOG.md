@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.0.21 - 2026-09-09
+
+- Remove the unrelated Design package from the focused Code installation prompt.
+- Keep the complete Scoville suite option unchanged.
+
 ## v1.0.20 - 2026-09-05
 
 - Move repository development into `development/` and keep the installable Skill in its own top-level directory.

@@ -59,7 +59,6 @@ In a local Codex or Claude Code session, ask:
 ```text
 Install this Agent Skill for all my projects from this exact package directory:
 https://github.com/benjaminstelzer/scoville-code-anti-ai-slop/tree/main/scoville-code-anti-ai-slop
-https://github.com/benjaminstelzer/scoville-design-anti-ai-slop/tree/main/scoville-design-anti-ai-slop
 Preserve existing customizations and ask before overwriting conflicting files.
 Report the installed location and whether the host discovers the Skill.
 ```
