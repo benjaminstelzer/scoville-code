@@ -41,6 +41,14 @@ Choose evidence scope as an exclusive decision:
 When a change alters a symbol used elsewhere, exercise at least one affected
 use. Tests that mirror implementation without protecting behavior are not proof.
 
+A stub, mock, or hand-built fixture can support only the behavior actually
+exercised. If a claim depends on a dependency's behavior or a producer-consumer
+interaction replaced by the test, exercise that boundary with the actual
+component or narrow the claim and leave the required behavior unverified.
+Unmet required acceptance remains open. Controlled fixtures remain valid when
+the behavior under test actually runs. Required evidence does not expand
+existing permissions.
+
 ## Handle failures
 
 Classify a failed check before reacting. Treat it as caused by the change unless
@@ -60,9 +68,13 @@ again.
 ## Stop repetition
 
 Do not rerun an unchanged command unless a named concurrency, stochastic,
-flaky-test, or project protocol requires repetition. If two consecutive attempts
-fail to fix the same check, stop patching, re-read the owner's contract and
-evidence, then change the approach or narrow the change.
+flaky-test, or project protocol requires repetition. If two consecutive correction
+attempts fail to fix the same check, or verified findings after both attempts show
+the same causal mechanism still violates the affected contract, stop patching
+and re-read the owner, contract, and evidence. Then change the approach or narrow
+the change without weakening required acceptance. Different reproductions or
+passing existing checks do not reset this trigger. Similar symptoms alone do not
+establish a shared cause.
 
 After decisive evidence passes, run no broader or similar check for that behavior
 unless a separate changed behavior, named risk, or binding requirement remains.

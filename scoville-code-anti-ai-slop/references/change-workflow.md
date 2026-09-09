@@ -23,6 +23,10 @@ consumers and relevant serialization, persistence, publication, authorization,
 or process boundaries. Expand only when evidence names another path; do not run
 a broad repository inventory as insurance.
 
+Evidence that the same cause affects another input, state, or consumer within
+the changed contract also justifies inspecting that variant. Similar symptoms
+or nearby code alone do not justify expansion.
+
 For Explore work, test the hypothesis with the cheapest decisive observation.
 Do not add production scaffolding. If experimental code remains, reclassify it
 as Develop work and validate it accordingly.

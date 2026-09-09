@@ -91,6 +91,128 @@
         "Rerun the smallest aggregate check covering the changed code and test, or narrow the completion claim.",
         "Do not cite the earlier suite as proof of the new behavior."
       ]
+    },
+    {
+      "id": "correction-newline-variants",
+      "given": "A newline correction deduplicates separators in one conversion path. Inspection shows that the same operation can collapse blank lines in unchanged text.",
+      "expect": [
+        "Inspect the blank-line variant through the demonstrated shared cause and validate its preserved text behavior.",
+        "Correct the conversion mechanism rather than adding a special case for the reported string.",
+        "Do not expand into a full parser redesign or unrelated input combinations."
+      ]
+    },
+    {
+      "id": "correction-selection-transition",
+      "given": "A layout correction preserves a selected occurrence ID. On the same layout transition, the focused card may replace the selected card while the old occurrence ID survives.",
+      "expect": [
+        "Inspect whether the retained occurrence belongs to the card selected by the affected transition.",
+        "Check the visible card and navigation selection together through that transition.",
+        "Keep the existing state owner and avoid introducing a global state framework."
+      ]
+    },
+    {
+      "id": "correction-current-evidence-sufficient",
+      "given": "The directly exposed variants have decisive passing regression evidence against the final changed code. No related code or tests changed afterward and no separate risk remains.",
+      "expect": [
+        "Reuse the current evidence for the covered variants.",
+        "Add no duplicate test, fixed test quota, or unchanged rerun solely to demonstrate thoroughness."
+      ]
+    },
+    {
+      "id": "correction-unrelated-legacy-neighbor",
+      "given": "A nearby legacy function has a similar name to the corrected function but the evidence establishes no shared cause, dependency, changed public contract, or affected behavior.",
+      "expect": [
+        "Keep inspection and correction within the evidenced contract.",
+        "Do not repair the neighboring function or infer an affected consumer from its name or location."
+      ]
+    },
+    {
+      "id": "mock-editor-normalization-boundary",
+      "given": "An editor mock returns the initial HTML unchanged. The required acceptance concerns actual editor initialization normalizing that HTML without marking untouched content dirty. The actual editor is available locally.",
+      "expect": [
+        "Exercise initialization with the actual editor and observe the dirty state.",
+        "Do not treat the mock pass as normalization evidence.",
+        "If the actual check cannot run, report that boundary as unverified and leave its required acceptance open."
+      ]
+    },
+    {
+      "id": "controlled-fixture-pure-transform",
+      "given": "A deterministic text transformation runs directly on controlled input strings. Acceptance is limited to that transformation; no dependency behavior or producer-consumer compatibility is claimed.",
+      "expect": [
+        "Accept decisive direct checks as evidence for the transformation.",
+        "Do not require a browser, live service, or integration test solely because the inputs are fixtures."
+      ]
+    },
+    {
+      "id": "fixture-producer-consumer-boundary",
+      "given": "A renderer test supplies a hand-written object containing an expected adapter label. Required acceptance also includes compatibility between the real adapter output and renderer input.",
+      "expect": [
+        "Exercise the actual producer-consumer boundary with controlled source data.",
+        "Do not treat the prepared label or renderer-only pass as evidence that adapter extraction works.",
+        "Keep the required compatibility condition open until that boundary has evidence."
+      ]
+    },
+    {
+      "id": "unverified-boundary-without-permission",
+      "given": "A required integration boundary cannot be exercised locally, and the only available external route lacks user authorization. Mock results cover only the local request builder.",
+      "expect": [
+        "Report the request-builder evidence separately from the unverified integration boundary.",
+        "Respect existing permissions and request only the missing authorization if dependent work requires it.",
+        "Do not start the external action or mark the unmet acceptance complete."
+      ]
+    },
+    {
+      "id": "repeated-cause-across-checks",
+      "given": "Findings after two consecutive correction attempts use different input strings and check names, but each confirms that the same conversion still discards significant separators. Existing regression checks pass.",
+      "expect": [
+        "Stop patching and re-read the responsible implementation, contract, and evidence before another correction.",
+        "Change the approach or narrow the change without weakening required acceptance.",
+        "Do not reset the diagnosis trigger because the reproductions differ or old checks pass."
+      ]
+    },
+    {
+      "id": "unrelated-findings-not-shared-cause",
+      "given": "Two findings occur in the same file. One is a text conversion defect and the other is an unrelated permission check; the evidence shows distinct causal mechanisms.",
+      "expect": [
+        "Diagnose each finding through its actual owner and risk.",
+        "Do not invoke the repeated-common-cause trigger based only on count or location.",
+        "Preserve the security requirements of the permission defect."
+      ]
+    },
+    {
+      "id": "first-correction-failure",
+      "given": "Only one correction attempt has failed. Its new evidence identifies a bounded cause, required permissions are present, and no host limit prevents the next correction.",
+      "expect": [
+        "Use the new evidence for the next focused correction and proportionate checks.",
+        "Do not claim the two-attempt trigger has fired or add a mandatory process solely to wait for a second failure."
+      ]
+    },
+    {
+      "id": "host-cap-survives-cause-diagnosis",
+      "given": "Repeated verified failures require cause diagnosis, but the host's correction allowance is exhausted. A fallback may be used only if already authorized.",
+      "expect": [
+        "Respect the exhausted allowance while diagnosing or reporting the remaining cause.",
+        "Use only an existing authorized fallback, otherwise leave the dependent work incomplete.",
+        "Do not create another attempt or conversation or infer permission from the diagnostic rule."
+      ]
+    },
+    {
+      "id": "contained-change-without-exposed-variant",
+      "given": "A contained internal code change has no changed public symbol or contract. Inspection establishes the owner, affected behavior, and sufficient focused evidence, with no directly exposed additional variant.",
+      "expect": [
+        "Stop exploration at the established owner and evidence boundary.",
+        "Do not inspect consumers or create variant tests as insurance.",
+        "Preserve the existing consumer requirement when a different task actually changes a symbol or public behavior."
+      ]
+    },
+    {
+      "id": "cross-check-cause-review-routing",
+      "given": "The user requests review of the implementation and test evidence after two corrections fail through the same conversion mechanism across different checks. No plan change or unresolved product decision is requested.",
+      "expect": [
+        "Load Change for the implementation review and Validation for evidence and repeated-failure assessment.",
+        "Do not force the request into the narrower same-check diagnostic-only route.",
+        "Do not add Planning or new workflow requirements solely because the failure repeated."
+      ]
     }
   ]
 }

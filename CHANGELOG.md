@@ -1,5 +1,16 @@
 # Changelog
 
+## v1.0.23 - 2026-09-10
+
+- Clarify when a demonstrated cause justifies inspecting related input, state,
+  or consumer variants without expanding a contained change.
+- Separate mocked behavior from evidence for actual integration boundaries.
+  Required acceptance remains open when its behavior has not been exercised.
+- Diagnose repeated causal failures across different checks without weakening
+  existing stop rules, permissions, or acceptance.
+- Add fourteen open development cases. Structural checks and semantic review
+  passed; no new model qualification is claimed.
+
 ## v1.0.22 - 2026-09-09
 
 - Document host and tool requirements in the README compatibility block, matching the Skill frontmatter.
