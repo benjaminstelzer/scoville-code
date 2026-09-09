@@ -1,6 +1,7 @@
 ---
 name: scoville-code-anti-ai-slop
 description: Goal-first guardrail for planning, changing, testing, reviewing, or removing code and engineering artifacts. Preserve observable outcome, canonical ownership, risk, validation, and honest evidence without scope drift. Not for conceptual questions unrelated to a codebase.
+compatibility: "Any Agent Skills host that can read references/ and run the project's own build, test and check commands in a shell. Version control optional. No bundled scripts, no network access required. Developed for Codex and Claude Code; other hosts untested."
 ---
 
 # Scoville Code Anti-AI-Slop

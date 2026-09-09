@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Added the `compatibility` frontmatter field declaring host and tool requirements. No behavior change.
+
 ## v1.0.21 - 2026-09-09
 
 - Remove the unrelated Design package from the focused Code installation prompt.
