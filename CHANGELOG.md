@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Document host and tool requirements in the README compatibility block, matching the Skill frontmatter.
+
 - Added the `compatibility` frontmatter field declaring host and tool requirements. No behavior change.
 
 ## v1.0.21 - 2026-09-09
