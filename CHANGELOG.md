@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## v1.0.22 - 2026-09-09
 
 - Document host and tool requirements in the README compatibility block, matching the Skill frontmatter.
 
