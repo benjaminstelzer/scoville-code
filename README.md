@@ -123,8 +123,7 @@ Skill creates no private plan or decision log and installs no executable
 software. The repository remains the source of truth, which saves everyone
 from auditing the audit trail's audit trail.
 
-For repository structure and development tools, see
-[maintenance notes](development/docs/maintenance.md).
+Repository validation and retention rules are in [development](development/README.md).
 
 ## Scoville family
 
@@ -151,17 +150,9 @@ needs:
 
 ## Status
 
-The maintainability candidate and v1.0.17 control each passed 8/8 open Train
-cases and 3/4 open Validation cases in three runs. Every failure concerned the
-same narrow security fix. A conservative SkillOpt proposal also scored 3/4 and
-was rejected. The four-case Holdout remains sealed.
-
-Earlier 30/30 results belong to the historically qualified Code package.
-Neither those scores nor instruction-size comparisons qualify the current
-maintainability extension. See [benchmark evidence](development/docs/benchmark-evidence.md)
-for the candidates, failures, and retained history.
-
-Repository development and the current path mapping are in [development/](development/README.md).
+The package retains deterministic contract cases. Historical model-run scores
+are summarized in the changelog and do not qualify the current package,
+guarantee secure code, or establish an instruction-size advantage.
 
 ## Sources
 

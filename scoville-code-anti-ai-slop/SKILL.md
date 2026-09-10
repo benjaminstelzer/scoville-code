@@ -172,7 +172,7 @@ status, reason, error, source, and validation semantics.
 Answer/diagnosis/audit/review authorizes read-only inspection only. For
 audit/review, report actionable correctness/impact; do not edit, stage, commit,
 or claim checks without request and evidence. Change authorizes only the
-smallest local reversible implementation plus proportionate checks—not
+smallest local reversible implementation plus proportionate checks - not
 publication/unrelated cleanup. Ask before adding a framework, runtime, service,
 paid integration, or security-sensitive dependency.
 
