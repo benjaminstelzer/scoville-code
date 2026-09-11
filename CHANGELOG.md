@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.0.25 - 2026-09-11
+
+- Classify purely editorial work by its actual effects even when the request calls it a migration. Real migrations, including audits and dry runs, retain their High risk classification.
+- Behavioral acceptance remains deferred. This release adds no live-model or cross-host qualification.
+
 ## v1.0.23 - 2026-09-10
 
 - Allow a demonstrated cause to justify inspection of related inputs, state, or
