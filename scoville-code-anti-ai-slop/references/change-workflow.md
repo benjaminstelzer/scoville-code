@@ -14,8 +14,12 @@ coherent diff that can deliver the requested behavior.
 
 When the project is version-controlled, inspect its state before editing and
 preserve unrelated changes. Start with exact paths named by the request;
-otherwise use a targeted filename or symbol search. Read the owning file and the
-callers, contracts, tests, or configuration needed to confirm its behavior.
+otherwise identify candidate files before searching their contents. Keep browser
+profiles, generated artifacts and raw traces outside ordinary source searches;
+include them when named or implicated by evidence. Read the owner and relevant
+callers, contracts, tests or configuration within a bounded output budget.
+If output is truncated, recover the missing relevant range or field, not the
+whole payload again; a line limit alone does not bound a large JSONL event.
 
 For a contained change, stop when the owner, affected behavior, and focused
 check are clear. For Structural or High risk, inspect directly affected

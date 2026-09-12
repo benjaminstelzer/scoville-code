@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.0.26 - 2026-09-12
+
+- Bound source searches and recover only relevant missing output after truncation. Explicitly requested traces and generated sources remain in scope.
+- A paired Astra Low fixture executed real file reads and a local configuration edit. Both runs preserved the requested behavior. The candidate projected a large trace field without repeating the full payload. This single pair does not establish general token or quota savings.
+
 ## v1.0.25 - 2026-09-11
 
 - Classify purely editorial work by its actual effects even when the request calls it a migration. Real migrations, including audits and dry runs, retain their High risk classification.

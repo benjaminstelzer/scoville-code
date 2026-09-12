@@ -154,6 +154,8 @@ The package retains deterministic contract cases. Historical model-run scores
 are summarized in the changelog and do not qualify the current package,
 guarantee secure code, or establish an instruction-size advantage.
 
+Focused release checks are recorded in [the v1.0.26 validation summary](development/validation-v1.0.26.md). Native discovery and real compaction remain unqualified.
+
 ## Sources
 
 - [OpenAI coding-agent best practices](https://developers.openai.com/codex/learn/best-practices)
