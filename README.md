@@ -125,6 +125,22 @@ from auditing the audit trail's audit trail.
 
 Repository validation and retention rules are in [development](development/README.md).
 
+## How it was developed
+
+Code has grown through real engineering tasks, regression cases and
+optimization runs, including SkillOpt. The
+[development history](https://github.com/benjaminstelzer/scoville-code-anti-ai-slop/blob/b3509d8e6fc5f485e1b3274b600de7f717aea396/CHANGELOG.md)
+includes both an adopted compression and a later rejected proposal that still
+missed a required concern. Running an optimizer did not make its output worth
+shipping.
+
+I analyze complete task histories to see where the Skill keeps work focused,
+where it fails, and where repeated searches, oversized output or redundant
+checks waste tokens. Those findings feed instruction changes and focused
+tests. A [recent paired check](development/validation-v1.0.26.md) exercised
+bounded reads while preserving the requested edit. That is useful evidence for
+one correction, not a general token-saving claim.
+
 ## Scoville family
 
 Each Skill works independently. Combine only the concerns the task actually
@@ -180,19 +196,3 @@ Focused release checks are recorded in [the v1.0.26 validation summary](developm
 ## License
 
 MIT. See [LICENSE](LICENSE).
-
-## How it was developed
-
-Code has grown through real engineering tasks, regression cases and
-optimization runs, including SkillOpt. The
-[development history](https://github.com/benjaminstelzer/scoville-code-anti-ai-slop/blob/b3509d8e6fc5f485e1b3274b600de7f717aea396/CHANGELOG.md)
-includes both an adopted compression and a later rejected proposal that still
-missed a required concern. Running an optimizer did not make its output worth
-shipping.
-
-I analyze complete task histories to see where the Skill keeps work focused,
-where it fails, and where repeated searches, oversized output or redundant
-checks waste tokens. Those findings feed instruction changes and focused
-tests. A [recent paired check](development/validation-v1.0.26.md) exercised
-bounded reads while preserving the requested edit. That is useful evidence for
-one correction, not a general token-saving claim.

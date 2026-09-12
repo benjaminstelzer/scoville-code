@@ -4,7 +4,7 @@ The only installable package is [`scoville-code-anti-ai-slop/`](../scoville-code
 
 ## Validate
 
-Check Skill frontmatter, UI metadata, package links, and the JSON syntax of `tests/evaluation-cases.json`. Review outcome preservation, canonical ownership, bounded change, and evidence claims directly against the canonical Skill and references. Case definitions test the contract; they are not generated-output qualification.
+Review outcome preservation, canonical ownership, bounded change, and evidence claims directly against the canonical Skill and references. The retained cases describe expected behavior. They do not establish observed agent results.
 
 ## Retention
 
