@@ -1,34 +1,22 @@
 # Scoville Code Anti-AI-Slop
 
-The result is the point. The process earns its place by making that result
-safer, clearer, or easier to verify.
+A coding agent can finish the wrong thing quite thoroughly. The tests are green,
+the report sounds certain, but the behavior you asked for is still missing.
 
-It usually looks harmless:
+Scoville Code keeps the requested outcome at the centre of engineering work.
+It asks the agent to find the code that owns the problem, make a proportionate
+change and check the behavior affected by it. A failing check needs a cause.
+Calling it pre-existing, or weakening the assertion until it passes, does not
+resolve it.
 
-- The agent reports "All tests pass." No tests ran. The suite has passed as
-  prose.
-- A failing test is declared "pre-existing" after one glance at its name. No
-  baseline, comparison, or other evidence appears.
-- Lint and typecheck pass, so the changed behavior is reported as verified. The
-  behavior itself was not consulted.
-- A failing assertion or safety guard is weakened until CI turns green.
-  Consensus has been reached. Correctness was not invited.
-
-That is coding slop: evidence is narrated instead of observed. The report says
-fixed. The behavior remains unknown, or the check that caught the bug no longer
-does.
-
-Scoville Code is a goal-first Agent Skill for planning, changing, testing,
-reviewing, and removing code or engineering artifacts. It keeps canonical
-ownership, scope, risk boundaries, validation, and honest evidence visible. It
-can answer or diagnose without editing, and it does not turn every rename into
-a release rehearsal merely because a checklist was feeling ambitious.
+Use it for implementation, diagnosis, review and removal of code or engineering
+artifacts. It can investigate without editing. Small changes should stay small,
+while migrations, security boundaries and irreversible work need closer checks.
 
 ## Why "Scoville"?
 
-The family is named for useful signal that remains detectable after dilution. In coding, the
-heat is the requested behavior after plans, wrappers, tests, and confident
-status prose have all tried to become the feature.
+The family is named for useful signal that remains detectable after dilution.
+In Code, that means keeping the requested behavior in view as the task grows in detail.
 
 ## How to use
 
@@ -101,7 +89,7 @@ Preserve existing customizations and ask before overwriting conflicting files. R
 - **Evidence before claims.** Checks prove only what they observed. A failed
   tool is not silently promoted to a passing product.
 - **Root-cause correction.** The agent changes approach after repeated failure
-  instead of applying patch number three with renewed optimism.
+  instead of repeating the same unsuccessful fix.
 - **Navigable code structure.** Hand-written source files use a default ceiling
   of 2,000 physical lines with project priority and concrete exceptions. Domain
   ownership, module boundaries, dependency direction, generated sources, and
@@ -109,7 +97,7 @@ Preserve existing customizations and ask before overwriting conflicting files. R
 - **Material questions only.** It asks when a missing choice changes behavior,
   authority, cost, reversibility, or scope, not for details the code settles.
 - **Complete handoff.** The final report names changed behavior, relevant
-  validation, unresolved failures, and repository state without pretending.
+  validation, unresolved failures, and relevant repository state.
 
 The complete contract is in
 [SKILL.md](scoville-code-anti-ai-slop/SKILL.md).
@@ -120,26 +108,22 @@ The Core selects an internal mode from Advise, Explore, Develop, or Harden, then
 loads only the planning, change-workflow, or validation guidance the operation
 needs. Project instructions and established owners outrank Skill defaults. The
 Skill creates no private plan or decision log and installs no executable
-software. The repository remains the source of truth, which saves everyone
-from auditing the audit trail's audit trail.
-
-Repository validation and retention rules are in [development](development/README.md).
+software. The repository remains the source of truth.
 
 ## How it was developed
 
-Code has grown through real engineering tasks, regression cases and
-optimization runs, including SkillOpt. The
-[development history](https://github.com/benjaminstelzer/scoville-code-anti-ai-slop/blob/b3509d8e6fc5f485e1b3274b600de7f717aea396/CHANGELOG.md)
-includes both an adopted compression and a later rejected proposal that still
-missed a required concern. Running an optimizer did not make its output worth
-shipping.
+Code has grown through real engineering work. I read complete task histories
+to find where an agent loses the requested outcome, works around the wrong
+cause or keeps checking something it has already established. Repeated searches
+and oversized tool output matter for the same reason: they consume context
+without necessarily helping to fix the problem.
 
-I analyze complete task histories to see where the Skill keeps work focused,
-where it fails, and where repeated searches, oversized output or redundant
-checks waste tokens. Those findings feed instruction changes and focused
-tests. A [recent paired check](development/validation-v1.0.26.md) exercised
-bounded reads while preserving the requested edit. That is useful evidence for
-one correction, not a general token-saving claim.
+Those observations become instruction changes and regression cases. I also use
+SkillOpt to explore shorter instructions. The
+[development history](https://github.com/benjaminstelzer/scoville-code-anti-ai-slop/blob/b3509d8e6fc5f485e1b3274b600de7f717aea396/CHANGELOG.md)
+includes an adopted compression and a later proposal I rejected because it
+still missed a required concern. Shorter is useful when the required behavior
+survives.
 
 ## Scoville family
 
@@ -163,14 +147,6 @@ needs:
   Work Items, Decisions, and lifecycle state.
 - [Handoff](https://github.com/benjaminstelzer/scoville-handoff) transfers active
   work to another agent or session.
-
-## Status
-
-The package retains deterministic contract cases. Historical model-run scores
-are summarized in the changelog and do not qualify the current package,
-guarantee secure code, or establish an instruction-size advantage.
-
-Focused release checks are recorded in [the v1.0.26 validation summary](development/validation-v1.0.26.md). Native discovery and real compaction remain unqualified.
 
 ## Sources
 

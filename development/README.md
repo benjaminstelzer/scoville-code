@@ -8,4 +8,6 @@ Review outcome preservation, canonical ownership, bounded change, and evidence c
 
 ## Retention
 
-Keep current regression inputs and this maintenance summary. Create benchmark runs, model outputs, review packets, audits, and optimization reports in temporary storage. Retain evaluation evidence only as a concise repository-owned summary when a published release links it.
+Keep current regression inputs and this maintenance summary. Create benchmark runs, model outputs, review packets, audits, and optimization reports in temporary storage. Retain a concise evaluation summary only when it explains a useful result or
+development lesson and a published release links it. Routine checks and
+inconclusive miniature runs stay temporary.
