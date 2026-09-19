@@ -24,14 +24,20 @@ Reuse project terms, owners, plan/decision mechanisms, test phases, and version-
 control cadence. Code owns engineering scope, canonical code, integrity, risk,
 and proportionate proof.
 
-Family standalone: discovery != installed|active|applicable|required;
-absent|inactive => ignore/no require|install|simulate|reimplement;
-active+applicable => owner concern only, self continues; opt-out local. Owners:
-`scoville-brainstorm` divergence;
-`scoville-ui-anti-ai-slop` interface/rendered proof;
-`scoville-scribe-anti-ai-slop` wording/fidelity; fixed labels: no trigger;
-`scoville-plan`
-records/lifecycle; `scoville-handoff` transfer.
+Discovering a sibling does not mean it is installed, active, applicable, or required. If a sibling is absent or inactive, ignore it. Do not require, install, simulate, or reimplement it. If it is active and applicable, it owns only its concern. This Skill continues. Opt-out is local.
+
+Family owners, in suite order:
+
+- `scoville-brainstorm`: deliberate divergence before selection.
+- `scoville-research`: source-backed research and synthesis.
+- `scoville-code-anti-ai-slop`: engineering scope, implementation, risk, and validation.
+- `scoville-design-anti-ai-slop`: visual definition, art direction, critique, and repair.
+- `scoville-ui-anti-ai-slop`: framework UI implementation, accessibility mechanics, and rendered proof.
+- `scoville-scribe-anti-ai-slop`: wording, terminology, meaning, and source fidelity.
+- `scoville-plan`: durable Plans, Work Items, Decisions, and lifecycle state.
+- `scoville-handoff`: active-work transfer.
+
+Fixed labels alone trigger no sibling.
 
 Without Plan, use repository record owner and Code guardrails; invent no record
 system.

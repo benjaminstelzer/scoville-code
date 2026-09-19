@@ -2,8 +2,8 @@
 
 2026-09-11: the user authorized the reviewed changes and explicitly deferred
 acceptance to conserve tokens, intending to observe behavior. Source edits do
-not establish behavioral acceptance. No test suite, model probe or post-change
-independent review has run. Local installation and publication were subsequently authorized on 2026-09-11.
+not establish behavioral acceptance. At deferral, no test suite, model probe or
+post-change independent review had run. Local installation and publication were subsequently authorized on 2026-09-11.
 They do not close acceptance; observations must identify which package actually ran.
 
 ## F04: editorial migration labels
@@ -52,3 +52,15 @@ Inspect existing relevant tests before choosing commands. Structural tests and
 manual observations prove only their own scope. Record observed behavior and
 remaining gaps here or in the owning record, never infer a pass from silence.
 No automatic recurring task or broad model benchmark is requested.
+
+## 2026-09-12 partial acceptance
+
+User-requested tests resumed with Astra Low. Four fresh supplied-text F04 probes
+preserved Normal/High/Structural classification and the explicit linkcheck
+requirement. They did not execute checks or migrations. A read-only CLI smoke
+was invalid because policy blocked its Skill read; no routing pass is claimed.
+
+[Test results and session audit](astra-acceptance-2026-09-12.md) records package
+hashes, all 15 scoped text probes, 95 existing tests and the private project usage findings.
+Actual host routing and the conditional candidates remain open. No instruction
+changes or publication followed from this partial result.

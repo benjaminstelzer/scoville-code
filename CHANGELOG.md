@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.0.30 - 2026-09-19
+
+- State the complete eight-Skill ownership boundary in suite order while
+  keeping every sibling optional and independently activated.
+
 ## v1.0.26 - 2026-09-12
 
 - Bound source searches and recover only relevant missing output after truncation. Explicitly requested traces and generated sources remain in scope.
@@ -38,7 +43,7 @@
 - Made every Scoville Skill optional and independently usable. Discovering a
   sibling does not install or activate it.
 
-## 2026-08-08: Optional Scoville Plan ownership
+## v1.0.6 - 2026-08-08
 
 - Let Scoville Plan own durable Plans, Work Items, and Decisions when it is
   independently available and applicable.
@@ -47,7 +52,7 @@
 - Do not cross an explicit proposal-acceptance boundary through an unattended
   implementation assumption.
 
-## 2026-08-06: Broader plan compatibility
+## v1.0.3 - 2026-08-06
 
 - Generalized planning language so Code works with any authoritative project
   plan without depending on one planning product.
@@ -61,7 +66,9 @@
 - Require decisive checks to cover every explicit acceptance behavior and each
   concrete coupling that can make a required path behave differently.
 
-## 2026-08-03: Rename to Scoville Code Anti-AI-Slop
+## v1.0.1 - 2026-08-03
+
+### Rename to Scoville Code Anti-AI-Slop
 
 - Renamed the Skill from `scoville-anti-ai-coding-slop` to
   `scoville-code-anti-ai-slop`.
@@ -71,7 +78,7 @@
 - Replace an installation under `scoville-anti-ai-coding-slop/` with
   `scoville-code-anti-ai-slop/`. Do not keep both names installed.
 
-## 2026-07-26: Runtime-neutral operation and validation floor
+### Runtime-neutral operation and validation floor - 2026-07-26
 
 - Keep internal modes, risk flags, and framing questions out of user-facing
   output.
@@ -86,7 +93,7 @@
 - Inspect the complete scoped change and working-tree state once before
   completion, using the facilities available in the current runtime.
 
-## 2026-07-22: Durable handoff and local code style
+### Durable handoff and local code style - 2026-07-22
 
 - Preserve binding constraints and unrecorded material decisions in compacted
   or handed-off work, then reconcile the record with current instructions and
@@ -98,7 +105,7 @@
 - Report unrelated pre-existing findings only when they could change the user's
   next action.
 
-## 2026-07-21: Validation stop semantics
+### Validation stop semantics - 2026-07-21
 
 - After one infrastructure failure, allow one different substitute check. If it
   cannot prove the behavior, stop and report the result as unverified.
@@ -107,7 +114,7 @@
 - Open another validation cycle only when the final inspection finds a concrete
   defect that is then fixed.
 
-## 2026-07-20: Goal-first rewrite
+### Goal-first rewrite - 2026-07-20
 
 - Rebuilt the Skill around the requested observable outcome. Correctness,
   structure, and validation constrain delivery but do not replace it.
@@ -121,7 +128,7 @@
 - Removed Skill-owned fallback plan and decision files. Existing project records
   remain canonical.
 
-## 2026-07-18: Runtime and user precedence
+### Runtime and user precedence - 2026-07-18
 
 - Resolve planning through user instructions, runtime facilities, and project
   conventions before considering a temporary fallback.
@@ -129,7 +136,7 @@
   plan owner.
 - Skip written plans for tiny work unless the user or runtime requires one.
 
-## 2026-07-16: Bounded discovery and validation
+### Bounded discovery and validation - 2026-07-16
 
 - Add broader validation only for a named structural or high-risk concern, an
   explicit project rule, or a user requirement.
@@ -141,7 +148,7 @@
 - Stop locating once the source and directly relevant test establish the
   canonical owner.
 
-## 2026-07-13: Adaptive, risk-proportionate workflow
+### Adaptive, risk-proportionate workflow - 2026-07-13
 
 - Inherit user and repository workflows concern by concern and use fallback
   rules only where the project is silent.
@@ -150,7 +157,7 @@
 - Organize work around behavior-complete outcomes, real stop conditions,
   focused evidence, final review, and explicit residual risk.
 
-## 2026-07-10: Structural execution and review gate
+### Structural execution and review gate - 2026-07-10
 
 - Added explicit Change, Review, Advisory, and Non-engineering operations for
   code and engineering artifacts.
@@ -161,14 +168,14 @@
 - Added owner, boundary, atomicity, dependency, failure, completion, and
   residual-risk gates.
 
-## 2026-07-07: Structural quality beyond green tests
+### Structural quality beyond green tests - 2026-07-07
 
 - Added pre-edit and post-edit structural review so passing tests alone cannot
   approve a harmful change.
 - Added whole-diff review for atomicity, boundary loss, misleading wrappers,
   file-growth signals, and failure-mode coverage.
 
-## 2026-07-03: Execution-focused quality gate
+### Execution-focused quality gate - 2026-07-03
 
 - Replaced the original checklist with an execution loop for locating the
   canonical owner, making a scoped change, validating behavior, inspecting the
@@ -177,7 +184,7 @@
   defect proof, narrow-to-broad checks, and repository-owned version-control
   policy.
 
-## 2026-06-29: Initial release
+## v1.0.0 - 2026-06-29
 
 - Added the first goal-oriented engineering quality gate for AI-assisted code
   changes and reviews.
