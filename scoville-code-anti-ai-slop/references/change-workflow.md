@@ -16,10 +16,17 @@ When the project is version-controlled, inspect its state before editing and
 preserve unrelated changes. Start with exact paths named by the request;
 otherwise identify candidate files before searching their contents. Keep browser
 profiles, generated artifacts and raw traces outside ordinary source searches;
-include them when named or implicated by evidence. Read the owner and relevant
-callers, contracts, tests or configuration within a bounded output budget.
-If output is truncated, recover the missing relevant range or field, not the
-whole payload again; a line limit alone does not bound a large JSONL event.
+include them when named or implicated by evidence. When the possible scope is
+broad or unknown, use bounded path or metadata discovery to select candidates
+and set an output budget before reading contents. Do not emit a complete
+recursive file list when a bounded path query or targeted lookup can identify
+candidates. Read only the owner and relevant callers, contracts, tests or
+configuration needed to answer named open questions. Do not automatically
+continue truncated output; recover only the missing relevant range or field. A
+line limit alone does not bound a large JSONL event, so filter an explicitly
+needed large source locally before returning the relevant fields. Read a known
+small file directly without first inventorying its directory. Do not require a
+complete size inventory or a fixed byte limit.
 
 For a contained change, stop when the owner, affected behavior, and focused
 check are clear. For Structural or High risk, inspect directly affected

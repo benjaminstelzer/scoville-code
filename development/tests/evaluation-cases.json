@@ -206,6 +206,23 @@
       ]
     },
     {
+      "id": "bounded-content-selection-before-reading",
+      "given": "An isolated repository names a small configuration change and one result field in an explicitly required large single-line JSONL source, alongside 500 irrelevant files. The possible content scope is otherwise broad.",
+      "expect": [
+        "Select candidate paths and bound returned output before reading file contents.",
+        "Edit only the named configuration and filter the large JSONL source locally to the requested field.",
+        "Do not recursively dump irrelevant contents or automatically drain truncated output."
+      ]
+    },
+    {
+      "id": "known-small-file-direct-read",
+      "given": "A request names one exact small configuration file and requires a contained value change with no evidence implicating other paths.",
+      "expect": [
+        "Read the named small file directly and apply the contained change.",
+        "Do not add a directory, size, or repository inventory as a prerequisite."
+      ]
+    },
+    {
       "id": "cross-check-cause-review-routing",
       "given": "The user requests review of the implementation and test evidence after two corrections fail through the same conversion mechanism across different checks. No plan change or unresolved product decision is requested.",
       "expect": [
