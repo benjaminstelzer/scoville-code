@@ -1,10 +1,9 @@
 ---
 format_version: 1
 id: PLAN-0002
-status: active
+status: completed
 created: 2026-09-19
 updated: 2026-09-19
-current_item: W-001
 ---
 
 # Scoville Code: verlässliche Vertragsprüfungen und begrenztes Einlesen
@@ -32,9 +31,9 @@ Vier gezielte Präzisierungen aus `C:/Users/benja/Desktop/scoville-audit.md` ums
 
 ### W-001 Große Inhaltsmengen vor dem Einlesen eingrenzen
 
-Status: in_progress
+Status: done
 Depends on: []
-Blocked by: [EVAL-W001]
+Blocked by: []
 Decisions: []
 Outcome: Die bestehende Suchregel verhindert blindes rekursives Inhaltsladen und wahllose Fortsetzung abgeschnittener Ausgaben, ohne kleine gezielte Reads mit Inventuren zu belasten.
 Acceptance: Im gepaarten ausführbaren Fall wird die relevante kleine Konfiguration richtig geändert; irrelevante Dateiinhalte werden nicht ausgegeben. Eine ausdrücklich benötigte große einzeilige JSONL-Datei wird lokal nach dem benötigten Feld gefiltert. Kein vollständiges rekursives Listing, kein Rohdump und kein seitenweises Leeren aller Truncations. Gegenfall: exakte kleine Datei wird ohne Verzeichnisinventur gelesen. Tatsächliche Werkzeugaufrufe und kumulierte ausgegebene Inhaltsmenge sind ausgewertet; keine Gleichsetzung mit Wochenquota.
@@ -43,12 +42,11 @@ Steps:
 2. Ergänze einen Fall samt Gegenfall in `development/tests/evaluation-cases.json`: kleine benannte Konfiguration, 500 irrelevante Dateien, eine lokal generierte 2-MiB-JSONL-Einzelzeile mit genau einem angefragten Ergebnisfeld. Erzeuge diese Daten ausschließlich im Task-Temp; Aufgabe ist eine konkrete Konfigurationsänderung plus Ausgabe dieses Felds, ohne Hinweise auf die Falle. Der separate Gegenfall nennt nur die kleine Datei. Beide Kontexte erhalten dieselben Inhalte.
 3. Präzisiere ausschließlich den bestehenden Locate-proportionately-Absatz in `scoville-code-anti-ai-slop/references/change-workflow.md`: bei unbekanntem breitem Umfang zuerst begrenzte Metadaten/Pfadauswahl; vor Inhaltslesen Auswahl und Ausgabebudget eingrenzen; weitere Reads nur für benannte offene Fragen; keine automatische Truncation-Fortsetzung. Bekannte kleine Dateien direkt lesen und ausdrücklich benötigte große Quellen lokal filtern. Keine vollständige Größeninventur und kein starres MB-Limit verlangen.
 4. Führe das eine Baseline-/Kandidatenpaar nach dem gemeinsamen Protokoll aus. Prüfe Dateiergebnis und Read-Traces, nicht nur die Abschlussantwort; erfasse den Unterschied zwischen erzeugter Toolausgabe und tatsächlich sichtbarer begrenzter Ausgabe, soweit verfügbar.
-Evidence: [Astra Low pair changed both JSON files and filtered the 2 MiB JSONL to 13 output chars but both emitted a complete recursive path list; W-001 Acceptance failed]
-Next action: Die freigegebene präzisierte Regel in genau einem frischen Baseline-/Kandidatenpaar prüfen und EVAL-W001 nur bei bestandener Acceptance auflösen.
+Evidence: [Initial Astra Low pair exposed complete recursive path listings in both variants; wording was tightened and Acceptance remained open, Authorized rerun passed: candidate bounded paths to 30 and JSONL output to 13 chars while baseline emitted all paths; both edits and checks passed]
 
 ### W-002 Erwartungen an unabhängigen Grenzverträgen prüfen
 
-Status: todo
+Status: done
 Depends on: [W-001]
 Blocked by: []
 Decisions: []
@@ -59,12 +57,11 @@ Steps:
 2. Ergänze dort einen ausführbaren Fall: Producer und bisheriger Test nutzen `title.font.font.size`, während die unabhängige lokale Consumerspezifikation und der tatsächliche Consumer `title.font.size` unterstützen. Liefere einen vorhandenen grünen Producer-Test und einen engen Consumer-Aufruf; Aufgabe ist die fehlerhafte Übergabe zu beheben. Ein unabhängiger korrekter reiner String-Transformationsfall dient als Gegenfall. Keine echten Divi-Dateien kopieren.
 3. Präzisiere den vorhandenen Satz zu implementierungsspiegelnden Tests in `scoville-code-anti-ai-slop/references/validation.md`: Erwartungen bei betroffenen Grenzverträgen aus vereinbartem Vertrag oder unabhängigem tatsächlichem Verbraucher ableiten; gemeinsam kopierte Konstante oder eigener Roundtrip genügt dafür nicht. Erhalte die Ausnahme für echte kontrollierte deterministische Checks und den begrenzten Claim bei unprüfbarer Integration.
 4. Führe das eine Baseline-/Kandidatenpaar aus; prüfe tatsächliche Änderungen und Consumer-Testresultat. Prüfe zugleich, dass kein globales Recherche-, Browser- oder Integrationserfordernis im Skilltext entstanden ist.
-Evidence: []
-Next action: Nach W-001 den aktuellen Validation-Absatz und die zwei benannten vorhandenen Fälle lesen.
+Evidence: [Astra Low pair changed only producer.py and its mirrored test; the actual consumer contract stayed byte-identical and all three focused tests passed, Baseline and candidate behavior matched; retained wording closes the observed independent-expectation gap without claiming run improvement]
 
 ### W-003 Nachweisen, dass die Fehlerinjektion den Zielpfad trifft
 
-Status: todo
+Status: done
 Depends on: [W-002]
 Blocked by: []
 Decisions: []
@@ -75,12 +72,11 @@ Steps:
 2. Ergänze den Fall in `development/tests/evaluation-cases.json` und ein kleines isoliertes ausführbares Fixture mit State-Read, Cache-Read und gezähltem Provideraufruf. Liefere den irreführenden ursprünglichen Test und als zu prüfenden Vorschlag die Akzeptanz beider Codes. Ergänze einen bereits eindeutig zielgenauen Fehlerfall als Gegenfall; keine Datenbank und kein Netz nötig.
 3. Ergänze den bestehenden Fixture-/Mock-Absatz in `scoville-code-anti-ai-slop/references/validation.md` um tatsächlich erreichte Vorbedingungen, getroffene Zieloperation und relevante Nachwirkung. Bestehende eindeutige Rückgaben dürfen als Nachweis genügen; keine universelle Zähler-, Logging- oder Fault-Injection-Pflicht hinzufügen.
 4. Führe das eine Baseline-/Kandidatenpaar aus und prüfe die beiden Fehlerpfade sowie unveränderte Scope-Grenzen. Prüfe, dass die neue Formulierung die in W-002 abgenommene unabhängige Vertragserwartung nicht abschwächt.
-Evidence: []
-Next action: Nach W-002 die konkrete Ergänzungsstelle im nun aktuellen Fixture-/Mock-Absatz bestimmen.
+Evidence: [Astra Low pair isolated state and cache failures and asserted exact paths with no provider call; all three tests passed, Production code and the already unambiguous control stayed unchanged; no universal instrumentation was added]
 
 ### W-004 Unabhängig betroffene Verbrauchervarianten erfassen
 
-Status: todo
+Status: done
 Depends on: [W-003]
 Blocked by: []
 Decisions: []
@@ -92,5 +88,4 @@ Steps:
 3. Ersetze die betroffene Verbraucherformulierung in `scoville-code-anti-ai-slop/references/change-workflow.md`: direkt betroffene Aufrufer, Registrierungen und Test-Doubles lokalisieren; unabhängig betroffene Vertragsvarianten berücksichtigen; ein repräsentativer Verbraucher genügt bei nur einer Variante. Stimme den vorhandenen Satz in `scoville-code-anti-ai-slop/references/validation.md` knapp darauf ab, ohne eine zweite ausführliche Regelkopie anzulegen.
 4. Führe das eine Baseline-/Kandidatenpaar aus. Prüfe anschließend die zwei final geänderten Referenzen vollständig auf Duplikate, Scope-Ausweitung und gegenseitige Widersprüche; parse `development/tests/evaluation-cases.json` mit Python und vergleiche gezielt die bestehenden Fälle `contained-change-without-exposed-variant`, `fixture-producer-consumer-boundary` und `controlled-fixture-pure-transform` mit dem finalen Text.
 5. Halte ausschließlich beobachtete Abnahmen und verbliebene Grenzen in den Evidence-Feldern dieses Plans fest, prüfe scoped Diff und native Struktur. Entferne ausschließlich verifizierte eigene Task-Temp-Artefakte, nachdem notwendige knappe Ergebnisse übernommen wurden. Keine Installation oder Veröffentlichung anschließen.
-Evidence: []
-Next action: Nach W-003 die beiden vorhandenen Verbraucherformulierungen gegeneinander lesen und den W-004-Fixturevertrag festlegen.
+Evidence: [Astra Low pair updated both registered consumers and the test double; four focused tests passed and registry plus unrelated neighbor stayed byte-identical, Full references showed no duplicate or contradictory rule; three named legacy cases matched final text and evaluation JSON parsed, Evaluator rerun passed W-001 observations and 3 W-002 plus 3 W-003 plus 4 W-004 tests]

@@ -136,6 +136,15 @@
       ]
     },
     {
+      "id": "negative-path-target-operation-proof",
+      "given": "A cache-read test globally fails storage, so the preceding state read fails first. A proposed relaxation accepts either state-error or cache-error while both paths avoid the provider. A separate negative test already returns an unambiguous error from its named operation.",
+      "expect": [
+        "Make the state read succeed and inject failure only at the cache read before claiming cache-error coverage.",
+        "Keep the state-read failure separately proven and verify the relevant no-provider aftermath for both paths.",
+        "Reject accepting both error codes as target-path proof and do not add counters or production instrumentation to the already unambiguous control."
+      ]
+    },
+    {
       "id": "controlled-fixture-pure-transform",
       "given": "A deterministic text transformation runs directly on controlled input strings. Acceptance is limited to that transformation; no dependency behavior or producer-consumer compatibility is claimed.",
       "expect": [
@@ -150,6 +159,15 @@
         "Exercise the actual producer-consumer boundary with controlled source data.",
         "Do not treat the prepared label or renderer-only pass as evidence that adapter extraction works.",
         "Keep the required compatibility condition open until that boundary has evidence."
+      ]
+    },
+    {
+      "id": "independent-consumer-contract-expectation",
+      "given": "A producer and its green unit test both use `title.font.font.size`, while an independently specified local consumer and its actual implementation accept only `title.font.size`. A separate deterministic string transformation has no integration claim.",
+      "expect": [
+        "Derive the boundary expectation from the independent contract or actual consumer rather than the producer test.",
+        "Correct the producer and its mirrored expectation without changing the consumer contract.",
+        "Exercise the actual consumer and retain the direct pure-transformation check without requiring browser, network, or framework integration."
       ]
     },
     {
@@ -203,6 +221,15 @@
         "Stop exploration at the established owner and evidence boundary.",
         "Do not inspect consumers or create variant tests as insurance.",
         "Preserve the existing consumer requirement when a different task actually changes a symbol or public behavior."
+      ]
+    },
+    {
+      "id": "registered-consumer-contract-variants",
+      "given": "An explicit formatter contract change affects two distinct consumers registered in a local registry and an old formatter test double. An unrelated neighboring module has a similar name. A separate internal rewrite preserves its contract.",
+      "expect": [
+        "Locate and update both independently affected registered consumer variants and the test double.",
+        "Exercise both variants through focused tests and leave the unrelated neighbor unchanged.",
+        "Do not require a consumer inventory for the separate internal rewrite whose contract is unchanged."
       ]
     },
     {

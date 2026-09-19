@@ -38,8 +38,15 @@ Choose evidence scope as an exclusive decision:
    the narrowest decisive check.
 3. Risk selects the failure mode to exercise; it never widens scope by itself.
 
-When a change alters a symbol used elsewhere, exercise at least one affected
-use. Tests that mirror implementation without protecting behavior are not proof.
+When a change alters a symbol used elsewhere, exercise each independently
+affected contract variant; one affected use is sufficient when inspection finds
+only one variant. Tests that mirror implementation without protecting behavior
+are not proof.
+For an affected boundary contract, derive expectations from the agreed contract
+or an independently implemented actual consumer. A constant copied by both
+sides or the producer's own round trip does not establish compatibility.
+Controlled deterministic checks remain sufficient for behavior that does not
+claim such a boundary.
 
 A stub, mock, or hand-built fixture can support only the behavior actually
 exercised. If a claim depends on a dependency's behavior or a producer-consumer
@@ -48,6 +55,12 @@ component or narrow the claim and leave the required behavior unverified.
 Unmet required acceptance remains open. Controlled fixtures remain valid when
 the behavior under test actually runs. Required evidence does not expand
 existing permissions.
+
+For a negative-path claim, establish that required preconditions completed,
+the intended target operation was reached and caused the failure, and relevant
+aftermath matches the contract. An existing unambiguous return, state, or call
+observation can supply this evidence; do not require universal counters,
+logging, production instrumentation, or a fault-injection framework.
 
 ## Handle failures
 

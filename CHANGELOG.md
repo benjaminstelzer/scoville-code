@@ -1,5 +1,15 @@
 # Changelog
 
+## v1.0.31 - 2026-09-19
+
+- Bound broad reads before content is returned, and filter required large
+  sources locally instead of draining truncated output or listing an entire
+  tree.
+- Derive boundary expectations from an agreed contract or independent
+  consumer, prove negative tests reach the named failure operation, and cover
+  every independently affected consumer variant without inventorying unrelated
+  neighbors.
+
 ## v1.0.30 - 2026-09-19
 
 - State the complete eight-Skill ownership boundary in suite order while

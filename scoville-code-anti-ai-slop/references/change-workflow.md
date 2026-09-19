@@ -100,10 +100,13 @@ the target runtime. Change a generator or hand-written source, not its output.
 Consolidate proven duplication in its canonical owner, but create no abstraction
 before a second real consumer or shared invariant exists.
 
-For a changed symbol or public behavior, inspect at least one real consumer. For
-stateful or async work, trace when data becomes durable and when completion is
-acknowledged. For destructive behavior, verify scope and reversibility before
-the action, not after it.
+For a changed symbol or public behavior, locate directly affected callers,
+registrations, and test doubles. Cover each independently affected contract
+variant; one representative real consumer is sufficient when inspection finds
+only one variant. Do not inventory unrelated callers or neighboring modules.
+For stateful or async work, trace when data becomes durable and when completion
+is acknowledged. For destructive behavior, verify scope and reversibility
+before the action, not after it.
 
 ## Review implementation
 
