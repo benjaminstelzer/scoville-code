@@ -81,25 +81,20 @@ Treat limits as limits, not extra work: read-only or no-edit wording alone does
 not add an authorization judgment. Asking whether a material choice must be
 recorded does not also request plan representation or lifecycle mutation.
 
-Use Planning for a requested plan/lifecycle change, durable handoff, several
-dependent outcomes with material sequencing/interruption risk, or material
-choice needing a record.
+Select every route required by the operation being performed now:
 
-An explicit ownership contract that resolves a bounded implementation choice is
-Change-only. Add Planning only for plan/Decision representation,
-lifecycle/sequencing, durable handoff, or a material choice still unresolved
-after inspection.
+| Current operation | Route |
+| --- | --- |
+| Create or change plan/Decision representation, lifecycle or sequencing; coordinate several dependent outcomes with material interruption risk; prepare a durable handoff; or resolve a material choice still open after inspection | Planning |
+| Explore or change code, locate ownership or root cause, review an implementation or patch, or handle Structural/High risk | Change |
+| Choose, run or interpret checks; judge actual test, validation or completion evidence; or select the next evidence action after repeated failure | Validation |
+| Only classify described future work or mention a later operation without performing or judging it | No additional route |
 
-A bounded patch review asking whether durability precedes publication is
-Change-only. Add Validation only when the current operation explicitly
-chooses/runs checks or judges actual test/validation/completion evidence; add
-Planning only for plan/Decision/lifecycle/handoff representation or a material
-choice still unresolved after inspection.
-
-When asked only for the next diagnostic/evidence action after the same check
-failed repeatedly, use Validation-only and inspect the check/owner/source before
-repeating. "Choose next action" is not a material Planning decision unless that
-inspection leaves an actual implementation choice unresolved.
+Combine rows only when the current operation performs both. An explicit
+ownership contract that resolves a bounded implementation choice and a bounded
+patch review about durability are Change-only unless one of the Planning rows
+also applies. Repeated failure is Validation-only unless inspection leaves a
+material implementation choice unresolved.
 
 A choice is material if a missing answer changes
 outcome, scope, owner, public contract, data/security posture, reversibility,
@@ -107,19 +102,14 @@ external authority, meaningful cost; accepts irreversible loss; weakens
 integrity; or expands scope. Resolve harmless details locally. If a material choice remains unresolved,
 ask one specific question before work that depends on that choice.
 
-- Planning-only: if asked only how future implementation/verification should
-  appear in a plan, use only Planning. Mentioning subordinate work activates no
-  subordinate route unless this task performs or evaluates it. Work sharing one
-  observable outcome, owner, and acceptance boundary is one behavior-complete
-  lifecycle item; its implementation and documentation are subordinate steps
-  and its focused test is evidence.
-- Validation-only: when asked only whether reported evidence is stale,
-  sufficient, or ordered correctly after a reported change, use only Validation.
-  Use **Normal** absent supplied Structural/High facts. A related-code change
-  alone is not Structural and activates Change only if also inspecting its
-  implementation, ownership, or root-cause fit.
-- Change: explore/change code, locate ownership, review implementation/patch,
-  or handle Structural/High.
+Planning representation does not activate the subordinate implementation or
+validation it describes. Work sharing one observable outcome, owner, and
+acceptance boundary is one behavior-complete lifecycle item; its implementation
+and documentation are subordinate steps and its focused test is evidence. A
+Validation-only judgment of reported evidence uses **Normal** absent supplied
+Structural/High facts. A related-code change alone is not Structural and adds
+Change only when the current operation inspects implementation, ownership, or
+root-cause fit.
 
 Before Planning read
 [planning-and-decisions.md](references/planning-and-decisions.md). Before Change

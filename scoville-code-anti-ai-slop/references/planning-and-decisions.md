@@ -63,10 +63,10 @@ scope. Otherwise choose the smallest reversible option that preserves the
 outcome and continue.
 
 Do independent work first, then ask one specific question before dependent work.
-In unattended work, state the assumption, choose the smallest reversible path,
-and record the assumption in the report unless a durable decision owner
-requires explicit acceptance. In that case, record the proposal and stop only
-the dependent work.
+In unattended work, assumptions may resolve only harmless details or choices
+inside an explicitly authorized decision space. If dependent work needs an
+unresolved material choice, record the proposal and stop that dependent work;
+continue only independent authorized work.
 
 ## Hand off and resume
 
