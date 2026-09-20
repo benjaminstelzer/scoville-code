@@ -1,7 +1,7 @@
 # Validation and Completion Evidence
 
-Choose the cheapest evidence that could disprove the changed behavior or a
-named risk. A passing check proves only what it exercised.
+Choose the cheapest evidence that could disprove a claim about the changed
+behavior or expose a named failure risk. A passing check proves only what it exercised.
 
 ## Contents
 

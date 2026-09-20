@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.0.32 - 2026-09-20
+
+- Make repository authority, Develop-mode retention, material-choice blocking,
+  and durable completion requirements explicit.
+- Clarify that discovering another family Skill does not activate it, while
+  independently authorized work continues and a user opt-out applies only to
+  the excluded Skill.
+
 ## v1.0.31 - 2026-09-19
 
 - Bound broad reads before content is returned, and filter required large
