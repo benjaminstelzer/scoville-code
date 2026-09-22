@@ -1,6 +1,6 @@
 ---
 name: scoville-code-anti-ai-slop
-description: Goal-first guardrail for planning, changing, testing, reviewing, or removing code and engineering artifacts. Preserve observable outcome, a single authoritative owner, risk, validation, and honest evidence without scope drift. Not for conceptual questions unrelated to a codebase.
+description: Goal-first guardrail for planning, changing, testing, reviewing, or removing code and engineering artifacts. Includes engineering Plan entries even when no code is changed. Preserve observable outcome, a single authoritative owner, risk, validation, and honest evidence without scope drift. Not for conceptual questions unrelated to a codebase.
 compatibility: "Any Agent Skills host that can read references/ and run the project's own build, test and check commands in a shell. Version control optional. No bundled scripts, no network access required. Developed for Codex and Claude Code; other hosts untested."
 ---
 
@@ -33,9 +33,11 @@ Family owners, in suite order:
 - `scoville-code-anti-ai-slop`: engineering scope, implementation, risk, and validation.
 - `scoville-design-anti-ai-slop`: visual definition, art direction, critique, and repair.
 - `scoville-ui-anti-ai-slop`: framework UI implementation, accessibility mechanics, and rendered proof.
+- `scoville-wordpress-ui-backend-anti-ai-slop`: WordPress plugin-owned wp-admin implementation and UI acceptance.
 - `scoville-scribe-anti-ai-slop`: wording, terminology, meaning, and source fidelity.
 - `scoville-plan`: durable Plans, Work Items, Decisions, and lifecycle state.
 - `scoville-handoff`: active-work transfer.
+- `scoville-workflow-for-codex`: explicit Plan execution through native Codex project tasks.
 
 Fixed labels alone trigger no sibling.
 
@@ -71,24 +73,35 @@ not escalate mode.
 
 ## Route work and choices
 
-Route and report the current operation, not later work it describes. If an
-output names a route, use the selected route. Self-contained classification
-stays Core-only when implementation or testing is only described and no
-planning, project inspection, change/ownership/risk review, or evidence judgment
-occurs; classify the described work's mode and next action separately.
+Routes select reference reading, not permission to execute. Apply in order:
+
+1. Exclude blocked or separately deferred operations. The mode label alone
+   selects no route. Before inspection, merely asking to unblock implementation
+   needs only this core.
+2. Combine the table's routes for currently authorized work. An unblocked
+   Develop request includes implementation and focused acceptance evidence:
+   select Change and Validation. Classification-only uses the last row.
+3. Classify the current operation using Risk state. Structural or High always
+   adds Change to the selected references, even when implementation inspection
+   and edits are forbidden. This risk override applies after the table.
+4. Read the selected references before the action or judgment. Reading them
+   grants no authority: preserve every no-inspection, no-edit and other limit.
+
+For classification, distinguish the described work's mode and next action.
+Report the resulting selected routes, not merely the table's intermediate set.
 
 Treat limits as limits, not extra work: read-only or no-edit wording alone does
 not add an authorization judgment. Asking whether a material choice must be
 recorded does not also request plan representation or lifecycle mutation.
 
-Select every route required by the operation being performed now:
+Read this core before references. Step 2 uses this table:
 
 | Current operation | Route |
 | --- | --- |
 | Create or change plan/Decision representation, lifecycle or sequencing; coordinate several dependent outcomes with material interruption risk; prepare a durable handoff; or resolve a material choice still open after inspection | Planning |
-| Explore or change code, locate ownership or root cause, review an implementation or patch, or handle Structural/High risk | Change |
+| Explore or change code, locate ownership or root cause, or review an implementation or patch | Change |
 | Choose, run or interpret checks; judge actual test, validation or completion evidence; or select the next evidence action after repeated failure | Validation |
-| Only classify described future work or mention a later operation without performing or judging it | No additional route |
+| Only classify described future work or mention a later operation without performing or judging it | Normal: no additional route. Structural or High: Change. |
 
 Combine rows only when the current operation performs both. An explicit
 ownership contract that resolves a bounded implementation choice and a bounded
@@ -111,14 +124,15 @@ Structural/High facts. A related-code change alone is not Structural and adds
 Change only when the current operation inspects implementation, ownership, or
 root-cause fit.
 
-Before Planning read
-[planning-and-decisions.md](references/planning-and-decisions.md). Before Change
-or concluding implementation/patch review read
-[change-workflow.md](references/change-workflow.md). Before choosing, running,
-or interpreting checks; reviewing evidence; handling repeated failure; or
-claiming implementation completeness read
-[validation.md](references/validation.md). Load before constrained action/claim,
-never afterward as justification.
+Read each selected route before performing its operation or returning its
+judgment, including advice-only answers:
+
+- Planning: [planning-and-decisions.md](references/planning-and-decisions.md).
+- Change, including implementation/patch review: [change-workflow.md](references/change-workflow.md).
+- Validation, including check selection, failed-check interpretation, evidence review and completeness claims: [validation.md](references/validation.md).
+
+Naming a required route does not satisfy this read. If its text is unavailable,
+obtain it before the judgment; do not infer its guidance from the core.
 
 ## Risk state
 

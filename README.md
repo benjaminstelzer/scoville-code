@@ -63,20 +63,9 @@ Install only the linked package for the focused option.
 
 ### Install the complete Scoville suite
 
-```text
-Install the complete Scoville Skill suite for all my projects. Fetch and install every exact package directory below:
-
-https://github.com/benjaminstelzer/scoville-brainstorm/tree/main/scoville-brainstorm
-https://github.com/benjaminstelzer/scoville-research/tree/main/scoville-research
-https://github.com/benjaminstelzer/scoville-code-anti-ai-slop/tree/main/scoville-code-anti-ai-slop
-https://github.com/benjaminstelzer/scoville-design-anti-ai-slop/tree/main/scoville-design-anti-ai-slop
-https://github.com/benjaminstelzer/scoville-ui-anti-ai-slop/tree/main/scoville-ui-anti-ai-slop
-https://github.com/benjaminstelzer/scoville-scribe-anti-ai-slop/tree/main/scoville-scribe-anti-ai-slop
-https://github.com/benjaminstelzer/scoville-plan/tree/main/scoville-plan
-https://github.com/benjaminstelzer/scoville-handoff/tree/main/scoville-handoff
-
-Preserve existing customizations and ask before overwriting conflicting files. Report every installed location and whether the host discovers each Skill.
-```
+Get the complete suite from the
+[Scoville Suite monorepo](https://github.com/benjaminstelzer/scoville-suite).
+Install its released Skill packages, not development templates.
 
 ## What it enforces
 
@@ -130,23 +119,16 @@ survives.
 Each Skill works independently. Combine only the concerns the task actually
 needs:
 
-- [Brainstorm](https://github.com/benjaminstelzer/scoville-brainstorm) explores
-  materially different mechanisms before selection.
-- [Research](https://github.com/benjaminstelzer/scoville-research) turns web,
-  GitHub, and scholarly evidence into a decision-ready, claim-traceable result.
-- [Code](https://github.com/benjaminstelzer/scoville-code-anti-ai-slop) owns
-  engineering scope, implementation, risk, and validation.
-- [Design](https://github.com/benjaminstelzer/scoville-design-anti-ai-slop) owns
-  visual definition, art direction, design systems, critique, and repair.
-- [UI](https://github.com/benjaminstelzer/scoville-ui-anti-ai-slop) owns
-  framework-aligned implementation, interface mechanics, accessibility, and
-  rendered evidence, with a standalone design fallback.
-- [Scribe](https://github.com/benjaminstelzer/scoville-scribe-anti-ai-slop) owns
-  wording, terminology, factual meaning, and source fidelity.
-- [Plan](https://github.com/benjaminstelzer/scoville-plan) owns durable Plans,
-  Work Items, Decisions, and lifecycle state.
-- [Handoff](https://github.com/benjaminstelzer/scoville-handoff) transfers active
-  work to another agent or session.
+- [Brainstorm](https://github.com/benjaminstelzer/scoville-brainstorm) explores materially different mechanisms before selection.
+- [Research](https://github.com/benjaminstelzer/scoville-research) turns web, GitHub, and scholarly evidence into a decision-ready, claim-traceable result.
+- [Code](https://github.com/benjaminstelzer/scoville-code-anti-ai-slop) owns engineering scope, implementation, risk, and validation.
+- [Design](https://github.com/benjaminstelzer/scoville-design-anti-ai-slop) owns visual definition, art direction, design systems, critique, and repair.
+- [UI](https://github.com/benjaminstelzer/scoville-ui-anti-ai-slop) owns framework-aligned implementation, interface mechanics, accessibility, and rendered evidence, with a standalone design fallback.
+- [WordPress UI Backend](https://github.com/benjaminstelzer/scoville-wordpress-ui-backend-anti-ai-slop) owns plugin-owned WordPress admin interfaces, platform components, spacing, accessibility and internationalization.
+- [Scribe](https://github.com/benjaminstelzer/scoville-scribe-anti-ai-slop) owns wording, terminology, factual meaning, and source fidelity.
+- [Plan](https://github.com/benjaminstelzer/scoville-plan) owns durable Plans, Work Items, Decisions, and lifecycle state.
+- [Handoff](https://github.com/benjaminstelzer/scoville-handoff) transfers active work to another agent or session.
+- [Workflow Codex](https://github.com/benjaminstelzer/scoville-suite) coordinates explicit Plan execution through native Codex project tasks.
 
 ## Sources
 
@@ -172,3 +154,4 @@ needs:
 ## License
 
 MIT. See [LICENSE](LICENSE).
+

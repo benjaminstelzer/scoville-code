@@ -1,5 +1,16 @@
 # Changelog
 
+## v1.0.34 - 2026-09-22
+
+- Apply engineering guardrails to Plan entries even when no code changes.
+- Make reference selection explicit for implementation, validation and
+  risk classification without granting permission to perform deferred work.
+
+## v1.0.33 - 2026-09-20
+
+- Simplify operation routing and stop dependent work when a material decision
+  remains unresolved.
+
 ## v1.0.32 - 2026-09-20
 
 - Make repository authority, Develop-mode retention, material-choice blocking,
