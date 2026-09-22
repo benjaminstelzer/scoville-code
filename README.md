@@ -43,8 +43,7 @@ remove code without turning every small change into a full audit.
 
 ## What it costs
 
-- Source inspection and meaningful checks use more tokens and time than an immediate patch.
-- The checks remain proportionate to the change. Instructions cannot guarantee correct code or replace engineering judgment.
+- Source inspection and checks use more tokens and time than an immediate patch.
 
 ## How it was developed
 
