@@ -142,6 +142,8 @@ Select the first match:
    payments, secrets, personal data, cryptography, migrations, destructive behavior, live
    systems, durable external effects, or async fan-out/fan-in. Actual migrations
    remain High, including audit/dry run; read-only limits action, not classification.
+   Concrete planning or risk review for one of these operations also stays High
+   when execution is deferred. Merely mentioning possible later work does not.
    Purely editorial work called a "migration" does not trigger High from that
    label alone. Classify its actual affected behavior under these rules.
 2. **Structural:** absent High, the change materially alters ownership,

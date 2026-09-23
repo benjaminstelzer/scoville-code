@@ -49,10 +49,11 @@ validation limit. Decide ordinary implementation details locally.
 Record a material decision in the project's existing plan, ADR, decision log,
 authorized commit, or pull-request mechanism. When none exists, preserve it in a
 handoff only if future work depends on it. Do not invent a durable record system.
-When `scoville-plan` is independently available and applicable, it owns the
+When `scoville-plan` is already independently available and applicable, it owns
 canonical Plan, Work Item, and Decision mutation; this reference supplies only
-Code's implementation analysis. Without that Skill, keep using the repository's
-existing owner and do not require or simulate Scoville Plan.
+Code's implementation analysis. This mention does not require loading or
+searching for that Skill. Without independent availability, keep using the
+repository's existing owner and do not require or simulate Scoville Plan.
 
 ## Resolve decision ambiguity
 

@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.0.36 - 2026-09-24
+
+- Keep concrete planning and risk review for high-impact operations in the High risk class when execution is deferred.
+- Use Scoville Plan as the record owner only when it is independently available and applicable.
+
 ## v1.0.35 - 2026-09-23
 
 - Follow established project conventions for existing code unless they
