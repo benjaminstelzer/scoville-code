@@ -30,10 +30,10 @@ remove code without turning every small change into a full audit.
   tool is not silently promoted to a passing product.
 - **Root-cause correction.** The agent changes approach after repeated failure
   instead of repeating the same unsuccessful fix.
-- **Navigable code structure.** Hand-written source files use a default ceiling
-  of 2,000 physical lines with project priority and concrete exceptions. Domain
-  ownership, module boundaries, dependency direction, generated sources, and
-  resource cleanup remain explicit without forcing one architecture.
+- **Navigable code structure.** Existing work follows project conventions and
+  surrounding module boundaries. Greenfield work starts with the smallest
+  coherent responsibility-based layout. A 2,000-line default ceiling remains
+  a backstop with concrete exceptions, never an architecture target.
 - **Material questions only.** It asks when a missing choice changes behavior,
   authority, cost, reversibility, or scope, not for details the code settles.
 - **Complete handoff.** The final report names changed behavior, relevant

@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.0.35 - 2026-09-23
+
+- Follow established project conventions for existing code unless they
+  conflict with the requested outcome, safety or a binding contract.
+- Start Greenfield code with the smallest coherent responsibility-based layout
+  and split at real domain, I/O, integration or state boundaries. Keep the
+  2,000-line default as a backstop, not an architecture target.
+
 ## v1.0.34 - 2026-09-22
 
 - Apply engineering guardrails to Plan entries even when no code changes.

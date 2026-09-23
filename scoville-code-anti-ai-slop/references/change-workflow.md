@@ -45,8 +45,10 @@ as Develop work and validate it accordingly.
 ## Implement for the outcome
 
 - Put behavior in its canonical owner and reuse the canonical pathway.
-- Match surrounding naming, idioms, error handling, comments, and annotations.
-  Name code for behavior, not novelty or history.
+- In existing code, follow project rules and surrounding naming, idioms, error
+  handling, comments, annotations, test style, and established module
+  boundaries unless they conflict with the requested outcome, safety, or a
+  binding contract. Name code for behavior, not novelty or history.
 - Implement the smallest maintainable, behavior-complete result. Avoid
   speculative helpers, guards, flags, layers, compatibility paths, and nearby
   cleanup.
@@ -57,8 +59,14 @@ as Develop work and validate it accordingly.
   comments before completion. Comment only on constraints code cannot express.
 
 Keep authored code navigable:
-- Project conventions and stricter configured limits override these defaults.
-  Keep hand-written source files at no more than 2,000 physical lines in normal
+- Project conventions and stricter configured limits override the defaults
+  below.
+- For greenfield work without relevant project conventions, start with the
+  smallest coherent layout. Keep one nameable domain responsibility per file
+  or module, and split when a second responsibility or a real I/O, integration,
+  or state boundary would make navigation or independent change clearer. Use
+  purpose-revealing names; create no speculative layers or empty structure.
+- Keep hand-written source files at no more than 2,000 physical lines in normal
   formatting, and split earlier at real responsibility boundaries. This is a
   ceiling, not a target. Never meet it through compression, lost comments, or
   numbered fragments.
@@ -70,9 +78,7 @@ Keep authored code navigable:
   directories or an established equivalent area. Language `import`, `use`, or
   `require` statements follow project conventions and require no directory.
   Create no empty future-facing structure.
-- Keep one nameable domain responsibility per file or module. Use names that
-  reveal purpose. Avoid catch-alls, metric-only fragments, and artificial
-  one-function files.
+- Avoid catch-alls, metric-only fragments, and artificial one-function files.
 - Keep functions focused on one understandable task, with side effects visible
   to callers. Extract helpers for real concepts or reuse, not a size metric.
 
