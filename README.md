@@ -1,4 +1,4 @@
-# Scoville Code Anti-AI-Slop
+# Scoville Code
 
 A coding agent can finish the wrong thing quite thoroughly. The tests are green,
 the report sounds certain, but the behavior you asked for is still missing.
@@ -15,7 +15,7 @@ remove code without turning every small change into a full audit.
 - Read the owner and relevant callers, contracts and tests. Expand only when the evidence points elsewhere.
 - Fix the cause in the existing implementation. Avoid parallel paths, speculative abstractions and unrelated cleanup.
 - Test the changed behavior. A successful build or mocked integration proves only what it exercised.
-- Investigate failed checks without weakening them. After two unsuccessful corrections of the same cause, reassess the approach.
+- Investigate failed checks without weakening required guarantees. Change obsolete assertions only when an explicitly authorized contract change requires it. After two unsuccessful corrections of the same cause, reassess the approach.
 - Inspect the complete change and report observed results and remaining gaps. Stop checking when further evidence would not change the decision.
 
 ## What it enforces
@@ -36,10 +36,17 @@ remove code without turning every small change into a full audit.
   a backstop with concrete exceptions, never an architecture target.
 - **Material questions only.** It asks when a missing choice changes behavior,
   authority, cost, reversibility, or scope, not for details the code settles.
+- **Defaults for a wholly new project.** Project instructions come first.
+  Only complete greenfield work uses the stack-specific conventions in the
+  Skill's `references/project-conventions.md`. Keep personal overrides outside
+  the installed Skill and reference them explicitly from `AGENTS.md` so Skill
+  updates do not replace them. Existing projects keep their organization.
+  The [customization guide](https://github.com/benjaminstelzer/scoville-code#your-own-conventions)
+  explains paths, precedence and update behavior with a copyable example.
 - **Complete handoff.** The final report names changed behavior, relevant
   validation, unresolved failures, and relevant repository state.
 
-- The complete contract is in [SKILL.md](https://github.com/benjaminstelzer/scoville-code-anti-ai-slop/blob/main/scoville-code-anti-ai-slop/SKILL.md).
+- The complete contract is in [SKILL.md](https://github.com/benjaminstelzer/scoville-code/blob/main/scoville-code/SKILL.md).
 
 ## What it costs
 
@@ -54,26 +61,35 @@ remove code without turning every small change into a full audit.
 
 ## Compatibility
 
-Any Agent Skills host that can read references/ and run the project's own build, test and check commands in a shell. Version control optional. No bundled scripts, no network access required. Developed for Codex and Claude Code; other hosts untested.
+Use a frontier LLM from the Fable, Astra, SOL or Opus families, version 5.0 or
+newer. This is the minimum model requirement, not a claim that every model in
+those families has been tested.
+
+The host must read the Skill's references and run the project's own build, test
+and check commands in a shell. Version control is optional. The Skill bundles
+no scripts and requires no network access. It was developed for Codex and
+Claude Code. Other hosts are untested.
+
+This Skill works on its own. Other Scoville Skills are optional and handle
+only their own concerns when available and applicable.
 
 ## Install
 
 ### Install this Skill
 
-In a local Codex or Claude Code session, ask:
+This standalone package works independently. Ask your compatible agent host:
 
 ```text
-Install this Agent Skill for all my projects from this exact package directory:
-https://github.com/benjaminstelzer/scoville-code-anti-ai-slop/tree/main/scoville-code-anti-ai-slop
-Preserve existing customizations and ask before overwriting conflicting files.
-Report the installed location and whether the host discovers the Skill.
+Install this Skill for all my projects from this exact package directory:
+https://github.com/benjaminstelzer/scoville-code/tree/main/scoville-code
+Preserve personal settings and unrelated Skills. Report the installed location
+and whether the host discovers the Skill.
 ```
 
-The agent needs source access and permission to write to its personal Skills
-location. Manual fallback: [Codex Skills guide](https://learn.chatgpt.com/docs/build-skills)
-or [Claude Code Skills guide](https://code.claude.com/docs/en/skills).
-
-Install only the linked package for the focused option.
+The host needs permission to write to its Skills directory. See the
+[Codex Skills guide](https://learn.chatgpt.com/docs/build-skills) or the
+[Claude Code Skills guide](https://code.claude.com/docs/en/skills)
+for host-specific locations.
 
 ### Install the complete Scoville suite
 
@@ -83,23 +99,58 @@ Install its released Skill packages, not development templates.
 
 ## How to use
 
-Name Scoville Code for codebase work where scope, ownership, risk, or evidence
-matters:
-
 ```text
-Use Scoville Code to implement rate limiting in the existing API owner. Keep the diff scoped, preserve public behavior outside the stated limit, and run the repository's relevant checks.
+Use Scoville Code to analyze this codebase for correctness, ownership and missing validation. Report prioritized findings.
 ```
 
 ```text
-Use Scoville Code to diagnose why this migration sometimes leaves consumers on the old schema. Identify the supported root cause and evidence. Do not change files.
+Analyze this codebase for defects and hidden failure paths. Support findings with code evidence and keep the analysis read-only.
 ```
 
-```text
-Use Scoville Code to review this patch for correctness, hidden failure paths, ownership drift, and missing validation. Report prioritized findings only.
+### Starting a new project
+
+Project instructions come first. Scoville Code uses its organization fallback
+only when you start a wholly new project, and only for choices your instructions
+have not already settled. Adding a module to an existing project is not a fresh
+start. Neither is a refactor or a missing naming rule.
+
+The defaults live in
+[`references/project-conventions.md`](scoville-code/references/project-conventions.md)
+inside the installed Skill. They follow the selected language and framework:
+Python modules, Angular components and PSR-4 classes have different naming
+rules for a reason. Where the ecosystem leaves the choice open, the fallback
+uses a small `src/`, `tests/`, `docs/` and `scripts/` layout. Directories appear
+when they have a purpose, not as an empty scaffold. Tests can live beside the
+code when the framework expects that.
+
+### Your own conventions
+
+You can edit the bundled reference, but a Skill update can replace that edit.
+For conventions you want to keep across updates, maintain a Markdown file
+outside the Skill installation and explicitly reference it in your global or
+project `AGENTS.md`. For example, with an `AGENTS.md` at the project root:
+
+```markdown
+### Greenfield project conventions
+
+For the initial organization of a wholly new project, first follow this
+project's explicit requirements, then read `docs/project-conventions.md`
+for my additional folder and filename conventions. Use Scoville Code's
+defaults only for choices neither source settles. Do not apply this
+fallback to additions or refactors in an existing project.
 ```
 
-Explicit `$scoville-code-anti-ai-slop` invocation also works on hosts that
-support named Skill invocation.
+Create the referenced file with your actual preferences. Relative paths resolve
+from the directory containing the referring `AGENTS.md`; a shared personal file
+can instead use an explicit absolute path available on that machine. The Skill
+does not search your computer for convention files. If the required file cannot
+be read, the agent reports that input gap before making dependent choices.
+
+Your file is maintained separately from the installed Skill, so replacing the
+Skill does not replace it. Project-specific instructions still take precedence
+over generic personal defaults unless you explicitly choose otherwise. Required
+framework paths and loading rules remain binding. Naming preferences do not
+grant new permissions or extend the fallback to existing projects.
 
 ## Sources
 
@@ -124,18 +175,11 @@ support named Skill invocation.
 
 ## Family
 
-- [Code](https://github.com/benjaminstelzer/scoville-code-anti-ai-slop) owns engineering scope, implementation, risk, and validation.
+- [Code](https://github.com/benjaminstelzer/scoville-code) owns engineering scope, implementation, risk, and validation.
 - [Plan](https://github.com/benjaminstelzer/scoville-plan) owns durable Plans, Work Items, Decisions, and lifecycle state.
-- [Scribe](https://github.com/benjaminstelzer/scoville-scribe-anti-ai-slop) owns wording, terminology, factual meaning, and source fidelity.
-- [UI](https://github.com/benjaminstelzer/scoville-ui-anti-ai-slop) owns framework-aligned implementation, interface mechanics, accessibility, and rendered evidence, with a standalone design fallback.
-- [WordPress UI Backend](https://github.com/benjaminstelzer/scoville-wordpress-ui-backend-anti-ai-slop) owns plugin-owned WordPress admin interfaces, platform components, spacing, accessibility and internationalization.
-- [Design](https://github.com/benjaminstelzer/scoville-design-anti-ai-slop) owns visual definition, art direction, design systems, critique, and repair.
+- [UI](https://github.com/benjaminstelzer/scoville-ui) owns UI implementation, information structure, accessibility and rendered evidence, with a conditional WordPress adapter.
 - [Handoff](https://github.com/benjaminstelzer/scoville-handoff) transfers active work to another agent or session.
-- [Research](https://github.com/benjaminstelzer/scoville-research) turns web, GitHub, and scholarly evidence into a decision-ready, claim-traceable result.
-- [Brainstorm](https://github.com/benjaminstelzer/scoville-brainstorm) explores materially different mechanisms before selection.
-- [Workflow Codex](https://github.com/benjaminstelzer/scoville-suite) coordinates explicit Plan execution through native Codex project tasks.
 
 ## License
 
 MIT. See [LICENSE](LICENSE).
-

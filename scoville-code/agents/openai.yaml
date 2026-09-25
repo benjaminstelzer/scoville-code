@@ -1,0 +1,4 @@
+interface:
+  display_name: "Scoville Code"
+  short_description: "Keeps the engineering result ahead of the process"
+  default_prompt: "Use $scoville-code to deliver the requested observable outcome while preserving safety, canonical ownership, boundary semantics, and truthful evidence."

@@ -42,9 +42,7 @@ not treat every checkpoint as a new task.
 
 ## Record material decisions
 
-A choice is material when it changes the requested outcome, scope, canonical
-owner, public contract, data or security posture, reversibility, or a meaningful
-validation limit. Decide ordinary implementation details locally.
+Use the core's material-choice criteria.
 
 Record a material decision in the project's existing plan, ADR, decision log,
 authorized commit, or pull-request mechanism. When none exists, preserve it in a
@@ -57,11 +55,8 @@ repository's existing owner and do not require or simulate Scoville Plan.
 
 ## Resolve decision ambiguity
 
-Ask when the answer changes what gets built, especially before selecting between
-materially different product outcomes, accepting irreversible loss, weakening a
-safety or integrity guarantee, adding external authority or cost, or expanding
-scope. Otherwise choose the smallest reversible option that preserves the
-outcome and continue.
+For ordinary details, choose the smallest reversible option that preserves the
+outcome. For an unresolved material choice, follow the core's question rule.
 
 Do independent work first, then ask one specific question before dependent work.
 In unattended work, assumptions may resolve only harmless details or choices

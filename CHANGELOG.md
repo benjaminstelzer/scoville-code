@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.0.0 - 2026-09-25
+
+- Rename the Skill and installation directory to scoville-code.
+
 ## v1.0.36 - 2026-09-24
 
 - Keep concrete planning and risk review for high-impact operations in the High risk class when execution is deferred.
@@ -42,11 +46,6 @@
   every independently affected consumer variant without inventorying unrelated
   neighbors.
 
-## v1.0.30 - 2026-09-19
-
-- State the complete eight-Skill ownership boundary in suite order while
-  keeping every sibling optional and independently activated.
-
 ## v1.0.26 - 2026-09-12
 
 - Bound source searches and recover only relevant missing output after truncation. Explicitly requested traces and generated sources remain in scope.
@@ -63,11 +62,6 @@
   boundary.
 - Diagnose repeated causal failures across checks without weakening stop rules,
   permissions, or acceptance criteria.
-
-## v1.0.21 - 2026-09-09
-
-- Removed the unrelated Design Skill from the focused Code installation prompt.
-  The complete-suite installation remains available.
 
 ## v1.0.18 - 2026-09-01
 

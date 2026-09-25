@@ -66,13 +66,15 @@ logging, production instrumentation, or a fault-injection framework.
 
 Classify a failed check before reacting. Treat it as caused by the change unless
 specific evidence shows it is pre-existing or environmental; fix what the
-change caused. Never weaken or delete a failing test or guard to obtain green
-output.
+change caused. Apply the core's integrity rule when changing assertions or
+validators: distinguish an explicitly replaced contract from an unmet one.
 
-For infrastructure failure, run the project's documented setup once if needed,
-then try at most one different check that still exercises the behavior. If
-neither does, stop and report the behavior as unverified instead of probing more
-runners, environments, or dependencies.
+For infrastructure failure, use the project's documented setup when relevant.
+Continue with another check only when a named open acceptance question, a
+relevant change in conditions, or a binding project requirement justifies it.
+Choose a check that can answer that question. Stop when no authorized next
+check can add decisive evidence, and report the required behavior as unverified.
+An unresolved requirement alone does not justify repeated ineffective probing.
 
 Retain the first complete diagnostic. On repeated output, report the stable
 failure signature and meaningful delta rather than printing the same large log
@@ -80,8 +82,13 @@ again.
 
 ## Stop repetition
 
-Do not rerun an unchanged command unless a named concurrency, stochastic,
-flaky-test, or project protocol requires repetition. If two consecutive correction
+Rerun a command only when relevant inputs or conditions changed, a named open
+acceptance question can be answered by that run, or a binding project protocol
+requires it. Name the expected evidence. Unchanged repetition without new
+information is not justified. Concurrency, stochastic or flaky behavior can
+require repeated observations when tied to the actual claim.
+
+If two consecutive correction
 attempts fail to fix the same check, or verified findings after both attempts show
 the same causal mechanism still violates the affected contract, stop patching
 and re-read the owner, contract, and evidence. Then change the approach or narrow
@@ -108,10 +115,11 @@ Before completion:
 4. confirm no integrity-floor failure was introduced; and
 5. state material unverified behavior or residual risk.
 
-For version-controlled work, use one final inspection of the complete scoped
-diff and working-tree state. Do not follow it with another test, diff, or status
-command unless it reveals a concrete defect. After fixing that defect, validate
-only the affected behavior and inspect once more.
+For version-controlled work, inspect the complete scoped diff and working-tree
+state at the completion boundary. Further tests or inspections need the same
+named-question, changed-conditions or project-requirement justification above.
+After a correction, validate the affected behavior and inspect the resulting
+change. Keep the final completion claim tied to the actual final tree.
 
 ## Report the evidence
 

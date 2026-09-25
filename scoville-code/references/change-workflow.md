@@ -38,10 +38,6 @@ Evidence that the same cause affects another input, state, or consumer within
 the changed contract also justifies inspecting that variant. Similar symptoms
 or nearby code alone do not justify expansion.
 
-For Explore work, test the hypothesis with the cheapest decisive observation.
-Do not add production scaffolding. If experimental code remains, reclassify it
-as Develop work and validate it accordingly.
-
 ## Implement for the outcome
 
 - Put behavior in its canonical owner and reuse the canonical pathway.
@@ -53,14 +49,16 @@ as Develop work and validate it accordingly.
   speculative helpers, guards, flags, layers, compatibility paths, and nearby
   cleanup.
 - Fix the evidenced root cause. Do not special-case a test or symptom.
-- Make durable work precede progress, publication, acknowledgement, or success.
 - Prefer existing dependencies and supported extension points.
 - Remove temporary diagnostics, placeholders, dead branches, and restatement
   comments before completion. Comment only on constraints code cannot express.
 
-Keep authored code navigable:
+Apply these Scoville defaults for navigable code:
 - Project conventions and stricter configured limits override the defaults
   below.
+- Follow the core's complete-greenfield gate before reading
+  [project-conventions.md](project-conventions.md). Existing projects keep their
+  organization even when a new module or an unspecified naming detail appears.
 - For greenfield work without relevant project conventions, start with the
   smallest coherent layout. Keep one nameable domain responsibility per file
   or module, and split when a second responsibility or a real I/O, integration,
@@ -87,10 +85,8 @@ outcome or a named risk.
 
 ## Handle dependencies and boundaries
 
-Preserve failure meaning and all semantics consumers need when data crosses a
-boundary. Do not collapse distinct statuses or error reasons for local
-convenience. Keep validation, authorization, persistence, and publication in
-their canonical layers.
+Apply the core's integrity rules at every affected boundary. Keep validation,
+authorization, persistence and publication in their canonical layers.
 
 Keep dependency direction visible. Add no cycle or shortcut into another
 module's internals. Keep public surfaces small, integration details in adapters,
