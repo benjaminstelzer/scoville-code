@@ -1,8 +1,5 @@
 # Scoville Code
 
-The name comes from the Scoville scale, which originally measured chili heat through dilution.
-Here, the heat is the requested behavior and the evidence that it works, kept clear through implementation and testing.
-
 A coding agent can produce passing tests while missing the behavior you asked
 for. Scoville Code connects the requested result, the existing implementation
 and the evidence that a change works.
@@ -11,20 +8,23 @@ Use it to develop, diagnose, review or remove code. It directs the agent to find
 the cause, respect the project's architecture and check the affected behavior
 with effort proportionate to the task.
 
+The name comes from the Scoville scale, which originally measured chili heat through dilution.
+Here, the heat is the requested behavior and the evidence that it works, kept clear through implementation and testing.
+
 ## How it works
 
 - Identify the outcome, responsible code, risks and decisive check before editing.
 - Read relevant code, callers and tests. Expand the investigation when evidence requires it.
 - Fix the cause within the existing architecture and requested scope.
 - Check the changed behavior and report what the evidence actually proves.
-- Investigate failures without weakening guarantees. Revise obsolete assertions only for an authorized contract change. Reassess after two failed corrections of the same cause.
+- Investigate failures without weakening guarantees. Revise obsolete assertions only for an approved change to the expected behavior. Reassess after two failed corrections of the same cause.
 - Inspect the complete change, report remaining gaps and stop checking when further evidence would not change the decision.
 
 ## What it enforces
 
-- **The requested result.** Plans, tests and refactors support the outcome;
-  completion requires the behavior itself.
-- **Existing ownership.** Changes follow the project's architecture, records,
+- **The requested result.** Plans, tests and refactors support the outcome.
+  Completion requires the behavior itself.
+- **Project conventions.** Changes follow the project's architecture, records,
   terminology and workflow.
 - **Proportionate checks.** Verification addresses concrete failure risks.
   Broader security, migration or release checks follow the task and project rules.
@@ -33,7 +33,7 @@ with effort proportionate to the task.
 - **Root-cause correction.** Repeated failure triggers a reassessment of the approach.
 - **Navigable code.** Existing conventions and module boundaries guide changes.
   New projects start with a small layout organized by responsibility. The
-  2,000-line default ceiling permits justified exceptions.
+  default limit of 2,000 lines per source file permits justified exceptions.
 - **Necessary questions.** Ask when a choice changes behavior, authority, cost,
   reversibility or scope. Resolve ordinary details from the project.
 - **Your conventions.** Project instructions take priority. Defaults apply only
@@ -43,7 +43,7 @@ with effort proportionate to the task.
 - **Useful completion reports.** State changed behavior, validation, unresolved
   failures and relevant repository state.
 
-The complete contract is in [SKILL.md](https://github.com/benjaminstelzer/scoville-code/blob/main/scoville-code/SKILL.md).
+The full instructions are in [SKILL.md](https://github.com/benjaminstelzer/scoville-code/blob/main/scoville-code/SKILL.md).
 
 ## What it costs
 
@@ -56,9 +56,8 @@ The complete contract is in [SKILL.md](https://github.com/benjaminstelzer/scovil
 
 ## Compatibility
 
-Use a frontier LLM from the Fable, Astra, SOL or Opus families, version 5.0 or
-newer. This is the minimum model requirement, not a claim that every model in
-those families has been tested.
+A current Fable, Astra, SOL or Opus model is recommended. Luna was also used
+in testing.
 
 The host must read the Skill's references and run the project's own build, test
 and check commands in a shell. Version control is optional. The Skill bundles
@@ -107,7 +106,7 @@ For a wholly new project, Scoville Code uses
 [`references/project-conventions.md`](scoville-code/references/project-conventions.md)
 for choices the project instructions leave open. Its defaults follow the
 language and framework, with a small `src/`, `tests/`, `docs/` and `scripts/`
-layout where appropriate. Directories are added when needed; tests may sit
+layout where appropriate. Directories are added when needed. Tests may sit
 beside code when the framework expects it. Existing projects retain their
 organization, including during refactors or module additions.
 
@@ -129,10 +128,9 @@ fallback to additions or refactors in an existing project.
 ```
 
 Create the file with your conventions. Relative paths resolve from the
-referring `AGENTS.md`; a shared personal file can use an absolute path.
+referring `AGENTS.md`. A shared personal file can use an absolute path.
 The agent reads the explicitly referenced file and reports it if unavailable.
 
-Keeping conventions outside the installed Skill preserves them across updates.
 Project-specific instructions and framework requirements still apply.
 
 ## Sources
