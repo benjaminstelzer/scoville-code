@@ -1,53 +1,46 @@
 # Scoville Code
 
-A coding agent can finish the wrong thing quite thoroughly. The tests are green,
-the report sounds certain, but the behavior you asked for is still missing.
+A coding agent can produce passing tests while missing the behavior you asked
+for. Scoville Code connects the requested result, the existing implementation
+and the evidence that a change works.
 
-Scoville Code is the engineering foundation of the suite. It connects the
-requested result, the existing implementation and the evidence that the change
-works. The agent must understand the cause and respect the project's architecture,
-not simply produce a plausible patch. Use it to develop, diagnose, review or
-remove code without turning every small change into a full audit.
+Use it to develop, diagnose, review or remove code. It directs the agent to find
+the cause, respect the project's architecture and check the affected behavior
+with effort proportionate to the task.
 
 ## How it works
 
-- Establish the observable outcome, responsible code, introduced risks and cheapest decisive check before substantial editing.
-- Read the owner and relevant callers, contracts and tests. Expand only when the evidence points elsewhere.
-- Fix the cause in the existing implementation. Avoid parallel paths, speculative abstractions and unrelated cleanup.
-- Test the changed behavior. A successful build or mocked integration proves only what it exercised.
-- Investigate failed checks without weakening required guarantees. Change obsolete assertions only when an explicitly authorized contract change requires it. After two unsuccessful corrections of the same cause, reassess the approach.
-- Inspect the complete change and report observed results and remaining gaps. Stop checking when further evidence would not change the decision.
+- Identify the outcome, responsible code, risks and decisive check before editing.
+- Read relevant code, callers and tests. Expand the investigation when evidence requires it.
+- Fix the cause within the existing architecture and requested scope.
+- Check the changed behavior and report what the evidence actually proves.
+- Investigate failures without weakening guarantees. Revise obsolete assertions only for an authorized contract change. Reassess after two failed corrections of the same cause.
+- Inspect the complete change, report remaining gaps and stop checking when further evidence would not change the decision.
 
 ## What it enforces
 
-- **Outcome over ceremony.** Plans, tests, docs, and refactors support the
-  requested behavior. Producing them is not completion by itself.
-- **Canonical ownership.** The change fits the project's existing architecture,
-  records, terminology, and workflow instead of creating a second owner.
-- **Proportionate risk.** Small reversible work stays small. Checks follow
-  concrete failure risks. Broader security, migration or release gates apply
-  when the requested outcome or project rules require them.
-- **Evidence before claims.** Checks prove only what they observed. A failed
-  tool is not silently promoted to a passing product.
-- **Root-cause correction.** The agent changes approach after repeated failure
-  instead of repeating the same unsuccessful fix.
-- **Navigable code structure.** Existing work follows project conventions and
-  surrounding module boundaries. Greenfield work starts with the smallest
-  coherent responsibility-based layout. A 2,000-line default ceiling remains
-  a backstop with concrete exceptions, never an architecture target.
-- **Material questions only.** It asks when a missing choice changes behavior,
-  authority, cost, reversibility, or scope, not for details the code settles.
-- **Defaults for a wholly new project.** Project instructions come first.
-  Only complete greenfield work uses the stack-specific conventions in the
-  Skill's `references/project-conventions.md`. Keep personal overrides outside
-  the installed Skill and reference them explicitly from `AGENTS.md` so Skill
-  updates do not replace them. Existing projects keep their organization.
-  The [customization guide](https://github.com/benjaminstelzer/scoville-code#your-own-conventions)
-  explains paths, precedence and update behavior with a copyable example.
-- **Complete handoff.** The final report names changed behavior, relevant
-  validation, unresolved failures, and relevant repository state.
+- **The requested result.** Plans, tests and refactors support the outcome;
+  completion requires the behavior itself.
+- **Existing ownership.** Changes follow the project's architecture, records,
+  terminology and workflow.
+- **Proportionate checks.** Verification addresses concrete failure risks.
+  Broader security, migration or release checks follow the task and project rules.
+- **Supported claims.** Reports distinguish observed results, failed checks
+  and unverified behavior.
+- **Root-cause correction.** Repeated failure triggers a reassessment of the approach.
+- **Navigable code.** Existing conventions and module boundaries guide changes.
+  New projects start with a small layout organized by responsibility. The
+  2,000-line default ceiling permits justified exceptions.
+- **Necessary questions.** Ask when a choice changes behavior, authority, cost,
+  reversibility or scope. Resolve ordinary details from the project.
+- **Your conventions.** Project instructions take priority. Defaults apply only
+  to a wholly new project. Keep personal conventions outside the installed
+  Skill and reference them from `AGENTS.md` to preserve them across updates.
+  See the [customization guide](https://github.com/benjaminstelzer/scoville-code#your-own-conventions).
+- **Useful completion reports.** State changed behavior, validation, unresolved
+  failures and relevant repository state.
 
-- The complete contract is in [SKILL.md](https://github.com/benjaminstelzer/scoville-code/blob/main/scoville-code/SKILL.md).
+The complete contract is in [SKILL.md](https://github.com/benjaminstelzer/scoville-code/blob/main/scoville-code/SKILL.md).
 
 ## What it costs
 
@@ -55,10 +48,8 @@ remove code without turning every small change into a full audit.
 
 ## How it was developed
 
-- Developed through real engineering tasks and analysis of their complete histories.
-- Turned wrong-cause fixes, missed outcomes and repeated checks into instruction changes and regression cases.
-- Combined targeted simulations with optimization workflows, including SkillOpt.
-- Retained shorter instructions only when required behavior survived the tests.
+- Real engineering tasks and their histories supplied cases involving wrong-cause fixes, missed outcomes and repeated checks.
+- Targeted simulations and SkillOpt informed instruction revisions, with tests checking that required behavior survived.
 
 ## Compatibility
 
@@ -71,8 +62,7 @@ and check commands in a shell. Version control is optional. The Skill bundles
 no scripts and requires no network access. It was developed for Codex and
 Claude Code. Other hosts are untested.
 
-This Skill works on its own. Other Scoville Skills are optional and handle
-only their own concerns when available and applicable.
+This Skill works independently. Other Scoville Skills are optional.
 
 ## Install
 
@@ -110,19 +100,13 @@ Analyze this codebase for defects and hidden failure paths. Support findings wit
 
 ### Starting a new project
 
-Project instructions come first. Scoville Code uses its organization fallback
-only when you start a wholly new project, and only for choices your instructions
-have not already settled. Adding a module to an existing project is not a fresh
-start. Neither is a refactor or a missing naming rule.
-
-The defaults live in
+For a wholly new project, Scoville Code uses
 [`references/project-conventions.md`](scoville-code/references/project-conventions.md)
-inside the installed Skill. They follow the selected language and framework:
-Python modules, Angular components and PSR-4 classes have different naming
-rules for a reason. Where the ecosystem leaves the choice open, the fallback
-uses a small `src/`, `tests/`, `docs/` and `scripts/` layout. Directories appear
-when they have a purpose, not as an empty scaffold. Tests can live beside the
-code when the framework expects that.
+for choices the project instructions leave open. Its defaults follow the
+language and framework, with a small `src/`, `tests/`, `docs/` and `scripts/`
+layout where appropriate. Directories are added when needed; tests may sit
+beside code when the framework expects it. Existing projects retain their
+organization, including during refactors or module additions.
 
 ### Your own conventions
 
@@ -141,17 +125,12 @@ defaults only for choices neither source settles. Do not apply this
 fallback to additions or refactors in an existing project.
 ```
 
-Create the referenced file with your actual preferences. Relative paths resolve
-from the directory containing the referring `AGENTS.md`. A shared personal file
-can instead use an explicit absolute path available on that machine. The Skill
-does not search your computer for convention files. If the required file cannot
-be read, the agent reports that input gap before making dependent choices.
+Create the file with your conventions. Relative paths resolve from the
+referring `AGENTS.md`; a shared personal file can use an absolute path.
+The agent reads the explicitly referenced file and reports it if unavailable.
 
-Your file is maintained separately from the installed Skill, so replacing the
-Skill does not replace it. Project-specific instructions still take precedence
-over generic personal defaults unless you explicitly choose otherwise. Required
-framework paths and loading rules remain binding. Naming preferences do not
-grant new permissions or extend the fallback to existing projects.
+Keeping conventions outside the installed Skill preserves them across updates.
+Project-specific instructions and framework requirements still apply.
 
 ## Sources
 
