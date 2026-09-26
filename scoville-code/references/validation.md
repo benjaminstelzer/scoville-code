@@ -64,6 +64,11 @@ logging, production instrumentation, or a fault-injection framework.
 
 ## Handle failures
 
+Evaluate each check's own exit status and diagnostic. A later successful command
+must not hide an earlier failure. Run checks separately or stop the command group
+on failure. In PowerShell, inspect `$LASTEXITCODE` immediately after a native
+command; `$ErrorActionPreference` alone does not make native failures terminating.
+
 Classify a failed check before reacting. Treat it as caused by the change unless
 specific evidence shows it is pre-existing or environmental; fix what the
 change caused. Apply the core's integrity rule when changing assertions or

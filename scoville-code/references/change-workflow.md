@@ -82,6 +82,10 @@ Apply these Scoville defaults for navigable code:
 
 Do not restyle or reformat untouched code. Every changed hunk must support the
 outcome or a named risk.
+Preserve encoding and line endings outside the edited lines, including in mixed-
+ending files. A whitespace warning does not authorize whole-file normalization
+or a Git configuration change. Inspect the affected diff and fix only introduced
+defects; leave unrelated existing formatting alone.
 
 ## Handle dependencies and boundaries
 

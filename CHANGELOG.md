@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.0.1 - 2026-09-26
+
+- Preserve unrelated encoding and line endings during edits, and evaluate each validation command by its own exit status.
+
 ## v2.0.0 - 2026-09-25
 
 - Rename the Skill and installation directory to scoville-code.

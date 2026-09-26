@@ -24,8 +24,9 @@ remove code without turning every small change into a full audit.
   requested behavior. Producing them is not completion by itself.
 - **Canonical ownership.** The change fits the project's existing architecture,
   records, terminology, and workflow instead of creating a second owner.
-- **Proportionate risk.** Small reversible work stays small. Destructive,
-  public-facing, security, data, or release work receives stronger gates.
+- **Proportionate risk.** Small reversible work stays small. Checks follow
+  concrete failure risks. Broader security, migration or release gates apply
+  when the requested outcome or project rules require them.
 - **Evidence before claims.** Checks prove only what they observed. A failed
   tool is not silently promoted to a passing product.
 - **Root-cause correction.** The agent changes approach after repeated failure
@@ -141,7 +142,7 @@ fallback to additions or refactors in an existing project.
 ```
 
 Create the referenced file with your actual preferences. Relative paths resolve
-from the directory containing the referring `AGENTS.md`; a shared personal file
+from the directory containing the referring `AGENTS.md`. A shared personal file
 can instead use an explicit absolute path available on that machine. The Skill
 does not search your computer for convention files. If the required file cannot
 be read, the agent reports that input gap before making dependent choices.
