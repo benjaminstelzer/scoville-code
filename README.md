@@ -38,7 +38,8 @@ Here, the heat is the requested behavior and the evidence that it works, kept cl
   reversibility or scope. Resolve ordinary details from the project.
 - **Your conventions.** Project instructions take priority. Defaults apply only
   to a wholly new project. Keep personal conventions outside the installed
-  Skill and reference them from `AGENTS.md` to preserve them across updates.
+  Skill and reference them from `AGENTS.md` (Codex) or `CLAUDE.md` (Claude Code)
+  to preserve them across updates.
   See the [customization guide](https://github.com/benjaminstelzer/scoville-code#your-own-conventions).
 - **Useful completion reports.** State changed behavior, validation, unresolved
   failures and relevant repository state.
@@ -115,7 +116,8 @@ organization, including during refactors or module additions.
 You can edit the bundled reference, but a Skill update can replace that edit.
 For conventions you want to keep across updates, maintain a Markdown file
 outside the Skill installation and explicitly reference it in your global or
-project `AGENTS.md`. For example, with an `AGENTS.md` at the project root:
+project `AGENTS.md` (Codex) or `CLAUDE.md` (Claude Code). For example, add
+this to the applicable file at the project root:
 
 ```markdown
 ### Greenfield project conventions
@@ -128,7 +130,7 @@ fallback to additions or refactors in an existing project.
 ```
 
 Create the file with your conventions. Relative paths resolve from the
-referring `AGENTS.md`. A shared personal file can use an absolute path.
+referring `AGENTS.md` or `CLAUDE.md`. A shared personal file can use an absolute path.
 The agent reads the explicitly referenced file and reports it if unavailable.
 
 Project-specific instructions and framework requirements still apply.
