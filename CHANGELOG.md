@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.0.3 - 2026-09-27
+
+- Remove the blanket network-access claim from the compatibility description.
+
 ## v2.0.2 - 2026-09-27
 
 - Explain how to keep personal conventions in `AGENTS.md` for Codex or `CLAUDE.md` for Claude Code.
