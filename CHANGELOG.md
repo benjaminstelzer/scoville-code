@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.0.2 - 2026-09-27
+
+- Explain how to keep personal conventions in `AGENTS.md` for Codex or `CLAUDE.md` for Claude Code.
+
 ## v2.0.1 - 2026-09-26
 
 - Preserve unrelated encoding and line endings during edits, and evaluate each validation command by its own exit status.
