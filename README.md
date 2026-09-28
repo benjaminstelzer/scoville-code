@@ -8,7 +8,6 @@ Use it to develop, diagnose, review or remove code. It directs the agent to find
 the cause, respect the project's architecture and check the affected behavior
 with effort proportionate to the task.
 
-The name comes from the Scoville scale, which originally measured chili heat through dilution.
 Here, the heat is the requested behavior and the evidence that it works, kept clear through implementation and testing.
 
 ## How it works
@@ -98,7 +97,11 @@ Use Scoville Code to analyze this codebase for correctness, ownership and missin
 ```
 
 ```text
-Analyze this codebase for defects and hidden failure paths. Support findings with code evidence and keep the analysis read-only.
+Use Scoville Code to fix the failing checkout total when a coupon and free shipping combine. Find the cause, change the responsible code and verify the corrected case.
+```
+
+```text
+Use Scoville Code to add CSV export to the orders page. Follow the existing structure and verify the exported fields and values against a representative local test order.
 ```
 
 ### Starting a new project
@@ -134,6 +137,8 @@ referring `AGENTS.md` or `CLAUDE.md`. A shared personal file can use an absolute
 The agent reads the explicitly referenced file and reports it if unavailable.
 
 Project-specific instructions and framework requirements still apply.
+
+The name comes from the Scoville scale, which originally measured chili heat through dilution.
 
 ## Sources
 

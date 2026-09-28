@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.0.5 - 2026-09-28
+
+- Clarify the README presentation and keep the name explanation once per package.
+
 ## v2.0.4 - 2026-09-28
 
 - Scale safeguards to actual consequences and prefer the simplest sufficient failure handling.
