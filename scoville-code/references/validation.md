@@ -56,11 +56,16 @@ Unmet required acceptance remains open. Controlled fixtures remain valid when
 the behavior under test actually runs. Required evidence does not expand
 existing permissions.
 
-For a negative-path claim, establish that required preconditions completed,
-the intended target operation was reached and caused the failure, and relevant
-aftermath matches the contract. An existing unambiguous return, state, or call
-observation can supply this evidence; do not require universal counters,
-logging, production instrumentation, or a fault-injection framework.
+For an added or changed safeguard against a material failure, verify that valid
+use still succeeds and the claimed protection holds where the effect occurs.
+A prior check alone is insufficient when its result can become stale; for
+example, a checked path can change before deletion. For a negative-path claim,
+establish that required preconditions completed, the intended target operation
+was reached and caused the failure, and relevant aftermath matches the contract.
+Rejection at an earlier check does not prove protection at the claimed boundary.
+An existing unambiguous return, state, or call observation can supply this
+evidence; do not require universal counters, logging, production instrumentation,
+or a fault-injection framework.
 
 ## Handle failures
 

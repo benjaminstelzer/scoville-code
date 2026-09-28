@@ -118,12 +118,22 @@ work that depends on an unresolved material choice.
 
 ## Risk state
 
+Scale safeguards to who a failure affects, how promptly it is detected and how
+readily its effects can be reversed. Internal tooling is neither inherently
+harmless nor inherently critical; its actual consequences decide.
+Each added safeguard must address a requirement or a concrete failure mode;
+a plausible failure need not occur first. Choose the least complex response
+that meets the contract and protects against the material consequence. Prefer
+a clear failure and manual recovery when they are sufficient. Risk selects
+what to examine, not a preset amount of machinery.
+
 Select the first match:
 
 1. **High:** requested/current change involves authentication, authorization,
    payments, secrets, personal data, cryptography, migrations, destructive behavior, live
-   systems, durable external effects, or async fan-out/fan-in. Actual migrations
-   remain High, including audit/dry run; read-only limits action, not classification.
+   systems, durable external effects, or async fan-out/fan-in whose partial failure
+   can lose or duplicate durable external effects. Actual migrations remain High,
+   including audit/dry run; read-only limits action, not classification.
    Concrete planning or risk review for one of these operations also stays High
    when execution is deferred. Merely mentioning possible later work does not.
    Purely editorial work called a "migration" does not trigger High from that
@@ -167,6 +177,14 @@ Never accept:
 - advancing an operation, publishing its result, or acknowledging completion
   before its required durable state has been stored; or
 - a second owner/path that bypasses the canonical invariant.
+
+These rules forbid false completion; they do not require persistence, receipts
+or integrity proofs beyond the actual contract and failure consequences.
+If a later step fails, keep useful output available for manual recovery where
+practical and permitted by the contract. Report the failure and mark unsaved
+output as unsaved. Providing recovery output does not acknowledge completion
+or authorize downstream advancement or publication that requires durable state
+first.
 
 Preserve required safety, authentication, authorization, privacy, auditability,
 retention and policy guarantees. Do not weaken tests, validators or guards to
