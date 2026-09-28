@@ -45,9 +45,13 @@ or nearby code alone do not justify expansion.
   handling, comments, annotations, test style, and established module
   boundaries unless they conflict with the requested outcome, safety, or a
   binding contract. Name code for behavior, not novelty or history.
-- Implement the smallest maintainable, behavior-complete result. Avoid
-  speculative helpers, guards, flags, layers, compatibility paths, and nearby
-  cleanup.
+- Implement the smallest maintainable, behavior-complete result. For new
+  functionality, start with the simplest end-to-end implementation that delivers
+  the outcome and reports failures clearly. Avoid speculative helpers, guards,
+  flags, layers, compatibility paths, and nearby cleanup.
+- Implementation choices are not new requirements. Before adding safeguards
+  for states introduced by the design, consider removing those states while
+  preserving the original requirements and established guarantees.
 - Fix the evidenced root cause. Do not special-case a test or symptom.
 - Prefer existing dependencies and supported extension points.
 - Remove temporary diagnostics, placeholders, dead branches, and restatement
@@ -100,6 +104,11 @@ test or maintenance boundary. Whoever creates a resource owns or names its
 cleanup. Add retry, cancellation, or timeout machinery only when required by the
 request, an existing contract, or an observed failure.
 
+For agent-facing helpers, scripts and prompts, keep required inputs few, provide
+an invocation the agent can use directly, and make successful output usable by
+its intended consumer without repair. Errors identify the cause and a concrete
+next action, including expected formats or allowed values where relevant.
+
 Respect existing manifests, lockfiles, generators, and build entry points.
 Keep touched dependency versions traceable, and use syntax and APIs supported by
 the target runtime. Change a generator or hand-written source, not its output.
@@ -110,15 +119,23 @@ For a changed symbol or public behavior, locate directly affected callers,
 registrations, and test doubles. Cover each independently affected contract
 variant; one representative real consumer is sufficient when inspection finds
 only one variant. Do not inventory unrelated callers or neighboring modules.
-For stateful or async work, trace when data becomes durable and when completion
-is acknowledged. For destructive behavior, verify scope and reversibility
-before the action, not after it.
+Where the contract requires durable state, trace storage before completion is
+acknowledged. Persist what the actual workflow needs. Continuing from saved
+output does not by itself require persisted execution states or recovery
+commands. State or async execution alone does not require persistence.
+For destructive behavior, verify scope and reversibility before the action,
+not after it.
 
 ## Review implementation
 
 Prioritize findings in this order: safety or data loss; premature publication;
 lossy boundaries; duplicate owners or bypasses; misleading or silent failure;
-then maintainability problems and missing meaningful coverage.
+then maintainability problems and missing meaningful coverage. Flag safeguards
+without a requirement or concrete failure mode, or whose complexity is
+disproportionate to the protected consequences. When proposing safeguards, name
+the consequence that justifies them; a conceivable edge case alone is not a
+finding. Flag agent-facing errors that leave the caller without an actionable
+next step.
 
 For maintainability, reject line-count gaming, vague catch-all ownership, new
 dependency cycles, hidden global state, or separation that only spreads the

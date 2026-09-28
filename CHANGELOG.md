@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.0.4 - 2026-09-28
+
+- Scale safeguards to actual consequences and prefer the simplest sufficient failure handling.
+- Separate saved results from resumable execution, and keep useful recovery output available without claiming successful persistence.
+- Require meaningful safeguard checks at the affected boundary and actionable diagnostics.
+
 ## v2.0.3 - 2026-09-27
 
 - Remove the blanket network-access claim from the compatibility description.
