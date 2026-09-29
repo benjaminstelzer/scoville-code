@@ -81,8 +81,6 @@ own build, test and check commands in a shell. Version control is optional,
 and the Skill ships no scripts. It was developed for Codex and Claude Code.
 Other hosts haven't been tested.
 
-It works on its own. The other Scoville Skills are optional.
-
 This Skill works independently. Other Scoville Skills are optional.
 
 ## Install
