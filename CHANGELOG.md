@@ -1,8 +1,9 @@
 # Changelog
 
-## v2.0.5 - 2026-09-28
+## v2.0.6 - 2026-09-29
 
-- Clarify the README presentation and keep the name explanation once per package.
+- Check runtime and memory costs before and after implementation, including repeated searches, I/O and recursive work. Keep bounded quadratic work when suitable and prefer simpler alternatives before proposing a cache.
+- Use existing caches through their validity and isolation contracts. Ask before adding a new result cache unless already authorized, while allowing ordinary traversal-local indexes.
 
 ## v2.0.4 - 2026-09-28
 

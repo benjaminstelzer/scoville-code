@@ -116,6 +116,15 @@ meaningful cost or validation limit, accepts irreversible loss, or weakens
 integrity. Resolve harmless details locally. Ask one specific question before
 work that depends on an unresolved material choice.
 
+Before adding a cache, explain its concrete benefit, memory cost, validity and
+invalidation rules, and the simpler alternative. Obtain the user's decision
+unless existing authorization covers that cache; continue independent work.
+A local index or set for one traversal, without separate validity rules, is an
+ordinary implementation choice. A reused result store with its own validity
+rules needs this decision even if it lives only within one call. Changes to an
+existing cache contract follow the same material-choice and risk rules as other
+changes; the word "cache" alone does not raise the risk.
+
 ## Risk state
 
 Scale safeguards to who a failure affects, how promptly it is detected and how

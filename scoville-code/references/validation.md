@@ -17,6 +17,11 @@ Validation is sufficient when every independent changed behavior and material
 risk has decisive evidence and another check would not plausibly change the
 implementation or completion decision.
 
+For relevant unresolved runtime or memory costs, use realistic input sizes or
+a focused measurement that can decide between the alternatives. No universal
+benchmark suite is required. When cache use changes, check freshness,
+invalidation and context separation as applicable to that change.
+
 - **Explore:** Use the cheapest decisive observation. Add no regression, stress,
   repetition, or matrix work unless the hypothesis requires it.
 - **Develop:** Prefer an existing focused test, typecheck, lint, build, or direct
