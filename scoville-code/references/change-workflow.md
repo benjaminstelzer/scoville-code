@@ -40,6 +40,19 @@ or nearby code alone do not justify expansion.
 
 ## Implement for the outcome
 
+Before implementation, consider expected or explicitly assumed input sizes,
+call frequency, time and memory costs in the changed behavior and affected
+call paths. Look for nested traversals, repeated linear searches or I/O,
+branching recursion and repeated computation of the same subproblem. Compare
+simpler algorithms, suitable data structures and avoiding duplicate work before
+proposing a cache. Bounded O(n²) can be appropriate; asymptotic improvement
+alone does not justify extra complexity or memory.
+
+Use an existing cache only when its contract fits, through its canonical access
+path and with correct keys, context or tenant separation, lifetime and
+invalidation. Do not force cache use or add one for every task. The core's
+material-choice rule owns decisions about new caches.
+
 - Put behavior in its canonical owner and reuse the canonical pathway.
 - In existing code, follow project rules and surrounding naming, idioms, error
   handling, comments, annotations, test style, and established module
@@ -127,6 +140,11 @@ For destructive behavior, verify scope and reversibility before the action,
 not after it.
 
 ## Review implementation
+
+Apply the cost check from "Implement for the outcome" again to the actual
+resulting code. Check whether repeated work or a cheaper suitable alternative
+remains in the changed paths. Use Validation for relevant unresolved cost
+questions and cache-correctness evidence.
 
 Prioritize findings in this order: safety or data loss; premature publication;
 lossy boundaries; duplicate owners or bypasses; misleading or silent failure;
