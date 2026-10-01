@@ -8,8 +8,10 @@ Use it to write, debug, review or remove code. It has the agent find the
 actual cause, work within the project's architecture and check the affected
 behavior, with as much effort as the task deserves.
 
-The heat, in this case, is the behavior you asked for and the evidence that it
-works. Scoville Code keeps both clear through implementation and testing.
+The name comes from the Scoville scale, which originally measured chili heat
+through dilution. The heat, in this case, is the behavior you asked for and
+the evidence that it works. Scoville Code keeps both clear through
+implementation and testing.
 
 ## How it works
 
@@ -17,11 +19,12 @@ works. Scoville Code keeps both clear through implementation and testing.
   the check that will settle whether it works.
 - Read the relevant code, its callers and tests. Look further when the
   evidence calls for it.
-- Fix the cause, within the existing architecture and the scope you asked for.
-- Check runtime and memory costs before and after the change. Prefer simpler
+- Assess runtime and memory costs before the change. Prefer simpler
   algorithms and avoiding repeated work. Use suitable existing caches correctly
   and explain the tradeoff before asking you to approve a new one.
-- Check the changed behavior and report what the evidence actually proves.
+- Fix the cause, within the existing architecture and the scope you asked for.
+- Check the changed behavior, including runtime and memory costs, and report
+  what the evidence actually proves.
 - When something fails, investigate it without weakening guarantees. Change
   an outdated assertion only when a change to the expected behavior has been
   approved. After two failed fixes for the same cause, step back and reassess.
@@ -87,7 +90,7 @@ This Skill works independently. Other Scoville Skills are optional.
 
 ### Install this Skill
 
-This package works on its own. Ask your agent host:
+Ask your agent host:
 
 ```text
 Install this Skill for all my projects from this exact package directory:
@@ -157,8 +160,6 @@ referenced file and tells you if it can't find it.
 
 Project-specific instructions and framework requirements still apply.
 
-The name comes from the Scoville scale, which originally measured chili heat through dilution.
-
 ## Sources
 
 - [OpenAI coding-agent best practices](https://developers.openai.com/codex/learn/best-practices)
@@ -186,6 +187,7 @@ The name comes from the Scoville scale, which originally measured chili heat thr
 - [Plan](https://github.com/benjaminstelzer/scoville-plan) keeps Plans, Work Items, Decisions and their status in the repository.
 - [UI](https://github.com/benjaminstelzer/scoville-ui) covers UI implementation, information structure, accessibility and rendered checks, with an optional WordPress adapter.
 - [Handoff](https://github.com/benjaminstelzer/scoville-handoff) passes active work to another agent or session.
+- [Project Context Cleanup](https://github.com/benjaminstelzer/scoville-suite) keeps requested project rules and index text concise without losing required context.
 
 ## License
 
