@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.0.7 - 2026-10-01
+
+- Recognize Project Context Cleanup as the active owner for requested edits to project rules and index text. Keep engineering work within Code's existing scope.
+
 ## v2.0.6 - 2026-09-29
 
 - Check runtime and memory costs before and after implementation, including repeated searches, I/O and recursive work. Keep bounded quadratic work when suitable and prefer simpler alternatives before proposing a cache.

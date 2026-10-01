@@ -34,8 +34,11 @@ Family owners, in suite order:
 - `scoville-plan`: durable Plans, Work Items, Decisions, and lifecycle state.
 - `scoville-ui`: framework UI implementation and acceptance, including supported WordPress admin surfaces.
 - `scoville-handoff`: active-work transfer.
+- `scoville-project-context-cleanup`: requested project-rule and index wording, information quality and structure.
 
 Mentioning another Skill or using one of its labels does not activate it.
+
+
 
 Without Plan, use repository record owner and Code guardrails; invent no record
 system.
