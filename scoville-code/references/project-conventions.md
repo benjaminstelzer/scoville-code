@@ -33,6 +33,14 @@ framework chosen just to obtain a folder template. Consult the official guide
 for that stack when its conventions are needed. If it cannot be reached, use
 available authoritative local guidance and state any material uncertainty.
 
+For a wholly new project, choose the target runtime and compatible dependencies
+from the request and authoritative stack guidance, not just the locally installed
+version. An official initializer is optional when it fits. Follow the ecosystem's
+lockfile or pinning convention. Prefer native or existing checks before adding a
+test framework; provide one usable check for the changed behavior. Keep an
+existing README, or create one when needed, with actual prerequisites, setup,
+use/start and check commands.
+
 | Ecosystem | Convention and primary source |
 | --- | --- |
 | Python | Lowercase module names, underscores where useful, such as `invoice_parser.py`. Package names are short and lowercase. See [PEP 8](https://peps.python.org/pep-0008/#package-and-module-names). |

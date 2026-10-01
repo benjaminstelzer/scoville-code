@@ -59,13 +59,12 @@ result), **Owner** (canonical source), **Risk** (plausible introduced failure),
 | **Advise** | Answer, inspect, or report; edit only when asked. Purely conceptual answers need no reference. |
 | **Explore** | Test a hypothesis with cheapest decisive observation; add no production scaffolding/readiness claim. Retained experimental code becomes Develop. |
 | **Develop** | Deliver ordinary working behavior with focused validation. |
-| **Harden** | Apply broad release, migration, security, compatibility, or operational gates only when user, project, or concrete high-risk behavior requires them. |
+| **Harden** | Make a requested or project-required broad release, readiness, platform, migration, or security decision. High risk alone does not select broad gates. |
 
-Choose the mode from the requested outcome. A request to implement remains
-Develop while a decision or permission blocks its next action. Stop only the
-dependent work and ask. Advice, review, inspection and recording future work in
-a plan are Advise. Classifying future implementation may describe it as Develop
-without authorizing it. A central file, public API or suite alone escalates no mode.
+Choose the mode from the requested outcome. Implementation remains Develop while
+a decision or permission blocks its next action; stop only that dependent work.
+Advice, review and recording future work are Advise. Describing future work as
+Develop does not authorize it. A central file, public API or suite changes no mode.
 
 ## Select references for the current action
 
@@ -81,16 +80,14 @@ when the table selected no reference.
 | Choose, run or interpret checks; judge validation/completion evidence; select the next evidence action after repeated failure | [Validation](references/validation.md) |
 | Only classify future work or mention a later operation without performing or judging it | No reference from this table |
 
-Risk override: **Structural or High always adds Change**. This includes a
-classification-only answer and a task that forbids implementation inspection
-or editing. Reading Change supplies the risk rules; it does not authorize
-inspection, editing or execution.
+Risk override: **Structural or High adds Change**, even for classification only
+or an inspection ban. Reading it supplies risk rules, not permission to inspect,
+edit or execute.
 
-An unblocked Develop request includes implementation and focused acceptance:
-read Change and Validation. Merely asking to unblock implementation before
-inspection needs only this core, subject to the risk override. For a requested
-classification, distinguish the work's mode from its next action and report the
-final routes after that override.
+Unblocked Develop reads Change and Validation for implementation and focused
+acceptance. A request only to unblock work before inspection needs the core plus
+any risk override. For classification, distinguish future mode from the current
+action and report its final reference route.
 
 Combine routes only for operations actually performed or judged:
 - Recording future implementation in a plan does not activate its implementation
@@ -207,9 +204,12 @@ does not authorize abandoning a guarantee. Resolve unclear authority before
 the dependent change. Across boundaries preserve meaningful status, reason,
 error, source and validation semantics.
 
-Answer/diagnosis/audit/review authorizes read-only inspection only. For
-audit/review, report actionable correctness/impact; do not edit, stage, commit,
-or claim checks without request and evidence. Change authorizes only the
+Answer and audit authorize read-only inspection. Review and diagnosis may also
+run bounded local reproductions with known reversible effects and disposable
+test output, even outside ignored paths. None of these modes edits product
+files, stages or commits. Report actionable correctness/impact without claiming
+unrun checks. An explicit execution ban or an unauthorized durable/external
+effect blocks the check. Change authorizes only the
 smallest local reversible implementation plus proportionate checks - not
 publication/unrelated cleanup. Ask before adding a framework, runtime, service,
 paid integration, or security-sensitive dependency.

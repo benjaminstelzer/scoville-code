@@ -125,8 +125,15 @@ next action, including expected formats or allowed values where relevant.
 Respect existing manifests, lockfiles, generators, and build entry points.
 Keep touched dependency versions traceable, and use syntax and APIs supported by
 the target runtime. Change a generator or hand-written source, not its output.
+Before installing a newly needed direct package, verify its exact identity and
+intended source against official project documentation; reuse already verified
+evidence. A local runtime version alone does not choose the target version.
 Consolidate proven duplication in its canonical owner, but create no abstraction
 before a second real consumer or shared invariant exists.
+
+Trace relevant untrusted inputs to the operation they could affect and use a safe
+interface at that concrete boundary. External data alone does not make work
+High risk; classify the actual possible consequence.
 
 For a changed symbol or public behavior, locate directly affected callers,
 registrations, and test doubles. Cover each independently affected contract

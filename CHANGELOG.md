@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.0.8 - 2026-10-01
+
+- Keep the Change route for high-risk work even when the current request only classifies future work. Reading the route does not authorize implementation.
+- Allow bounded local diagnosis while keeping external or durable effects within the user's authorization. Run broad validation only when the task or project requires it.
+- Guide new projects through dependency identity, a usable README and focused checks without replacing an existing project's organization.
+
 ## v2.0.7 - 2026-10-01
 
 - Recognize Project Context Cleanup as the active owner for requested edits to project rules and index text. Keep engineering work within Code's existing scope.
@@ -18,10 +24,6 @@
 ## v2.0.3 - 2026-09-27
 
 - Remove the blanket network-access claim from the compatibility description.
-
-## v2.0.2 - 2026-09-27
-
-- Explain how to keep personal conventions in `AGENTS.md` for Codex or `CLAUDE.md` for Claude Code.
 
 ## v2.0.1 - 2026-09-26
 
