@@ -31,8 +31,8 @@ invalidation and context separation as applicable to that change.
   case passes after the fix.
 - **Structural or High:** Exercise the concrete material failure mode. Add
   broader checks only for the affected boundary or named risk.
-- **Harden:** Run project-owned release, platform, migration, security, or broad
-  suites once at the meaningful completion boundary.
+- **Harden:** Run the broad gate once for the requested completion decision or
+  binding project rule; the High label alone does not require it.
 
 Choose evidence scope as an exclusive decision:
 
@@ -125,16 +125,17 @@ the user expands scope.
 Before completion:
 
 1. confirm the observable outcome resides in the canonical owner;
-2. inspect every changed file and the complete scoped change;
+2. inspect changed authored content and the complete scoped diff once; for
+   generated output, inspect its source owner and affected consumer outputs;
 3. confirm every hunk supports the outcome or a named risk;
 4. confirm no integrity-floor failure was introduced; and
 5. state material unverified behavior or residual risk.
 
 For version-controlled work, inspect the complete scoped diff and working-tree
-state at the completion boundary. Further tests or inspections need the same
-named-question, changed-conditions or project-requirement justification above.
-After a correction, validate the affected behavior and inspect the resulting
-change. Keep the final completion claim tied to the actual final tree.
+state at completion. Reuse already reviewed unchanged bytes; revisit affected
+content after corrections and validate that behavior. Additional checks need a
+named open question, changed conditions or project requirement. Tie completion
+to the final tree.
 
 ## Report the evidence
 
