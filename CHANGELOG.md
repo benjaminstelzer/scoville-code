@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.0.9 - 2026-10-02
+
+- Keep fixes and validation proportionate to the requested result. Reassess repeated failed corrections and add caching only for a concrete benefit.
+- Let Handoff own explicitly requested continuation prompts when active, while keeping Code independently usable.
+
 ## v2.0.8 - 2026-10-01
 
 - Keep the Change route for high-risk work even when the current request only classifies future work. Reading the route does not authorize implementation.
