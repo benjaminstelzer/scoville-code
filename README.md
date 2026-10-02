@@ -1,78 +1,44 @@
 # Scoville Code
 
-A coding agent can produce passing tests while missing the behavior you asked
-for. Scoville Code connects the requested result, the existing implementation
-and the evidence that a change works.
+Passing tests are useful. Passing tests for the wrong behavior, rather less so.
+Scoville Code keeps implementation, debugging and review tied to the result you
+asked for: find the cause, work with the existing architecture and check what
+actually changed.
 
-Use it to write, debug, review or remove code. It has the agent find the
-actual cause, work within the project's architecture and check the affected
-behavior, with as much effort as the task deserves.
-
-The name comes from the Scoville scale, which originally measured chili heat
-through dilution. The heat, in this case, is the behavior you asked for and
-the evidence that it works. Scoville Code keeps both clear through
-implementation and testing.
+Scoville measures chili heat. Code aims for sharper reasoning before a small
+fix acquires its own framework.
 
 ## How it works
 
-- Before editing, pin down the outcome, the responsible code, the risks and
-  the check that will settle whether it works.
-- Read the relevant code, its callers and tests. Look further when the
-  evidence calls for it.
-- Assess runtime and memory costs before the change. Prefer simpler
-  algorithms and avoiding repeated work. Use suitable existing caches correctly
-  and explain the tradeoff before asking you to approve a new one.
-- Fix the cause, within the existing architecture and the scope you asked for.
-- Check the changed behavior, including runtime and memory costs, and report
-  what the evidence actually proves.
-- When something fails, investigate it without weakening guarantees. Change
-  an outdated assertion only when a change to the expected behavior has been
-  approved. After two failed fixes for the same cause, step back and reassess.
-- Look at the complete change, report what's still open, and stop checking
-  once more evidence wouldn't change the decision.
+- Establish the requested result and find the code responsible for it.
+- Fix the cause within the project's architecture and your authorized scope.
+- Check the affected behavior and relevant performance costs.
+- Reassess failed fixes, report remaining limits and stop when further checks
+  would no longer change the decision.
 
 ## What it enforces
 
-- **The requested result.** Plans, tests and refactors serve the outcome. The
-  task is only done when the behavior itself works.
-- **Project conventions.** Changes follow the project's architecture, records,
-  terminology and workflow.
-- **Proportionate checks.** Checks target concrete ways things could fail.
-  Broader security, migration or release checks happen when the task or the
-  project's rules call for them.
-- **Supported claims.** Reports keep observed results, failed checks and
-  unverified behavior apart.
-- **Root-cause correction.** If fixes keep failing, the approach gets
-  reassessed.
-- **Navigable code.** Changes follow existing conventions and module
-  boundaries. New projects start with a small layout organized by
-  responsibility. Source files are limited to 2,000 lines by default, with
-  room for justified exceptions.
-- **Necessary questions.** The agent asks when a choice affects behavior,
-  authority, cost, reversibility or scope. Ordinary details it settles from
-  the project itself.
-- **Your conventions.** Project instructions come first. The defaults only
-  apply to a brand-new project. To keep your own conventions across updates,
-  store them outside the installed Skill and reference them from `AGENTS.md`
-  (Codex) or `CLAUDE.md` (Claude Code).
-  See the [customization guide](https://github.com/benjaminstelzer/scoville-code#your-own-conventions).
-- **Useful completion reports.** The final report states what behavior
-  changed, how it was checked, which failures remain and the relevant
-  repository state.
+- **Work that serves the request.** Refactors, safeguards and tests need a
+  concrete purpose. The agent asks about material choices and settles routine
+  details from the project.
+- **Your conventions.** Existing architecture and project rules take precedence.
+  New projects start with a small structure organized by responsibility.
+- **Evidence that fits the change.** Check the behavior, preserve guarantees and
+  distinguish observed results from what remains unverified.
 
-The full instructions are in [SKILL.md](https://github.com/benjaminstelzer/scoville-code/blob/main/scoville-code/SKILL.md).
+Keep personal conventions outside the installed Skill so updates preserve them.
+See the [customization guide](https://github.com/benjaminstelzer/scoville-code#your-own-conventions)
+and [full instructions](https://github.com/benjaminstelzer/scoville-code/blob/main/scoville-code/SKILL.md).
 
 ## What it costs
 
-- Reading the code and running checks costs more tokens and time than
-  patching right away.
+- Reading relevant code and checking behavior takes tokens and time. The extra work is aimed at avoiding fixes that merely look finished.
 
 ## How it was developed
 
-- The cases come from real engineering tasks and their histories: fixes aimed
-  at the wrong cause, missed outcomes and checks that ran again and again.
-- Targeted simulations and SkillOpt fed into the revisions of the
-  instructions, and tests made sure the required behavior survived them.
+The cases come from real engineering tasks: wrong-cause fixes, missed outcomes
+and checks repeated without new information. They shaped the focus on useful
+evidence. Selected comparisons do not establish a general performance gain.
 
 ## Compatibility
 

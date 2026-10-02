@@ -38,8 +38,6 @@ Family owners, in suite order:
 
 Mentioning another Skill or using one of its labels does not activate it.
 
-
-
 Without Plan, use repository record owner and Code guardrails; invent no record
 system.
 
@@ -59,7 +57,7 @@ result), **Owner** (canonical source), **Risk** (plausible introduced failure),
 | **Advise** | Answer, inspect, or report; edit only when asked. Purely conceptual answers need no reference. |
 | **Explore** | Test a hypothesis with cheapest decisive observation; add no production scaffolding/readiness claim. Retained experimental code becomes Develop. |
 | **Develop** | Deliver ordinary working behavior with focused validation. |
-| **Harden** | Make a requested or project-required broad release, readiness, platform, migration, or security decision. High risk alone does not select broad gates. |
+| **Harden** | Make a requested or project-required broad release, readiness, platform, migration, or security decision. Risk alone does not select broad gates. |
 
 Choose the mode from the requested outcome. Implementation remains Develop while
 a decision or permission blocks its next action; stop only that dependent work.
@@ -68,45 +66,19 @@ Develop does not authorize it. A central file, public API or suite changes no mo
 
 ## Select references for the current action
 
-First choose the mode from the requested outcome. Then use the table to select
-references for the current authorized action. Exclude blocked or separately
-deferred actions. Finally apply the risk override below; it can add Change even
-when the table selected no reference.
+Load references for the work actually performed or judged, within existing
+permissions. A future task or a risk label adds no reading requirement.
 
 | Current operation | Required reference |
 | --- | --- |
-| Create or change Plan/Decision representation, lifecycle or sequencing; coordinate dependent outcomes with material interruption risk; prepare a durable handoff; or resolve a material choice still open after inspection | [Planning](references/planning-and-decisions.md) |
-| Explore or change code; locate ownership or root cause; review implementation or a patch | [Change](references/change-workflow.md) |
-| Choose, run or interpret checks; judge validation/completion evidence; select the next evidence action after repeated failure | [Validation](references/validation.md) |
-| Only classify future work or mention a later operation without performing or judging it | No reference from this table |
+| Change planning records, coordinate dependent outcomes across interruption, preserve engineering continuation state, or resolve a material choice left open by inspection | [Planning](references/planning-and-decisions.md) |
+| Explore or change code, locate ownership or root cause, or review implementation | [Change](references/change-workflow.md) |
+| Choose, run or interpret checks, or judge completion evidence | [Validation](references/validation.md) |
 
-Risk override: **Structural or High adds Change**, even for classification only
-or an inspection ban. Reading it supplies risk rules, not permission to inspect,
-edit or execute.
-
-Unblocked Develop reads Change and Validation for implementation and focused
-acceptance. A request only to unblock work before inspection needs the core plus
-any risk override. For classification, distinguish future mode from the current
-action and report its final reference route.
-
-Combine routes only for operations actually performed or judged:
-- Recording future implementation in a plan does not activate its implementation
-  or validation. Keep one behavior-complete lifecycle item per observable
-  outcome, owner and acceptance boundary. Implementation and documentation are
-  subordinate steps, focused tests are evidence.
-- A resolved ownership contract for a bounded implementation choice, or a
-  bounded patch review about durability, needs Change unless a Planning row
-  independently applies. Asking whether to record a choice does not itself
-  request record representation or mutation.
-- Repeated-failure evidence needs Validation. Add Planning only if inspection
-  leaves a material implementation choice unresolved. Reviewing reported
-  evidence alone is Normal unless supplied facts establish Structural or High.
-  Related-code changes alone neither establish Structural risk nor add Change
-  without implementation, ownership or root-cause inspection.
-- Read-only or no-edit limits do not add a separate authorization judgment.
-
-Read every selected reference before acting or judging, including advice-only
-answers. If unavailable, obtain its text rather than infer it from this core.
+Implementation normally needs Change and Validation. Combine other routes only
+for work actually required. Recording future work does not authorize its
+implementation or require its validation route. If a needed reference is
+unavailable, obtain its text before the dependent work.
 
 ## Resolve material choices
 
@@ -116,52 +88,30 @@ meaningful cost or validation limit, accepts irreversible loss, or weakens
 integrity. Resolve harmless details locally. Ask one specific question before
 work that depends on an unresolved material choice.
 
-Before adding a cache, explain its concrete benefit, memory cost, validity and
-invalidation rules, and the simpler alternative. Obtain the user's decision
-unless existing authorization covers that cache; continue independent work.
-A local index or set for one traversal, without separate validity rules, is an
-ordinary implementation choice. A reused result store with its own validity
-rules needs this decision even if it lives only within one call. Changes to an
-existing cache contract follow the same material-choice and risk rules as other
-changes; the word "cache" alone does not raise the risk.
+Support older formats or interfaces only for an established requirement or
+evidenced affected use. If a change breaks actual compatibility and the support
+decision is unresolved, ask before that change. Do not invent old consumers or
+silently add fallback paths. Existing authorization for the change remains valid.
 
-## Risk state
+## Failure consequences
 
 Scale safeguards to who a failure affects, how promptly it is detected and how
 readily its effects can be reversed. Internal tooling is neither inherently
 harmless nor inherently critical; its actual consequences decide.
-Each added safeguard must address a requirement or a concrete failure mode;
-a plausible failure need not occur first. Choose the least complex response
-that meets the contract and protects against the material consequence. Prefer
-a clear failure and manual recovery when they are sufficient. Risk selects
-what to examine, not a preset amount of machinery.
+Add a safeguard only for a requirement or credible failure consequence that
+the existing failure behavior does not adequately cover. Assess the consequence
+and why a visible failure is insufficient internally; explain them in a review
+finding when relevant. A plausible failure need not occur first. If a native
+exception or failed command already surfaces clearly without
+material harm or a broken guarantee, use that failure path. Choose the simplest
+response that meets the contract. Risk selects what to examine, not a preset
+amount of machinery.
 
-Select the first match:
+Name the concrete failure and affected boundary, such as lost data,
+unauthorized access, incompatible output or duplicated external effects.
+Component names and categories alone justify neither broader investigation nor
+additional safeguards. Preserve required guarantees even for internal tooling.
 
-1. **High:** requested/current change involves authentication, authorization,
-   payments, secrets, personal data, cryptography, migrations, destructive behavior, live
-   systems, durable external effects, or async fan-out/fan-in whose partial failure
-   can lose or duplicate durable external effects. Actual migrations remain High,
-   including audit/dry run; read-only limits action, not classification.
-   Concrete planning or risk review for one of these operations also stays High
-   when execution is deferred. Merely mentioning possible later work does not.
-   Purely editorial work called a "migration" does not trigger High from that
-   label alone. Classify its actual affected behavior under these rules.
-2. **Structural:** absent High, the change materially alters ownership,
-   coupling, boundary semantics, serialization, persistence, state progression,
-   orchestration, or failure behavior.
-3. **Normal:** neither applies.
-
-Persistence or state-progression change is Structural unless High. "Durable
-external effects" means irreversible or production/user-facing effects, not
-every non-live persistence audit. Changing consumed representation or partition
-dimensions of a cache key, identifier, serialized value, or protocol field is a
-Structural boundary change. Internal rewrite preserving that representation and
-consumer contract is Normal.
-
-Never infer risk from operation names/component nouns. Touching a central file,
-API, command, cache, queue, or boundary sets no flag; name the concrete failure.
-Classification-only without a concrete trigger is Normal.
 Treat responsibility growth, mode creep, speculative abstraction, tests that
 mirror implementation and scaffolding as review signals, not automatic blockers.
 Address introduced or worsened problems. Mention unrelated findings only when
@@ -189,11 +139,11 @@ Never accept:
 
 These rules forbid false completion; they do not require persistence, receipts
 or integrity proofs beyond the actual contract and failure consequences.
-If a later step fails, keep useful output available for manual recovery where
-practical and permitted by the contract. Report the failure and mark unsaved
-output as unsaved. Providing recovery output does not acknowledge completion
-or authorize downstream advancement or publication that requires durable state
-first.
+If a later step fails, do not unnecessarily discard useful output already
+produced and permitted to be retained. This creates no requirement for
+checkpoints, resume features or additional persistence. Report the failure and
+mark unsaved output as unsaved. Recovery output does not acknowledge completion
+or authorize advancement or publication that requires durable state first.
 
 Preserve required safety, authentication, authorization, privacy, auditability,
 retention and policy guarantees. Do not weaken tests, validators or guards to

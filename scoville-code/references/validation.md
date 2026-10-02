@@ -29,27 +29,21 @@ invalidation and context separation as applicable to that change.
   behavior or a material invariant in the project's existing harness.
 - **Defect:** Reproduce the reported failure when practical, then prove the same
   case passes after the fix.
-- **Structural or High:** Exercise the concrete material failure mode. Add
-  broader checks only for the affected boundary or named risk.
-- **Harden:** Run the broad gate once for the requested completion decision or
-  binding project rule; the High label alone does not require it.
 
-Choose evidence scope as an exclusive decision:
-
-1. Use a broad release, readiness, platform, or migration gate only when the
-   current task makes that completion decision or a binding project rule
-   requires it.
-2. Otherwise prove each specific changed behavior and affected boundary with
-   the narrowest decisive check.
-3. Risk selects the failure mode to exercise; it never widens scope by itself.
+Use a broad release, readiness, platform or migration gate only when the task
+makes that completion decision or a binding project rule requires it. Otherwise
+exercise each changed behavior and concrete material failure with the narrowest
+decisive check. Risk alone does not expand the task.
 
 When a change alters a symbol used elsewhere, exercise each independently
 affected contract variant; one affected use is sufficient when inspection finds
 only one variant. Tests that mirror implementation without protecting behavior
 are not proof.
-For an affected boundary contract, derive expectations from the agreed contract
-or an independently implemented actual consumer. A constant copied by both
-sides or the producer's own round trip does not establish compatibility.
+For every behavior test, derive expected results from the requested behavior
+or an independent contract, not solely from the implementation being checked.
+An independently implemented actual consumer can establish boundary expectations.
+A constant copied by both sides or the producer's own round trip does not
+establish compatibility.
 Controlled deterministic checks remain sufficient for behavior that does not
 claim such a boundary.
 
@@ -103,13 +97,19 @@ requires it. Name the expected evidence. Unchanged repetition without new
 information is not justified. Concurrency, stochastic or flaky behavior can
 require repeated observations when tied to the actual claim.
 
-If two consecutive correction
-attempts fail to fix the same check, or verified findings after both attempts show
-the same causal mechanism still violates the affected contract, stop patching
-and re-read the owner, contract, and evidence. Then change the approach or narrow
-the change without weakening required acceptance. Different reproductions or
-passing existing checks do not reset this trigger. Similar symptoms alone do not
-establish a shared cause.
+Do not repeat a failed correction strategy unless new evidence or changed
+conditions support the next attempt. If the same cause persists or the diagnosis
+is unsupported, return to the owner, contract and evidence before patching again.
+A new symptom-specific patch is not a new approach. Without a supported next
+approach, stop that repair path, report the blocker and continue independent
+work. Do not weaken acceptance or bypass host attempt limits. New evidence that
+identifies a bounded cause can justify a focused correction.
+
+After two unsuccessful corrections of the same failure or evidenced cause,
+reassess the owner, contract and evidence before another patch. Different
+reproductions, new failure output or passing existing checks do not reset this
+checkpoint. New output supports a next attempt only when it changes or
+substantiates the causal explanation.
 
 After decisive evidence passes, run no broader or similar check for that behavior
 unless a separate changed behavior, named risk, or binding requirement remains.
@@ -122,20 +122,12 @@ the user expands scope.
 
 ## Inspect the final change
 
-Before completion:
-
-1. confirm the observable outcome resides in the canonical owner;
-2. inspect changed authored content and the complete scoped diff once; for
-   generated output, inspect its source owner and affected consumer outputs;
-3. confirm every hunk supports the outcome or a named risk;
-4. confirm no integrity-floor failure was introduced; and
-5. state material unverified behavior or residual risk.
-
-For version-controlled work, inspect the complete scoped diff and working-tree
-state at completion. Reuse already reviewed unchanged bytes; revisit affected
-content after corrections and validate that behavior. Additional checks need a
-named open question, changed conditions or project requirement. Tie completion
-to the final tree.
+Inspect the final scoped diff and repository state. Confirm that the outcome
+resides in its canonical owner, each hunk serves the request or a named risk,
+and required guarantees and acceptance remain intact. For generated output,
+inspect the source owner and affected consumer output. Reuse reviewed unchanged
+content and evidence; revisit affected content after a correction. Tie completion
+to the final tree and report material unverified behavior.
 
 ## Report the evidence
 

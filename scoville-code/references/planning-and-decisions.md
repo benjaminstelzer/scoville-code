@@ -66,9 +66,15 @@ continue only independent authorized work.
 
 ## Hand off and resume
 
-A durable handoff contains only the requested outcome, binding constraints,
-current state, decisive evidence, next concrete step, and any material decision
-not already recorded canonically.
+When Scoville Handoff is active for an explicit transfer, it owns the
+continuation prompt and its required contents. The summary below does not
+restrict that prompt.
+
+For existing project records, or a requested handoff when Scoville Handoff is
+inactive, retain the requested outcome, binding constraints, current state,
+decisive evidence, next concrete step, and any material decision not already
+recorded canonically. This requires neither another Skill nor a new record
+system.
 
 On resume, treat the handoff as a snapshot rather than current truth: re-read
 applicable instructions, inspect repository and plan state, and reconcile any
