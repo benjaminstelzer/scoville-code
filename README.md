@@ -42,17 +42,11 @@ evidence. Selected comparisons do not establish a general performance gain.
 
 ## Compatibility
 
-Use a frontier model from the Fable, Astra, SOL or Opus families, version 5.0
-or newer. Luna was also used in testing.
-
-The host has to be able to read the Skill's references and run the project's
-own build, test and check commands in a shell. Version control is optional,
-and the Skill ships no scripts. It was developed for Codex and Claude Code.
-Other hosts haven't been tested.
-
-This Skill works independently. Other Scoville Skills are optional.
+Developed for Codex and Claude Code with access to the Skill's references and a shell for the project's own checks. Use a Fable, Astra, SOL or Opus model (5.0+).
 
 ## Install
+
+This Skill works independently. Other Scoville Skills are optional.
 
 ### Install this Skill
 
