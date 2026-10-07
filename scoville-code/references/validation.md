@@ -125,12 +125,16 @@ reproductions, new failure output or passing existing checks do not reset this
 checkpoint. New output supports a next attempt only when it changes or
 substantiates the causal explanation.
 
-After decisive evidence passes, retain the required evidence once and
+After decisive evidence passes, record the concise result once and
 continue the requested development or complete the task. Add no checks,
 independent reviews or bookkeeping unless a separate changed behavior,
 unresolved material risk or binding requirement remains. Group required
 reviews at the completed boundary of their scope, not after each edit or
 tool result, unless their protocol requires an earlier review.
+Reviews serve assessment and correction during development. Do not permanently
+store their texts, raw test logs or a complete check history by default. Keep
+only results and open limits needed for further development, plus independently
+required records.
 An earlier aggregate pass becomes stale when related production code or tests
 change afterward; rerun the smallest aggregate check covering the final tree or
 narrow the completion claim.

@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.1.1 - 2026-10-07
+
+- Keep Instructions and Evidence focused on future work. Remove duplicated Steps and review transcripts, and handle routine Plan closure without another bookkeeping worker.
+- Check complete text before large reads and preserve Python launcher arguments when invoking the size checker.
+
 ## v2.1.0 - 2026-10-07
 
 - Keep development ahead of bookkeeping and stop validation after decisive evidence unless a changed behavior or concrete concern calls for more.
