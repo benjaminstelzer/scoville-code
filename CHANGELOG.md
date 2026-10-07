@@ -1,5 +1,12 @@
 # Changelog
 
+## v2.1.0 - 2026-10-07
+
+- Keep development ahead of bookkeeping and stop validation after decisive evidence unless a changed behavior or concrete concern calls for more.
+- Test observable results. Use source-content checks only for an actual external contract, not to freeze incidental instruction wording.
+- Preserve complete text through compaction or a hashed temporary file when it exceeds the known output limit. Offer the separate manual helper procedure only without Python.
+- Follow the applicable Codex or Claude Code project rules without copying rules between hosts.
+
 ## v2.0.9 - 2026-10-02
 
 - Keep fixes and validation proportionate to the requested result. Reassess repeated failed corrections and add caching only for a concrete benefit.

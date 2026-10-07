@@ -42,11 +42,13 @@ not treat every checkpoint as a new task.
 
 ## Record material decisions
 
-Use the core's material-choice criteria.
+Use the criteria in SKILL.md's Resolve material choices section.
 
 Record a material decision in the project's existing plan, ADR, decision log,
 authorized commit, or pull-request mechanism. When none exists, preserve it in a
 handoff only if future work depends on it. Do not invent a durable record system.
+Retain the decision's source and status so a later agent can distinguish
+authorization from an observed result.
 When `scoville-plan` is already independently available and applicable, it owns
 canonical Plan, Work Item, and Decision mutation; this reference supplies only
 Code's implementation analysis. This mention does not require loading or
@@ -56,7 +58,7 @@ repository's existing owner and do not require or simulate Scoville Plan.
 ## Resolve decision ambiguity
 
 For ordinary details, choose the smallest reversible option that preserves the
-outcome. For an unresolved material choice, follow the core's question rule.
+outcome. For an unresolved material choice, follow the question rule in SKILL.md's Resolve material choices section.
 
 Do independent work first, then ask one specific question before dependent work.
 In unattended work, assumptions may resolve only harmless details or choices

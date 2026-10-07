@@ -47,6 +47,20 @@ establish compatibility.
 Controlled deterministic checks remain sufficient for behavior that does not
 claim such a boundary.
 
+Test required outcomes and behavior. Check source material only to protect a
+technical contract that exists independently of the test and that an actual
+program, build or host interface depends on, such as a parsed format, required
+package or import structure, or agreement between version declarations that
+consumers read. Compare changing values with their owner or each other instead
+of pinning their current values. Prose read as instructions, documentation or
+diagnostics is not such a contract; test its effect through behavior. Exact
+comparisons remain appropriate for complete unchanged data transfer and
+generated artifacts checked against their current canonical owner. For
+diagnostics, check failure status, the identified input or condition, required
+corrective information and the corrected invocation, not sentence wording.
+Assert exact prose only when the user explicitly requires that text. Preserve
+the required outcome when replacing a wording assertion with a behavior check.
+
 A stub, mock, or hand-built fixture can support only the behavior actually
 exercised. If a claim depends on a dependency's behavior or a producer-consumer
 interaction replaced by the test, exercise that boundary with the actual
@@ -75,7 +89,7 @@ command; `$ErrorActionPreference` alone does not make native failures terminatin
 
 Classify a failed check before reacting. Treat it as caused by the change unless
 specific evidence shows it is pre-existing or environmental; fix what the
-change caused. Apply the core's integrity rule when changing assertions or
+change caused. Apply the integrity rule in SKILL.md's Scope, integrity, and authority section when changing assertions or
 validators: distinguish an explicitly replaced contract from an unmet one.
 
 For infrastructure failure, use the project's documented setup when relevant.
@@ -111,8 +125,12 @@ reproductions, new failure output or passing existing checks do not reset this
 checkpoint. New output supports a next attempt only when it changes or
 substantiates the causal explanation.
 
-After decisive evidence passes, run no broader or similar check for that behavior
-unless a separate changed behavior, named risk, or binding requirement remains.
+After decisive evidence passes, retain the required evidence once and
+continue the requested development or complete the task. Add no checks,
+independent reviews or bookkeeping unless a separate changed behavior,
+unresolved material risk or binding requirement remains. Group required
+reviews at the completed boundary of their scope, not after each edit or
+tool result, unless their protocol requires an earlier review.
 An earlier aggregate pass becomes stale when related production code or tests
 change afterward; rerun the smallest aggregate check covering the final tree or
 narrow the completion claim.

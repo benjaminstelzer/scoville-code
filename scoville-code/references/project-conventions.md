@@ -14,9 +14,9 @@ Use the chosen language or framework's official conventions for remaining
 choices. Use the general fallback below only where that ecosystem leaves the
 choice open. There is no single industry-standard tree or casing for all stacks.
 
-If the already applicable global or project `AGENTS.md` explicitly directs you
+If the already applicable global or project `AGENTS.md` or `CLAUDE.md` explicitly directs you
 to a user conventions file, read that exact file. Resolve a relative path from
-the directory containing that `AGENTS.md`. Do not search for personal files or
+the directory containing that `AGENTS.md` or `CLAUDE.md`. Do not search for personal files or
 treat an incidental path mention as an instruction. The file can customize
 organization and naming, but cannot change task permissions, technical loading
 requirements or the complete-greenfield boundary. Project-specific instructions
@@ -39,7 +39,7 @@ version. An official initializer is optional when it fits. Follow the ecosystem'
 lockfile or pinning convention. Prefer native or existing checks before adding a
 test framework; provide one usable check for the changed behavior. Keep an
 existing README, or create one when needed, with actual prerequisites, setup,
-use/start and check commands.
+usage, startup and check commands.
 
 | Ecosystem | Convention and primary source |
 | --- | --- |
@@ -76,7 +76,7 @@ boundary. Name files for their contents and tests for the behavior or source
 they cover. Follow the selected test framework's naming and discovery rules.
 
 For freely chosen general directories and documents, use descriptive English
-`kebab-case` names. Language/module/class files retain their ecosystem's casing
+`kebab-case` names. Files for languages, modules and classes retain their ecosystem's casing
 and separators. Preserve conventional names such as `README.md`. Avoid spaces,
 platform-reserved names and paths distinguished only by case. Do not use
 `new`, `final`, numbered fragments or backup suffixes instead of clear ownership
