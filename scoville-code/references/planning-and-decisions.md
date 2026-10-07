@@ -40,6 +40,15 @@ with the item that owns the behavior.
 Continue to the next authorized in-scope item when its dependencies are met; do
 not treat every checkpoint as a new task.
 
+Keep records only for further development: the current result, remaining work,
+binding constraints and material decisions. In native Plan records, Steps own
+actions; Instructions add only conditions absent from Steps, never a prose
+duplicate. Record accepted results during normal closure, without separate
+bookkeeping work or reviews.
+Reviews serve development; record that a required review occurred, but do not
+archive its text or reconstruct a complete project history. Use the existing
+planning owner's explicit maintenance route when asked to clean up old records.
+
 ## Record material decisions
 
 Use the criteria in SKILL.md's Resolve material choices section.

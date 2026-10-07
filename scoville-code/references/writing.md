@@ -13,12 +13,20 @@ Never truncate text, including command and combined tool output. Apply only
 declared or explicitly selected output limits. If none applies to this result
 channel, do not invent a limit or require a numeric size check. A known inner
 or outer limit still applies; check the complete combined output against the
-smallest applicable limit.
+smallest applicable limit. Apply this before the first file read that emits
+potentially large text, including an assignment received by file path. Checking
+the size does not emit the file. For a read, use the checker's size and
+recommended_max_utf8_bytes, not its compaction or publication instruction. Read
+the unchanged text in ordered, character-safe portions within that byte budget,
+including output labels. Do not alter or copy the input, first request an
+oversized full read, or recover omitted text after truncation.
 
-Native Codex Ask advisers and Workflow children may discover the interpreter,
-run the text-size and complete-file publication commands, and prepare temporary
-complete artifacts under the project's `.scoville/temp` only when needed to
-deliver an oversized answer or handoff. Among these roles, reviewers must not
+Native Codex Ask advisers and Workflow children may discover the interpreter and
+run the named text-size checker before reading potentially large text, including
+when the interpreter and checker are outside the workspace. For necessary
+oversized-answer or handoff delivery only, they may also run complete-file
+publication commands and prepare temporary complete artifacts under the project's
+`.scoville/temp`. Among these roles, reviewers must not
 execute tests or change project files beyond these delivery artifacts. This
 exception permits no other project writes and does not override host tool
 restrictions or Workflow ownership and takeover gates.
@@ -26,9 +34,10 @@ restrictions or Workflow ownership and takeover gates.
 Capture potentially large command output in full without displaying it. Before
 emitting large text, check the complete planned output, including combined
 results and labels. Invoke the verified Python interpreter with the following
-arguments, preserving each quoted path as one argument. In PowerShell, use `&`
-before a quoted executable path:
-`"<verified-python>" "<skill-directory>/scripts/check_text_size.py" --file "<text>" --max-output-tokens <limit>`,
+arguments, preserving each quoted path as one argument. Keep a launcher such as
+`py -3` as two unquoted tokens. Quote an executable path; in PowerShell, prefix
+that quoted path with `&`:
+`<verified-python> "<skill-directory>/scripts/check_text_size.py" --file "<text>" --max-output-tokens <limit>`,
 using the smallest applicable declared or explicitly overridden output limit.
 If the conservative budget is exceeded, compact wording and remove only
 irrelevant material while preserving required facts and safeguards. If it still
@@ -72,9 +81,12 @@ before jargon. Avoid slash chains in prose; preserve literal paths, commands,
 field names and other technical syntax.
 
 Keep each rule at its responsible source. Remove repetition and low-value
-maintenance detail, not required context or safeguards. Omit history that no
-longer affects the work; preserve required historical records in their canonical
-location. A TL;DR cannot replace necessary explanation. Use paragraphs, lists or
+maintenance detail, not required context or safeguards. Keep records only when
+needed for further development or an independently binding requirement. Reviews
+serve development; do not archive their text. A concise record that a required
+review occurred is sufficient. Do not reconstruct a complete project history,
+duplicate Steps as prose, or create documentation solely to prove bookkeeping.
+A TL;DR cannot replace necessary explanation. Use paragraphs, lists or
 a compact diagram when they clarify the decision; preserve useful diagrams.
 
 For longer work, briefly report meaningful findings and next actions. Make the
