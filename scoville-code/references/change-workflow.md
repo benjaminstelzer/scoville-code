@@ -57,7 +57,7 @@ alone does not justify extra complexity or memory.
 Use an existing cache only when its contract fits, through its canonical access
 path and with correct keys, context or tenant separation, lifetime and
 invalidation. Add a cache only for a concrete benefit that justifies its state,
-memory and validity rules. Apply the core's ordinary material-choice rule when
+memory and validity rules. Apply SKILL.md's Resolve material choices section when
 its behavioral or cost tradeoff needs a user decision.
 
 - Put behavior in its canonical owner and reuse the canonical pathway.
@@ -68,7 +68,7 @@ its behavioral or cost tradeoff needs a user decision.
 - Implement the smallest maintainable, behavior-complete result. For new
   functionality, start with the simplest end-to-end implementation that delivers
   the outcome and lets failures surface. Additional checks or error handling
-  must meet the core's safeguard rule; an existence check before an operation
+  must meet the safeguard rule in SKILL.md's Failure consequences section; an existence check before an operation
   that already fails clearly or a catch that only rethrows adds no protection.
   Avoid speculative helpers, guards, flags, layers, compatibility paths, and
   nearby cleanup.
@@ -88,7 +88,7 @@ real concepts or reuse. Add reusable frameworks, extension points and
 configurable variants only for a concrete current need. Do not split code merely
 to meet a size metric or spread unchanged coupling across more files. A narrow
 fix does not authorize a broad refactor. Existing projects keep their
-organization; the core routes wholly new projects to ecosystem guidance.
+organization; SKILL.md routes wholly new projects to ecosystem guidance.
 
 Do not restyle or reformat untouched code. Every changed hunk must support the
 outcome or a named risk.
@@ -99,7 +99,7 @@ defects; leave unrelated existing formatting alone.
 
 ## Handle dependencies and boundaries
 
-Apply the core's integrity rules at every affected boundary. Keep validation,
+Apply the rules in SKILL.md's Scope, integrity, and authority section at every affected boundary. Keep validation,
 authorization, persistence and publication in their canonical layers.
 
 Keep dependency direction visible. Add no cycle or shortcut into another
@@ -108,8 +108,7 @@ and domain rules out of generic infrastructure helpers. Give mutable state a
 clear owner, and separate I/O from deterministic domain logic only at a real
 test or maintenance boundary. Whoever creates a resource owns or names its
 cleanup. Add retry, cancellation, or timeout machinery only when required by the
-request, an existing contract, or a credible failure consequence under the core's
-safeguard rule. A failed attempt alone does not justify adding retries.
+request, an existing contract, or a credible failure consequence under the safeguard rule in SKILL.md's Failure consequences section. A failed attempt alone does not justify adding retries.
 
 For agent-facing helpers, scripts and prompts, keep required inputs few, provide
 an invocation the agent can use directly, and make successful output usable by
@@ -153,8 +152,8 @@ Judge the change against the requested behavior, established guarantees and
 authorized scope. A review with no findings is complete; finding a different
 possible implementation is not evidence of a defect.
 
-Prioritize concrete safety, data-loss and correctness consequences. Apply the
-core's safeguard rule to both added and missing protection. For an unnecessary
+Prioritize concrete safety, data-loss and correctness consequences. Apply
+the safeguard rule in SKILL.md's Failure consequences section to both added and missing protection. For an unnecessary
 mechanism, identify its lack of a required purpose, its added work, state,
 supported variants or maintenance burden, and the smallest removal. This is a
 scope or maintainability finding, not an invitation to add hardening. For missing
