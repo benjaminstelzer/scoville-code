@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.1.2 - 2026-10-07
+
+- Keep standalone acceptance focused on distinct necessary results. Put implementation and test execution in subordinate steps while preserving methods and checks explicitly required for acceptance.
+
 ## v2.1.1 - 2026-10-07
 
 - Keep Instructions and Evidence focused on future work. Remove duplicated Steps and review transcripts, and handle routine Plan closure without another bookkeeping worker.

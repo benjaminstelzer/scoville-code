@@ -37,6 +37,12 @@ boundaries. Separate dependencies, owners, or rollout timing justify a split
 only when they create such independent outcomes. Keep acceptance and evidence
 with the item that owns the behavior.
 
+Define acceptance through distinct necessary outcome
+conditions and required results. Keep implementation and test execution in
+subordinate steps unless that method or check is itself required for acceptance.
+Do not expand acceptance into a process checklist. For native
+Scoville Plan records, Plan's field rules remain authoritative.
+
 Continue to the next authorized in-scope item when its dependencies are met; do
 not treat every checkpoint as a new task.
 
