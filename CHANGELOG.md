@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.1.3 - 2026-10-08
+
+- Read complete bounded UTF-8 text before using it. Capture full command output and its original status before display.
+- Verify stateful behavior against the actual application store through its factory and participating processes. Report counts only when they affect a decision.
+
 ## v2.1.2 - 2026-10-07
 
 - Keep standalone acceptance focused on distinct necessary results. Put implementation and test execution in subordinate steps while preserving methods and checks explicitly required for acceptance.

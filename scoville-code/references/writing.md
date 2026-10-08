@@ -13,16 +13,28 @@ Never truncate text, including command and combined tool output. Apply only
 declared or explicitly selected output limits. If none applies to this result
 channel, do not invent a limit or require a numeric size check. A known inner
 or outer limit still applies; check the complete combined output against the
-smallest applicable limit. Apply this before the first file read that emits
-potentially large text, including an assignment received by file path. Checking
-the size does not emit the file. For a read, use the checker's size and
-recommended_max_utf8_bytes, not its compaction or publication instruction. Read
-the unchanged text in ordered, character-safe portions within that byte budget,
-including output labels. Do not alter or copy the input, first request an
-oversized full read, or recover omitted text after truncation.
+smallest applicable limit. Measure all content your commands and orchestration
+script emit into one outer tool result, including forwarded metadata, labels,
+separators and combined results. Several inner calls or `text()` calls in one
+outer call share that result's budget. The checker measures this content; it
+does not measure opaque host-added framing or guarantee provider-specific token
+counts. Before the first potentially large file read, use
+the bundled checker with:
+`<verified-python> -X utf8 "<skill-directory>/scripts/check_text_size.py" --file "<file-to-read>" --max-output-tokens <limit> --part 1`.
+It validates the complete UTF-8 file and includes its label in the budget:
+`part=N bytes=start:end/total next=M` names the next `--part M`;
+`last` replaces `next=M` only when end equals total. Read through `last`.
+Read every unchanged part before dependent work. Use separate outer tool calls
+unless their complete combined output has been measured and fits. An error leaves
+the read incomplete, even when a tiny budget cannot fit a diagnostic. With no
+limit, read complete UTF-8 directly. Without Python, use
+the manual fallback listed in [Runtime helpers](../SKILL.md#runtime-helpers). A missing helper
+or helper error does not enable it. Do not alter or copy the input, request an oversized full read, or recover
+omitted text after truncation.
 
 Native Codex Ask advisers and Workflow children may discover the interpreter and
-run the named text-size checker before reading potentially large text, including
+run the named checker for bounded UTF-8 reads, command capture, size checks and
+oversized-result delivery, including
 when the interpreter and checker are outside the workspace. For necessary
 oversized-answer or handoff delivery only, they may also run complete-file
 publication commands and prepare temporary complete artifacts under the project's
@@ -31,13 +43,40 @@ execute tests or change project files beyond these delivery artifacts. This
 exception permits no other project writes and does not override host tool
 restrictions or Workflow ownership and takeover gates.
 
-Capture potentially large command output in full without displaying it. Before
-emitting large text, check the complete planned output, including combined
-results and labels. Invoke the verified Python interpreter with the following
+Capture potentially large command output before displaying it, including
+diagnostics. With Python, use the existing checker for a permitted native command:
+`<verified-python> -X utf8 "<skill-directory>/scripts/check_text_size.py" --max-output-tokens <limit> --run -- <command> <arguments>`.
+Start Python text producers with `-X utf8`. The helper runs argv without a shell,
+captures complete stdout and stderr, validates UTF-8 and measures the whole
+rendered output including status and labels. Grouped streams do not establish
+their chronological order. It preserves the child's exit status; signal exits
+use `128 + signal` with the original status in the output. Its own failures use
+125 and stop dependent work. `output_complete=false` means required content was
+withheld, even if the command returned 0. Never treat that as a complete read.
+For needed output from a safely repeatable read-only query, a role allowed to save it may rerun the query
+once with `--publish-full --project-root "<workspace>"` before `--run`, then read
+the complete file with `--part`. Read-only roles narrow the query only when every
+required fact remains included, or report the missing input.
+For effects or nonreproducible required output, choose an allowed
+`--publish-full --project-root "<workspace>"` before `--run` on the first call.
+It saves valid UTF-8 output from that same execution. Invalid UTF-8 stops with 125
+and is not saved; configure the producer for UTF-8 first. Never rerun such a command
+merely to add saving. This grants no new command or write rights. Reviewers must
+not capture sources to a file for their own reading; the manager supplies needed
+large inputs. For other shell output, preserve its own status and complete UTF-8
+bytes before display. PowerShell `Out-String` formats objects and POSIX command
+substitution removes trailing newlines. Neither preserves arbitrary raw output.
+A capture failure, decoding error or replacement character introduced relative
+to the source stops dependent work.
+Before emitting large text, check the complete planned output, including combined
+results and labels. For captured output in memory, count its complete rendered
+UTF-8 bytes directly against `floor(limit_in_tokens * 4 / 5)`, without writing a
+file. With an existing or permissibly prepared UTF-8 file, invoke the verified
+Python interpreter with the following
 arguments, preserving each quoted path as one argument. Keep a launcher such as
 `py -3` as two unquoted tokens. Quote an executable path; in PowerShell, prefix
 that quoted path with `&`:
-`<verified-python> "<skill-directory>/scripts/check_text_size.py" --file "<text>" --max-output-tokens <limit>`,
+`<verified-python> -X utf8 "<skill-directory>/scripts/check_text_size.py" --file "<text>" --max-output-tokens <limit>`,
 using the smallest applicable declared or explicitly overridden output limit.
 If the conservative budget is exceeded, compact wording and remove only
 irrelevant material while preserving required facts and safeguards. If it still
