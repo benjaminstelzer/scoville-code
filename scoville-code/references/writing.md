@@ -13,6 +13,11 @@ Never truncate text, including command and combined tool output. The checker
 measures the complete emitted text, not opaque host framing or exact provider
 token counts.
 
+Attribute truncation only to the layer supported by the evidence. A shortened
+later query does not prove that the original capture was truncated. If the
+model-visible output or effective host cap is unknown, leave the host cause
+unconfirmed and use the existing complete-output recovery.
+
 Before a potentially large read, use the verified Python interpreter and the
 bundled reader:
 `<verified-python> -X utf8 "<skill-directory>/scripts/check_text_size.py" --file "<document>" --max-output-tokens <limit> --part 1`.

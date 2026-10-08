@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.1.5 - 2026-10-08
+
+- Diagnose shortened output from the observed failing layer; a later shortened query does not prove that the original capture lost information.
+
 ## v2.1.4 - 2026-10-08
 
 - Distinguish Python program files from document inputs and preserve complete output from running command sessions.
