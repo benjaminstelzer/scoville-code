@@ -2,7 +2,30 @@
 # Text-size check without Python
 
 Use this route only when Python is unavailable. A missing script or helper error
-does not enable it. Prepare the complete planned output as UTF-8 without displaying
+does not enable it.
+
+For a permitted command, capture complete stdout, stderr and its original status
+with an available host facility before display. Validate UTF-8 and measure the
+whole rendered output, including labels. Grouped streams do not prove their
+chronological order. Withheld content remains unread even after status 0. For
+effects or nonreproducible required results, prepare permitted complete saving
+before the first execution; never rerun merely to add saving. A reviewer does not
+save source captures. If no safe capture is available, stop the dependent work.
+
+For an input-file read, use an available native UTF-8 reader without altering or
+copying the input. This includes Skill references. Several files or parts in one
+command or outer tool call form one output; measure that combined output first,
+otherwise use separate individually checked outer tool calls. Validate its encoding before output. Read every ordered part
+at character boundaries, measuring each actual output including labels against
+`floor(limit_in_tokens * 4 / 5)` bytes. Every nonempty part must make progress.
+Do not compact required input, skip text or recover truncated output. A reviewer
+does not write source captures. Without a safe complete read, report the specific
+unread input and stop dependent work. With no applicable limit, read complete
+UTF-8 directly. File-size checks alone do not cover formatted or combined output.
+A failed preflight never permits an unmeasured read. Correct the error; when size
+is the reason, read smaller ordered UTF-8 parts, each measured before output.
+
+For composed output or permitted result delivery, prepare the complete planned output as UTF-8 without displaying
 it. Include every label and combined result. Retain the smallest applicable
 declared or explicitly overridden tool-output limit. Do not guess or increase it.
 The shared writing rules determine whether a limit applies and preserve

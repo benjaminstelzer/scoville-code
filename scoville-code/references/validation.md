@@ -69,6 +69,12 @@ Unmet required acceptance remains open. Controlled fixtures remain valid when
 the behavior under test actually runs. Required evidence does not expand
 existing permissions.
 
+For a stateful behavior claim, trace the actual call through its factory and
+configuration to the same stored state you observe. A passing isolated instance
+or separate snapshot does not prove the application's binding. Include separate
+processes when they participate in that behavior, without inventing unrelated
+integration work.
+
 For an added or changed safeguard against a material failure, verify that valid
 use still succeeds and the claimed protection holds where the effect occurs.
 A prior check alone is insufficient when its result can become stale; for
@@ -158,3 +164,8 @@ clean compile, source review, unit test, rendered interaction, live-system check
 and deployment; one does not imply another. If a check was skipped, failed, or
 could not run, say so and narrow the claim. Never cite stale evidence as proof of
 the final change.
+
+Prefer decisive status, failures and observations to unnecessary counts. Compute
+a count only when it affects acceptance or a decision. In PowerShell, make collections explicit,
+for example `@($report.checks.PSObject.Properties).Count`; do not report per-element
+`.Count` values as one total.

@@ -21,8 +21,10 @@ broad or unknown, use bounded path or metadata discovery to select candidates
 and set an output budget before reading contents. Do not emit a complete
 recursive file list when a bounded path query or targeted lookup can identify
 candidates. Read only the owner and relevant callers, contracts, tests or
-configuration needed to answer named open questions. Do not automatically
-continue truncated output; recover only the missing relevant range or field. A
+configuration needed to answer named open questions. Do not continue truncated
+output or recover omitted text from it. Rerun the needed read with complete,
+prechecked output under the shared writing rules. Narrow the selection only when
+all information required for the current question remains included. A
 line limit alone does not bound a large JSONL event, so filter an explicitly
 needed large source locally before returning the relevant fields. Read a known
 small file directly without first inventorying its directory. Do not require a
