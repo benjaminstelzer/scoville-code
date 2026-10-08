@@ -12,23 +12,25 @@ coherent diff that can deliver the requested behavior.
 
 ## Locate proportionately
 
-When the project is version-controlled, inspect its state before editing and
-preserve unrelated changes. Start with exact paths named by the request;
-otherwise identify candidate files before searching their contents. Keep browser
-profiles, generated artifacts and raw traces outside ordinary source searches;
-include them when named or implicated by evidence. When the possible scope is
-broad or unknown, use bounded path or metadata discovery to select candidates
-and set an output budget before reading contents. Do not emit a complete
-recursive file list when a bounded path query or targeted lookup can identify
-candidates. Read only the owner and relevant callers, contracts, tests or
-configuration needed to answer named open questions. Do not continue truncated
-output or recover omitted text from it. Rerun the needed read with complete,
-prechecked output under the shared writing rules. Narrow the selection only when
-all information required for the current question remains included. A
-line limit alone does not bound a large JSONL event, so filter an explicitly
-needed large source locally before returning the relevant fields. Read a known
-small file directly without first inventorying its directory. Do not require a
-complete size inventory or a fixed byte limit.
+1. In version-controlled projects, inspect state before editing and preserve
+   unrelated changes.
+2. Start with requested exact paths; otherwise select candidate files before
+   searching contents. For broad or unknown scope, use bounded path or metadata
+   discovery and set an output budget before reading contents.
+3. Read only the owner and relevant callers, contracts, tests or configuration
+   needed for named open questions. Read known small files directly without a
+   directory inventory.
+
+Keep browser profiles, generated artifacts and raw traces outside ordinary
+searches unless named or implicated by evidence. Use bounded queries or targeted
+lookups instead of complete recursive lists when they identify candidates. Require
+neither a complete size inventory nor a fixed byte limit.
+
+Do not continue truncated output or recover omitted text. Rerun the needed read
+with complete prechecked output under the shared writing rules. Narrow selection
+only while retaining all information needed for the current question. A line
+limit cannot bound a large JSONL event; filter an explicitly needed large source
+locally before returning relevant fields.
 
 For a contained change, stop when the owner, affected behavior, and focused
 check are clear. Inspect affected consumers and serialization, persistence,
