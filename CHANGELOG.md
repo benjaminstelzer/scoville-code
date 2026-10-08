@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.1.7 - 2026-10-08
+
+- Make scope selection, implementation and proportionate validation easier to follow, with prerequisites and failure stops explicit.
+
 ## v2.1.6 - 2026-10-08
 
 - Use a short ordered sequence to locate the relevant code, choose a proportionate check and implement the change.
