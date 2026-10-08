@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.1.6 - 2026-10-08
+
+- Use a short ordered sequence to locate the relevant code, choose a proportionate check and implement the change.
+
 ## v2.1.5 - 2026-10-08
 
 - Diagnose shortened output from the observed failing layer; a later shortened query does not prove that the original capture lost information.
