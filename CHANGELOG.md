@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.1.4 - 2026-10-08
+
+- Distinguish Python program files from document inputs and preserve complete output from running command sessions.
+- Keep safeguards and validation focused on the actual failure risk. Use Plan field rules for assigned reviews of native planning records.
+
 ## v2.1.3 - 2026-10-08
 
 - Read complete bounded UTF-8 text before using it. Capture full command output and its original status before display.
