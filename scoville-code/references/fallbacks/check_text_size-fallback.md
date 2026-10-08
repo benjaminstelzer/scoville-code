@@ -1,7 +1,7 @@
 <!-- helper-fallback: scripts/check_text_size.py -->
 # Text-size check without Python
 
-Use this route only when Python is unavailable. A missing script or helper error
+Use this route only when no suitable Python 3.11+ is available. A missing script or helper error
 does not enable it.
 
 For a permitted command, capture complete stdout, stderr and its original status
@@ -15,7 +15,9 @@ save source captures. If no safe capture is available, stop the dependent work.
 For an input-file read, use an available native UTF-8 reader without altering or
 copying the input. This includes Skill references. Several files or parts in one
 command or outer tool call form one output; measure that combined output first,
-otherwise use separate individually checked outer tool calls. Validate its encoding before output. Read every ordered part
+otherwise use separate individually checked outer tool calls. Strictly decode
+UTF-8 before output; a decoder that replaces invalid bytes does not validate
+them. Read every ordered part
 at character boundaries, measuring each actual output including labels against
 `floor(limit_in_tokens * 4 / 5)` bytes. Every nonempty part must make progress.
 Do not compact required input, skip text or recover truncated output. A reviewer

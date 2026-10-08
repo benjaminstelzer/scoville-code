@@ -165,7 +165,7 @@ def main():
                     pass
     source = parser.add_mutually_exclusive_group(required=True)
     source.add_argument('--file', type=Path,
-                        help='UTF-8 file containing the complete planned output, including any combined results')
+                        help='UTF-8 document input, never a Python program: use --part 1 for bounded reading; omit --part for a size check of complete planned output')
     source.add_argument('--run', action='store_true',
                         help='capture the complete native command argv after --, without a shell or automatic retry; put checker options before --run')
     parser.add_argument('--max-output-tokens', type=int,

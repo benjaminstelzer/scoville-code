@@ -111,39 +111,32 @@ again.
 
 ## Stop repetition
 
-Rerun a command only when relevant inputs or conditions changed, a named open
-acceptance question can be answered by that run, or a binding project protocol
-requires it. Name the expected evidence. Unchanged repetition without new
-information is not justified. Concurrency, stochastic or flaky behavior can
-require repeated observations when tied to the actual claim.
+Rerun a command only when relevant inputs or conditions changed, the run can
+answer a named open acceptance question, or a binding project protocol requires
+it; name the expected evidence. Concurrency, stochastic or flaky behavior may
+need repeated observations tied to the actual claim.
 
-Do not repeat a failed correction strategy unless new evidence or changed
-conditions support the next attempt. If the same cause persists or the diagnosis
-is unsupported, return to the owner, contract and evidence before patching again.
-A new symptom-specific patch is not a new approach. Without a supported next
+Repeat a failed correction strategy only when new evidence or changed conditions
+support it. New output supports another attempt only when it changes or
+substantiates the causal explanation; different reproductions, new failure output
+or passing existing checks alone do not. If the diagnosis is unsupported, or
+after two unsuccessful corrections of the same failure or evidenced cause,
+return to the owner, contract and evidence before another patch; a new
+symptom-specific patch is not a new approach, while new evidence identifying a
+bounded cause can justify a focused correction. Without a supported next
 approach, stop that repair path, report the blocker and continue independent
-work. Do not weaken acceptance or bypass host attempt limits. New evidence that
-identifies a bounded cause can justify a focused correction.
+work. Do not weaken acceptance or bypass host attempt limits.
 
-After two unsuccessful corrections of the same failure or evidenced cause,
-reassess the owner, contract and evidence before another patch. Different
-reproductions, new failure output or passing existing checks do not reset this
-checkpoint. New output supports a next attempt only when it changes or
-substantiates the causal explanation.
-
-After decisive evidence passes, record the concise result once and
-continue the requested development or complete the task. Add no checks,
-independent reviews or bookkeeping unless a separate changed behavior,
-unresolved material risk or binding requirement remains. Group required
-reviews at the completed boundary of their scope, not after each edit or
-tool result, unless their protocol requires an earlier review.
-Reviews serve assessment and correction during development. Do not permanently
-store their texts, raw test logs or a complete check history by default. Keep
-only results and open limits needed for further development, plus independently
-required records.
-An earlier aggregate pass becomes stale when related production code or tests
-change afterward; rerun the smallest aggregate check covering the final tree or
-narrow the completion claim.
+After decisive evidence passes, record the concise result once and continue the
+requested work or complete the task. Add checks, independent reviews or
+bookkeeping only for a separate changed behavior, an unresolved material risk
+or a binding requirement. Group required reviews at the completed boundary of
+their scope unless their protocol requires an earlier review. Keep only results
+and open limits needed for further development plus independently required
+records; do not store review texts, raw test logs or a complete check history by
+default. An earlier aggregate pass becomes stale when related production code
+or tests change afterward; rerun the smallest aggregate check covering the final
+tree or narrow the completion claim.
 
 Do not fix unrelated suite failures unless they block the requested outcome or
 the user expands scope.
