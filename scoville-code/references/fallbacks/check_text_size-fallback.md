@@ -42,15 +42,17 @@ material while preserving every required fact and safeguard. Never truncate.
 If the complete necessary text still cannot fit, or the active role's transfer
 contract independently permits file delivery, use the publication procedure
 below. Without a content limit, omit the size check and make no fit claim.
-Resolve the existing workspace
-and `.scoville/temp` before creating anything. The resolved directory must stay
-inside that workspace. Compute SHA-256 over the complete unchanged UTF-8 bytes.
-Use `<hash>.txt` there. Reject a symlink or non-file at that name. Reuse an existing
-regular file only if its bytes are identical. Otherwise write and close a separate
-temporary file in that directory and publish it without overwriting an existing
-target, using an available atomic no-overwrite filesystem operation. Remove only
-the temporary file you created. If the required byte count, SHA-256, path check or
-publication operation is unavailable or fails, stop with its diagnostic.
+1. Resolve the existing workspace and `.scoville/temp` before creating anything.
+   The resolved directory must stay inside that workspace.
+2. Compute SHA-256 over the complete unchanged UTF-8 bytes; use `<hash>.txt` there.
+3. Reject a symlink or non-file at that name. Reuse an existing regular file
+   only if its bytes are identical.
+4. Otherwise write and close a separate temporary file in that directory.
+   Publish it atomically without overwriting an existing target.
+5. Remove only the temporary file you created.
+
+If the required byte count, SHA-256, path check or publication operation is
+unavailable or fails, stop with its diagnostic.
 
 Return only the size result or the absolute published path and SHA-256. Say that
 the file contains the complete unchanged text. Explicitly instruct the recipient
