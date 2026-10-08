@@ -240,9 +240,12 @@ Without suitable Python 3.11+, first read only the check_text_size reference bel
 a native UTF-8 reader and ordered unchanged parts, measuring each complete
 output including labels before display against `floor(limit * 4 / 5)` bytes.
 With no limit, read it completely. Without a safe reader, stop dependent work.
-Only when suitable Python 3.11+ is unavailable, load the matching optional reference below.
-Missing scripts, missing dependencies or helper errors stop the operation;
-they never enable the manual route. Do not load these references otherwise.
+
+| Condition | Required route |
+| --- | --- |
+| Suitable Python 3.11+ is available | Use the bundled helper; do not load manual references. |
+| No suitable Python 3.11+ | Read only the matching optional reference below. |
+| Missing script, missing dependency or helper error | Stop the affected operation; this never enables the manual route. |
 
 | Helper | Optional no-Python reference |
 | --- | --- |

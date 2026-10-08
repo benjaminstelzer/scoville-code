@@ -70,38 +70,44 @@ the child's exit status; signals use `128 + signal` and report the original
 status. Helper failures use 125 and stop dependent work. So does withheld required
 content marked `output_complete=false`, even with exit 0.
 
-For effects or nonreproducible output, choose an allowed
-`--publish-full --project-root "<workspace>"` before `--run` on the first call.
-This saves complete UTF-8 output from that execution; invalid UTF-8 fails with
-125 without saving. Configure UTF-8 first; never repeat effects merely to save
-their output. A safely repeatable read-only query may be rerun once with that
-option when the role may save it. Otherwise narrow the query only if all required
-facts remain included, or report the missing input. Reviewers never capture
-sources to files for their own reading; the manager supplies large inputs.
+Choose capture before execution:
+
+| Command or role | Capture route |
+| --- | --- |
+| Effects or nonreproducible output | Configure UTF-8 and choose allowed `--publish-full --project-root "<workspace>"` before the first `--run`. Never repeat effects to save output. |
+| Safely repeatable read-only query | One rerun with that option is allowed when the role may save it. |
+| Saving is not permitted | Narrow only while retaining every required fact, or report the missing input. |
+| Reviewer reading sources | Do not save source captures; the manager supplies large inputs. |
+
+Publication saves complete UTF-8 from that execution. Invalid UTF-8 fails with
+125 without saving.
 
 For other shell output, preserve status and complete UTF-8 bytes before display.
 PowerShell `Out-String` formats objects; POSIX command substitution strips trailing
 newlines. Neither preserves arbitrary raw output. Capture or decoding failure,
 or replacement characters introduced relative to the source, stop dependent work.
 
-Before emitting large text through a channel with a declared or explicitly
-selected output limit, measure the complete rendered output, including
-labels and combined results. Without an applicable limit, emit the complete
-UTF-8 text directly; no numeric size check is due and no budget may be invented.
-In memory, compare its UTF-8 byte count with
-`floor(limit_in_tokens * 4 / 5)` without saving. For an existing or permissibly
-prepared file use:
-`<verified-python> -X utf8 "<skill-directory>/scripts/check_text_size.py" --file "<text>" --max-output-tokens <limit>`,
-Keep each quoted path one argument. Keep launcher tokens such as `py -3` separate;
-quote an executable path and prefix it with `&` in PowerShell. Use the smallest
-applicable declared or explicitly overridden limit. If exceeded, compact wording
-and remove irrelevant material while preserving required facts and safeguards.
-If it still cannot fit, publish the complete unchanged text with
-`--publish-full --project-root "<workspace>"`. Send its absolute path and SHA-256,
-instructing the recipient to verify the hash and read the entire file through
-the reader rule above before dependent work. Hash verification alone is not
-reading. These artifacts are temporary: never stage or commit them, and use
-another agent's artifact as evidence only when explicitly supplied.
+Prepare large text for delivery:
+
+1. Finish the complete rendered output, including labels and combined results.
+2. Without an applicable declared or explicitly selected limit, emit complete
+   UTF-8 directly; invent no budget or numeric check.
+3. With a limit, use the smallest applicable limit. In memory, compare UTF-8
+   bytes with `floor(limit_in_tokens * 4 / 5)` without saving. For an existing
+   or permissibly prepared file use:
+   `<verified-python> -X utf8 "<skill-directory>/scripts/check_text_size.py" --file "<text>" --max-output-tokens <limit>`.
+   Keep each quoted path one argument and launcher tokens such as `py -3` separate.
+   Quote an executable path and prefix it with `&` in PowerShell.
+
+4. If exceeded, compact wording and remove irrelevant material while preserving
+   required facts and safeguards.
+5. If it still cannot fit, publish complete unchanged text with
+   `--publish-full --project-root "<workspace>"`. Send the absolute path, SHA-256
+   and an instruction to verify the hash and read the entire file under the
+   reader rule before dependent work. Hash verification alone is not reading.
+
+These artifacts are temporary: never stage or commit them. Use another agent's
+artifact as evidence only when explicitly supplied.
 
 If the active role's transfer contract independently permits file delivery,
 publish without a size check when no content limit applies; omit

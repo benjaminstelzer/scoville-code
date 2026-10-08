@@ -78,9 +78,14 @@ integration work.
 For an added or changed safeguard against a material failure, verify that valid
 use still succeeds and the claimed protection holds where the effect occurs.
 A prior check alone is insufficient when its result can become stale; for
-example, a checked path can change before deletion. For a negative-path claim,
-establish that required preconditions completed, the intended target operation
-was reached and caused the failure, and relevant aftermath matches the contract.
+example, a checked path can change before deletion. For negative-path evidence,
+establish this sequence:
+
+```text
+Required preconditions completed → target operation reached and caused failure
+  → relevant aftermath observed against the contract
+```
+
 Rejection at an earlier check does not prove protection at the claimed boundary.
 An existing unambiguous return, state, or call observation can supply this
 evidence; do not require universal counters, logging, production instrumentation,
@@ -116,19 +121,16 @@ answer a named open acceptance question, or a binding project protocol requires
 it; name the expected evidence. Concurrency, stochastic or flaky behavior may
 need repeated observations tied to the actual claim.
 
-Repeat a failed correction strategy only when new evidence or changed conditions
-support it. New output supports another attempt only when it changes or
-substantiates the causal explanation; different reproductions, new failure output
-or passing existing checks alone do not. If the diagnosis is unsupported, or
-after two unsuccessful corrections of the same failure or evidenced cause,
-return to the owner, contract and evidence before another patch; a new
-symptom-specific patch is not a new approach, while new evidence identifying a
-bounded cause can justify a focused correction. Without a supported next
-approach, stop that repair path, report the blocker and continue independent
-work. Do not weaken acceptance or bypass host attempt limits.
+| Correction state | Next action |
+| --- | --- |
+| New evidence or changed conditions support the failed strategy | Retry only when they change or substantiate the causal explanation. Different reproductions, new failure output or passing checks alone do not. |
+| Unsupported diagnosis, or two unsuccessful corrections of the same failure or evidenced cause | Return to owner, contract and evidence before another patch. A symptom-specific patch is not a new approach. New evidence for a bounded cause may justify a focused correction. |
+| No supported next approach | Stop that repair path, report blocker and continue independent work. |
+| Decisive evidence passes | Record the concise result once and continue or complete the requested work. |
 
-After decisive evidence passes, record the concise result once and continue the
-requested work or complete the task. Add checks, independent reviews or
+Do not weaken acceptance or bypass host attempt limits.
+
+Add checks, independent reviews or
 bookkeeping only for a separate changed behavior, an unresolved material risk
 or a binding requirement. Group required reviews at the completed boundary of
 their scope unless their protocol requires an earlier review. Keep only results
