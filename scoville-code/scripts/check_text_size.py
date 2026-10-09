@@ -115,6 +115,12 @@ def capture_command(args):
         return error('budget cannot fit complete status metadata')
     if not command:
         return error('--run requires a complete command argument list')
+    if Path(command[0]).suffix.lower() == '.py':
+        return error(
+            'PYTHON_INTERPRETER_REQUIRED child_started=false: '
+            'insert the verified Python executable and -X utf8 before the script; '
+            'keep all existing arguments'
+        )
     if args.publish_full:
         try:
             directory.mkdir(parents=True, exist_ok=True)
