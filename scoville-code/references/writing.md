@@ -21,26 +21,41 @@ unconfirmed and use the existing complete-output recovery.
 Without an applicable limit, read complete UTF-8 directly; invent no budget.
 With an applicable limit:
 
-1. Use the smallest declared or explicitly selected limit for the read and
-   enclosing output. Read separately unless the complete combined output,
+1. Use the smallest declared or explicitly selected limit of the command and
+   every enclosing tool output. Read separately unless the complete combined output,
    including labels and metadata, is measured and fits; combined reads share
    that budget.
 2. If the file may exceed that limit, use the verified Python interpreter and
    bundled reader:
    `<verified-python> -X utf8 "<skill-directory>/scripts/check_text_size.py" --file "<document>" --max-output-tokens <limit> --part 1`.
    It validates the complete UTF-8 file and budgets labels too.
+   The program is `scripts/check_text_size.py`; the document is its `--file`
+   argument. Copy the whole command: change only `--file` for another document
+   or `--part` to continue. Keep program, launcher and quoting unchanged.
+   Only named `.py` files may be Python program files; SKILL.md, references and
+   assignments are documents.
 3. For multipart output, follow `part=N bytes=start:end/total next=M` with
    `--part M` through `last`,
    where end equals total. Read every unchanged part in order before dependent
-   work. Keep the budget unchanged; otherwise restart at part 1.
+   work. Use one limit for the whole sequence. If an applicable limit changes,
+   restart at part 1 with the new smallest limit; never raise a binding limit
+   to keep the old sequence.
+
+Reader parts are already bounded. Execute the supplied reader command unchanged;
+do not wrap it in `--run`, add `--publish-full`, or save its output.
 
 A reader error leaves the read incomplete, even if its diagnostic cannot fit.
+Correct a visible cause and restart at part 1. Do not repeat an unchanged failed
+call or raise a binding limit. Otherwise report the unread document and stop
+dependent work.
 Do not alter or copy the input, truncate it or recover omitted text after an
 oversized read.
 
-The reader program is `scripts/check_text_size.py`; pass its document only as
-`--file`. Only named `.py` files may be Python program files. SKILL.md, references
-and assignments are documents, never programs.
+To check a supplied expected SHA-256, use the same checker with
+`--file "<artifact>" --sha256 --max-output-tokens <limit>` and compare its
+`sha256` with the supplied value. A mismatch or error stops dependent work.
+Then read the same unchanged file from `--part 1` through `last` with the same
+limit. Hash verification is not reading; ordinary sources need no extra hash check.
 
 Without suitable Python 3.11+, use
 the manual fallback listed in [Runtime helpers](../SKILL.md#runtime-helpers). A missing helper
@@ -60,6 +75,11 @@ execute tests or change project files beyond these delivery artifacts. This
 exception permits no other project writes and does not override host tool
 restrictions or Workflow ownership and takeover gates.
 
+Run complete commands in the current tool shell without nesting another shell.
+For direct calls in PowerShell, quote the interpreter path and prefix it with `&`.
+If a shell change is necessary, use the known suitable absolute launcher.
+Pass `rg` an existing directory and `-g "<pattern>"`; `--run` does not expand globs.
+
 Capture potentially large command output, including diagnostics, before display.
 For a permitted command use:
 `<verified-python> -X utf8 "<skill-directory>/scripts/check_text_size.py" --max-output-tokens <limit> --run -- <command> <arguments>`.
@@ -77,7 +97,7 @@ Choose capture before execution:
 | Effects or nonreproducible output | Configure UTF-8 and choose allowed `--publish-full --project-root "<workspace>"` before the first `--run`. Never repeat effects to save output. |
 | Safely repeatable read-only query | One rerun with that option is allowed when the role may save it. |
 | Saving is not permitted | Narrow only while retaining every required fact, or report the missing input. |
-| Reviewer reading sources | Do not save source captures; the manager supplies large inputs. |
+| Reviewer reading sources | Use the bounded reader; do not save source captures. The manager supplies large inputs. |
 
 Publication saves complete UTF-8 from that execution. Invalid UTF-8 fails with
 125 without saving.
@@ -97,7 +117,6 @@ Prepare large text for delivery:
    or permissibly prepared file use:
    `<verified-python> -X utf8 "<skill-directory>/scripts/check_text_size.py" --file "<text>" --max-output-tokens <limit>`.
    Keep each quoted path one argument and launcher tokens such as `py -3` separate.
-   Quote an executable path and prefix it with `&` in PowerShell.
 
 4. If exceeded, compact wording and remove irrelevant material while preserving
    required facts and safeguards.

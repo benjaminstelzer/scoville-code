@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.1.8 - 2026-10-09
+
+- Preserve literal arguments and failure status when reading required context. Changed output limits restart the complete read instead of skipping part of the input.
+
 ## v2.1.7 - 2026-10-08
 
 - Make scope selection, implementation and proportionate validation easier to follow, with prerequisites and failure stops explicit.

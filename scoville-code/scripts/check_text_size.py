@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Check text, read bounded UTF-8 parts, capture a command or publish complete text."""
 import argparse
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -64,7 +65,6 @@ class TextParser(argparse.ArgumentParser):
 
 
 def publish_full(root, data):
-    import hashlib
     root = root.resolve()
     directory = (root / '.scoville' / 'temp').resolve()
     if not directory.is_relative_to(root):
@@ -154,7 +154,7 @@ def main():
     parser = TextParser(description=__doc__, allow_abbrev=False)
     options = sys.argv[:sys.argv.index('--run') + 1] if '--run' in sys.argv else sys.argv
     parser.capture_mode = '--run' in options
-    if '--run' in options or '--part' in options or any(arg.startswith('--part=') for arg in options):
+    if '--run' in options or '--part' in options or '--sha256' in options or any(arg.startswith('--part=') for arg in options):
         for index, arg in enumerate(options):
             value = (options[index + 1] if arg == '--max-output-tokens' and index + 1 < len(options)
                      else arg.partition('=')[2] if arg.startswith('--max-output-tokens=') else None)
@@ -176,10 +176,14 @@ def main():
                         help='existing absolute workspace, required only with --publish-full')
     parser.add_argument('--part', type=int,
                         help='read this one-based unchanged UTF-8 portion within the declared output budget')
+    parser.add_argument('--sha256', action='store_true',
+                        help='verify an expected file hash: emit only original UTF-8 byte count and SHA-256; then read all parts')
     # An optional argparse REMAINDER does not consume the -- separator. Split
     # the native argv explicitly so child options never become checker options.
     args = parser.parse_args(options[1:])
     args.run = sys.argv[sys.argv.index('--run') + 1:] if args.run else None
+    if args.sha256 and (args.max_output_tokens is None or args.part is not None or args.publish_full or args.project_root or args.run is not None):
+        parser.error('--sha256 requires --file <artifact> --max-output-tokens <limit>; omit --part, --publish-full, --project-root and --run')
     if args.part is not None and (args.part < 1 or args.publish_full or args.project_root or args.run is not None):
         parser.error('--part must be positive and cannot be combined with --publish-full, --project-root or --run')
     if args.run is not None and (args.max_output_tokens is None or args.run[:1] != ['--'] or len(args.run) < 2):
@@ -198,7 +202,15 @@ def main():
         data = args.file.read_bytes()
         data.decode('utf-8')
     except (OSError, UnicodeError) as error:
+        if args.sha256:
+            parser.error(f'--file "{args.file}" must be a readable UTF-8 artifact; leave hash verification incomplete; do not alter or copy the artifact: {error}')
         parser.error(f'--file "{args.file}" must be a readable UTF-8 file; provide the complete UTF-8 planned output: {error}')
+    if args.sha256:
+        output = (json.dumps({'utf8_bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest()}) + '\n').encode('ascii')
+        if len(output) > args.max_output_tokens * 4 // 5:
+            parser.error('output budget cannot fit SHA-256 metadata; retain the binding limit and leave verification incomplete')
+        sys.stdout.buffer.write(output)
+        return 0
     if args.part is not None:
         try:
             output = read_part(data, args.part, args.max_output_tokens * 4 // 5)
