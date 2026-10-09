@@ -79,8 +79,7 @@ restrictions or Workflow ownership and takeover gates.
 Run complete commands in the current tool shell without nesting another shell.
 For direct calls in PowerShell, quote the interpreter path and prefix it with `&`.
 If a shell change is necessary, use the known suitable absolute launcher.
-Pass `rg` an existing directory and `-g "<pattern>"`; `--run` does not expand globs.
-For example: `rg -n -g "*.php" -- "search text" "<existing-directory>"`.
+Pass `rg` exact existing file or directory paths, never wildcard paths. Select files with `-g "<pattern>"`, for example `rg -n -g "queue*.php" -- "search text" "<existing-directory>"`; `--run` does not expand wildcards.
 For simple inventories, use shell commands instead of nested `python -c` and `exec`.
 
 Capture potentially large command output, including diagnostics, before display.
