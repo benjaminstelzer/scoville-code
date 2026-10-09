@@ -86,7 +86,9 @@ For simple inventories, use shell commands instead of nested `python -c` and `ex
 Capture potentially large command output, including diagnostics, before display.
 For a permitted command use:
 `<verified-python> -X utf8 "<skill-directory>/scripts/check_text_size.py" --max-output-tokens <limit> --run -- <command> <arguments>`.
-Start Python text producers with `-X utf8`. The helper runs argv without a shell,
+Start Python text producers with `<verified-python> -X utf8`. To capture one, use
+`--run -- <verified-python> -X utf8 "<helper.py>" <all documented arguments>`;
+the outer Python runs only the checker. The helper runs argv without a shell,
 captures both streams completely, validates UTF-8 and measures rendered status
 and labels too. Grouped streams do not prove chronological order. It preserves
 the child's exit status; signals use `128 + signal` and report the original

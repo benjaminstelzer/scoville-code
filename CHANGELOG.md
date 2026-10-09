@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.1.12 - 2026-10-09
+
+- Keep the verified Python interpreter and all required arguments when capturing a helper command. Small direct calls remain available.
+
 ## v2.1.11 - 2026-10-09
 
 - Clarify which path runs the reader and which document it reads, including source files from another Skill.
