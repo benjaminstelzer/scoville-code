@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.1.13 - 2026-10-09
+
+- Use exact search paths and keep filename patterns in rg's -g filters. Existing files, directories and regular expressions remain available.
+
 ## v2.1.12 - 2026-10-09
 
 - Keep the verified Python interpreter and all required arguments when capturing a helper command. Small direct calls remain available.
