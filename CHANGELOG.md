@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.1.11 - 2026-10-09
+
+- Clarify which path runs the reader and which document it reads, including source files from another Skill.
+
 ## v2.1.10 - 2026-10-09
 
 - Reuse completed work, unchanged reviewed content and complete passing results. Repeat affected checks only for a relevant change, an unanswered question or a binding protocol.

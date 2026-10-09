@@ -232,12 +232,12 @@ With an applicable limit:
    bundled reader:
    `<verified-python> -X utf8 "<skill-directory>/scripts/check_text_size.py" --file "<document>" --max-output-tokens <limit> --part 1`.
    It validates the complete UTF-8 file and budgets labels too.
-   The program is `scripts/check_text_size.py`. Documents, including those of
-   other Skills, belong in `--file`. Keep the verified launcher, full checker
-   path and quoting unchanged. Copy the last correct complete command: change
-   only `--part` for the reported next part; for another document change `--file`
-   and reset `--part` to 1. Only named `.py` files may be Python programs; Skills,
-   references and assignments are documents.
+   Python runs the full checker path `<skill-directory>/scripts/check_text_size.py`
+   after `-X utf8`. The checker reads every document only through `--file`, including
+   SKILL.md files and references of any Skill, assignments, and `.py` files read as
+   text. Keep the verified launcher, checker path and quoting unchanged. Copy the
+   last correct complete command: change only `--part` for the reported next part;
+   for another document change only `--file` and reset `--part` to 1.
 3. For multipart output, follow `part=N bytes=start:end/total next=M` with
    `--part M` through `last`,
    where end equals total. Read every unchanged part in order before dependent
