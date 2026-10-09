@@ -99,7 +99,7 @@ Choose capture before execution:
 | Command or role | Capture route |
 | --- | --- |
 | Effects or nonreproducible output | Configure UTF-8 and choose allowed `--publish-full --project-root "<workspace>"` before the first `--run`. Never repeat effects to save output. |
-| Safely repeatable read-only query | One rerun with that option is allowed when the role may save it. |
+| Safely repeatable read-only query | One rerun with that option is allowed only when the current role and phase permit writing this temporary capture file. |
 | Saving is not permitted | Narrow only while retaining every required fact, or report the missing input. |
 | Reviewer reading sources | Use the bounded reader; do not save source captures. The manager supplies large inputs. |
 
