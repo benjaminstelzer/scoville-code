@@ -116,10 +116,15 @@ again.
 
 ## Stop repetition
 
-Rerun a command only when relevant inputs or conditions changed, the run can
-answer a named open acceptance question, or a binding project protocol requires
-it; name the expected evidence. Concurrency, stochastic or flaky behavior may
-need repeated observations tied to the actual claim.
+Reuse completed work, reviewed unchanged content and complete passing results
+while their requirements, inputs and relevant conditions, such as files,
+dependencies, runtime, configuration and environment, remain unchanged. A new
+Step, role, assignment, review or release phase alone does not justify repeating
+them; a required independent review of content no reviewer has assessed is not
+a repetition. Repeat only the affected work for a relevant change, a
+still-unanswered question or a binding protocol; name the new result or evidence
+it can add. Concurrency, stochastic or flaky claims may require repeated
+observations tied to the actual claim.
 
 | Correction state | Next action |
 | --- | --- |
@@ -149,8 +154,9 @@ Inspect the final scoped diff and repository state. Confirm that the outcome
 resides in its canonical owner, each hunk serves the request or a named risk,
 and required guarantees and acceptance remain intact. For generated output,
 inspect the source owner and affected consumer output. Reuse reviewed unchanged
-content and evidence; revisit affected content after a correction. Tie completion
-to the final tree and report material unverified behavior.
+content and evidence; revisit only affected content. Tie completion to the final
+tree; passing checks already run on it need no rerun while their inputs and
+conditions are unchanged. Report material unverified behavior.
 
 ## Report the evidence
 
