@@ -59,7 +59,7 @@ Mentioning another Skill or using one of its labels does not activate it.
 Within safety rules and explicit constraints, work toward the observable result.
 Act to deliver it, resolve a concrete blocker or material uncertainty, or follow
 a binding instruction. Process, tests, documentation and cleanup serve that
-result. Stop adding them when they neither advance it nor test a named risk.
+result. Stop adding or repeating them when they neither advance it nor test a named risk.
 Do not try to eliminate every residual risk.
 
 Before substantial edits, identify the observable result, its canonical source,
@@ -165,11 +165,15 @@ mark unsaved output as unsaved. Recovery output does not acknowledge completion
 or authorize advancement or publication that requires durable state first.
 
 Preserve required safety, authentication, authorization, privacy, auditability,
-retention and policy guarantees. Do not weaken tests, validators or guards to
-hide an unmet requirement or obtain green output. An obsolete assertion or
-validation rule may change only as a consequence of an explicitly authorized
-contract change, with evidence for the new contract. A general change request
-does not authorize abandoning a guarantee. Resolve unclear authority before
+retention and policy guarantees. Never weaken a test, validator or guard to hide
+failure or obtain green output when it enforces an applicable requirement,
+verifies a real dependency or prevents a concrete failure consequence. A check's
+existence, age or failure alone establishes no authority. Limit a check to the
+boundary its supported purpose covers; preserve required guarantees and unrelated
+work, and report differences outside that boundary. Success within that boundary
+proves nothing beyond it. Changing a required guarantee requires an explicitly
+authorized contract change and evidence for the new contract; a general change
+request is not that authorization. Resolve unclear authority or boundaries before
 the dependent change. Across boundaries preserve meaningful status, reason,
 error, source and validation semantics.
 
@@ -228,11 +232,12 @@ With an applicable limit:
    bundled reader:
    `<verified-python> -X utf8 "<skill-directory>/scripts/check_text_size.py" --file "<document>" --max-output-tokens <limit> --part 1`.
    It validates the complete UTF-8 file and budgets labels too.
-   The program is `scripts/check_text_size.py`; the document is its `--file`
-   argument. Copy the whole command: change only `--file` for another document
-   or `--part` to continue. Keep program, launcher and quoting unchanged.
-   Only named `.py` files may be Python program files; SKILL.md, references and
-   assignments are documents.
+   The program is `scripts/check_text_size.py`. Documents, including those of
+   other Skills, belong in `--file`. Keep the verified launcher, full checker
+   path and quoting unchanged. Copy the last correct complete command: change
+   only `--part` for the reported next part; for another document change `--file`
+   and reset `--part` to 1. Only named `.py` files may be Python programs; Skills,
+   references and assignments are documents.
 3. For multipart output, follow `part=N bytes=start:end/total next=M` with
    `--part M` through `last`,
    where end equals total. Read every unchanged part in order before dependent
