@@ -12,6 +12,10 @@ effects or nonreproducible required results, prepare permitted complete saving
 before the first execution; never rerun merely to add saving. A reviewer does not
 save source captures. If no safe capture is available, stop the dependent work.
 
+For a supplied expected SHA-256, compare it with a host tool's hash of the
+original bytes; a mismatch or failure stops dependent work. Hash verification
+does not replace the complete UTF-8 read below.
+
 For an input-file read, use an available native UTF-8 reader without altering or
 copying the input. This includes Skill references. Several files or parts in one
 command or outer tool call form one output; measure that combined output first,
