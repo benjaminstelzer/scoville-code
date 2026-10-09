@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.1.9 - 2026-10-09
+
+- Use a complete reader command when continuing document reads, and an existing directory with a file filter when searching. Prefer direct shell commands for simple file inventories.
+
 ## v2.1.8 - 2026-10-09
 
 - Preserve literal arguments and failure status when reading required context. Changed output limits restart the complete read instead of skipping part of the input.

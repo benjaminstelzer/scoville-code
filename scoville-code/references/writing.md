@@ -79,6 +79,8 @@ Run complete commands in the current tool shell without nesting another shell.
 For direct calls in PowerShell, quote the interpreter path and prefix it with `&`.
 If a shell change is necessary, use the known suitable absolute launcher.
 Pass `rg` an existing directory and `-g "<pattern>"`; `--run` does not expand globs.
+For example: `rg -n -g "*.php" -- "search text" "<existing-directory>"`.
+For simple inventories, use shell commands instead of nested `python -c` and `exec`.
 
 Capture potentially large command output, including diagnostics, before display.
 For a permitted command use:
