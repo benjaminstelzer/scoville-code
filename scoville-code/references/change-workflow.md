@@ -50,19 +50,8 @@ the requested behavior. Neither recursion nor multiple passes are inherently
 wrong; do not merge clear passes into a more complex algorithm merely to count
 fewer passes.
 
-When a change could materially affect runtime, memory use or I/O cost,
-consider expected or explicitly assumed input sizes and affected call paths.
-Look for nested traversals, repeated linear searches or I/O, branching recursion
-and repeated computation of the same subproblem. Compare
-simpler algorithms, suitable data structures and avoiding duplicate work before
-proposing a cache. Bounded O(n²) can be appropriate; asymptotic improvement
-alone does not justify extra complexity or memory.
-
-Use an existing cache only when its contract fits, through its canonical access
-path and with correct keys, context or tenant separation, lifetime and
-invalidation. Add a cache only for a concrete benefit that justifies its state,
-memory and validity rules. Apply SKILL.md's Resolve material choices section when
-its behavioral or cost tradeoff needs a user decision.
+When runtime, memory, I/O cost or cache behavior may materially change, read
+[cost and cache decisions](cost-and-cache.md) before deciding or judging that work.
 
 - Put behavior in its canonical owner and reuse the canonical pathway.
 - In existing code, follow project rules and surrounding naming, idioms, error
@@ -147,31 +136,6 @@ not after it.
 
 ## Review implementation
 
-For changes meeting the cost-check trigger in "Implement for the outcome",
-check the resulting code for repeated work or a cheaper suitable alternative.
-Use Validation for relevant unresolved cost questions and cache-correctness
-evidence.
-
-Judge the change against the requested behavior, established guarantees and
-authorized scope. A review with no findings is complete; finding a different
-possible implementation is not evidence of a defect.
-
-Prioritize concrete safety, data-loss and correctness consequences. Apply
-the safeguard rule in SKILL.md's Failure consequences section to both added and missing protection. For an unnecessary
-mechanism, identify its lack of a required purpose, its added work, state,
-supported variants or maintenance burden, and the smallest removal. This is a
-scope or maintainability finding, not an invitation to add hardening. For missing
-protection, name the credible state, violated requirement or material consequence,
-and why existing failure behavior is insufficient.
-
-A conceivable edge case or style preference alone is not a finding. Optional
-improvements do not block acceptance or become implementation work without
-authorization; omit them unless they inform a relevant decision. Investigate
-dependency cycles, hidden state or unclear ownership through their actual impact.
-After a module split, exercise affected consumers and its import, autoload,
-registration or startup path before claiming the behavior remains reachable.
-
-For each actionable finding, state the exact location, mechanism, observable
-impact, smallest correction, and validation limit. Confirm the evidence supports
-the diagnosed cause. Do not turn personal style preferences or unrelated
-pre-existing issues into blockers.
+When reviewing the resulting implementation, including your final scoped diff,
+read [implementation review](implementation-review.md). Independent review remains
+subject to the task's authority and cadence; this reference adds no review phase.
