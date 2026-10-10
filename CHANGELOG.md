@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased - 2026-10-10
+
+- Keep the full reading procedure in one reference and load host command details when needed. Preserve complete reads and existing permissions.
+
 ## v2.1.15 - 2026-10-10
 
 - Reject direct Python script capture before execution with an actionable no-start diagnostic; preserve explicit interpreter calls and source reads.

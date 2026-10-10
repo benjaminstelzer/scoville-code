@@ -4,9 +4,8 @@ Apply these rules to plans, decisions, instructions, agent messages, handoffs,
 reviews and reports. Preserve the required output schemas and delivery contracts.
 
 When saving composed or transferred text, use a literal-safe UTF-8 file-write
-or patch operation. Do not interpolate the content into shell commands or
-`python -c` code. Finish and verify the saved content before any dependent
-command. A preparation failure stops that command. Existing write permissions
+or patch operation. Do not interpolate the content into executable code. Finish and verify saved
+content before any dependent command. A preparation failure stops that command. Existing write permissions
 still apply.
 
 Never truncate text, including command and combined tool output. The checker
@@ -17,6 +16,8 @@ Attribute truncation only to the layer supported by the evidence. A shortened
 later query does not prove that the original capture was truncated. If the
 model-visible output or effective host cap is unknown, leave the host cause
 unconfirmed and use the existing complete-output recovery.
+
+## Large reads
 
 Without an applicable limit, read complete UTF-8 directly; invent no budget.
 With an applicable limit:
@@ -65,22 +66,9 @@ If commands are forbidden, use the host's permitted UTF-8 reader in ordered
 ranges within its limits. This replaces no required helper operation. Name any
 required unread input and stop the work depending on it.
 
-Native Codex Ask advisers and Workflow children may discover the interpreter and
-run the named checker for bounded UTF-8 reads, command capture, size checks and
-oversized-result delivery, including
-when the interpreter and checker are outside the workspace. For necessary
-oversized-answer or handoff delivery only, they may also run complete-file
-publication commands and prepare temporary complete artifacts under the project's
-`.scoville/temp`. Among these roles, reviewers must not
-execute tests or change project files beyond these delivery artifacts. This
-exception permits no other project writes and does not override host tool
-restrictions or Workflow ownership and takeover gates.
+## Shell commands
 
-Run complete commands in the current tool shell without nesting another shell.
-For direct calls in PowerShell, quote the interpreter path and prefix it with `&`.
-If a shell change is necessary, use the known suitable absolute launcher.
-Pass `rg` exact existing file or directory paths, never wildcard paths. Select files with `-g "<pattern>"`, for example `rg -n -g "queue*.php" -- "search text" "<existing-directory>"`; `--run` does not expand wildcards.
-For simple inventories, use shell commands instead of nested `python -c` and `exec`.
+Before running shell commands, follow [shell command rules](shell-commands.md).
 
 Capture potentially large command output, including diagnostics, before display.
 For a permitted command use:
@@ -106,10 +94,9 @@ Choose capture before execution:
 Publication saves complete UTF-8 from that execution. Invalid UTF-8 fails with
 125 without saving.
 
-For other shell output, preserve status and complete UTF-8 bytes before display.
-PowerShell `Out-String` formats objects; POSIX command substitution strips trailing
-newlines. Neither preserves arbitrary raw output. Capture or decoding failure,
-or replacement characters introduced relative to the source, stop dependent work.
+Preserve command status and complete UTF-8 bytes before display. Capture or
+decoding failure, or replacement characters introduced relative to the source,
+stop dependent work.
 
 Prepare large text for delivery:
 
@@ -140,8 +127,8 @@ If your role cannot run commands or write files, compact your answer without
 losing required content and return the complete text through its permitted
 result channel. The caller must capture the complete result and apply the size
 check or complete-file route before displaying it through a limited tool output.
-Apart from the delivery-artifact exception above, these rules grant no additional
-command or write permission. If a known cap on that result channel itself
+These rules grant no additional command or write permission. Role instructions
+own any necessary delivery exception. If a known cap on that result channel itself
 prevents complete delivery, report the concrete transport limitation.
 
 Write for the actual recipient. All internal agent communication, including
@@ -166,9 +153,8 @@ whole requested task is complete, required checks and actual results, and specif
 missing inputs or decisions. Continue authorized work. During longer work, give
 the user brief material findings and next actions. Make the final user report
 understandable on its own.
-Writing rules change no task risk, required model, role or authority. Apart from
-the explicit delivery-artifact exception, questions and assessments authorize
-no changes.
+Writing rules change no task risk, required model, role or authority. Questions
+and assessments authorize no changes.
 
 Skill, reference, Plan, Decision and builder-fixed instruction text and
 human-addressed explanations use the shortest wording that even simpler models,
