@@ -144,22 +144,38 @@ Apart from the delivery-artifact exception above, these rules grant no additiona
 command or write permission. If a known cap on that result channel itself
 prevents complete delivery, report the concrete transport limitation.
 
-Preserve results, scope, prerequisites, decisions, permissions, boundaries and
-acceptance criteria. Supply needed facts directly or through exact accessible
-sources with an explicit reading instruction; assume no hidden history. Include
-state, dependencies, binding constraints, decision reasons, evidence limits and
-next actions needed for assessment or continuation.
+Write for the actual recipient. All internal agent communication, including
+assignments, steering, questions, results, reviews and handoffs, uses minimal
+clearly labelled fields, not conversational status prose. Send only facts needed
+for the next correct decision or action: result, decisive evidence, concrete
+defect or blocker, unresolved limit and necessary next permitted action.
+Omit narration, recaps, unchanged settings, history and known procedures unless
+the recipient needs them or a contract requires them. Use unambiguous labels
+and actions; no unexplained abbreviations or invented protocol tokens.
 
-Report whether the whole requested task is complete, required checks and actual
-results, and specific missing inputs or decisions. Continue authorized work.
-During longer work, briefly report meaningful findings and next actions. Make
-the final result, checks and remaining limits understandable on their own.
+Treat an uncertain recipient as fresh. Supply every required fact and constraint
+directly or through exact accessible sources with an explicit reading instruction;
+assume no hidden history. Preserve required schemas, statuses, exact control
+messages and user relay text, identities, permissions, stops, quiescence and
+complete-delivery contracts unchanged. Keep required facts when rewriting or
+transferring content.
+
+Human-addressed text, including unchanged user relay bodies, follows the direct
+user question and its delivery contract. A final user report states whether the
+whole requested task is complete, required checks and actual results, and specific
+missing inputs or decisions. Continue authorized work. During longer work, give
+the user brief material findings and next actions. Make the final user report
+understandable on its own.
 Writing rules change no task risk, required model, role or authority. Apart from
 the explicit delivery-artifact exception, questions and assessments authorize
 no changes.
 
-Use the shortest wording Luna understands on first reading: complete sentences
+Skill, reference, Plan, Decision and builder-fixed instruction text and
+human-addressed explanations use the shortest wording that even simpler models,
+such as Luna, Haiku or Gemini, understand on first reading: complete sentences
 with a verb or imperative, one term per meaning and plain words before jargon.
+Composed internal fields need not be complete sentences but keep one term per
+meaning.
 Avoid slash chains in prose; preserve literal paths, commands, field names and
 technical syntax. Length alone proves neither effectiveness nor performance.
 
