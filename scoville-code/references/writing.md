@@ -131,18 +131,24 @@ These rules grant no additional command or write permission. Role instructions
 own any necessary delivery exception. If a known cap on that result channel itself
 prevents complete delivery, report the concrete transport limitation.
 
-Write for the actual recipient. All internal agent communication, including
-assignments, steering, questions, results, reviews and handoffs, uses minimal
-clearly labelled fields, not conversational status prose. Send only facts needed
+Write for the actual recipient. Messages to agents, including assignments,
+steering, questions, results, reviews and handoffs, and the commentary of an
+agent that does not answer the user directly use minimal clearly labelled
+fields, not conversational status prose. Visible output is not automatically
+addressed to the user. Send only facts needed
 for the next correct decision or action: result, decisive evidence, concrete
 defect or blocker, unresolved limit and necessary next permitted action.
 Omit narration, recaps, unchanged settings, history and known procedures unless
 the recipient needs them or a contract requires them. Use unambiguous labels
 and actions; no unexplained abbreviations or invented protocol tokens.
 
-Treat an uncertain recipient as fresh. Supply every required fact and constraint
-directly or through exact accessible sources with an explicit reading instruction;
-assume no hidden history. Preserve required schemas, statuses, exact control
+Treat an uncertain recipient as fresh; assume no hidden history. Supply every
+fact and constraint needed for the next correct decision or action. For source
+text the recipient can access and is permitted to read, give its exact path and
+section with an explicit reading instruction instead of repeating it. State
+other required facts directly. Quote only wording needed as decisive evidence
+or required text from a source the recipient cannot read.
+Preserve required schemas, statuses, exact control
 messages and user relay text, identities, permissions, stops, quiescence and
 complete-delivery contracts unchanged. Keep required facts when rewriting or
 transferring content.
@@ -150,8 +156,9 @@ transferring content.
 Human-addressed text, including unchanged user relay bodies, follows the direct
 user question and its delivery contract. A final user report states whether the
 whole requested task is complete, required checks and actual results, and specific
-missing inputs or decisions. Continue authorized work. During longer work, give
-the user brief material findings and next actions. Make the final user report
+missing inputs or decisions. Continue authorized work. An agent answering the
+user directly gives brief material findings and next actions during longer work.
+Make the final user report
 understandable on its own.
 Writing rules change no task risk, required model, role or authority. Questions
 and assessments authorize no changes.

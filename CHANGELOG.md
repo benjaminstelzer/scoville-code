@@ -2,6 +2,7 @@
 
 ## Unreleased - 2026-10-10
 
+- Keep agent messages and internal commentary compact. Reference readable source text instead of copying it; preserve required facts and exact controls.
 - Keep the full reading procedure in one reference and load host command details when needed. Preserve complete reads and existing permissions.
 
 ## v2.1.15 - 2026-10-10
