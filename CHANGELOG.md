@@ -2,6 +2,9 @@
 
 ## Unreleased - 2026-10-12
 
+- Apply test-expectation criteria to affected existing assertions as well as
+  new tests; revise unjustified implementation pins without weakening guarantees.
+
 - Derive test expectations from the required behavior. Use justified bounds for
   internal work and valid measurement; preserve exact contractual guarantees.
 

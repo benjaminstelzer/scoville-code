@@ -39,7 +39,9 @@ When a change alters a symbol used elsewhere, exercise each independently
 affected contract variant; one affected use is sufficient when inspection finds
 only one variant.
 Derive test expectations from requested behavior or an independent contract,
-not solely from current implementation. Allow equivalent implementations and
+not solely from current implementation. Review existing assertions affected
+by the task on the same basis; revise expectations that merely pin the current
+implementation. Allow equivalent implementations and
 authorized behavior changes while preserving required guarantees. For internal
 work, use independently justified bounds unless the contract requires an exact
 count. Verify that the measured path ran and the measurement is valid; a broken
