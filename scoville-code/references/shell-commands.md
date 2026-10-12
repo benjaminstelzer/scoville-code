@@ -16,7 +16,8 @@ trailing newlines. Use complete raw-output capture when byte preservation matter
 
 ## Output capture and delivery
 
-Capture potentially large command output, including diagnostics, before display.
+File reading follows the shared writing rule; choose its method yourself.
+For other commands, capture potentially large output, including diagnostics, before display.
 For a permitted command use:
 `<verified-python> -X utf8 "<skill-directory>/scripts/check_text_size.py" --max-output-tokens <limit> --run -- <command> <arguments>`.
 Start Python text producers with `<verified-python> -X utf8`. To capture one, use
@@ -35,7 +36,7 @@ Choose capture before execution:
 | Effects or nonreproducible output | Configure UTF-8 and choose allowed `--publish-full --project-root "<workspace>"` before the first `--run`. Never repeat effects to save output. |
 | Safely repeatable read-only query | One rerun with that option is allowed only when the current role and phase permit writing this temporary capture file. |
 | Saving is not permitted | Narrow only while retaining every required fact, or report the missing input. |
-| Reviewer reading sources | Use the bounded reader; do not save source captures. The manager supplies large inputs. |
+| Reviewer reading sources | Read completely; do not save source captures. The manager supplies large inputs. |
 
 Publication saves complete UTF-8 from that execution. Invalid UTF-8 fails with
 125 without saving.
@@ -59,8 +60,7 @@ Prepare large text for delivery:
    required facts and safeguards.
 5. If it still cannot fit, publish complete unchanged text with
    `--publish-full --project-root "<workspace>"`. Send the absolute path, SHA-256
-   and an instruction to verify the hash and read the entire file under the
-   reader rule before dependent work. Hash verification alone is not reading.
+   and an instruction to verify the hash and read the entire file before dependent work. Hash verification alone is not reading.
 
 These artifacts are temporary: never stage or commit them. Use another agent's
 artifact as evidence only when explicitly supplied.

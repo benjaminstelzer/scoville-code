@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased - 2026-10-11
+
+- Read required files completely with an agent-chosen method. Remove the document-reading helper and multipart protocol; keep output capture and result delivery separate.
+
 ## Unreleased - 2026-10-10
 
 - Load command capture and large-result delivery only when needed; preserve complete outputs and role permissions.

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check text, read bounded UTF-8 parts, capture a command or publish complete text."""
+"""Check text size, capture a command, verify a hash or publish complete text."""
 import argparse
 import hashlib
 import json
@@ -10,56 +10,19 @@ import sys
 import subprocess
 
 
-def read_part(data, number, budget):
-    """Return one complete, labelled UTF-8 portion within the output budget."""
-    start = 0
-    current = 1
-    while True:
-        def label(end):
-            continuation = 'last' if end == len(data) else f'next={current + 1}'
-            return f'part={current} bytes={start}:{end}/{len(data)} {continuation}\n'.encode('ascii')
-
-        # The shorter final label can fit even when a nonfinal candidate cannot.
-        if len(label(len(data))) + len(data) - start <= budget:
-            end = len(data)
-        else:
-            low, high = start, min(len(data) - 1, start + budget)
-            while low < high:
-                middle = (low + high + 1) // 2
-                if len(label(middle)) + middle - start <= budget:
-                    low = middle
-                else:
-                    high = middle - 1
-            end = low
-        # Never split a UTF-8 character. Prefer a complete line when possible.
-        while end < len(data) and end > start and data[end] & 0xc0 == 0x80:
-            end -= 1
-        if end < len(data):
-            newline = data.rfind(b'\n', start, end)
-            if newline >= start:
-                end = newline + 1
-        if len(label(end)) + end - start > budget or (end == start and start < len(data)):
-            raise ValueError('output budget cannot fit the part label and next UTF-8 character')
-        if current == number:
-            return label(end) + data[start:end]
-        if end == len(data):
-            raise ValueError(f'--part exceeds the final part {current}')
-        start, current = end, current + 1
-
-
 class TextParser(argparse.ArgumentParser):
-    part_budget = None
+    output_budget = None
     capture_mode = False
 
     def exit(self, status=0, message=None):
         super().exit(125 if status and self.capture_mode else status, message)
 
     def error(self, message):
-        if self.part_budget is None:
+        if self.output_budget is None:
             super().error(message)
         # Never cut a diagnostic to make it fit. Exit status remains authoritative.
         diagnostic = ('error: ' + message + '\n').encode('utf-8')
-        if len(diagnostic) <= self.part_budget:
+        if len(diagnostic) <= self.output_budget:
             sys.stderr.buffer.write(diagnostic)
         self.exit(2)
 
@@ -160,18 +123,18 @@ def main():
     parser = TextParser(description=__doc__, allow_abbrev=False)
     options = sys.argv[:sys.argv.index('--run') + 1] if '--run' in sys.argv else sys.argv
     parser.capture_mode = '--run' in options
-    if '--run' in options or '--part' in options or '--sha256' in options or any(arg.startswith('--part=') for arg in options):
+    if '--run' in options or '--sha256' in options:
         for index, arg in enumerate(options):
             value = (options[index + 1] if arg == '--max-output-tokens' and index + 1 < len(options)
                      else arg.partition('=')[2] if arg.startswith('--max-output-tokens=') else None)
             if value is not None:
                 try:
-                    parser.part_budget = max(0, int(value) * 4 // 5)
+                    parser.output_budget = max(0, int(value) * 4 // 5)
                 except ValueError:
                     pass
     source = parser.add_mutually_exclusive_group(required=True)
     source.add_argument('--file', type=Path,
-                        help='UTF-8 document input, never a Python program: use --part 1 for bounded reading; omit --part for a size check of complete planned output')
+                        help='UTF-8 planned output or artifact for size check, hash verification or publication')
     source.add_argument('--run', action='store_true',
                         help='capture the complete native command argv after --, without a shell or automatic retry; put checker options before --run')
     parser.add_argument('--max-output-tokens', type=int,
@@ -180,18 +143,14 @@ def main():
                         help="publish complete unchanged text when required content cannot fit or the active role's transfer contract independently requires file delivery")
     parser.add_argument('--project-root', type=Path,
                         help='existing absolute workspace, required only with --publish-full')
-    parser.add_argument('--part', type=int,
-                        help='read this one-based unchanged UTF-8 portion within the declared output budget')
     parser.add_argument('--sha256', action='store_true',
-                        help='verify an expected file hash: emit only original UTF-8 byte count and SHA-256; then read all parts')
+                        help='verify an expected file hash: emit only original UTF-8 byte count and SHA-256; then read the complete file')
     # An optional argparse REMAINDER does not consume the -- separator. Split
     # the native argv explicitly so child options never become checker options.
     args = parser.parse_args(options[1:])
     args.run = sys.argv[sys.argv.index('--run') + 1:] if args.run else None
-    if args.sha256 and (args.max_output_tokens is None or args.part is not None or args.publish_full or args.project_root or args.run is not None):
-        parser.error('--sha256 requires --file <artifact> --max-output-tokens <limit>; omit --part, --publish-full, --project-root and --run')
-    if args.part is not None and (args.part < 1 or args.publish_full or args.project_root or args.run is not None):
-        parser.error('--part must be positive and cannot be combined with --publish-full, --project-root or --run')
+    if args.sha256 and (args.max_output_tokens is None or args.publish_full or args.project_root or args.run is not None):
+        parser.error('--sha256 requires --file <artifact> --max-output-tokens <limit>; omit --publish-full, --project-root and --run')
     if args.run is not None and (args.max_output_tokens is None or args.run[:1] != ['--'] or len(args.run) < 2):
         parser.error('--run requires --max-output-tokens <positive-limit> and -- followed by a complete command argument list')
     if args.max_output_tokens is None and not args.publish_full:
@@ -215,13 +174,6 @@ def main():
         output = (json.dumps({'utf8_bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest()}) + '\n').encode('ascii')
         if len(output) > args.max_output_tokens * 4 // 5:
             parser.error('output budget cannot fit SHA-256 metadata; retain the binding limit and leave verification incomplete')
-        sys.stdout.buffer.write(output)
-        return 0
-    if args.part is not None:
-        try:
-            output = read_part(data, args.part, args.max_output_tokens * 4 // 5)
-        except ValueError as error:
-            parser.error(str(error))
         sys.stdout.buffer.write(output)
         return 0
     # UTF-8 bytes are a conservative size proxy, not a model-specific token count.

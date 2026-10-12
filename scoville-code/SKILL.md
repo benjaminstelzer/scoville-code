@@ -212,19 +212,12 @@ Use that executable wherever examples say `python` or `<verified-python>`,
 including Python commands after `--run --`.
 Report a missing runtime only when no suitable installed interpreter is found.
 
-Before shell calls, follow [shell command rules](references/shell-commands.md).
+Before helper calls, follow [shell command rules](references/shell-commands.md).
 
 ## Runtime helpers
 
 Use the bundled helpers for their operations. Read their invocation instructions,
 not their source, unless diagnosing a failure.
-
-When a host output limit applies and a file may exceed it, read it with the bundled reader.
-Follow the [large-read rules](references/writing.md#large-reads) before the first such read.
-Without suitable Python 3.11+, first read only the check_text_size reference below. Use
-a native UTF-8 reader and ordered unchanged parts, measuring each complete
-output including labels before display against `floor(limit * 4 / 5)` bytes.
-With no limit, read it completely. Without a safe reader, stop dependent work.
 
 | Condition | Required route |
 | --- | --- |
