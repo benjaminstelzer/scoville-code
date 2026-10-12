@@ -12,15 +12,20 @@ effects or nonreproducible required results, prepare permitted complete saving
 before the first execution; never rerun merely to add saving. A reviewer does not
 save source captures. If no safe capture is available, stop the dependent work.
 
-For a supplied expected SHA-256, compare it with a host tool's hash of the
-original bytes; a mismatch or failure stops dependent work. Hash verification
-does not replace reading the complete file.
+For a new supplied artifact, compare its expected SHA-256 with a host tool's
+hash of the original bytes once. Retain the verification for unchanged rereads;
+verify again if changed or uncertain. A mismatch or failure stops dependent
+work. Hash verification does not replace complete reading.
 
 For composed output or permitted result delivery, prepare the complete planned output as UTF-8 without displaying
 it. Include every label and combined result. Retain the smallest applicable
 declared or explicitly overridden tool-output limit. Do not guess or increase it.
 The shared writing rules determine whether a limit applies and preserve
 read-only roles. Without an applicable declared limit, no numeric check is due.
+
+Return complete captured command output directly when it fits; save it from
+the same execution only when necessary. Explicit composed-file delivery remains
+permitted by its transfer contract.
 
 When a limit applies, count the file's bytes with an available file-size tool. Use at most
 `floor(limit_in_tokens * 4 / 5)` UTF-8 bytes as the same conservative target.
@@ -43,8 +48,8 @@ below. Without a content limit, omit the size check and make no fit claim.
 If the required byte count, SHA-256, path check or publication operation is
 unavailable or fails, stop with its diagnostic.
 
-Return only the size result or the absolute published path and SHA-256. Say that
-the file contains the complete unchanged text. Explicitly instruct the recipient
+For a size check, return its result. For file publication, return the absolute
+path and SHA-256. Say that the file contains the complete unchanged text. Explicitly instruct the recipient
 to verify the hash over original bytes and read the entire file as UTF-8
 through complete outputs that fit any applicable limits before dependent work.
 Existing role, read-stage and transfer gates still apply.
