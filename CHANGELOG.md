@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased - 2026-10-12
+
+- Derive test expectations from the required behavior. Use justified bounds for
+  internal work and valid measurement; preserve exact contractual guarantees.
+
 ## Unreleased - 2026-10-11
 
 - Read required files completely with an agent-chosen method. Remove the document-reading helper and multipart protocol; keep output capture and result delivery separate.

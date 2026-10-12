@@ -37,10 +37,13 @@ decisive check. Risk alone does not expand the task.
 
 When a change alters a symbol used elsewhere, exercise each independently
 affected contract variant; one affected use is sufficient when inspection finds
-only one variant. Tests that mirror implementation without protecting behavior
-are not proof.
-For every behavior test, derive expected results from the requested behavior
-or an independent contract, not solely from the implementation being checked.
+only one variant.
+Derive test expectations from requested behavior or an independent contract,
+not solely from current implementation. Allow equivalent implementations and
+authorized behavior changes while preserving required guarantees. For internal
+work, use independently justified bounds unless the contract requires an exact
+count. Verify that the measured path ran and the measurement is valid; a broken
+or skipped measurement cannot prove success.
 An independently implemented actual consumer can establish boundary expectations.
 A constant copied by both sides or the producer's own round trip does not
 establish compatibility.
