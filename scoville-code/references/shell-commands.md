@@ -38,8 +38,9 @@ Choose capture before execution:
 | Saving is not permitted | Narrow only while retaining every required fact, or report the missing input. |
 | Reviewer reading sources | Read completely; do not save source captures. The manager supplies large inputs. |
 
-Publication saves complete UTF-8 from that execution. Invalid UTF-8 fails with
-125 without saving.
+With `--run`, complete output that fits is returned directly, even with
+`--publish-full`; larger output is saved from that same execution. Invalid
+UTF-8 fails with 125 without saving.
 
 Preserve command status and complete UTF-8 bytes before display. Capture or
 decoding failure, or replacement characters introduced relative to the source,
@@ -60,7 +61,10 @@ Prepare large text for delivery:
    required facts and safeguards.
 5. If it still cannot fit, publish complete unchanged text with
    `--publish-full --project-root "<workspace>"`. Send the absolute path, SHA-256
-   and an instruction to verify the hash and read the entire file before dependent work. Hash verification alone is not reading.
+   and an instruction to verify that supplied artifact once and read the entire
+   file before dependent work. Retain that verification for unchanged rereads;
+   changed or uncertain artifacts require verification again. Hash verification
+   alone is not reading.
 
 These artifacts are temporary: never stage or commit them. Use another agent's
 artifact as evidence only when explicitly supplied.

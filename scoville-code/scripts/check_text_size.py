@@ -97,12 +97,12 @@ def capture_command(args):
         header = (f'exit={known_exit} stdout_bytes={len(result.stdout)} '
                   f'stderr_bytes={len(result.stderr)}\n').encode('ascii')
         rendered = header + b'stdout:\n' + result.stdout + b'\nstderr:\n' + result.stderr
-        if args.publish_full:
+        if len(rendered) <= budget:
+            output = rendered
+        elif args.publish_full:
             path, digest = publish_full(args.project_root, rendered)
             output = (json.dumps({'status': 'complete_file', 'output_complete': False,
                 'exit_code': known_exit, 'full_file': path, 'sha256': digest}, ensure_ascii=True) + '\n').encode('ascii')
-        elif len(rendered) <= budget:
-            output = rendered
         else:
             output = (f'output_complete=false exit={known_exit} stdout_bytes={len(result.stdout)} '
                       f'stderr_bytes={len(result.stderr)}\n').encode('ascii')
@@ -140,7 +140,7 @@ def main():
     parser.add_argument('--max-output-tokens', type=int,
                         help='actual smallest applicable command/outer tool-output limit, from the tool declaration or explicit override')
     parser.add_argument('--publish-full', action='store_true',
-                        help="publish complete unchanged text when required content cannot fit or the active role's transfer contract independently requires file delivery")
+                        help="with --run, save complete output only if it cannot fit; with --file, explicitly publish complete unchanged text")
     parser.add_argument('--project-root', type=Path,
                         help='existing absolute workspace, required only with --publish-full')
     parser.add_argument('--sha256', action='store_true',
@@ -203,7 +203,7 @@ def main():
         except (OSError, ValueError) as error:
             parser.error(f'complete-file publication failed: {error}')
         result['status'] = 'complete_file'
-        result['instruction'] = 'Send this absolute path and SHA-256. It contains the complete unchanged text; the receiver must verify the SHA-256 and read the entire file at its permitted stage before dependent work.'
+        result['instruction'] = 'Send this absolute path and SHA-256. It contains the complete unchanged text; the receiver must verify this artifact once and read the entire file at its permitted stage before dependent work.'
     print(json.dumps(result, ensure_ascii=True))
     return 0
 
