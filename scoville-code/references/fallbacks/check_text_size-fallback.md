@@ -14,22 +14,7 @@ save source captures. If no safe capture is available, stop the dependent work.
 
 For a supplied expected SHA-256, compare it with a host tool's hash of the
 original bytes; a mismatch or failure stops dependent work. Hash verification
-does not replace the complete UTF-8 read below.
-
-For an input-file read, use an available native UTF-8 reader without altering or
-copying the input. This includes Skill references. Several files or parts in one
-command or outer tool call form one output; measure that combined output first,
-otherwise use separate individually checked outer tool calls. Strictly decode
-UTF-8 before output; a decoder that replaces invalid bytes does not validate
-them. Read every ordered part
-at character boundaries, measuring each actual output including labels against
-`floor(limit_in_tokens * 4 / 5)` bytes. Every nonempty part must make progress.
-Do not compact required input, skip text or recover truncated output. A reviewer
-does not write source captures. Without a safe complete read, report the specific
-unread input and stop dependent work. With no applicable limit, read complete
-UTF-8 directly. File-size checks alone do not cover formatted or combined output.
-A failed preflight never permits an unmeasured read. Correct the error; when size
-is the reason, read smaller ordered UTF-8 parts, each measured before output.
+does not replace reading the complete file.
 
 For composed output or permitted result delivery, prepare the complete planned output as UTF-8 without displaying
 it. Include every label and combined result. Retain the smallest applicable
