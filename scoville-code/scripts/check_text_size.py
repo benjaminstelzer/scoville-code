@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check text size, capture a command, verify a hash or publish complete text."""
+"""Check text size, capture a command or publish complete text."""
 import argparse
 import hashlib
 import json
@@ -33,8 +33,17 @@ def publish_full(root, data):
     if not directory.is_relative_to(root):
         raise ValueError(f'.scoville/temp resolved to "{directory}" and must stay inside --project-root "{root}"; use a direct contained temporary directory')
     directory.mkdir(parents=True, exist_ok=True)
-    digest = hashlib.sha256(data).hexdigest()
-    target = directory / (digest + '.txt')
+    # Keep published results out of Git status. Never replace an existing ignore
+    # file or follow a link; tracked files remain tracked.
+    try:
+        marker = os.open(directory / '.gitignore', os.O_WRONLY | os.O_CREAT | os.O_EXCL | getattr(os, 'O_BINARY', 0))
+    except FileExistsError:
+        pass
+    else:
+        with os.fdopen(marker, 'wb') as stream:
+            stream.write(b'*\n')
+    # A content-derived name keeps one immutable file per text.
+    target = directory / (hashlib.sha256(data).hexdigest() + '.txt')
     temporary = None
     try:
         with tempfile.NamedTemporaryFile(dir=directory, delete=False) as stream:
@@ -48,7 +57,7 @@ def publish_full(root, data):
     finally:
         if temporary is not None:
             temporary.unlink()
-    return str(target), digest
+    return str(target)
 
 
 def capture_command(args):
@@ -72,8 +81,8 @@ def capture_command(args):
         if not directory.is_relative_to(args.project_root.resolve()):
             return error('.scoville/temp escapes --project-root')
         minimum = (json.dumps({'status': 'complete_file', 'output_complete': False,
-            'exit_code': -2147483648, 'full_file': str(directory / ('0' * 64 + '.txt')),
-            'sha256': '0' * 64}, ensure_ascii=True) + '\n').encode('ascii')
+            'exit_code': -2147483648, 'full_file': str(directory / ('0' * 64 + '.txt'))},
+            ensure_ascii=True) + '\n').encode('ascii')
     if len(minimum) > budget:
         return error('budget cannot fit complete status metadata')
     if not command:
@@ -100,9 +109,9 @@ def capture_command(args):
         if len(rendered) <= budget:
             output = rendered
         elif args.publish_full:
-            path, digest = publish_full(args.project_root, rendered)
             output = (json.dumps({'status': 'complete_file', 'output_complete': False,
-                'exit_code': known_exit, 'full_file': path, 'sha256': digest}, ensure_ascii=True) + '\n').encode('ascii')
+                'exit_code': known_exit, 'full_file': publish_full(args.project_root, rendered)},
+                ensure_ascii=True) + '\n').encode('ascii')
         else:
             output = (f'output_complete=false exit={known_exit} stdout_bytes={len(result.stdout)} '
                       f'stderr_bytes={len(result.stderr)}\n').encode('ascii')
@@ -123,7 +132,7 @@ def main():
     parser = TextParser(description=__doc__, allow_abbrev=False)
     options = sys.argv[:sys.argv.index('--run') + 1] if '--run' in sys.argv else sys.argv
     parser.capture_mode = '--run' in options
-    if '--run' in options or '--sha256' in options:
+    if '--run' in options:
         for index, arg in enumerate(options):
             value = (options[index + 1] if arg == '--max-output-tokens' and index + 1 < len(options)
                      else arg.partition('=')[2] if arg.startswith('--max-output-tokens=') else None)
@@ -134,7 +143,7 @@ def main():
                     pass
     source = parser.add_mutually_exclusive_group(required=True)
     source.add_argument('--file', type=Path,
-                        help='UTF-8 planned output or artifact for size check, hash verification or publication')
+                        help='UTF-8 planned output for size check or publication')
     source.add_argument('--run', action='store_true',
                         help='capture the complete native command argv after --, without a shell or automatic retry; put checker options before --run')
     parser.add_argument('--max-output-tokens', type=int,
@@ -143,14 +152,10 @@ def main():
                         help="with --run, save complete output only if it cannot fit; with --file, explicitly publish complete unchanged text")
     parser.add_argument('--project-root', type=Path,
                         help='existing absolute workspace, required only with --publish-full')
-    parser.add_argument('--sha256', action='store_true',
-                        help='verify an expected file hash: emit only original UTF-8 byte count and SHA-256; then read the complete file')
     # An optional argparse REMAINDER does not consume the -- separator. Split
     # the native argv explicitly so child options never become checker options.
     args = parser.parse_args(options[1:])
     args.run = sys.argv[sys.argv.index('--run') + 1:] if args.run else None
-    if args.sha256 and (args.max_output_tokens is None or args.publish_full or args.project_root or args.run is not None):
-        parser.error('--sha256 requires --file <artifact> --max-output-tokens <limit>; omit --publish-full, --project-root and --run')
     if args.run is not None and (args.max_output_tokens is None or args.run[:1] != ['--'] or len(args.run) < 2):
         parser.error('--run requires --max-output-tokens <positive-limit> and -- followed by a complete command argument list')
     if args.max_output_tokens is None and not args.publish_full:
@@ -167,15 +172,7 @@ def main():
         data = args.file.read_bytes()
         data.decode('utf-8')
     except (OSError, UnicodeError) as error:
-        if args.sha256:
-            parser.error(f'--file "{args.file}" must be a readable UTF-8 artifact; leave hash verification incomplete; do not alter or copy the artifact: {error}')
         parser.error(f'--file "{args.file}" must be a readable UTF-8 file; provide the complete UTF-8 planned output: {error}')
-    if args.sha256:
-        output = (json.dumps({'utf8_bytes': len(data), 'sha256': hashlib.sha256(data).hexdigest()}) + '\n').encode('ascii')
-        if len(output) > args.max_output_tokens * 4 // 5:
-            parser.error('output budget cannot fit SHA-256 metadata; retain the binding limit and leave verification incomplete')
-        sys.stdout.buffer.write(output)
-        return 0
     # UTF-8 bytes are a conservative size proxy, not a model-specific token count.
     result = {'utf8_bytes': len(data)}
     if args.max_output_tokens is not None:
@@ -195,15 +192,15 @@ def main():
             'Remove only irrelevant information. Preserve every required fact and safeguard. '
             'Never truncate text or automatically increase the limit. '
             'If essential text cannot fit, use --publish-full --project-root <workspace> '
-            'and send the returned absolute path and SHA-256 instead of a partial result.'
+            'and send the returned absolute path instead of a partial result.'
         )
     if args.publish_full:
         try:
-            result['full_file'], result['sha256'] = publish_full(args.project_root, data)
+            result['full_file'] = publish_full(args.project_root, data)
         except (OSError, ValueError) as error:
             parser.error(f'complete-file publication failed: {error}')
         result['status'] = 'complete_file'
-        result['instruction'] = 'Send this absolute path and SHA-256. It contains the complete unchanged text; the receiver must verify this artifact once and read the entire file at its permitted stage before dependent work.'
+        result['instruction'] = 'Send this absolute path. It contains the complete unchanged text; the receiver must read the entire file at its permitted stage before dependent work.'
     print(json.dumps(result, ensure_ascii=True))
     return 0
 

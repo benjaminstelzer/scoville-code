@@ -12,11 +12,6 @@ effects or nonreproducible required results, prepare permitted complete saving
 before the first execution; never rerun merely to add saving. A reviewer does not
 save source captures. If no safe capture is available, stop the dependent work.
 
-For a new supplied artifact, compare its expected SHA-256 with a host tool's
-hash of the original bytes once. Retain the verification for unchanged rereads;
-verify again if changed or uncertain. A mismatch or failure stops dependent
-work. Hash verification does not replace complete reading.
-
 For composed output or permitted result delivery, prepare the complete planned output as UTF-8 without displaying
 it. Include every label and combined result. Retain the smallest applicable
 declared or explicitly overridden tool-output limit. Do not guess or increase it.
@@ -49,7 +44,7 @@ If the required byte count, SHA-256, path check or publication operation is
 unavailable or fails, stop with its diagnostic.
 
 For a size check, return its result. For file publication, return the absolute
-path and SHA-256. Say that the file contains the complete unchanged text. Explicitly instruct the recipient
-to verify the hash over original bytes and read the entire file as UTF-8
+path. Say that the file contains the complete unchanged text. Explicitly instruct the recipient
+to read the entire file as UTF-8
 through complete outputs that fit any applicable limits before dependent work.
 Existing role, read-stage and transfer gates still apply.
