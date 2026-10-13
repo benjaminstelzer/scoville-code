@@ -2,6 +2,10 @@
 
 ## Unreleased - 2026-10-13
 
+- Check ordinary generated and copied outputs through current creation and
+  expected results; use content or hash comparisons for an actual requirement
+  or concrete defect, not as a routine gate.
+
 - Keep saved oversized results out of Git status with `.scoville/temp/.gitignore`;
   existing ignore files and tracked files stay unchanged.
 - Send oversized results as a file path only; recipients read the whole file
