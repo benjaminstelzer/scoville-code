@@ -59,8 +59,10 @@ package or import structure, or agreement between version declarations that
 consumers read. Compare changing values with their owner or each other instead
 of pinning their current values. Prose read as instructions, documentation or
 diagnostics is not such a contract; test its effect through behavior. Exact
-comparisons remain appropriate for complete unchanged data transfer and
-generated artifacts checked against their current canonical owner. For
+comparisons protect complete unchanged data transfer and independently required
+artifact integrity. For ordinary generated or copied outputs, check successful
+current creation and the expected outputs. Compare content or hashes only when
+the task, a binding product contract or a concrete defect requires it. For
 diagnostics, check failure status, the identified input or condition, required
 corrective information and the corrected invocation, not sentence wording.
 Assert exact prose only when the user explicitly requires that text. Preserve
