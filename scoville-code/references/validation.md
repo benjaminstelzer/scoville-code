@@ -52,21 +52,18 @@ establish compatibility.
 Controlled deterministic checks remain sufficient for behavior that does not
 claim such a boundary.
 
-Test required outcomes and behavior. Check source material only to protect a
-technical contract that exists independently of the test and that an actual
-program, build or host interface depends on, such as a parsed format, required
-package or import structure, or agreement between version declarations that
-consumers read. Compare changing values with their owner or each other instead
-of pinning their current values. Prose read as instructions, documentation or
-diagnostics is not such a contract; test its effect through behavior. Exact
-comparisons protect complete unchanged data transfer and independently required
-artifact integrity. For ordinary generated or copied outputs, check successful
-current creation and the expected outputs. Compare content or hashes only when
-the task, a binding product contract or a concrete defect requires it. For
-diagnostics, check failure status, the identified input or condition, required
-corrective information and the corrected invocation, not sentence wording.
-Assert exact prose only when the user explicitly requires that text. Preserve
-the required outcome when replacing a wording assertion with a behavior check.
+Test required outcomes and behavior with expectations from an independent
+contract. Use this distinction:
+
+| Subject | Meaningful evidence | Avoid |
+| --- | --- | --- |
+| Parsed format, package/import structure or consumer-read version declarations | Protect the actual program/build/host contract; compare changing values with their owner or each other. | Pinning incidental source text or today's values. |
+| Instruction/documentation prose | Verify its effect through behavior. | Exact wording assertions unless the user requires that wording. |
+| Diagnostics | Failure status, identified input/condition, corrective information and corrected invocation. | Sentence matching. |
+| Complete unchanged transfer or independently required artifact integrity | Exact content comparisons where that contract requires them. | Replacing exactness with an insufficient approximation. |
+| Ordinary generated/copied outputs | Successful current creation and expected outputs. | Content/hash comparisons without task, binding contract or concrete defect requiring them. |
+
+Keep the required outcome when replacing wording assertions with behavior checks.
 
 A stub, mock, or hand-built fixture can support only the behavior actually
 exercised. If a claim depends on a dependency's behavior or a producer-consumer
@@ -174,6 +171,5 @@ could not run, say so and narrow the claim. Never cite stale evidence as proof o
 the final change.
 
 Prefer decisive status, failures and observations to unnecessary counts. Compute
-a count only when it affects acceptance or a decision. In PowerShell, make collections explicit,
-for example `@($report.checks.PSObject.Properties).Count`; do not report per-element
-`.Count` values as one total.
+a count only when it affects acceptance or a decision; verify the collection
+total rather than reporting per-element counts.
