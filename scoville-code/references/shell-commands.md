@@ -13,6 +13,9 @@ complex logic, use a literal-safe file or script rather than nested inline code.
 
 PowerShell `Out-String` formats objects; POSIX command substitution removes
 trailing newlines. Use complete raw-output capture when byte preservation matters.
+Before piping text into Python from PowerShell, set
+`$OutputEncoding = [System.Text.UTF8Encoding]::new($false)` and start Python
+with `-X utf8` so source text and stdin agree.
 
 ## Output capture and delivery
 
@@ -56,15 +59,15 @@ Prepare large text for delivery:
    or permissibly prepared file use:
    `<verified-python> -X utf8 "<skill-directory>/scripts/check_text_size.py" --file "<text>" --max-output-tokens <limit>`.
    Keep each quoted path one argument and launcher tokens such as `py -3` separate.
+   The checker measures the complete emitted text, not opaque host framing or
+   exact provider token counts.
 
 4. If exceeded, compact wording and remove irrelevant material while preserving
    required facts and safeguards.
 5. If it still cannot fit, publish complete unchanged text with
-   `--publish-full --project-root "<workspace>"`. Send the absolute path, SHA-256
-   and an instruction to verify that supplied artifact once and read the entire
-   file before dependent work. Retain that verification for unchanged rereads;
-   changed or uncertain artifacts require verification again. Hash verification
-   alone is not reading.
+   `--publish-full --project-root "<workspace>"`. Send the absolute path and an
+   instruction to read the entire file before dependent work. Published files
+   are never overwritten.
 
 These artifacts are temporary: never stage or commit them. Use another agent's
 artifact as evidence only when explicitly supplied.
