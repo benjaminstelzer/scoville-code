@@ -26,11 +26,9 @@ searches unless named or implicated by evidence. Use bounded queries or targeted
 lookups instead of complete recursive lists when they identify candidates. Require
 neither a complete size inventory nor a fixed byte limit.
 
-Do not continue truncated output or recover omitted text. Rerun the needed read
-with complete prechecked output under the shared writing rules. Narrow selection
-only while retaining all information needed for the current question. A line
-limit cannot bound a large JSONL event; filter an explicitly needed large source
-locally before returning relevant fields.
+Recover incomplete required reads under the shared writing rules before
+continuing. A line limit cannot bound a large JSONL event; filter an explicitly
+needed large source locally while retaining every required fact.
 
 For a contained change, stop when the owner, affected behavior, and focused
 check are clear. Inspect affected consumers and serialization, persistence,

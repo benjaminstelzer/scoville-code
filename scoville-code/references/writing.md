@@ -18,14 +18,14 @@ Read every required file completely before dependent work. Choose a permitted
 method yourself. If a read is incomplete or fails, obtain the missing content.
 If this is impossible, name the unread input and stop dependent work.
 
-For operations other than file reading, read [command and output-delivery rules](shell-commands.md)
+For operations other than file reading, read [shell rules and their conditional delivery route](shell-commands.md)
 before shell commands, complete-file preparation or output that may exceed an
 applicable limit.
 
 If your role cannot run commands or write files, compact your answer without
 losing required content and return the complete text through its permitted
 result channel. The caller must capture the complete result and apply the
-[size check or complete-file route](shell-commands.md#output-capture-and-delivery)
+[size check or complete-file route](output-delivery.md)
 before displaying it through a limited tool output. If a known cap on that
 result channel itself prevents complete delivery, report the concrete transport
 limitation.

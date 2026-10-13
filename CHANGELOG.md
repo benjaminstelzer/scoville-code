@@ -2,6 +2,8 @@
 
 ## Unreleased - 2026-10-13
 
+- Load detailed command capture and full-file delivery only when needed. Keep complete output, failure diagnostics and role permissions.
+
 - Check ordinary generated and copied outputs through current creation and
   expected results; use content or hash comparisons for an actual requirement
   or concrete defect, not as a routine gate.
