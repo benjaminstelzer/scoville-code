@@ -29,10 +29,16 @@ For machine reports, when commands are permitted, use this order:
 
 1. Parse the complete data with code without displaying raw or reformatted
    report contents. If needed, inspect its structure through code and display
-   only the needed field names, types and collection sizes.
+   only the needed field names, types, collection sizes and distinct values of
+   status or other control fields.
 2. Extract required text passages and read them completely for their meaning.
-   Run the required checks over the complete checked scope. Parsing alone
-   proves no result.
+   Before writing filters or assertions, take the actual values from the data
+   and their meaning from the schema, producer or binding contract; do not
+   guess literals. Different wording with the same established meaning is no
+   defect unless exact values are binding. Unknown or contradictory meanings
+   stay unresolved and establish neither success nor permission. Run the
+   required checks over the complete checked scope. Parsing alone proves no
+   result.
 3. Display only the checked collection and field names, decisive values,
    results and all deviations within that scope. For collection checks,
    display the processed and expected counts, not every passing path.
