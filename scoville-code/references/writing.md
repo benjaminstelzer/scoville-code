@@ -32,6 +32,10 @@ For machine reports, when commands are permitted, use this order:
    only the needed field names, types, collection sizes and distinct values of
    status or other control fields.
 2. Extract required text passages and read them completely for their meaning.
+   Required passages include prose whose wording matters, such as diagnostics,
+   messages and schema descriptions. Objects, arrays and serialized structured
+   state remain report data, including inside string fields; inspect and
+   compare them in code rather than displaying them as text passages.
    Before writing filters or assertions, take the actual values from the data
    and their meaning from the schema, producer or binding contract; do not
    guess literals. Different wording with the same established meaning is no
@@ -39,9 +43,17 @@ For machine reports, when commands are permitted, use this order:
    stay unresolved and establish neither success nor permission. Run the
    required checks over the complete checked scope. Parsing alone proves no
    result.
-3. Display only the checked collection and field names, decisive values,
-   results and all deviations within that scope. For collection checks,
-   display the processed and expected counts, not every passing path.
+3. Before executing a command that displays machine data, check its output
+   expressions and emitted values against steps 1 and 2 and the limits below.
+   Compare structured values, including states before and after a change, in code.
+   Build a compact result from the checks; selecting or serializing report
+   subtrees or whole state strings is not a compact result. Display only checked
+   collection and field names, decisive values, results and every relevant
+   deviation. Include the identity or property, decisive expected and actual
+   values, and complete necessary diagnostic text that explain each deviation,
+   as applicable. For collection checks, include processed and expected counts,
+   not every passing entry. Correct an overbroad output expression before
+   execution; do not print this self-check.
 
 Parse errors, missing required fields, wrong types or unsupported formats in
 the checked scope prevent a pass. Do not replace a complete check with sampling.
