@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased - 2026-10-14
+
+- Parse machine reports completely and display checked facts and all in-scope deviations. Reuse fully read shared rules across Skills without hiding required inputs.
+
 ## Unreleased - 2026-10-13
 
 - Load detailed command capture and full-file delivery only when needed. Keep complete output, failure diagnostics and role permissions.
