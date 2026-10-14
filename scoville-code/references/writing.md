@@ -4,9 +4,11 @@ Apply these rules to plans, decisions, instructions, agent messages, handoffs,
 reviews and reports. Preserve the required output schemas and delivery contracts.
 
 Fully read shared writing and shell rules of the same build count as loaded
-across Suite Skills, including routes that name their writing reference. Reload
-after an explicit reload, changed rules or build, or missing, incomplete or
-uncertain retained text. Load newly needed specialized references normally.
+across Suite Skills. Do not reread retained shared rules merely because another
+Skill route names the same writing or shell reference. Reload them after an
+explicit reload, changed rules or build, or missing, incomplete or uncertain
+retained text. Treat retained text as uncertain only for a concrete reason,
+not general caution. Load newly needed specialized references normally.
 
 When saving composed or transferred text, use a literal-safe UTF-8 file-write
 or patch operation. Do not interpolate the content into executable code. Finish saving
@@ -23,16 +25,23 @@ Read every required file completely before dependent work. Choose a permitted
 method yourself. If a read is incomplete or fails, obtain the missing content.
 If this is impossible, name the unread input and stop dependent work.
 
-For machine reports, use permitted commands to parse the complete data and run
-the required checks. Show only the checked collection and fields, decisive
-values, results and all deviations within that scope. For collection checks,
-show the processed and expected counts, not every passing path. Parsing alone
-proves no result; read required text passages for their meaning. Parse errors,
-missing required fields, wrong types or unsupported formats in the checked
-scope prevent a pass. Do not replace a complete check with sampling. Roles
-without command permission use the complete reading method above. Instructions,
-original assignments, native finals and binding Plan or Decision text still
-require complete reading; parsing does not replace it.
+For machine reports, when commands are permitted, use this order:
+
+1. Parse the complete data with code without displaying raw or reformatted
+   report contents. If needed, inspect its structure through code and display
+   only the needed field names, types and collection sizes.
+2. Extract required text passages and read them completely for their meaning.
+   Run the required checks over the complete checked scope. Parsing alone
+   proves no result.
+3. Display only the checked collection and field names, decisive values,
+   results and all deviations within that scope. For collection checks,
+   display the processed and expected counts, not every passing path.
+
+Parse errors, missing required fields, wrong types or unsupported formats in
+the checked scope prevent a pass. Do not replace a complete check with sampling.
+Roles without command permission use the complete reading method above.
+Instructions, original assignments, native finals and binding Plan or Decision
+text still require complete reading; parsing does not replace it.
 
 For operations other than file reading, read [shell rules and their conditional delivery route](shell-commands.md)
 before shell commands, complete-file preparation or output that may exceed an
@@ -52,8 +61,11 @@ not conversational prose. So does the visible commentary of an agent that does
 not answer the user directly. Send only facts needed
 for the next correct decision or action: result, decisive evidence, concrete
 defect or blocker, unresolved limit and necessary next permitted action.
-Omit narration, recaps, unchanged settings, history and known procedures unless
-the recipient needs them or a contract requires them. Use unambiguous labels
+Omit narration, recaps, raw logs, inventories, raw output of passing checks,
+unchanged settings, history and known procedures unless the recipient needs
+them or a contract requires them. When reproduction needs complete machine
+data, cite the exact path of the existing file instead of copying it.
+Use unambiguous labels
 and actions; no unexplained abbreviations or invented protocol tokens.
 
 Treat an uncertain recipient as fresh; assume no hidden history. Supply every
