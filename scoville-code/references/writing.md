@@ -3,6 +3,16 @@
 Apply these rules to plans, decisions, instructions, agent messages, handoffs,
 reviews and reports. Preserve the required output schemas and delivery contracts.
 
+Before reading or displaying an input, distinguish its content:
+
+| Input | Required handling |
+| --- | --- |
+| Machine reports, logs and structured state | Evaluate the full relevant scope in code. Display checked results and necessary prose diagnostics, never raw records, payloads or stored state. |
+| Instructions, original assignments, native finals, binding Plan or Decision text, and needed source text | Read the required text completely. |
+
+This applies to direct tool results, saved captures and failures. A filename,
+capture or size check changes delivery, not what may be displayed.
+
 Fully read shared writing and shell rules of the same build count as loaded
 across Suite Skills. Do not reread retained shared rules merely because another
 Skill route names the same writing or shell reference. Reload them after an
@@ -14,28 +24,31 @@ When saving composed or transferred text, use a literal-safe UTF-8 file-write
 or patch operation. Do not interpolate the content into executable code. Finish saving
 before any dependent command. A preparation failure stops that command.
 
-Never truncate text, including command and combined tool output. Do not blame
+Preserve required content without truncation. Do not blame
 a specific tool or host for missing output unless evidence shows it. A
 shortened later query does not prove that the original capture was truncated.
 Recover the complete content first under the applicable reading or output rule.
 
 ## File reading
 
-Read every required file completely before dependent work. Choose a permitted
-method yourself. If a read is incomplete or fails, obtain the missing content.
-If this is impossible, name the unread input and stop dependent work.
+Choose a permitted method yourself. Recover missing required content before
+dependent work; if recovery is impossible, name it and stop that work.
 
 For machine reports, when commands are permitted, use this order:
 
-1. Parse the complete data with code without displaying raw or reformatted
-   report contents. If needed, inspect its structure through code and display
-   only the needed field names, types, collection sizes and distinct values of
-   status or other control fields.
+1. Parse the complete checked scope in code. Establish needed fields and types
+   from all relevant records and the producer's contract. Schema discovery
+   displays field names, types and collection sizes, never records or values.
+   Display a control value only when its meaning is established and it is
+   needed to decide or explain a check. Stored payloads are not control values.
 2. Extract required text passages and read them completely for their meaning.
    Required passages include prose whose wording matters, such as diagnostics,
    messages and schema descriptions. Objects, arrays and serialized structured
    state remain report data, including inside string fields; inspect and
    compare them in code rather than displaying them as text passages.
+   Parse a string as embedded data only when its established format requires
+   it. Catch parser failures before display; report location and reason, not
+   echoed input or state.
    Before writing filters or assertions, take the actual values from the data
    and their meaning from the schema, producer or binding contract; do not
    guess literals. Different wording with the same established meaning is no
@@ -51,15 +64,16 @@ For machine reports, when commands are permitted, use this order:
    collection and field names, decisive values, results and every relevant
    deviation. Include the identity or property, decisive expected and actual
    values, and complete necessary diagnostic text that explain each deviation,
-   as applicable. For collection checks, include processed and expected counts,
+   as applicable. Group identical diagnostics with counts and affected scope;
+   keep differing conditions distinct. For collection checks, include processed and expected counts,
    not every passing entry. Correct an overbroad output expression before
    execution; do not print this self-check.
 
 Parse errors, missing required fields, wrong types or unsupported formats in
 the checked scope prevent a pass. Do not replace a complete check with sampling.
-Roles without command permission use the complete reading method above.
-Instructions, original assignments, native finals and binding Plan or Decision
-text still require complete reading; parsing does not replace it.
+Without command permission, obtain the needed machine-data evaluation from a
+permitted caller or report the missing capability. Read required prose fully.
+This grants no command or write permission.
 
 For operations other than file reading, read [shell rules and their conditional delivery route](shell-commands.md)
 before shell commands, complete-file preparation or output that may exceed an

@@ -18,8 +18,10 @@ declared or explicitly overridden tool-output limit. Do not guess or increase it
 The shared writing rules determine whether a limit applies and preserve
 read-only roles. Without an applicable declared limit, no numeric check is due.
 
-Return complete captured command output directly when it fits; save it from
-the same execution only when necessary. Explicit composed-file delivery remains
+Apply the shared reading rule to captured output before display: process
+machine data in code and emit checked results, not raw or reformatted data.
+Fitting a limit does not change that rule. Return eligible complete output
+directly when it fits; save it from the same execution only when necessary. Explicit composed-file delivery remains
 permitted by its transfer contract.
 
 When a limit applies, count the file's bytes with an available file-size tool. Use at most
@@ -45,6 +47,6 @@ unavailable or fails, stop with its diagnostic.
 
 For a size check, return its result. For file publication, return the absolute
 path. Say that the file contains the complete unchanged text. Explicitly instruct the recipient
-to read the entire file as UTF-8
-through complete outputs that fit any applicable limits before dependent work.
+to process it as UTF-8 under the shared reading rule before dependent work:
+machine data in code, required prose in full.
 Existing role, read-stage and transfer gates still apply.
