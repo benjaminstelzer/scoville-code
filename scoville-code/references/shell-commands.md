@@ -22,12 +22,15 @@ with `-X utf8` so source text and stdin agree.
 Before potentially large command output, limited result transfer, complete-file
 delivery or any nonrepeatable effect, read [output-delivery.md](output-delivery.md).
 Choose capture before the effect; never repeat effects to recover output.
-Large supplied inputs and file results must be read completely before dependent
-work. A path, metadata or partial output is not the result.
+Supplied inputs and file results follow the shared reading rule: process
+machine data in code and read required prose completely. A path, metadata or
+partial output alone proves neither.
 
 Preserve complete UTF-8 output, including a failure's stdout and stderr, and
-each command's exit status. A capture or
-decoding failure, output_complete=false or unread required content stops dependent
-work even after exit 0. Running commands are not complete; retain their handle,
+each command's exit status. A capture or decoding failure, or unread required
+content, stops dependent work even after exit 0. For JSON `"status": "complete_file"`, open
+the path in `full_file` and process its contents under the shared reading rule;
+`"output_complete": false` describes the inline result. Without that complete-file route, missing output remains a
+blocker. Running commands are not complete; retain their handle,
 chunks and final status. Role and host permissions still apply: these rules
 permit no new command, source capture or file write.

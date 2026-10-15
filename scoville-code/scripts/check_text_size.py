@@ -200,7 +200,7 @@ def main():
         except (OSError, ValueError) as error:
             parser.error(f'complete-file publication failed: {error}')
         result['status'] = 'complete_file'
-        result['instruction'] = 'Send this absolute path. It contains the complete unchanged text; the receiver must read the entire file at its permitted stage before dependent work.'
+        result['instruction'] = 'Send this absolute path. It contains the complete unchanged text. At its permitted stage, the receiver applies the shared reading rule: machine data in code, required prose in full, before dependent work.'
     print(json.dumps(result, ensure_ascii=True))
     return 0
 
