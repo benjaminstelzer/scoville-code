@@ -34,6 +34,13 @@ Recover the complete content first under the applicable reading or output rule.
 Choose a permitted method yourself. Recover missing required content before
 dependent work; if recovery is impossible, name it and stop that work.
 
+The relevant scope is what the next decision needs; narrowing to it is not
+sampling. Reuse retained identities, notifications and complete results instead
+of repeating whole inventories. If a tool returns directly without a route to
+evaluate its result in code before display, narrow the request with its supported
+filters instead. Broaden only to resolve a concrete uncertainty. Preserve every
+required fact and obtain complete required results.
+
 For machine reports, when commands are permitted, use this order:
 
 1. Parse the complete checked scope in code. Establish needed fields and types

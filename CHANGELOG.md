@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased - 2026-10-18
+
+- Reuse known results and request only the scope the next decision needs. Narrow direct tool requests before display when code preprocessing is unavailable.
+
 ## Unreleased - 2026-10-15
 
 - Process complete reports in code, including saved captures and failures. Load the rules before data, preserve required original text, and keep parser errors from echoing stored state. Evaluate producer output before display, retain one-time results, and distinguish saved captures from missing output.
