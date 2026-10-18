@@ -51,7 +51,15 @@ fewer passes.
 When runtime, memory, I/O cost or cache behavior may materially change, read
 [cost and cache decisions](cost-and-cache.md) before deciding or judging that work.
 
-- Put behavior in its canonical owner and reuse the canonical pathway.
+- Put behavior in its canonical owner. Reuse an existing pathway when it
+  achieves the requested result, permits the explicitly intended changes, and
+  preserves every requirement that applies regardless of the pathway. These
+  include shared authorization, protection of other data, and required
+  persistence. A prerequisite serving only another operation's purpose does not
+  become required through reuse. If it blocks this operation, adjust the
+  existing pathway or separate its operation-specific behavior using the
+  smallest maintainable change. Keep applicable guarantees at their responsible
+  boundaries; dropping such a prerequisite does not waive them.
 - In existing code, follow project rules and surrounding naming, idioms, error
   handling, comments, annotations, test style, and established module
   boundaries unless they conflict with the requested outcome, safety, or a

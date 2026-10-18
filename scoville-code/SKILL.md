@@ -68,7 +68,7 @@ could change your decision. Keep this preparation internal.
 
 | Mode | Requested outcome |
 | --- | --- |
-| **Advise** | Answer, inspect, or report; edit only when asked. For advice about using Scoville Code, explain the applicable capability and its conditions. Purely conceptual answers need no reference. |
+| **Advise** | Answer, inspect, or report; edit only when asked. For advice about using Scoville Code, explain the applicable capability and its conditions. Purely conceptual answers need no reference unless a stated conclusion is disputed. |
 | **Explore** | Test a hypothesis with the cheapest decisive observation. Add no production scaffolding and make no readiness claim. Retaining experimental code moves the work to Develop. |
 | **Develop** | Deliver ordinary working behavior with focused validation. |
 | **Harden** | Make a requested or project-required broad release, readiness, platform, migration, or security decision. Risk alone does not select broad gates. |
@@ -88,7 +88,7 @@ permissions. A future task or a risk label adds no reading requirement.
 | Change planning records, review assigned native Plan or Decision fields, coordinate dependent outcomes across interruption, preserve engineering continuation state, or resolve a material choice left open by inspection | [Planning](references/planning-and-decisions.md) |
 | Explore or change code, locate ownership or root cause, or review implementation | [Change](references/change-workflow.md) |
 | Choose, run or interpret checks, or judge completion evidence | [Validation](references/validation.md) |
-| Process machine reports or logs, or write instructions, reviews or a completion report | [Writing](references/writing.md) |
+| Process machine reports or logs, write instructions, reviews or a completion report, or assess a disputed factual or technical conclusion | [Writing](references/writing.md) |
 
 Implementation needs Change and Validation; its completion report also needs
 Writing. Combine other routes only for work actually required. Recording future work does not authorize its

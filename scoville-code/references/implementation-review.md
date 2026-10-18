@@ -7,9 +7,14 @@ check the resulting code for repeated work or a cheaper suitable alternative.
 Use Validation for relevant unresolved cost questions and cache-correctness
 evidence.
 
-Judge the change against the requested behavior, established guarantees and
-authorized scope. A review with no findings is complete; finding a different
-possible implementation is not evidence of a defect.
+Judge the change against the requested result, explicitly intended changes,
+guarantees that still apply, and authorized scope. Do not demand a prerequisite
+merely because a reused pathway enforces it; identify what required result or
+continuing guarantee would fail without it. A review with no findings is
+complete; finding a different possible implementation is not evidence of a defect.
+
+Apply [Evidence-based conclusions](writing.md#evidence-based-conclusions) to
+disputed findings.
 
 Prioritize concrete safety, data-loss and correctness consequences. Apply
 the safeguard rule in SKILL.md's Failure consequences section to both added and missing protection. For an unnecessary
