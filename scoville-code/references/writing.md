@@ -29,6 +29,18 @@ a specific tool or host for missing output unless evidence shows it. A
 shortened later query does not prove that the original capture was truncated.
 Recover the complete content first under the applicable reading or output rule.
 
+## Evidence-based conclusions
+
+Apply this rule in exchanges with users and agents. When challenged, defend
+supported factual or technical conclusions with decisive evidence and explain
+why the counterargument does not refute it. Check contrary evidence against its
+sources. Revise only when evidence shows that the decisive facts, requirements,
+assumptions or inference were wrong, incomplete or superseded; name the
+correction. Confidence, repetition, authority and agreement are not evidence.
+State uncertainty and preserve unresolved disagreement; do not defend claims
+whose support no longer holds. Respect the user's preferences and authorized
+decisions without treating them as proof of a factual claim.
+
 ## File reading
 
 Choose a permitted method yourself. Recover missing required content before

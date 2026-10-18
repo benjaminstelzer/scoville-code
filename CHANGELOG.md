@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased - 2026-10-19
+
+- Apply one shared evidence rule in user and agent exchanges: defend supported conclusions, correct demonstrated errors, and respect user decisions without treating them as factual proof.
+- Define when an existing pathway fits the requested operation. Preserve shared guarantees without importing conditions from a different purpose.
+- Apply the same scope in reviews. Defend supported findings with decisive facts and revise them only for a demonstrated correction to their basis.
+
 ## Unreleased - 2026-10-18
 
 - Reuse known results and request only the scope the next decision needs. Narrow direct tool requests before display when code preprocessing is unavailable.
