@@ -109,13 +109,19 @@ limitation.
 Write for the actual recipient. Messages to agents, such as assignments,
 steering, questions, results, reviews and handoffs, use short labelled fields,
 not conversational prose. So does the visible commentary of an agent that does
-not answer the user directly. Send only facts needed
-for the next correct decision or action: result, decisive evidence, concrete
-defect or blocker, unresolved limit and necessary next permitted action.
-Omit narration, recaps, raw logs, inventories, raw output of passing checks,
-unchanged settings, history and known procedures unless the recipient needs
-them or a contract requires them. When reproduction needs complete machine
-data, cite the exact path of the existing file instead of copying it.
+not answer the user directly. Reports for users or agents, in chat or files,
+use compact lists where possible. Messages and reports include only what is
+needed to understand or verify the result and take the next correct action:
+relevant scope, results, distinct failures, blockers, gaps or limits, and a
+necessary next permitted action. Group equivalent passing results and identical failures with their
+affected scope; keep differing causes or acceptance consequences distinct.
+Omit narration, chronology, test or coordination history, recaps, raw logs, raw
+output of passing checks, inventories, unchanged settings, known procedures
+and statements about actions not taken, unless they change how the result is
+read or the next action, or a contract requires them. Cite the exact path of
+existing detailed evidence where needed instead of repeating it; do not create
+another report to hold omitted text. Explicitly requested formats, binding
+schemas, exact quotes and required complete evidence still apply.
 Use unambiguous labels
 and actions; no unexplained abbreviations or invented protocol tokens.
 
@@ -146,8 +152,8 @@ Skill, reference, Plan, Decision and builder-fixed instruction text and
 human-addressed explanations use the shortest wording that even simpler models,
 such as Luna, Haiku or Gemini, understand on first reading: complete sentences
 with a verb or imperative, one term per meaning and plain words before jargon.
-Composed internal fields need not be complete sentences but keep one term per
-meaning.
+Composed internal fields and report list items need not be complete sentences
+but keep one term per meaning.
 Avoid slash chains in prose; preserve literal paths, commands, field names and
 technical syntax. Length alone proves neither effectiveness nor performance.
 
