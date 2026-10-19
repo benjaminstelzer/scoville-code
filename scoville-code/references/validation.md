@@ -164,7 +164,8 @@ conditions are unchanged. Report material unverified behavior.
 
 ## Report the evidence
 
-Report each decisive command or observation and its actual result. Distinguish a
+Report what was checked and its actual result; include detail only where it
+affects acceptance or the next decision. Distinguish a
 clean compile, source review, unit test, rendered interaction, live-system check,
 and deployment; one does not imply another. If a check was skipped, failed, or
 could not run, say so and narrow the claim. Never cite stale evidence as proof of

@@ -2,6 +2,7 @@
 
 ## Unreleased - 2026-10-19
 
+- Write reports as compact lists of checked scope, results and relevant gaps. Group equivalent outcomes and refer to existing evidence instead of retelling the run.
 - Apply one shared evidence rule in user and agent exchanges: defend supported conclusions, correct demonstrated errors, and respect user decisions without treating them as factual proof.
 - Define when an existing pathway fits the requested operation. Preserve shared guarantees without importing conditions from a different purpose.
 - Apply the same scope in reviews. Defend supported findings with decisive facts and revise them only for a demonstrated correction to their basis.
