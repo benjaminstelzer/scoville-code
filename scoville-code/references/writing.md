@@ -43,8 +43,12 @@ decisions without treating them as proof of a factual claim.
 
 ## File reading
 
-Choose a permitted method yourself. Recover missing required content before
-dependent work; if recovery is impossible, name it and stop that work.
+Choose a permitted method yourself that can deliver each required text completely;
+size or metadata may inform that choice when a read may be large. A truncated
+or partial result does not complete the required reads. Use existing completion
+and truncation signals; do not add verification reads to an already complete read. Recover
+missing required content before dependent work; if impossible, name it and stop
+that work.
 
 The relevant scope is what the next decision needs; narrowing to it is not
 sampling. Reuse retained identities, notifications and complete results instead

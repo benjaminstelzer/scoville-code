@@ -27,8 +27,9 @@ invalidation and context separation as applicable to that change.
 - **Develop:** Prefer an existing focused test, typecheck, lint, build, or direct
   execution. Add a test only when it protects observable regression-prone
   behavior or a material invariant in the project's existing harness.
-- **Defect:** Reproduce the reported failure when practical, then prove the same
-  case passes after the fix.
+- **Defect:** Before correcting, establish a violation of the requested behavior
+  or an independent contract; a test mismatch alone is not proof. Reproduce when
+  practical, then verify the same case after correction.
 
 Use a broad release, readiness, platform or migration gate only when the task
 makes that completion decision or a binding project rule requires it. Otherwise
@@ -44,16 +45,22 @@ by the task on the same basis; revise expectations that merely pin the current
 implementation. Allow equivalent implementations and
 authorized behavior changes while preserving required guarantees. For internal
 work, use independently justified bounds unless the contract requires an exact
-count. Verify that the measured path ran and the measurement is valid; a broken
-or skipped measurement cannot prove success.
+count.
+
+Before judging, confirm the relevant preconditions, actual measured path and
+a measurement that distinguishes the claimed result from the failure being
+checked. For a claimed state change, observe a starting state different from
+the expected result. Reuse existing observations; add a negative probe only
+when they leave this open. A broken, skipped or non-discriminating check cannot
+prove success.
+
 An independently implemented actual consumer can establish boundary expectations.
 A constant copied by both sides or the producer's own round trip does not
 establish compatibility.
 Controlled deterministic checks remain sufficient for behavior that does not
 claim such a boundary.
 
-Test required outcomes and behavior with expectations from an independent
-contract. Use this distinction:
+Select evidence by subject:
 
 | Subject | Meaningful evidence | Avoid |
 | --- | --- | --- |
@@ -108,11 +115,6 @@ change caused. Apply the integrity rule in SKILL.md's Scope, integrity, and auth
 validators: distinguish an explicitly replaced contract from an unmet one.
 
 For infrastructure failure, use the project's documented setup when relevant.
-Continue with another check only when a named open acceptance question, a
-relevant change in conditions, or a binding project requirement justifies it.
-Choose a check that can answer that question. Stop when no authorized next
-check can add decisive evidence, and report the required behavior as unverified.
-An unresolved requirement alone does not justify repeated ineffective probing.
 
 Retain the first complete diagnostic. On repeated output, report the stable
 failure signature and meaningful delta rather than printing the same large log
@@ -120,15 +122,13 @@ again.
 
 ## Stop repetition
 
-Reuse completed work, reviewed unchanged content and complete passing results
-while their requirements, inputs and relevant conditions, such as files,
-dependencies, runtime, configuration and environment, remain unchanged. A new
-Step, role, assignment, review or release phase alone does not justify repeating
-them; a required independent review of content no reviewer has assessed is not
-a repetition. Repeat only the affected work for a relevant change, a
-still-unanswered question or a binding protocol; name the new result or evidence
-it can add. Concurrency, stochastic or flaky claims may require repeated
-observations tied to the actual claim.
+Reuse completed work, reviewed content and complete passing results while their
+requirements, inputs, files, dependencies, runtime, configuration and environment
+remain relevantly unchanged. A new Step, role, assignment, review or release phase alone
+does not justify repetition. A required independent review of previously
+unreviewed content is not repetition; it reuses still-valid results instead of
+rerunning their checks. Concurrency, stochastic or flaky claims may require
+repeated observations tied to the actual claim.
 
 | Correction state | Next action |
 | --- | --- |
@@ -139,13 +139,25 @@ observations tied to the actual claim.
 
 Do not weaken acceptance or bypass host attempt limits.
 
-Add checks, independent reviews or
-bookkeeping only for a separate changed behavior, an unresolved material risk
-or a binding requirement. Group required reviews at the completed boundary of
-their scope unless their protocol requires an earlier review. Keep only results
-and open limits needed for further development plus independently required
-records; do not store review texts, raw test logs or a complete check history by
-default. An earlier aggregate pass becomes stale when related production code
+Before adding a check, review or record:
+
+1. Use available evidence first. Add work only for a named open question about
+   changed behavior, a material risk or changed conditions, or when the user,
+   a binding requirement or a protocol requires it.
+2. Choose the cheapest check that can decide the question. If no authorized
+   check can add decisive evidence, stop probing that question and report the
+   required behavior as unverified. An unresolved requirement alone does not
+   justify repeated ineffective probing.
+
+Group required reviews at their completed scope unless their protocol requires
+an earlier review. Keep only results and open limits needed for further work
+plus independently required records; no review texts, raw logs or full history
+by default. When updating a current result summary you maintain, search it for
+each item changed by the new result and replace every superseded status.
+Retain required earlier evidence with its version and measurement limits.
+Plan and Decision records keep their own update rules.
+
+An earlier aggregate pass becomes stale when related production code
 or tests change afterward; rerun the smallest aggregate check covering the final
 tree or narrow the completion claim.
 
