@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased - 2026-10-20
+
+- Keep required text complete when choosing how to read it. File size and metadata remain optional, and completed reads need no verification reread.
+- Ground defect claims in requested behavior or an independent contract. Reuse valid evidence, check meaningful preconditions and update superseded result summaries.
+
 ## Unreleased - 2026-10-19
 
 - Write reports as compact lists of checked scope, results and relevant gaps. Group equivalent outcomes and refer to existing evidence instead of retelling the run.
