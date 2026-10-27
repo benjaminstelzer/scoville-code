@@ -95,6 +95,9 @@ Writing. Combine other routes only for work actually required. Recording future 
 implementation or require its validation route. If a needed reference is
 unavailable, obtain its text before the dependent work.
 
+Every code review, including your final scoped diff, also requires
+[Code review quality](references/code-review.md).
+
 ## Resolve material choices
 
 A choice is material when a missing answer changes the outcome, scope, owner,

@@ -2,10 +2,12 @@
 
 ## Review implementation
 
-For changes that may materially affect runtime, memory, I/O cost or caches,
-check the resulting code for repeated work or a cheaper suitable alternative.
-Use Validation for relevant unresolved cost questions and cache-correctness
-evidence.
+[Code review quality](code-review.md) is a required acceptance condition.
+The rules below do not weaken it.
+
+Separately, use Validation for relevant unresolved cost questions and
+cache-correctness evidence when those concerns are in scope. They do not replace
+the required static review of loops and recursion.
 
 Judge the change against the requested result, explicitly intended changes,
 guarantees that still apply, and authorized scope. Do not demand a prerequisite
