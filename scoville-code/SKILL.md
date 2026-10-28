@@ -51,20 +51,15 @@ Family owners, in suite order:
 - `scoville-ui`: framework UI implementation and acceptance, including supported WordPress admin surfaces.
 - `scoville-handoff`: active-work transfer.
 - `scoville-project-context-cleanup`: requested project-rule and index wording, information quality and structure.
+- `scoville-skillwriter`: Skill and reusable prompt wording for frontier models.
 
 Mentioning another Skill or using one of its labels does not activate it.
 
 ## Outcome and mode
 
-Within safety rules and explicit constraints, work toward the observable result.
-Act to deliver it, resolve a concrete blocker or material uncertainty, or follow
-a binding instruction. Process, tests, documentation and cleanup serve that
-result. Stop adding or repeating them when they neither advance it nor test a named risk.
-Do not try to eliminate every residual risk.
-
-Before substantial edits, identify the observable result, its canonical source,
-a plausible failure the change could introduce, and the cheapest evidence that
-could change your decision. Keep this preparation internal.
+Before substantial edits, identify the responsible source, the changed behavior
+and a concrete failure risk. Process and checks must serve the requested outcome
+or resolve a named uncertainty.
 
 | Mode | Requested outcome |
 | --- | --- |
@@ -117,12 +112,17 @@ silently add fallback paths. Existing authorization for the change remains valid
 
 Scale safeguards to who a failure affects, how quickly it is detected and how
 easily it is reversed; internal tooling is neither harmless nor critical by
-category. Add a safeguard only for a requirement or a credible consequence
-existing failure behavior does not cover; the failure need not have occurred.
-If a native exception or failed command surfaces clearly without material harm
-or a broken guarantee, use it. Choose the simplest response meeting the contract;
-risk selects what to examine, not a preset amount of machinery. Assess why
-visible failure is insufficient internally and explain it in a relevant review finding.
+category. Add a safeguard only for a stated requirement or a credible failure
+that existing failure behavior does not cover. A failure is credible when it was
+observed during normal supported use, follows from normal supported use, or
+follows from a concrete attack path through input an attacker can reach.
+Otherwise, an injected fault, a constructed interleaving or a worst-case input
+shows only that a failure is possible. Before guarding such a failure, narrow
+the claim or remove the state that allows it. If a native exception or failed
+command surfaces clearly without material harm or a broken guarantee, use it.
+Choose the simplest response meeting the contract; risk selects what to examine,
+not a preset amount of machinery. Assess why visible failure is insufficient
+internally and explain it in a relevant review finding.
 
 Name the concrete failure and affected boundary, such as lost data,
 unauthorized access, incompatible output or duplicated external effects.
@@ -146,9 +146,6 @@ organizing a wholly new project, read
 layout and naming choices. Do not load or apply that fallback for new modules,
 subprojects, refactors or missing individual rules in an existing project.
 
-Make the smallest maintainable change that delivers the full requested behavior
-in its canonical source. Fix the evidenced cause, preserve unrelated work and
-check the affected behavior.
 Never accept:
 
 - a claim of safety, narrow scope or incremental behavior that the result does not support;

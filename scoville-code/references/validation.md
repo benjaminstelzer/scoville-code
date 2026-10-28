@@ -28,8 +28,10 @@ invalidation and context separation as applicable to that change.
   execution. Add a test only when it protects observable regression-prone
   behavior or a material invariant in the project's existing harness.
 - **Defect:** Before correcting, establish a violation of the requested behavior
-  or an independent contract; a test mismatch alone is not proof. Reproduce when
-  practical, then verify the same case after correction.
+  or an independent contract; a test mismatch, audit finding or review finding
+  alone is not proof. Reproduce it, or trace it through normal supported use or
+  a reachable attack path when reproduction is impractical; then verify the same
+  case after correction.
 
 Use a broad release, readiness, platform or migration gate only when the task
 makes that completion decision or a binding project rule requires it. Otherwise
@@ -65,7 +67,7 @@ Select evidence by subject:
 | Subject | Meaningful evidence | Avoid |
 | --- | --- | --- |
 | Parsed format, package/import structure or consumer-read version declarations | Protect the actual program/build/host contract; compare changing values with their owner or each other. | Pinning incidental source text or today's values. |
-| Instruction/documentation prose | Verify its effect through behavior. | Exact wording assertions unless the user requires that wording. |
+| Instruction/documentation prose | For wording-only edits, compare clarity, consistency and preserved meaning with the baseline. For changed required behavior or claimed effectiveness, test the affected outcome under the applicable evaluation contract. | Exact wording assertions unless that wording is binding. |
 | Diagnostics | Failure status, identified input/condition, corrective information and corrected invocation. | Sentence matching. |
 | Complete unchanged transfer or independently required artifact integrity | Exact content comparisons where that contract requires them. | Replacing exactness with an insufficient approximation. |
 | Ordinary generated/copied outputs | Successful current creation and expected outputs. | Content/hash comparisons without task, binding contract or concrete defect requiring them. |
@@ -109,10 +111,10 @@ must not hide an earlier failure. Run checks separately or stop the command grou
 on failure. In PowerShell, inspect `$LASTEXITCODE` immediately after a native
 command; `$ErrorActionPreference` alone does not make native failures terminating.
 
-Classify a failed check before reacting. Treat it as caused by the change unless
-specific evidence shows it is pre-existing or environmental; fix what the
-change caused. Apply the integrity rule in SKILL.md's Scope, integrity, and authority section when changing assertions or
-validators: distinguish an explicitly replaced contract from an unmet one.
+Classify a failed check from its diagnostic and relevant baseline evidence.
+Fix failures caused by the change; keep an unresolved cause explicit. Apply
+SKILL.md's integrity rule when changing assertions or validators: distinguish
+an explicitly replaced contract from an unmet one.
 
 For infrastructure failure, use the project's documented setup when relevant.
 

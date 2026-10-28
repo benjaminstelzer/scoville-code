@@ -64,11 +64,8 @@ When runtime, memory, I/O cost or cache behavior may materially change, read
   handling, comments, annotations, test style, and established module
   boundaries unless they conflict with the requested outcome, safety, or a
   binding contract. Name code for behavior, not novelty or history.
-- Implement the smallest maintainable, behavior-complete result. For new
-  functionality, start with the simplest end-to-end implementation that delivers
-  the outcome and lets failures surface. Additional checks or error handling
-  must meet the safeguard rule in SKILL.md's Failure consequences section; an existence check before an operation
-  that already fails clearly or a catch that only rethrows adds no protection.
+- Start with a behavior-complete implementation. Add safeguards under SKILL.md's
+  Failure consequences rule.
   Avoid speculative helpers, guards, flags, layers, compatibility paths, and
   nearby cleanup.
 - Implementation choices are not new requirements. Before adding safeguards
@@ -78,8 +75,11 @@ When runtime, memory, I/O cost or cache behavior may materially change, read
 - Prefer existing dependencies and supported extension points.
 - Remove temporary diagnostics, placeholders, dead branches, and restatement
   comments before completion. Remove guards or workarounds from earlier attempts
-  whose justification no longer holds after the root-cause fix; preserve those
-  still required. Comment only on constraints code cannot express.
+  whose justification no longer holds after the root-cause fix. When a change
+  replaces a model, path, format, detection route or guard, remove the replaced
+  one in the same change unless a named current consumer still needs it; remove
+  unused contract methods with their implementations. Comment only on
+  constraints code cannot express.
 
 Encapsulate an existing responsibility or state boundary even with one caller
 when it makes ownership and independent change clearer. Extract helpers for

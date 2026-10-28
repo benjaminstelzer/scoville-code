@@ -1,5 +1,18 @@
 # Changelog
 
+## Unreleased - 2026-10-28
+
+- Consolidate outcome guidance, distinguish wording checks from behavior tests,
+  and keep unknown check failures unresolved until the evidence identifies their
+  cause. Agent-facing reviews use the shared instruction-design rules.
+
+- Keep outcome-based Acceptance rules available in standalone and suite Code packages.
+
+- Assess algorithmic costs within reachable input bounds; correct an unsupported complexity claim without demanding an unnecessary algorithm change.
+
+- Count failures observed during normal supported use, normal-use failures and reachable attack paths as credible; treat other injected faults, constructed interleavings and worst-case inputs only as possible failures, not as a reason for new safeguards. Prefer narrowing a claim or removing the risky state, remove replaced paths in the same change, and require reproduction or a trace through normal supported use or a reachable attack path before fixing audit or review findings.
+- Count an unnecessary mechanism with added state, work or maintenance as a concrete review defect.
+
 ## Unreleased - 2026-10-27
 
 - Require code reviews to inspect simplicity, maintainability, foreseeable extension and clarity for later agents. Trace loops, recursion and scanning calls for avoidable nonlinear repeated work without requiring benchmarks.

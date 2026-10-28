@@ -8,14 +8,16 @@ approving code or reporting no findings:
 
 1. Simplicity: Check unnecessary behavior, state, layers, ownership or data flow
    and simpler solutions that preserve the required behavior and guarantees.
-2. Loops and recursion: Trace them through relevant callees, including built-in
-   or library calls that scan a collection. Identify what grows with input and
-   what is processed repeatedly. Report avoidable quadratic, exponential or
-   comparable repeated work when an equivalent lookup, pass or reuse removes it
-   without disproportionate complexity. Nested loops or recursion alone prove
-   no defect. Disjoint traversals or one visit per item can be linear when each
-   visit does bounded work. A small fixed bound or work required by the result
-   can justify the algorithm.
+2. Loops and recursion: Check whether a claimed input can reach the code. If
+   actual bounds exclude it, reject that failure attribution. Always trace
+   loops, recursion and collection scans for reachable inputs; identify what
+   grows and repeats. Nested loops or recursion alone prove
+   no defect. Disjoint traversals or one bounded visit per item can be linear;
+   a small fixed bound or work required by the result can justify the algorithm.
+   Report avoidable quadratic, exponential or comparable work when its concrete
+   consequence warrants a correction and an equivalent lookup, pass or reuse
+   removes it without disproportionate complexity. If only a complexity claim
+   is unsupported, correct that claim.
 3. Maintainability and extensibility: Check clear responsibilities and whether
    foreseeable changes fit the structure without unnecessary coupling or
    duplicated policy. Do not demand abstractions for hypothetical needs.
@@ -28,6 +30,7 @@ Fewer lines alone prove no improvement. Preserve distinct responsibilities,
 required guarantees and diagnostics; require no routine comments.
 
 Do not approve with an unassessed aspect or unresolved material finding. Report
-missing necessary sources as an evidence gap. Optional alternatives without a
-concrete defect do not block. Use existing findings and evidence fields; output
-no checklist and add no review phase.
+missing necessary sources as an evidence gap. Optional alternatives do not
+block. An unnecessary mechanism that adds state, work or maintenance without a
+required purpose is a concrete defect. Use existing findings and evidence
+fields; output no checklist and add no review phase.

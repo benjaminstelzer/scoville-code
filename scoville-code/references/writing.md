@@ -3,6 +3,10 @@
 Apply these rules to plans, decisions, instructions, agent messages, handoffs,
 reviews and reports. Preserve the required output schemas and delivery contracts.
 
+When composing reusable instructions or an output for another agent to act on,
+read [agent instruction design](instruction-design.md). Apply it at the producing
+rule or template; the receiving agent needs its task, not the authoring workflow.
+
 Before reading or displaying an input, distinguish its content:
 
 | Input | Required handling |
@@ -110,11 +114,10 @@ before displaying it through a limited tool output. If a known cap on that
 result channel itself prevents complete delivery, report the concrete transport
 limitation.
 
-Write for the actual recipient. Messages to agents, such as assignments,
-steering, questions, results, reviews and handoffs, use short labelled fields,
-not conversational prose. So does the visible commentary of an agent that does
-not answer the user directly. Reports for users or agents, in chat or files,
-use compact lists where possible. Messages and reports include only what is
+Write for the actual recipient. Use labelled fields for structured assignments
+or results when they make scope, evidence and the next action easier to find.
+Choose concise prose, lists, tables or diagrams to fit the information.
+Messages and reports include only what is
 needed to understand or verify the result and take the next correct action:
 relevant scope, results, distinct failures, blockers, gaps or limits, and a
 necessary next permitted action. Group equivalent passing results and identical failures with their
@@ -130,11 +133,11 @@ Use unambiguous labels
 and actions; no unexplained abbreviations or invented protocol tokens.
 
 Treat an uncertain recipient as fresh; assume no hidden history. Supply every
-fact and constraint needed for the next correct decision or action. For source
-text the recipient can access and is permitted to read, give its exact path and
-section with an explicit reading instruction instead of repeating it. State
-other required facts directly. Quote only wording needed as decisive evidence
-or required text from a source the recipient cannot read.
+fact and constraint needed for the next correct decision or action. When the
+output contract allows a source pointer, give its exact path and section with
+a reading instruction instead of duplicating accessible source text. State
+directly every fact needed before that read and every fact a transfer or evidence
+contract requires in the output. Quote wording only when decisive or required.
 Preserve required schemas, statuses, exact control
 messages and exact user wording, identities, permissions, stops, quiescence and
 complete-delivery contracts unchanged. Keep required facts when rewriting or
@@ -152,14 +155,11 @@ These rules grant no permissions and change no task risk, required model, role
 or authority; role instructions own any delivery exception. Questions and
 assessments authorize no changes.
 
-Skill, reference, Plan, Decision and builder-fixed instruction text and
-human-addressed explanations use the shortest wording that even simpler models,
-such as Luna, Haiku or Gemini, understand on first reading: complete sentences
-with a verb or imperative, one term per meaning and plain words before jargon.
-Composed internal fields and report list items need not be complete sentences
-but keep one term per meaning.
-Avoid slash chains in prose; preserve literal paths, commands, field names and
-technical syntax. Length alone proves neither effectiveness nor performance.
+Write instructions and explanations for their actual recipient; target current
+frontier models for AI-consumed text. Supply the context needed without hidden
+history, use plain wording and one term per meaning, and preserve literal paths,
+commands, field names and technical syntax. Length alone proves neither
+effectiveness nor performance.
 
 Keep each rule at its responsible source. Remove repetition and low-value
 maintenance detail while preserving required context and safeguards. Retain
