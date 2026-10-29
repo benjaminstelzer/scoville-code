@@ -1,8 +1,7 @@
 # Planning and Decisions
 
-Use planning only when it helps coordinate real dependent outcomes, preserves
-state across interruption, or records a material choice. Process is never a
-substitute deliverable.
+Use planning to coordinate dependent outcomes, preserve continuation state or
+record material choices in the project's existing owner.
 
 ## Contents
 
@@ -14,62 +13,44 @@ substitute deliverable.
 
 ## Use one planning owner
 
-An authoritative project plan is the sole durable planning state. A runtime that
-requires its own plan holds a disposable mirror of the same work. Use a runtime
-plan alone only when no project plan exists. Do not create a plan file, decision
-log, validation ceremony, or second source of truth merely because a code task
-exists.
-
-Use the available planning mechanism only for multiple dependent work items,
-material sequencing, or work that must survive handoff or compaction. For a
-small contained change, implement and validate directly unless a binding project
-workflow requires a tracked item.
+The authoritative project plan is the durable owner; any required runtime plan
+is a disposable mirror. Without a project plan, use the existing runtime owner.
+A small contained change needs no new records unless the project requires them.
 
 ## Define behavior-complete work
 
-Keep one behavior-complete lifecycle item active at a time. Its outcome should
-be independently resumable and observable. Implementation and its verification
-for one observable behavior belong to the same behavior Work Item; test
-commands, review, and documentation remain subordinate steps or evidence.
+Keep one behavior-complete lifecycle item active at a time, with an observable,
+independently resumable outcome. Its implementation and verification belong
+together; commands, review and documentation remain subordinate steps/evidence.
+Split only for distinct resumable outcomes and acceptance boundaries, including
+when dependencies, owners or rollout timing require them.
 
-Split work only into independently resumable outcomes with distinct acceptance
-boundaries. Separate dependencies, owners, or rollout timing justify a split
-only when they create such independent outcomes. Keep acceptance and evidence
-with the item that owns the behavior.
-
-Define acceptance through distinct necessary outcome
-conditions and required results. Keep implementation and test execution in
-subordinate steps unless that method or check is itself required for acceptance.
-Do not expand acceptance into a process checklist. For native
-Scoville Plan records, Plan's field rules remain authoritative.
+Acceptance names necessary outcome conditions and required results. Keep methods
+in steps unless independently required for acceptance. Scoville Plan owns native
+field and granularity rules.
 
 Continue to the next authorized in-scope item when its dependencies are met; do
 not treat every checkpoint as a new task.
 
-Keep records only for further development: the current result, remaining work,
-binding constraints and material decisions. In native Plan records, Steps own
-actions; Instructions add only conditions absent from Steps, never a prose
-duplicate. Record accepted results during normal closure, without separate
-bookkeeping work or reviews.
-Reviews serve development; record that a required review occurred, but do not
-archive its text or reconstruct a complete project history. Use the existing
-planning owner's explicit maintenance route when asked to clean up old records.
+Keep current results, remaining work, binding constraints and material decisions.
+In native Plans, Steps own actions; Instructions add
+conditions absent from Steps. Record accepted results and required review
+completion during closure, without archiving review text or reconstructing
+history. Use the existing owner's maintenance route for requested cleanup.
 
 ## Record material decisions
 
 For an assigned review of native Plan or Decision fields, use Scoville Plan only when
 already independently available and applicable; otherwise use the repository's
-existing field owner. Read its read-only route and applicable field
-rules, not just Code's engineering criteria. Stay within the assigned source
-boundary; this grants no maintenance, selectors, tests or record writes.
+existing field owner. For Scoville Plan, read its read-only route
+and applicable field rules; otherwise read the existing owner's applicable field
+rules. Code's engineering criteria alone do not suffice. Stay within the assigned
+source boundary; this grants no maintenance, selectors, tests or record writes.
 
-Use the criteria in SKILL.md's Resolve material choices section.
-
-Record a material decision in the project's existing plan, ADR, decision log,
-authorized commit, or pull-request mechanism. When none exists, preserve it in a
-handoff only if future work depends on it. Do not invent a durable record system.
-Retain the decision's source and status so a later agent can distinguish
-authorization from an observed result.
+Apply SKILL.md's material-choice criteria. Preserve each decision, its source
+and status in the existing plan, ADR, decision log, authorized commit or
+pull-request mechanism; without one, use a handoff only when future work depends
+on it. Keep authorization distinct from observation.
 When `scoville-plan` is already independently available and applicable, it owns
 canonical Plan, Work Item, and Decision mutation; this reference supplies only
 Code's implementation analysis. This mention does not require loading or
@@ -78,14 +59,9 @@ repository's existing owner and do not require or simulate Scoville Plan.
 
 ## Resolve decision ambiguity
 
-For ordinary details, choose the smallest reversible option that preserves the
-outcome. For an unresolved material choice, follow the question rule in SKILL.md's Resolve material choices section.
-
-Do independent work first, then ask one specific question before dependent work.
-In unattended work, assumptions may resolve only harmless details or choices
-inside an explicitly authorized decision space. If dependent work needs an
-unresolved material choice, record the proposal and stop that dependent work;
-continue only independent authorized work.
+Follow SKILL.md's choice and permission rules. In unattended work, choose within
+the authorized decision space; preserve unresolved material choices as proposals
+and stop dependent work while continuing independent authorized work.
 
 ## Hand off and resume
 

@@ -1,7 +1,7 @@
 # Validation and Completion Evidence
 
-Choose the cheapest evidence that could disprove a claim about the changed
-behavior or expose a named failure risk. A passing check proves only what it exercised.
+Use the cheapest decisive evidence for changed behavior, required guarantees
+and credible failure consequences. A pass proves only what the check exercised.
 
 ## Contents
 
@@ -13,17 +13,15 @@ behavior or expose a named failure risk. A passing check proves only what it exe
 
 ## Select proportional checks
 
-Validation is sufficient when every independent changed behavior and material
-risk has decisive evidence and another check would not plausibly change the
-implementation or completion decision.
+Validation is sufficient when independent changed behaviors and material risks
+have decisive evidence and another check would not plausibly change the result.
 
 For relevant unresolved runtime or memory costs, use realistic input sizes or
 a focused measurement that can decide between the alternatives. No universal
 benchmark suite is required. When cache use changes, check freshness,
 invalidation and context separation as applicable to that change.
 
-- **Explore:** Use the cheapest decisive observation. Add no regression, stress,
-  repetition, or matrix work unless the hypothesis requires it.
+- **Explore:** Use the cheapest decisive observation for the hypothesis.
 - **Develop:** Prefer an existing focused test, typecheck, lint, build, or direct
   execution. Add a test only when it protects observable regression-prone
   behavior or a material invariant in the project's existing harness.
@@ -33,21 +31,18 @@ invalidation and context separation as applicable to that change.
   a reachable attack path when reproduction is impractical; then verify the same
   case after correction.
 
-Use a broad release, readiness, platform or migration gate only when the task
-makes that completion decision or a binding project rule requires it. Otherwise
-exercise each changed behavior and concrete material failure with the narrowest
-decisive check. Risk alone does not expand the task.
+Use broad release, readiness, platform or migration gates only for that requested
+decision or a binding project rule. Evidence requirements do not expand permissions.
 
 When a change alters a symbol used elsewhere, exercise each independently
 affected contract variant; one affected use is sufficient when inspection finds
 only one variant.
-Derive test expectations from requested behavior or an independent contract,
-not solely from current implementation. Review existing assertions affected
-by the task on the same basis; revise expectations that merely pin the current
-implementation. Allow equivalent implementations and
-authorized behavior changes while preserving required guarantees. For internal
-work, use independently justified bounds unless the contract requires an exact
-count.
+Derive expectations from requested behavior or an independent contract. Review
+affected existing assertions on that basis: preserve independent guarantees,
+including locks, rollback, no-write behavior and fresh-process readback when
+required; revise assertions that merely pin implementation. Allow equivalent
+implementations and authorized behavior changes. Use independently justified
+bounds unless exact counts are contractual.
 
 Before judging, confirm the relevant preconditions, actual measured path and
 a measurement that distinguishes the claimed result from the failure being
@@ -56,11 +51,9 @@ the expected result. Reuse existing observations; add a negative probe only
 when they leave this open. A broken, skipped or non-discriminating check cannot
 prove success.
 
-An independently implemented actual consumer can establish boundary expectations.
-A constant copied by both sides or the producer's own round trip does not
-establish compatibility.
-Controlled deterministic checks remain sufficient for behavior that does not
-claim such a boundary.
+Use an actual independent consumer to establish compatibility across a claimed
+boundary; copied constants or a producer's own round trip cannot establish it.
+Controlled deterministic checks suffice for claims within the behavior they run.
 
 Select evidence by subject:
 
@@ -74,90 +67,69 @@ Select evidence by subject:
 
 Keep the required outcome when replacing wording assertions with behavior checks.
 
-A stub, mock, or hand-built fixture can support only the behavior actually
-exercised. If a claim depends on a dependency's behavior or a producer-consumer
-interaction replaced by the test, exercise that boundary with the actual
-component or narrow the claim and leave the required behavior unverified.
-Unmet required acceptance remains open. Controlled fixtures remain valid when
-the behavior under test actually runs. Required evidence does not expand
-existing permissions.
+A stub, mock or fixture proves only exercised behavior. If it replaces a
+dependency or interaction the claim relies on, exercise the actual boundary or
+narrow the claim; unmet required acceptance stays open.
 
-For a stateful behavior claim, trace the actual call through its factory and
-configuration to the same stored state you observe. A passing isolated instance
-or separate snapshot does not prove the application's binding. Include separate
-processes when they participate in that behavior, without inventing unrelated
-integration work.
+For stateful claims, trace the actual factory/configuration/call path to the
+observed stored state, including participating processes. An isolated instance
+or separate snapshot does not prove application binding.
 
-For an added or changed safeguard against a material failure, verify that valid
-use still succeeds and the claimed protection holds where the effect occurs.
-A prior check alone is insufficient when its result can become stale; for
-example, a checked path can change before deletion. For negative-path evidence,
-establish this sequence:
+For changed protection, verify valid use and the guarantee where the effect
+occurs, accounting for state that can change after a prior check. Fault injection
+must model a credible path under SKILL.md's Failure consequences rule. Negative
+evidence must establish:
 
 ```text
 Required preconditions completed → target operation reached and caused failure
   → relevant aftermath observed against the contract
 ```
 
-Rejection at an earlier check does not prove protection at the claimed boundary.
-An existing unambiguous return, state, or call observation can supply this
-evidence; do not require universal counters, logging, production instrumentation,
-or a fault-injection framework.
+Earlier rejection does not prove protection at the target boundary. Existing
+unambiguous return, state or call observations suffice; add no instrumentation
+framework merely to create evidence.
 
 ## Handle failures
 
-Evaluate each check's own exit status and diagnostic. A later successful command
-must not hide an earlier failure. Run checks separately or stop the command group
-on failure. In PowerShell, inspect `$LASTEXITCODE` immediately after a native
-command; `$ErrorActionPreference` alone does not make native failures terminating.
+Evaluate each check's own exit status and diagnostic under the shared shell
+rules; a later success must not hide a failure.
 
-Classify a failed check from its diagnostic and relevant baseline evidence.
-Fix failures caused by the change; keep an unresolved cause explicit. Apply
-SKILL.md's integrity rule when changing assertions or validators: distinguish
-an explicitly replaced contract from an unmet one.
+Diagnose failed checks against the contract and relevant baseline. Correct
+change-caused failures; keep unresolved causes explicit. Apply SKILL.md's
+integrity rule to assertions and validators, distinguishing replaced contracts
+from unmet ones. If requirements conflict or the goal is infeasible, explain
+the evidence and stop that path instead of presenting a substitute as success.
 
 For infrastructure failure, use the project's documented setup when relevant.
 
-Retain the first complete diagnostic. On repeated output, report the stable
-failure signature and meaningful delta rather than printing the same large log
-again.
+Retain the first complete diagnostic. Report the stable failure and meaningful
+delta on repetition under the shared data/output rules.
 
 ## Stop repetition
 
-Reuse completed work, reviewed content and complete passing results while their
-requirements, inputs, files, dependencies, runtime, configuration and environment
-remain relevantly unchanged. A new Step, role, assignment, review or release phase alone
-does not justify repetition. A required independent review of previously
-unreviewed content is not repetition; it reuses still-valid results instead of
-rerunning their checks. Concurrency, stochastic or flaky claims may require
-repeated observations tied to the actual claim.
+Reuse reviewed content and complete passing results while requirements, inputs,
+files, dependencies, runtime, configuration and environment remain relevantly
+unchanged. A new Step, role or phase alone does not require reruns. A required
+independent review of unreviewed content remains necessary and reuses valid
+results. Repeat observations only when the actual concurrency, stochastic or
+flaky claim needs them.
 
 | Correction state | Next action |
 | --- | --- |
-| New evidence or changed conditions support the failed strategy | Retry only when they change or substantiate the causal explanation. Different reproductions, new failure output or passing checks alone do not. |
-| Unsupported diagnosis, or two unsuccessful corrections of the same failure or evidenced cause | Return to owner, contract and evidence before another patch. A symptom-specific patch is not a new approach. New evidence for a bounded cause may justify a focused correction. |
+| Correction failed | Reassess the cause against owner, contract and evidence. Continue only with a supported next diagnosis or an approach substantiated by changed evidence or conditions; another symptom patch or additional output alone is insufficient. |
 | No supported next approach | Stop that repair path, report blocker and continue independent work. |
 | Decisive evidence passes | Record the concise result once and continue or complete the requested work. |
 
 Do not weaken acceptance or bypass host attempt limits.
 
-Before adding a check, review or record:
+Before more checks, reviews or records, use available evidence and identify the
+open question, changed condition or binding requirement. If no authorized check
+can decide it, stop probing and report the required behavior as unverified.
 
-1. Use available evidence first. Add work only for a named open question about
-   changed behavior, a material risk or changed conditions, or when the user,
-   a binding requirement or a protocol requires it.
-2. Choose the cheapest check that can decide the question. If no authorized
-   check can add decisive evidence, stop probing that question and report the
-   required behavior as unverified. An unresolved requirement alone does not
-   justify repeated ineffective probing.
-
-Group required reviews at their completed scope unless their protocol requires
-an earlier review. Keep only results and open limits needed for further work
-plus independently required records; no review texts, raw logs or full history
-by default. When updating a current result summary you maintain, search it for
-each item changed by the new result and replace every superseded status.
-Retain required earlier evidence with its version and measurement limits.
-Plan and Decision records keep their own update rules.
+Group required reviews at completed scope unless their protocol requires an
+earlier review. Keep results, open limits and independently required records;
+update superseded statuses in maintained summaries. Preserve required earlier
+evidence with its version and limits. Plan and Decision records own their updates.
 
 An earlier aggregate pass becomes stale when related production code
 or tests change afterward; rerun the smallest aggregate check covering the final
@@ -168,23 +140,16 @@ the user expands scope.
 
 ## Inspect the final change
 
-Inspect the final scoped diff and repository state. Confirm that the outcome
-resides in its canonical owner, each hunk serves the request or a named risk,
-and required guarantees and acceptance remain intact. For generated output,
-inspect the source owner and affected consumer output. Reuse reviewed unchanged
-content and evidence; revisit only affected content. Tie completion to the final
-tree; passing checks already run on it need no rerun while their inputs and
-conditions are unchanged. Report material unverified behavior.
+Inspect the final scoped diff and repository state for canonical ownership,
+authorized scope and preserved acceptance. For generated output, inspect its
+source and affected consumer output. Apply the required Code review quality
+route; reuse unchanged reviewed content. Tie completion evidence to the final
+tree and report material unverified behavior.
 
 ## Report the evidence
 
-Report what was checked and its actual result; include detail only where it
-affects acceptance or the next decision. Distinguish a
-clean compile, source review, unit test, rendered interaction, live-system check,
-and deployment; one does not imply another. If a check was skipped, failed, or
-could not run, say so and narrow the claim. Never cite stale evidence as proof of
-the final change.
-
-Prefer decisive status, failures and observations to unnecessary counts. Compute
-a count only when it affects acceptance or a decision; verify the collection
-total rather than reporting per-element counts.
+Report actual checks and results, material failures and limits. Distinguish
+source inspection, compilation, unit tests, rendered interaction, live-system
+checks and deployment; one does not prove another. Skipped, failed, unavailable
+or stale evidence cannot support a pass. Count only when it affects acceptance
+or a decision, checking the whole relevant collection.

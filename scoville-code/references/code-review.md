@@ -3,34 +3,30 @@
 Complete rules already supplied or read from this build satisfy references to
 code-review.md. Retain them; do not reread unchanged copies.
 
-Every code review must assess these aspects within its assigned scope before
-approving code or reporting no findings:
+Before approving or reporting no findings, inspect the relevant code paths for
+simplicity, algorithmic cost, maintainability and clarity. Relevant paths include
+changed executable logic and callers, data flows or dependencies whose behavior,
+input sizes or guarantees can change through the diff, including configuration.
+For pure text or formatting changes, check content and unintended effects;
+do not examine unchanged algorithms without a behavioral reason.
 
-1. Simplicity: Check unnecessary behavior, state, layers, ownership or data flow
-   and simpler solutions that preserve the required behavior and guarantees.
-2. Loops and recursion: Check whether a claimed input can reach the code. If
-   actual bounds exclude it, reject that failure attribution. Always trace
-   loops, recursion and collection scans for reachable inputs; identify what
-   grows and repeats. Nested loops or recursion alone prove
-   no defect. Disjoint traversals or one bounded visit per item can be linear;
-   a small fixed bound or work required by the result can justify the algorithm.
-   Report avoidable quadratic, exponential or comparable work when its concrete
-   consequence warrants a correction and an equivalent lookup, pass or reuse
-   removes it without disproportionate complexity. If only a complexity claim
-   is unsupported, correct that claim.
-3. Maintainability and extensibility: Check clear responsibilities and whether
-   foreseeable changes fit the structure without unnecessary coupling or
-   duplicated policy. Do not demand abstractions for hypothetical needs.
-4. Clarity for later agents: Owners, contracts, data flow and dependencies must
-   be understandable from code and project records without chat history.
+Choose the simplest sound solution at the responsible owner for the project's
+maintenance and development intent. Check encapsulation, dependency direction,
+duplicated policy and recurring workarounds. Owners, contracts and data flow
+must be understandable without chat history. Unnecessary behavior, state or
+layers with a concrete work or maintenance cost can be defects; a different
+style, fewer lines or a hypothetical extension need is not one.
 
-Use code inspection for the algorithmic check, not benchmarks or extra test
-runs. This is not a general performance, memory, I/O or cache-tuning request.
-Fewer lines alone prove no improvement. Preserve distinct responsibilities,
-required guarantees and diagnostics; require no routine comments.
+Trace relevant loops, collection scans and recursion in code: establish reachable
+inputs, bounds, what grows and what repeats. Check avoidable quadratic,
+exponential or comparable work and prefer equivalent lookup, pass or reuse when
+it removes meaningful cost without disproportionate complexity. Nested syntax
+alone proves nothing; disjoint traversals, fixed bounds or required output can
+justify the work. Reject failure attributions excluded by actual bounds. This
+static check requires no benchmark or extra test run and does not request
+general performance or cache tuning.
 
-Do not approve with an unassessed aspect or unresolved material finding. Report
-missing necessary sources as an evidence gap. Optional alternatives do not
-block. An unnecessary mechanism that adds state, work or maintenance without a
-required purpose is a concrete defect. Use existing findings and evidence
-fields; output no checklist and add no review phase.
+Preserve required guarantees and diagnostics. Resolve material findings before
+approval; name missing necessary sources as evidence gaps. Report actionable
+findings or concrete evidence limits in the existing result fields, without
+a per-aspect checklist, minimum finding count or additional review phase.

@@ -6,8 +6,10 @@ models. Give them what they lack and constrain only what must not vary. Mark
 provider-specific advice. These writing rules grant no task permissions.
 
 - **Outcome and done:** State the goal, context the recipient cannot infer,
-  real constraints and what counts as done. Skip general knowledge. Preserve
-  intended scope, facts, permissions, required behavior and acceptance criteria.
+  real constraints and what counts as done. Omit explanations of general
+  knowledge; retain contracts, project conventions and concise guidance against
+  known model failure patterns. Preserve intended
+  scope, facts, permissions, required behavior and acceptance criteria.
 - **Reasons:** Give the reason for a non-obvious rule when it helps apply it.
 - **Freedom matches fragility:** Use goals and heuristics where several
   approaches work. Prescribe exact commands, schemas or order only where a
@@ -21,7 +23,8 @@ provider-specific advice. These writing rules grant no task permissions.
   should name a concrete acceptance criterion, invariant or validator.
 - **One owner:** Keep each rule once at its responsible source. State precedence
   where instructions can collide, including the user's request over Skill
-  defaults. Fix an observed problem at its cause rather than adding a general ban.
+  defaults. First clarify, merge or remove the rule causing the problem. Add a
+  counterrule only for an independently necessary boundary.
 - **Positive and specific:** State the wanted behavior and its condition. Name
   concrete patterns to avoid when necessary; add an example for real ambiguity.
 - **Stable wording:** Use one term per meaning. Describe current behavior, not

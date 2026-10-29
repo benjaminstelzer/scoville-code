@@ -11,20 +11,24 @@ fix acquires its own framework.
 ## How it works
 
 - Establish the requested result and find the code responsible for it.
-- Fix the cause within the project's architecture and your authorized scope.
-- Check the affected behavior and relevant performance costs.
-- Reassess failed fixes, report remaining limits and stop when further checks
-  would no longer change the decision.
+- Fix the cause at its responsible owner, including shared causes behind
+  recurring workarounds, within your authorized scope.
+- Review affected behavior, guarantees and algorithmic costs. Derive checks
+  from the required result rather than incidental implementation details.
+- Continue failed repairs only with a supported next approach. Report evidenced
+  limits and stop a repair path when no viable diagnosis remains.
 
 ## What it enforces
 
 - **Work that serves the request.** Refactors, safeguards and tests need a
   concrete purpose. The agent asks about material choices and settles routine
-  details from the project.
+  details from the project. It explains conflicting requirements or evidenced
+  feasibility limits without substituting a different result.
 - **Your conventions.** Existing architecture and project rules take precedence.
   New projects start with a small structure organized by responsibility.
 - **Evidence that fits the change.** Check the behavior, preserve guarantees and
-  distinguish observed results from what remains unverified.
+  distinguish observed results from what remains unverified. Code review traces
+  relevant loops, scans and recursion; nested syntax alone is not a defect.
 
 Keep personal conventions outside the installed Skill so updates preserve them.
 See the [customization guide](https://github.com/benjaminstelzer/scoville-code#your-own-conventions)
@@ -36,20 +40,22 @@ and [full instructions](https://github.com/benjaminstelzer/scoville-code/blob/ma
 
 ## How it was developed
 
-The cases come from real engineering tasks: wrong-cause fixes, missed outcomes
-and checks repeated without new information. They shaped the focus on useful
-evidence. Selected comparisons do not establish a general performance gain.
+Real engineering tasks shaped the cases: wrong-cause fixes, missed outcomes and
+checks repeated without new information.
+
+Current targeted comparisons used gpt-6.1-sol / low in Codex. Independently
+checked fixture changes covered a shared parser fix, an encoding repair with a
+new supported diagnosis and evaluator recovery without repeating a completed
+producer. Other cases assessed complexity, test contracts, reachable fault paths
+and unsupported repairs. Report and binding-text cases checked complete handling.
+These controlled local results establish neither a reliability rate nor behavior
+in Claude Code, installed Skill discovery or a production system.
 
 ## Compatibility
 
 Developed for Codex and Claude Code with reference access and a shell
-for project checks.
-Targeted candidate-path tests in Codex with gpt-6.1-sol / low exercised local
-corrections, source-based complexity review, removal of a replaced path and
-article authorization through a reachable attack path. Existing recovery made
-an extra watchdog unnecessary. An external check of unknown cause remained
-unresolved. A fresh agent consumed an unchanged review. Broader model, host and
-installed-discovery behavior remain unverified.
+for project checks. Size checks use Python 3.11+ and the bundled checker; a manual
+fallback is available only without suitable Python, not after a helper error.
 
 ## Install
 

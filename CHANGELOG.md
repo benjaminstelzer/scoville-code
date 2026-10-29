@@ -1,5 +1,17 @@
 # Changelog
 
+## Unreleased - 2026-10-29
+
+- Focus implementation on the simplest sound solution at the responsible owner,
+  including shared causes behind recurring workarounds. Scope required review
+  to affected code paths, guarantees and avoidable superlinear work.
+- Reassess failed repairs from the evidence and continue only with a supported
+  next approach, while preserving host attempt limits and independent test
+  guarantees. Explain evidenced feasibility limits without claiming success.
+- Load machine-data evaluation, interpreter discovery and size-helper guidance
+  through their conditional routes. Preserve complete required text, checked
+  report output and existing permission boundaries.
+
 ## Unreleased - 2026-10-28
 
 - Consolidate outcome guidance, distinguish wording checks from behavior tests,

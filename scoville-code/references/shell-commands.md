@@ -7,30 +7,29 @@ In PowerShell, invoke a quoted executable path with `&`.
 Give `rg` existing file or directory paths and select files with `-g`, for example:
 `rg -n -g "*.php" -- "search text" "<existing-directory>"`.
 The command-capture helper passes arguments unchanged and expands no wildcards.
+Use native shell commands for simple inventories; use a literal-safe file or
+script for composed text or complex logic instead of nested inline code.
 
-Use native shell commands for simple inventories. For composed text or more
-complex logic, use a literal-safe file or script rather than nested inline code.
+Before Python commands or runtime-helper operations, read
+[python-discovery.md](python-discovery.md). File reading does not require Python.
+
+## Encoding and command status
 
 PowerShell `Out-String` formats objects; POSIX command substitution removes
-trailing newlines. Use complete raw-output capture when byte preservation matters.
+trailing newlines. Use complete raw capture when byte preservation matters.
 Before piping text into Python from PowerShell, set
-`$OutputEncoding = [System.Text.UTF8Encoding]::new($false)` and start Python
-with `-X utf8` so source text and stdin agree.
+`$OutputEncoding = [System.Text.UTF8Encoding]::new($false)` and launch Python
+with `-X utf8`.
 
-## Read output details when needed
+Evaluate each command's own exit status; a later success must not hide an earlier
+failure. Run checks separately or stop the group on failure. In PowerShell,
+inspect `$LASTEXITCODE` immediately after a native command;
+`$ErrorActionPreference` alone does not make native failures terminating.
+Running commands remain incomplete; retain their handle through final status.
 
-Before potentially large command output, limited result transfer, complete-file
-delivery or any nonrepeatable effect, read [output-delivery.md](output-delivery.md).
-Choose capture before the effect; never repeat effects to recover output.
-Supplied inputs and file results follow the shared reading rule: process
-machine data in code and read required prose completely. A path, metadata or
-partial output alone proves neither.
-
-Preserve complete UTF-8 output, including a failure's stdout and stderr, and
-each command's exit status. A capture or decoding failure, or unread required
-content, stops dependent work even after exit 0. For JSON `"status": "complete_file"`, open
-the path in `full_file` and process its contents under the shared reading rule;
-`"output_complete": false` describes the inline result. Without that complete-file route, missing output remains a
-blocker. Running commands are not complete; retain their handle,
-chunks and final status. Role and host permissions still apply: these rules
-permit no new command, source capture or file write.
+Before potentially large output, limited transfer, complete-file delivery or
+a nonrepeatable effect, read [output-delivery.md](output-delivery.md). Choose
+capture before execution; never repeat effects to recover output. Missing or
+unread required output, capture failure or decoding failure stops dependent
+work even after exit 0. Preserve failures' stdout, stderr and original exit
+status. These rules grant no command, source-capture or write permission.
