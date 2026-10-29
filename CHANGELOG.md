@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased - 2026-10-29 - Development records
+
+- Remove an obsolete research report and its development-index link; retain current Skill and test sources.
+
 ## Unreleased - 2026-10-29 - Follow-up corrections
 
 - Restore disputed-conclusion and shell/data reading routes; limit new protection to justified needs and retain scope, idioms and explicit authorization in reviews.
