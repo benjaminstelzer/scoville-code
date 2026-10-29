@@ -4,9 +4,10 @@ Complete rules already supplied or read from this build satisfy references to
 code-review.md. Retain them; do not reread unchanged copies.
 
 Before approving or reporting no findings, inspect the relevant code paths for
-simplicity, algorithmic cost, maintainability and clarity. Relevant paths include
-changed executable logic and callers, data flows or dependencies whose behavior,
-input sizes or guarantees can change through the diff, including configuration.
+simplicity, algorithmic cost, maintainability and clarity. For an audit, use the
+assigned scope. For a change, include changed executable logic and callers, data
+flows or dependencies whose behavior, input sizes or guarantees can change
+through the diff, including configuration.
 For pure text or formatting changes, check content and unintended effects;
 do not examine unchanged algorithms without a behavioral reason.
 

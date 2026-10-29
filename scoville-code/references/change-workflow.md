@@ -19,7 +19,8 @@ to resolve named uncertainties. Read known small files directly.
 
 Keep browser profiles, generated artifacts and raw traces outside ordinary
 searches unless named or implicated. Use targeted, bounded queries and the shared
-writing/data rules for large sources. Expand when evidence identifies another
+[data evaluation](machine-data.md) and [output capture](output-delivery.md) rules
+for large sources. Expand when evidence identifies another
 affected input, consumer or boundary, not merely nearby code or similar symptoms.
 Stop exploration when ownership, affected behavior and decisive checks are clear.
 
@@ -34,9 +35,10 @@ When runtime, memory, I/O cost or cache behavior may materially change, read
 - Reuse a suitable existing path while preserving SKILL.md's boundary guarantees.
   Separate prerequisites belonging only to another operation when they block
   the requested behavior; reuse alone does not make those prerequisites required.
-- Follow explicit project conventions and established module boundaries. Prefer
-  existing dependencies and supported extension points. Start behavior-complete;
-  apply SKILL.md's Failure consequences rule to added safeguards.
+- Follow explicit project conventions, surrounding code idioms and established
+  module boundaries. Prefer existing dependencies and supported extension points.
+  Start behavior-complete; apply SKILL.md's Failure consequences rule to added
+  safeguards.
 - Remove temporary diagnostics, placeholders, dead branches and superseded
   workarounds. Remove a replaced path and unused contract methods with their
   implementations unless a named current consumer still requires them.

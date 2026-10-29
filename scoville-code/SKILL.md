@@ -1,7 +1,7 @@
 ---
 name: scoville-code
 description: Implement, debug and review code with focused checks. Use to fix a bug or failing test, refactor, remove code, perform a code review, or plan engineering work in repository records. Combine with UI for interface concerns and Plan for its native records. Excludes conceptual questions unrelated to a codebase.
-compatibility: "Agent Skills host with references/ and the project's shell build, test and check commands. Version control optional. No network required. Developed for Codex and Claude Code; other hosts untested. Python 3.11+ for the bundled text-size checker; manual fallback only without suitable Python. Helper errors do not enable fallback."
+compatibility: "Agent Skills host with references/ and the project's shell build, test and check commands. Version control optional. No network required. Developed for Codex and Claude Code. Python 3.11+ for the bundled text-size checker; manual fallback only without suitable Python. Helper errors do not enable fallback."
 ---
 
 # Scoville Code
@@ -65,7 +65,7 @@ maintenance and development intent.
 
 | Mode | Requested outcome |
 | --- | --- |
-| **Advise** | Answer, inspect, or report; edit only when asked. For advice about using Scoville Code, explain the applicable capability and its conditions. Purely conceptual answers need no reference. |
+| **Advise** | Answer, inspect, or report; edit only when asked. For advice about using Scoville Code, explain the applicable capability and its conditions. Purely conceptual answers need no reference unless a trigger below applies. |
 | **Explore** | Test a hypothesis with the cheapest decisive observation. Add no production scaffolding and make no readiness claim. Retaining experimental code moves the work to Develop. |
 | **Develop** | Deliver ordinary working behavior with focused validation. |
 | **Harden** | Make a requested or project-required broad release, readiness, platform, migration, or security decision. Risk alone does not select broad gates. |
@@ -84,7 +84,7 @@ permissions. A future task or a risk label adds no reading requirement.
 | Change planning records, review assigned native Plan or Decision fields, coordinate dependent outcomes across interruption, preserve engineering continuation state, or resolve a material choice left open by inspection | [Planning](references/planning-and-decisions.md) |
 | Explore or change code, locate ownership or root cause, or review implementation | [Change](references/change-workflow.md) |
 | Choose, run or interpret checks, or judge completion evidence | [Validation](references/validation.md) |
-| Request or read machine reports, logs or structured state; write instructions, reviews or a completion report | [Writing](references/writing.md) |
+| Request or read machine reports, logs or structured state; write instructions, reviews or a completion report; or answer a disputed factual or technical conclusion | [Writing](references/writing.md) |
 
 Implementation needs Change and Validation; its completion report also needs
 Writing. Combine other routes only for work actually required. Recording future work does not authorize its
@@ -119,7 +119,7 @@ reachable attack path; a prior incident is unnecessary. Fault injection supports
 protection only when it models such a path. Reject an attribution whose
 preconditions cannot occur in supported use or through the claimed attack path.
 
-Add protection for a requirement or credible failure that existing behavior
+Add protection only for a requirement or credible failure that existing behavior
 does not cover. Use an existing visible exception or failed command when it
 causes no material harm and preserves the contract; visibility alone cannot
 undo damage or satisfy a broken guarantee. Prefer removing unnecessary risky

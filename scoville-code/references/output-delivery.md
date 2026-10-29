@@ -43,7 +43,7 @@ temporary files before evaluation; evaluator failure must not require rerunning 
 | Effect or nonreproducible output | Configure UTF-8 and allowed `--publish-full --project-root "<workspace>"` before the first `--run`. |
 | Safely repeatable read-only query | One rerun with that option is allowed only if the role and phase permit the temporary write. |
 | Saving forbidden | Narrow while preserving all required facts, or report the missing input. |
-| Reviewer reading sources | Read completely without saving source captures; the manager supplies large inputs. |
+| Reviewer reading sources | Read completely without saving source captures; the assigning agent supplies large inputs. |
 
 With `--run`, fitting output is returned directly even with `--publish-full`;
 larger output is saved from that execution. Direct machine output still needs

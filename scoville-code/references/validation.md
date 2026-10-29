@@ -91,8 +91,8 @@ framework merely to create evidence.
 
 ## Handle failures
 
-Evaluate each check's own exit status and diagnostic under the shared shell
-rules; a later success must not hide a failure.
+Evaluate each check's own exit status and diagnostic under the shared
+[shell rules](shell-commands.md); a later success must not hide a failure.
 
 Diagnose failed checks against the contract and relevant baseline. Correct
 change-caused failures; keep unresolved causes explicit. Apply SKILL.md's
@@ -103,7 +103,8 @@ the evidence and stop that path instead of presenting a substitute as success.
 For infrastructure failure, use the project's documented setup when relevant.
 
 Retain the first complete diagnostic. Report the stable failure and meaningful
-delta on repetition under the shared data/output rules.
+delta on repetition under the shared [data evaluation](machine-data.md) and
+[output capture](output-delivery.md) rules.
 
 ## Stop repetition
 

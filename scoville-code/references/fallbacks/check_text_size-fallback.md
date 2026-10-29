@@ -15,10 +15,10 @@ save source captures. If no safe capture is available, stop the dependent work.
 For composed output or permitted result delivery, prepare the complete planned output as UTF-8 without displaying
 it. Include every label and combined result. Retain the smallest applicable
 declared or explicitly overridden tool-output limit. Do not guess or increase it.
-The shared writing rules determine whether a limit applies and preserve
+The [output-delivery rules](../output-delivery.md) determine whether a limit applies and preserve
 read-only roles. Without an applicable declared limit, no numeric check is due.
 
-Apply the shared reading rule to captured output before display: process
+Apply the [machine-data rules](../machine-data.md) to captured output before display: process
 machine data in code and emit checked results, not raw or reformatted data.
 Fitting a limit does not change that rule. Return eligible complete output
 directly when it fits; save it from the same execution only when necessary. Explicit composed-file delivery remains
@@ -47,6 +47,6 @@ unavailable or fails, stop with its diagnostic.
 
 For a size check, return its result. For file publication, return the absolute
 path. Say that the file contains the complete unchanged text. Explicitly instruct the recipient
-to process it as UTF-8 under the shared reading rule before dependent work:
+to process it as UTF-8 under the [machine-data rules](../machine-data.md) before dependent work:
 machine data in code, required prose in full.
 Existing role, read-stage and transfer gates still apply.

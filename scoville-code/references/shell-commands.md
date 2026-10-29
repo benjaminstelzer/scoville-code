@@ -21,6 +21,9 @@ Before piping text into Python from PowerShell, set
 `$OutputEncoding = [System.Text.UTF8Encoding]::new($false)` and launch Python
 with `-X utf8`.
 
+For nested JSON, set `ConvertTo-Json -Depth` to cover the complete structure;
+PowerShell's default depth of 2 can replace nested values with strings.
+
 Evaluate each command's own exit status; a later success must not hide an earlier
 failure. Run checks separately or stop the group on failure. In PowerShell,
 inspect `$LASTEXITCODE` immediately after a native command;
