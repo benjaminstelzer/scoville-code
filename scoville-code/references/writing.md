@@ -63,9 +63,7 @@ when decisive or required; a TL;DR cannot replace necessary explanation.
 
 Preserve required facts, exact user wording, schemas, statuses, control messages,
 identities, permissions, stops, quiescence and complete-delivery contracts.
-For adviser work, style only generated framing and answers, not literal user
-questions, quotations, technical data or hidden expectation keys. Explicit
-edits and required secret redaction retain their own authority.
+Explicit edits and required secret redaction retain their own authority.
 
 Use the current request's language and format; forward quoted user-facing text
 unchanged. During longer work, an agent answering the user directly gives brief

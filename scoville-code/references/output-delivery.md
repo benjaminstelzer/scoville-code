@@ -47,12 +47,20 @@ temporary files before evaluation; evaluator failure must not require rerunning 
 
 With `--run`, fitting output is returned directly even with `--publish-full`;
 larger output is saved from that execution. Direct machine output still needs
-evaluation before display. Invalid UTF-8 fails with 125 without saving.
+evaluation before display. Capture supplies EOF on stdin. When native waiting
+cannot bound a command, an explicit `--timeout-seconds <positive-seconds>` before
+`--run` terminates its process family at that deadline; there is no default
+deadline or automatic retry. Invalid UTF-8 and timeout fail with 125. With
+`--publish-full`, available original bytes are saved as `.bin`; failure metadata
+on stderr gives `error`, `capture_complete`, `exit_code` and `full_file`.
+Timeout output remains incomplete; invalid encoding is not usable UTF-8.
+`timeout_cleanup_incomplete` also identifies a process whose termination is
+unconfirmed. Preserve it and resolve the process state before further work.
 Replacement characters introduced relative to the source also stop dependent work.
 
 A saved command capture contains `exit=<n> stdout_bytes=<n> stderr_bytes=<n>`,
 then `stdout:\n`, stdout, `\nstderr:\n` and stderr. Parse using the byte counts
-and UTF-8. JSON `"status": "complete_file"` with `full_file` identifies complete
+without decoding invalid bytes. JSON `"status": "complete_file"` with `full_file` identifies complete
 saved output; `"output_complete": false` describes its omitted inline portion.
 Open `full_file` and process the contents before dependent work. Without this
 route, missing output or `output_complete=false` leaves required content unread.

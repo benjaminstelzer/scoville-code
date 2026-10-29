@@ -3,11 +3,15 @@
 import argparse
 import hashlib
 import json
+import math
 import os
 from pathlib import Path
 import tempfile
 import sys
 import subprocess
+import signal
+import threading
+import time
 
 
 class TextParser(argparse.ArgumentParser):
@@ -27,7 +31,7 @@ class TextParser(argparse.ArgumentParser):
         self.exit(2)
 
 
-def publish_full(root, data):
+def publish_full(root, data, suffix='.txt'):
     root = root.resolve()
     directory = (root / '.scoville' / 'temp').resolve()
     if not directory.is_relative_to(root):
@@ -43,7 +47,7 @@ def publish_full(root, data):
         with os.fdopen(marker, 'wb') as stream:
             stream.write(b'*\n')
     # A content-derived name keeps one immutable file per text.
-    target = directory / (hashlib.sha256(data).hexdigest() + '.txt')
+    target = directory / (hashlib.sha256(data).hexdigest() + suffix)
     temporary = None
     try:
         with tempfile.NamedTemporaryFile(dir=directory, delete=False) as stream:
@@ -58,6 +62,68 @@ def publish_full(root, data):
         if temporary is not None:
             temporary.unlink()
     return str(target)
+
+
+def collect_output(process, timeout):
+    """Drain incrementally so a surviving pipe owner cannot hide captured bytes."""
+    chunks = [[], []]
+    failures = []
+    lock = threading.Lock()
+
+    def drain(stream, index):
+        try:
+            while data := stream.read1(65536):
+                with lock:
+                    chunks[index].append(data)
+        except OSError:
+            with lock:
+                failures.append('capture_read_failed')
+        finally:
+            stream.close()
+
+    readers = [threading.Thread(target=drain, args=(stream, index), daemon=True)
+               for index, stream in enumerate((process.stdout, process.stderr))]
+    for reader in readers:
+        reader.start()
+    deadline = None if timeout is None else time.monotonic() + timeout
+
+    def remaining(end):
+        return None if end is None else max(0, end - time.monotonic())
+
+    failure = None
+    try:
+        process.wait(timeout=remaining(deadline))
+        for reader in readers:
+            reader.join(remaining(deadline))
+        if any(reader.is_alive() for reader in readers):
+            raise subprocess.TimeoutExpired(process.args, timeout)
+    except subprocess.TimeoutExpired:
+        failure = 'timeout'
+        try:
+            if os.name == 'nt':
+                killed = subprocess.run(['taskkill', '/PID', str(process.pid), '/T', '/F'],
+                    stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=10)
+                if killed.returncode:
+                    failure = 'timeout_cleanup_incomplete'
+            else:
+                os.killpg(process.pid, signal.SIGKILL)
+        except (OSError, subprocess.TimeoutExpired):
+            failure = 'timeout_cleanup_incomplete'
+        cleanup_deadline = time.monotonic() + 5
+        if process.poll() is None:
+            try:
+                process.kill()
+                process.wait(timeout=remaining(cleanup_deadline))
+            except (OSError, subprocess.TimeoutExpired):
+                failure = 'timeout_cleanup_incomplete'
+        for reader in readers:
+            reader.join(remaining(cleanup_deadline))
+        if any(reader.is_alive() for reader in readers):
+            failure = 'timeout_cleanup_incomplete'
+        # A blocked reader owns its stream until EOF. Closing it here can wait
+        # on the Windows buffered-reader lock and defeat the deadline.
+    with lock:
+        return b''.join(chunks[0]), b''.join(chunks[1]), failure or (failures[0] if failures else None)
 
 
 def capture_command(args):
@@ -80,7 +146,8 @@ def capture_command(args):
         directory = (args.project_root.resolve() / '.scoville/temp').resolve()
         if not directory.is_relative_to(args.project_root.resolve()):
             return error('.scoville/temp escapes --project-root')
-        minimum = (json.dumps({'status': 'complete_file', 'output_complete': False,
+        minimum = (json.dumps({'status': 'capture_failed', 'error': 'timeout_cleanup_incomplete',
+            'capture_complete': False, 'output_complete': False, 'process_id': 2147483647,
             'exit_code': -2147483648, 'full_file': str(directory / ('0' * 64 + '.txt'))},
             ensure_ascii=True) + '\n').encode('ascii')
     if len(minimum) > budget:
@@ -99,13 +166,34 @@ def capture_command(args):
         except OSError as failure:
             return error(f'--publish-full preparation failed at "{directory}": {failure}')
     try:
-        result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        known_exit = result.returncode
-        result.stdout.decode('utf-8', errors='strict')
-        result.stderr.decode('utf-8', errors='strict')
-        header = (f'exit={known_exit} stdout_bytes={len(result.stdout)} '
-                  f'stderr_bytes={len(result.stderr)}\n').encode('ascii')
-        rendered = header + b'stdout:\n' + result.stdout + b'\nstderr:\n' + result.stderr
+        process = subprocess.Popen(command, stdin=subprocess.DEVNULL,
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+            start_new_session=os.name != 'nt')
+        stdout, stderr, failure_kind = collect_output(process, args.timeout_seconds)
+        known_exit = process.returncode
+        header = (f'exit={known_exit} stdout_bytes={len(stdout)} '
+                  f'stderr_bytes={len(stderr)}\n').encode('ascii')
+        rendered = header + b'stdout:\n' + stdout + b'\nstderr:\n' + stderr
+        try:
+            stdout.decode('utf-8', errors='strict')
+            stderr.decode('utf-8', errors='strict')
+        except UnicodeError:
+            failure_kind = failure_kind or 'invalid_utf8'
+        if failure_kind:
+            if args.publish_full:
+                metadata = {'status': 'capture_failed', 'error': failure_kind,
+                    'capture_complete': failure_kind == 'invalid_utf8', 'output_complete': False,
+                    'exit_code': known_exit,
+                    'full_file': publish_full(args.project_root, rendered, '.bin')}
+                if failure_kind == 'timeout_cleanup_incomplete':
+                    metadata['process_id'] = process.pid
+                output = (json.dumps(metadata,
+                    ensure_ascii=True) + '\n').encode('ascii')
+                if len(output) > budget:
+                    return error('budget cannot fit complete failure metadata')
+                sys.stderr.buffer.write(output)
+                return 125
+            return error(f'{failure_kind} process_id={process.pid}' if failure_kind == 'timeout_cleanup_incomplete' else failure_kind)
         if len(rendered) <= budget:
             output = rendered
         elif args.publish_full:
@@ -113,8 +201,8 @@ def capture_command(args):
                 'exit_code': known_exit, 'full_file': publish_full(args.project_root, rendered)},
                 ensure_ascii=True) + '\n').encode('ascii')
         else:
-            output = (f'output_complete=false exit={known_exit} stdout_bytes={len(result.stdout)} '
-                      f'stderr_bytes={len(result.stderr)}\n').encode('ascii')
+            output = (f'output_complete=false exit={known_exit} stdout_bytes={len(stdout)} '
+                      f'stderr_bytes={len(stderr)}\n').encode('ascii')
             if len(output) > budget:
                 output = f'output_complete=false exit={known_exit}\n'.encode('ascii')
         if len(output) > budget:
@@ -152,6 +240,8 @@ def main():
                         help="with --run, save complete output only if it cannot fit; with --file, explicitly publish complete unchanged text")
     parser.add_argument('--project-root', type=Path,
                         help='existing absolute workspace, required only with --publish-full')
+    parser.add_argument('--timeout-seconds', type=float,
+                        help='optional positive finite deadline for --run; timeout terminates its process family, preserves available output and never retries')
     # An optional argparse REMAINDER does not consume the -- separator. Split
     # the native argv explicitly so child options never become checker options.
     args = parser.parse_args(options[1:])
@@ -166,6 +256,8 @@ def main():
         parser.error('--publish-full requires --project-root <existing-absolute-workspace>')
     if args.project_root and not args.publish_full:
         parser.error('--project-root requires --publish-full; omit it for a read-only size check')
+    if args.timeout_seconds is not None and (args.run is None or not math.isfinite(args.timeout_seconds) or args.timeout_seconds <= 0):
+        parser.error('--timeout-seconds requires --run and a positive finite number of seconds')
     if args.run is not None:
         return capture_command(args)
     try:

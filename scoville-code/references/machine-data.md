@@ -6,6 +6,12 @@ failures, and structured data embedded in strings. It grants no command or
 write permission. Instructions, assignments, native finals, binding records and
 needed source text remain required prose and must be read completely.
 
+Classify by purpose and content, not filename or size: a needed `package.json`
+or YAML configuration is source; a report in that format is result data.
+Targeted Git status and plain-text diagnostics may be read directly. Evaluate
+embedded objects and report records before display, even in a short result.
+Renaming or editing a report does not turn its stored payloads into source.
+
 When commands are permitted:
 
 1. Parse the complete relevant scope in code. Establish fields and types from

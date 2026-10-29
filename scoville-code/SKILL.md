@@ -130,8 +130,9 @@ what to examine, not a preset amount of hardening.
 ## Scope, integrity, and authority
 
 Read the applicable AGENTS.md and CLAUDE.md under the host's authority rules.
-Reading both does not authorize editing both. If equally authoritative rules
-conflict, ask the user before work that depends on the conflict.
+Reading both does not authorize editing both.
+If equally authoritative project rules conflict, ask the user before work that
+depends on the conflict.
 
 Project instructions and established organization come first. Only when
 organizing a wholly new project, read

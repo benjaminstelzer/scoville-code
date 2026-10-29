@@ -34,7 +34,8 @@ If the complete necessary text still cannot fit, or the active role's transfer
 contract independently permits file delivery, use the publication procedure
 below. Without a content limit, omit the size check and make no fit claim.
 1. Resolve the existing workspace and `.scoville/temp` before creating anything.
-   The resolved directory must stay inside that workspace.
+   The resolved directory must stay inside that workspace. Create its missing
+   `.gitignore` with `*` without replacing or following an existing file.
 2. Compute SHA-256 over the complete unchanged UTF-8 bytes; use `<hash>.txt` there.
 3. Reject a symlink or non-file at that name. Reuse an existing regular file
    only if its bytes are identical.
@@ -50,3 +51,9 @@ path. Say that the file contains the complete unchanged text. Explicitly instruc
 to process it as UTF-8 under the [machine-data rules](../machine-data.md) before dependent work:
 machine data in code, required prose in full.
 Existing role, read-stage and transfer gates still apply.
+
+Noninteractive capture supplies EOF on stdin. A required deadline uses the
+host's bounded wait and process-family termination. Preserve available original
+bytes and status before UTF-8 decoding; encoding failure or timeout stops
+dependent work, and timeout output remains incomplete. Report unconfirmed
+termination with the retained process identity; never restart it automatically.

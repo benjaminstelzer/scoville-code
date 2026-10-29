@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased - 2026-10-29 - Capture and rule boundaries
+
+- Preserve original failed capture bytes, use noninteractive EOF and offer an explicit bounded command timeout with honest cleanup status.
+- Distinguish source contracts from result data and retain user resolution of equally authoritative rule conflicts in both profiles.
+
 ## Unreleased - 2026-10-29 - Development records
 
 - Remove an obsolete research report and its development-index link; retain current Skill and test sources.
