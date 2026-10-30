@@ -8,7 +8,8 @@ needed source text remain required prose and must be read completely.
 
 Classify by purpose and content, not filename or size: a needed `package.json`
 or YAML configuration is source; a report in that format is result data.
-Targeted Git status and plain-text diagnostics may be read directly. Evaluate
+Source excerpts, source-search matches, source diffs, targeted Git status and
+plain-text diagnostics may be read directly. Evaluate
 embedded objects and report records before display, even in a short result.
 Renaming or editing a report does not turn its stored payloads into source.
 

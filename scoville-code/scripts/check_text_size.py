@@ -223,6 +223,9 @@ def capture_command(args):
                     'capture_complete': failure_kind == 'invalid_utf8', 'output_complete': False,
                     'exit_code': known_exit,
                     'full_file': publish_full(args.project_root, rendered, '.bin')}
+                if failure_kind == 'invalid_utf8':
+                    metadata['instruction'] = ('Original bytes and child exit retained; UTF-8 interpretation is open. '
+                        'Stop text-dependent work. Use only producer-established encoding; no replacement or producer retry.')
                 if failure_kind.endswith('_cleanup_incomplete'):
                     metadata['process_id'] = process.pid
                 output = (json.dumps(metadata,

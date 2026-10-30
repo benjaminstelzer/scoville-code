@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased - 2026-10-30 - Source reading and UTF-8 diagnostics
+
+- Clarify direct source reading and producer-owned instruction-design loading while preserving report evaluation.
+- Explain retained bytes, child status and unresolved text interpretation after invalid UTF-8.
+- Remove redundant layout wording without changing activation or sibling requirements.
+
 ## Unreleased - 2026-10-30 - Capture and diagnostic follow-up
 
 - Load Code quality for implementation recommendations as well as implementation and review.

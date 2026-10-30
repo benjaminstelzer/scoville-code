@@ -2,9 +2,10 @@
 
 Apply these rules to plans, decisions, instructions, agent messages, handoffs,
 reviews and reports. Preserve required schemas and delivery contracts. For
-reusable instructions or an output another agent will act on, read
-[agent instruction design](instruction-design.md) at the producing rule or
-template; the recipient needs its task, not the authoring workflow.
+reusable instructions and outputs another agent will act on, apply
+[agent instruction design](instruction-design.md) through their producing rule or
+template. Load that reference when authoring or revising the producing Skill,
+rule or template; recipients use their supplied task and the writing rules below.
 
 ## Read and load by content
 

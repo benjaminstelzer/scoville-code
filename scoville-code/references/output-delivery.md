@@ -58,7 +58,11 @@ cannot bound a command, an explicit `--timeout-seconds <positive-seconds>` befor
 deadline or automatic retry. Invalid UTF-8 and timeout fail with 125. With
 `--publish-full`, available original bytes are saved as `.bin`; failure metadata
 on stderr gives `error`, `capture_complete`, `exit_code` and `full_file`.
-Timeout output remains incomplete; invalid encoding is not usable UTF-8.
+Timeout output remains incomplete. Invalid UTF-8 leaves text interpretation open,
+not the recorded process outcome or complete original-byte capture. Stop work
+that depends on interpreting that text; independent authorized work may continue.
+Decode another encoding only when established by the producer contract, never
+by guessing or silently replacing bytes. Do not repeat the producer to recover text.
 `timeout_cleanup_incomplete` also identifies a process whose termination is
 unconfirmed. Preserve it and resolve the process state before further work.
 Caught SIGINT/SIGTERM and POSIX SIGHUP use the same bounded cleanup and report `interrupted`
@@ -69,7 +73,7 @@ finished; `publication_failed` gives its `full_file` and filesystem `reason`.
 An additional capture failure remains in `capture_error`, with `process_id` when cleanup is unconfirmed.
 Read that recovery source; do not repeat the producer. A storage failure before
 complete saving proves no recovery copy.
-Replacement characters introduced relative to the source also stop dependent work.
+Replacement characters introduced relative to the source also stop text-dependent work.
 
 A saved command capture contains `exit=<n> stdout_bytes=<n> stderr_bytes=<n>`,
 then `stdout:\n`, stdout, `\nstderr:\n` and stderr. Parse using the byte counts

@@ -28,7 +28,7 @@ changes, required guarantees, failure risks and the evidence needed to check the
 This Skill works independently. Other Scoville Skills are optional; use an
 available, active sibling for its applicable concern. Do not install, simulate
 or require an absent sibling.
-Explicit activation requirements and user exclusions apply in either layout.
+Explicit activation requirements and user exclusions remain applicable.
 
 ## Standalone planning and continuation
 
