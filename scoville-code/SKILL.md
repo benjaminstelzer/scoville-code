@@ -45,6 +45,8 @@ For dependent or interrupted work:
 - On resume, reconcile these facts with current state before continuing.
   Reuse completed work whose evidence still holds.
 
+The owners below apply only when the corresponding Skill is independently available and active. This standalone Skill requires none of them.
+
 Family owners, in suite order:
 
 - `scoville-code`: engineering scope, implementation, risk, and validation.
@@ -60,8 +62,6 @@ Before substantial edits, identify the responsible source, the changed behavior
 and relevant failure risks. Check feasibility and conflicting requirements;
 explain evidenced limits without silently changing the authorized goal or method.
 Unknown feasibility calls for a decisive investigation, not an impossibility claim.
-Choose the simplest sound solution at that owner for the project's established
-maintenance and development intent.
 
 | Mode | Requested outcome |
 | --- | --- |
@@ -86,13 +86,13 @@ permissions. A future task or a risk label adds no reading requirement.
 | Choose, run or interpret checks, or judge completion evidence | [Validation](references/validation.md) |
 | Request or read machine reports, logs or structured state; write instructions, reviews or a completion report; or answer a disputed factual or technical conclusion | [Writing](references/writing.md) |
 
-Implementation needs Change and Validation; its completion report also needs
+Implementation needs Change, Validation and [Code quality](references/code-quality.md)
+before choosing the solution and before final scoped diff acceptance; its completion report also needs
 Writing. Combine other routes only for work actually required. Recording future work does not authorize its
 implementation or require its validation route. If a needed reference is
 unavailable, obtain its text before the dependent work.
 
-Every code review, including final scoped diff acceptance, requires
-[Code review quality](references/code-review.md).
+Every code review requires the same [Code quality](references/code-quality.md).
 
 ## Resolve material choices
 
@@ -111,21 +111,10 @@ silently add fallback paths. Existing authorization for the change remains valid
 
 ## Failure consequences
 
-Preserve required guarantees, including for internal tooling. Scale safeguards
-and checks to the reachable failure, affected guarantee and consequences:
-detection, reversibility, data loss, unauthorized access, incompatible output or
-duplicated effects. A credible failure follows from supported use or a concrete
-reachable attack path; a prior incident is unnecessary. Fault injection supports
-protection only when it models such a path. Reject an attribution whose
-preconditions cannot occur in supported use or through the claimed attack path.
-
-Add protection only for a requirement or credible failure that existing behavior
-does not cover. Use an existing visible exception or failed command when it
-causes no material harm and preserves the contract; visibility alone cannot
-undo damage or satisfy a broken guarantee. Prefer removing unnecessary risky
-state or narrowing an unsupported claim to adding machinery. Name why the
-existing behavior is insufficient when requesting protection. Risk identifies
-what to examine, not a preset amount of hardening.
+Apply [Code quality](references/code-quality.md) to missing and added safeguards.
+Scale implementation and checks to the reachable failure, affected guarantee and
+consequences: detection, reversibility, data loss, unauthorized access,
+incompatible output or duplicated effects, including in internal tooling.
 
 ## Scope, integrity, and authority
 
@@ -145,8 +134,7 @@ retention and policy guarantees at their canonical boundaries. Preserve
 consumer-required semantics, including status, reason, errors, source and
 validation; add no alternate path that bypasses them. Where durable state is
 required, store it before acknowledging completion, advancing or publishing.
-Require persistence, receipts and recovery features only for the actual contract
-or credible consequences. Retain useful permitted partial output after a later
+Retain useful permitted partial output after a later
 failure, identify it as partial or unsaved, and report the failure honestly.
 
 Derive a test, validator or guard's authority from its independent requirement,

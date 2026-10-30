@@ -14,6 +14,17 @@ import threading
 import time
 
 
+class PublicationError(OSError):
+    def __init__(self, cause, recovery_file):
+        super().__init__(str(cause))
+        self.recovery_file = str(recovery_file)
+        self.reason = f'{type(cause).__name__}:{getattr(cause, "errno", None)}'
+
+
+class CaptureInterrupted(Exception):
+    pass
+
+
 class TextParser(argparse.ArgumentParser):
     output_budget = None
     capture_mode = False
@@ -37,30 +48,35 @@ def publish_full(root, data, suffix='.txt'):
     if not directory.is_relative_to(root):
         raise ValueError(f'.scoville/temp resolved to "{directory}" and must stay inside --project-root "{root}"; use a direct contained temporary directory')
     directory.mkdir(parents=True, exist_ok=True)
-    # Keep published results out of Git status. Never replace an existing ignore
-    # file or follow a link; tracked files remain tracked.
-    try:
-        marker = os.open(directory / '.gitignore', os.O_WRONLY | os.O_CREAT | os.O_EXCL | getattr(os, 'O_BINARY', 0))
-    except FileExistsError:
-        pass
-    else:
-        with os.fdopen(marker, 'wb') as stream:
-            stream.write(b'*\n')
     # A content-derived name keeps one immutable file per text.
     target = directory / (hashlib.sha256(data).hexdigest() + suffix)
     temporary = None
+    complete = False
     try:
         with tempfile.NamedTemporaryFile(dir=directory, delete=False) as stream:
             temporary = Path(stream.name)
             stream.write(data)
+        complete = True
+        # Ignore creation must not lose the sole complete capture on failure.
+        try:
+            marker = os.open(directory / '.gitignore', os.O_WRONLY | os.O_CREAT | os.O_EXCL | getattr(os, 'O_BINARY', 0))
+        except FileExistsError:
+            pass
+        else:
+            with os.fdopen(marker, 'wb') as stream:
+                stream.write(b'*\n')
         try:
             os.link(temporary, target)
         except FileExistsError:
             if target.is_symlink() or not target.is_file() or target.read_bytes() != data:
                 raise ValueError(f'the hash-named target "{target}" is not the same regular file; do not overwrite it')
-    finally:
+        temporary.unlink()
+    except (OSError, ValueError) as error:
+        if complete:
+            raise PublicationError(error, temporary) from error
         if temporary is not None:
             temporary.unlink()
+        raise
     return str(target)
 
 
@@ -91,37 +107,48 @@ def collect_output(process, timeout):
         return None if end is None else max(0, end - time.monotonic())
 
     failure = None
+    def interrupted(signum, frame):
+        raise CaptureInterrupted(signum)
+
+    handled = (signal.SIGINT, signal.SIGTERM)
+    previous = {value: signal.signal(value, interrupted) for value in handled}
     try:
         process.wait(timeout=remaining(deadline))
         for reader in readers:
             reader.join(remaining(deadline))
         if any(reader.is_alive() for reader in readers):
             raise subprocess.TimeoutExpired(process.args, timeout)
-    except subprocess.TimeoutExpired:
-        failure = 'timeout'
+    except (subprocess.TimeoutExpired, CaptureInterrupted, KeyboardInterrupt) as error:
+        failure = 'timeout' if isinstance(error, subprocess.TimeoutExpired) else 'interrupted'
+        for value in handled:
+            signal.signal(value, signal.SIG_IGN)
+        cleanup_failure = failure + '_cleanup_incomplete'
         try:
             if os.name == 'nt':
                 killed = subprocess.run(['taskkill', '/PID', str(process.pid), '/T', '/F'],
                     stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=10)
                 if killed.returncode:
-                    failure = 'timeout_cleanup_incomplete'
+                    failure = cleanup_failure
             else:
                 os.killpg(process.pid, signal.SIGKILL)
         except (OSError, subprocess.TimeoutExpired):
-            failure = 'timeout_cleanup_incomplete'
+            failure = cleanup_failure
         cleanup_deadline = time.monotonic() + 5
         if process.poll() is None:
             try:
                 process.kill()
                 process.wait(timeout=remaining(cleanup_deadline))
             except (OSError, subprocess.TimeoutExpired):
-                failure = 'timeout_cleanup_incomplete'
+                failure = cleanup_failure
         for reader in readers:
             reader.join(remaining(cleanup_deadline))
         if any(reader.is_alive() for reader in readers):
-            failure = 'timeout_cleanup_incomplete'
+            failure = cleanup_failure
         # A blocked reader owns its stream until EOF. Closing it here can wait
         # on the Windows buffered-reader lock and defeat the deadline.
+    finally:
+        for value, handler in previous.items():
+            signal.signal(value, handler)
     with lock:
         return b''.join(chunks[0]), b''.join(chunks[1]), failure or (failures[0] if failures else None)
 
@@ -130,6 +157,7 @@ def capture_command(args):
     budget = args.max_output_tokens * 4 // 5
     command = args.run[1:] if args.run[:1] == ['--'] else args.run
     known_exit = None
+    capture_complete = False
 
     def error(message):
         for text in (f'output_complete=false error={message} exit={known_exit}\n',
@@ -148,7 +176,9 @@ def capture_command(args):
             return error('.scoville/temp escapes --project-root')
         minimum = (json.dumps({'status': 'capture_failed', 'error': 'timeout_cleanup_incomplete',
             'capture_complete': False, 'output_complete': False, 'process_id': 2147483647,
-            'exit_code': -2147483648, 'full_file': str(directory / ('0' * 64 + '.txt'))},
+            'exit_code': -2147483648, 'reason': 'PermissionError:123456789',
+            'instruction': 'Read full_file; correct publication conditions without rerunning the producer.',
+            'full_file': str(directory / ('0' * 64 + '.txt'))},
             ensure_ascii=True) + '\n').encode('ascii')
     if len(minimum) > budget:
         return error('budget cannot fit complete status metadata')
@@ -170,6 +200,7 @@ def capture_command(args):
             stdout=subprocess.PIPE, stderr=subprocess.PIPE,
             start_new_session=os.name != 'nt')
         stdout, stderr, failure_kind = collect_output(process, args.timeout_seconds)
+        capture_complete = failure_kind is None
         known_exit = process.returncode
         header = (f'exit={known_exit} stdout_bytes={len(stdout)} '
                   f'stderr_bytes={len(stderr)}\n').encode('ascii')
@@ -185,7 +216,7 @@ def capture_command(args):
                     'capture_complete': failure_kind == 'invalid_utf8', 'output_complete': False,
                     'exit_code': known_exit,
                     'full_file': publish_full(args.project_root, rendered, '.bin')}
-                if failure_kind == 'timeout_cleanup_incomplete':
+                if failure_kind.endswith('_cleanup_incomplete'):
                     metadata['process_id'] = process.pid
                 output = (json.dumps(metadata,
                     ensure_ascii=True) + '\n').encode('ascii')
@@ -210,6 +241,16 @@ def capture_command(args):
         sys.stdout.buffer.write(output)
         # Retain the original signal in metadata and use its conventional shell status.
         return 128 - known_exit if known_exit < 0 else known_exit
+    except PublicationError as failure:
+        output = (json.dumps({'status': 'capture_failed', 'error': 'publication_failed',
+            'reason': failure.reason, 'capture_complete': capture_complete,
+            'instruction': 'Read full_file; correct publication conditions without rerunning the producer.',
+            'output_complete': False, 'exit_code': known_exit, 'full_file': failure.recovery_file},
+            ensure_ascii=True) + '\n').encode('ascii')
+        if len(output) > budget:
+            return error('budget cannot fit publication recovery metadata')
+        sys.stderr.buffer.write(output)
+        return 125
     except (OSError, ValueError) as failure:
         return error(str(failure))
 
@@ -289,6 +330,11 @@ def main():
     if args.publish_full:
         try:
             result['full_file'] = publish_full(args.project_root, data)
+        except PublicationError as error:
+            print(json.dumps({'status': 'publication_failed', 'reason': error.reason,
+                              'message': str(error), 'full_file': error.recovery_file,
+                              'instruction': 'Read full_file; correct publication conditions without changing the original source.'}, ensure_ascii=True), file=sys.stderr)
+            return 2
         except (OSError, ValueError) as error:
             parser.error(f'complete-file publication failed: {error}')
         result['status'] = 'complete_file'

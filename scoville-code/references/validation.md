@@ -37,6 +37,8 @@ decision or a binding project rule. Evidence requirements do not expand permissi
 When a change alters a symbol used elsewhere, exercise each independently
 affected contract variant; one affected use is sufficient when inspection finds
 only one variant.
+After a module split, exercise affected consumers and its import, autoload,
+registration or startup path before claiming the behavior remains reachable.
 Derive expectations from requested behavior or an independent contract. Review
 affected existing assertions on that basis: preserve independent guarantees,
 including locks, rollback, no-write behavior and fresh-process readback when
@@ -77,7 +79,7 @@ or separate snapshot does not prove application binding.
 
 For changed protection, verify valid use and the guarantee where the effect
 occurs, accounting for state that can change after a prior check. Fault injection
-must model a credible path under SKILL.md's Failure consequences rule. Negative
+must model a credible path under [Code quality](code-quality.md). Negative
 evidence must establish:
 
 ```text
@@ -143,11 +145,16 @@ the user expands scope.
 
 Inspect the final scoped diff and repository state for canonical ownership,
 authorized scope and preserved acceptance. For generated output, inspect its
-source and affected consumer output. Apply the required Code review quality
-route; reuse unchanged reviewed content. Tie completion evidence to the final
+source and affected consumer output. Apply [Code quality](code-quality.md);
+reuse unchanged reviewed content. Tie completion evidence to the final
 tree and report material unverified behavior.
 
 ## Report the evidence
+
+For each actionable finding, give the exact location, evidenced mechanism,
+observable impact, simplest sound correction and validation limit. Prioritize
+safety, data loss and correctness. Report unrelated pre-existing issues only
+when they affect the next action.
 
 Report actual checks and results, material failures and limits. Distinguish
 source inspection, compilation, unit tests, rendered interaction, live-system

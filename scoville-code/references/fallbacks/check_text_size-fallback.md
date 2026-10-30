@@ -41,10 +41,12 @@ below. Without a content limit, omit the size check and make no fit claim.
    only if its bytes are identical.
 4. Otherwise write and close a separate temporary file in that directory.
    Publish it atomically without overwriting an existing target.
-5. Remove only the temporary file you created.
+5. Remove only the temporary file you created after successful publication.
 
 If the required byte count, SHA-256, path check or publication operation is
-unavailable or fails, stop with its diagnostic.
+unavailable or fails, stop with its diagnostic. Keep any complete own temporary
+file and report its recovery path. Do not replace atomic no-overwrite publication
+with direct writing to the final name or report partial content as complete.
 
 For a size check, return its result. For file publication, return the absolute
 path. Say that the file contains the complete unchanged text. Explicitly instruct the recipient

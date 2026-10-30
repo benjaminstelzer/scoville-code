@@ -40,16 +40,14 @@ and [full instructions](https://github.com/benjaminstelzer/scoville-code/blob/ma
 
 ## How it was developed
 
-Real engineering tasks shaped the cases: wrong-cause fixes, missed outcomes and
-checks repeated without new information.
+Code grew from engineering work in large, evolving projects. Early versions
+could turn a small change into a ritual: extra safeguards, repeated checks and
+elaborate proof that added little to the result. The useful shift was toward
+the actual problem, a maintainable solution and tests that protect real behavior.
 
-Current targeted comparisons used gpt-6.1-sol / low in Codex. Independently
-checked fixture changes covered a shared parser fix, an encoding repair with a
-new supported diagnosis and evaluator recovery without repeating a completed
-producer. Other cases assessed complexity, test contracts, reachable fault paths
-and unsupported repairs. Report and binding-text cases checked complete handling.
-These controlled local results establish neither a reliability rate nor behavior
-in Claude Code, installed Skill discovery or a production system.
+Ideas are tried in focused tests, then checked against complete workflows in
+real projects. Missed requirements, unnecessary complexity and wasted work feed
+into the next revision. The revised rules go through the same cycle again.
 
 ## Compatibility
 

@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased - 2026-10-30 - Shared criteria and focused helper fixes
+
+- Use one Code quality standard before design and acceptance, including justified safeguards, encapsulation and costly loops or recursion.
+- Keep standalone family owners explicitly optional and describe the development cycle without individual test reports.
+
 ## Unreleased - 2026-10-29 - Capture and rule boundaries
 
 - Preserve original failed capture bytes, use noninteractive EOF and offer an explicit bounded command timeout with honest cleanup status.

@@ -1,7 +1,7 @@
 # Change Workflow
 
-Deliver the simplest sound solution at the responsible owner, suited to the
-project's maintenance and development intent.
+Apply [Code quality](code-quality.md) when choosing the implementation and
+reviewing its result. This route owns the author's work, not separate criteria.
 
 ## Contents
 
@@ -26,9 +26,6 @@ Stop exploration when ownership, affected behavior and decisive checks are clear
 
 ## Implement for the outcome
 
-When runtime, memory, I/O cost or cache behavior may materially change, read
-[cost and cache decisions](cost-and-cache.md) before deciding or judging that work.
-
 - Fix the evidenced cause at its canonical owner. Resolve recurring workarounds
   at their common owner when they share a contract; one special case does not
   justify a framework.
@@ -37,16 +34,12 @@ When runtime, memory, I/O cost or cache behavior may materially change, read
   the requested behavior; reuse alone does not make those prerequisites required.
 - Follow explicit project conventions, surrounding code idioms and established
   module boundaries. Prefer existing dependencies and supported extension points.
-  Start behavior-complete; apply SKILL.md's Failure consequences rule to added
-  safeguards.
+  Start behavior-complete; apply Code quality to added safeguards.
 - Remove temporary diagnostics, placeholders, dead branches and superseded
   workarounds. Remove a replaced path and unused contract methods with their
   implementations unless a named current consumer still requires them.
 
-Encapsulate real responsibilities and state boundaries, including with one caller
-when independent change becomes clearer. Keep ownership, dependencies and data
-flow understandable; avoid speculative variants, arbitrary splits and hidden
-coupling. Recommend broader structural changes with their benefit and cost;
+Recommend broader structural changes with their benefit and cost;
 implement them only within authorized scope.
 
 Each hunk must serve the outcome or a named risk. Preserve unrelated formatting,
@@ -55,10 +48,9 @@ normalization or Git configuration changes.
 
 ## Handle dependencies and boundaries
 
-Keep guarantees in their canonical layers, mutable state with a clear owner,
-and dependencies free of cycles or shortcuts into another module's internals.
+Keep guarantees in their canonical layers and mutable state with a clear owner.
 Whoever creates a resource owns or names its cleanup. Add retry, cancellation
-or timeout machinery under SKILL.md's Failure consequences rule.
+or timeout machinery under Code quality's protection criterion.
 
 For agent-facing helpers, scripts and prompts, keep required inputs few, provide
 an invocation the agent can use directly, and make successful output usable by
@@ -88,5 +80,5 @@ not after it.
 ## Review implementation
 
 When reviewing the resulting implementation, including your final scoped diff,
-read [implementation review](implementation-review.md). Independent review remains
+apply [Code quality](code-quality.md) and Validation. Independent review remains
 subject to the task's authority and cadence; this reference adds no review phase.
