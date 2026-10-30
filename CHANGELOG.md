@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased - 2026-10-30 - Capture and diagnostic follow-up
+
+- Load Code quality for implementation recommendations as well as implementation and review.
+- Capture complete command output without a guessed token limit and preserve primary failure details.
+
 ## Unreleased - 2026-10-30 - Shared criteria and focused helper fixes
 
 - Use one Code quality standard before design and acceptance, including justified safeguards, encapsulation and costly loops or recursion.

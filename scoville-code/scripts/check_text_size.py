@@ -110,7 +110,7 @@ def collect_output(process, timeout):
     def interrupted(signum, frame):
         raise CaptureInterrupted(signum)
 
-    handled = (signal.SIGINT, signal.SIGTERM)
+    handled = (signal.SIGINT, signal.SIGTERM) + ((signal.SIGHUP,) if os.name != 'nt' else ())
     previous = {value: signal.signal(value, interrupted) for value in handled}
     try:
         process.wait(timeout=remaining(deadline))
@@ -154,16 +154,22 @@ def collect_output(process, timeout):
 
 
 def capture_command(args):
-    budget = args.max_output_tokens * 4 // 5
+    budget = args.max_output_tokens * 4 // 5 if args.max_output_tokens is not None else None
     command = args.run[1:] if args.run[:1] == ['--'] else args.run
     known_exit = None
     capture_complete = False
+    failure_kind = None
+    rendered = None
+    process = None
+
+    def fits(data):
+        return budget is None or len(data) <= budget
 
     def error(message):
         for text in (f'output_complete=false error={message} exit={known_exit}\n',
                      f'output_complete=false error=capture exit={known_exit}\n'):
             encoded = text.encode('utf-8')
-            if len(encoded) <= budget:
+            if fits(encoded):
                 sys.stderr.buffer.write(encoded)
                 break
         return 125
@@ -174,13 +180,14 @@ def capture_command(args):
         directory = (args.project_root.resolve() / '.scoville/temp').resolve()
         if not directory.is_relative_to(args.project_root.resolve()):
             return error('.scoville/temp escapes --project-root')
-        minimum = (json.dumps({'status': 'capture_failed', 'error': 'timeout_cleanup_incomplete',
+        minimum = (json.dumps({'status': 'capture_failed', 'error': 'publication_failed',
+            'capture_error': 'timeout_cleanup_incomplete',
             'capture_complete': False, 'output_complete': False, 'process_id': 2147483647,
             'exit_code': -2147483648, 'reason': 'PermissionError:123456789',
             'instruction': 'Read full_file; correct publication conditions without rerunning the producer.',
             'full_file': str(directory / ('0' * 64 + '.txt'))},
             ensure_ascii=True) + '\n').encode('ascii')
-    if len(minimum) > budget:
+    if not fits(minimum):
         return error('budget cannot fit complete status metadata')
     if not command:
         return error('--run requires a complete command argument list')
@@ -220,39 +227,49 @@ def capture_command(args):
                     metadata['process_id'] = process.pid
                 output = (json.dumps(metadata,
                     ensure_ascii=True) + '\n').encode('ascii')
-                if len(output) > budget:
+                if not fits(output):
                     return error('budget cannot fit complete failure metadata')
                 sys.stderr.buffer.write(output)
                 return 125
             return error(f'{failure_kind} process_id={process.pid}' if failure_kind == 'timeout_cleanup_incomplete' else failure_kind)
-        if len(rendered) <= budget:
+        if budget is not None and fits(rendered):
             output = rendered
         elif args.publish_full:
-            output = (json.dumps({'status': 'complete_file', 'output_complete': False,
-                'exit_code': known_exit, 'full_file': publish_full(args.project_root, rendered)},
-                ensure_ascii=True) + '\n').encode('ascii')
+            metadata = {'status': 'complete_file', 'output_complete': False,
+                'exit_code': known_exit, 'full_file': publish_full(args.project_root, rendered)}
+            if budget is None:
+                metadata['capture_complete'] = True
+            output = (json.dumps(metadata, ensure_ascii=True) + '\n').encode('ascii')
         else:
             output = (f'output_complete=false exit={known_exit} stdout_bytes={len(stdout)} '
                       f'stderr_bytes={len(stderr)}\n').encode('ascii')
-            if len(output) > budget:
+            if not fits(output):
                 output = f'output_complete=false exit={known_exit}\n'.encode('ascii')
-        if len(output) > budget:
+        if not fits(output):
             return error('budget cannot fit complete status metadata')
         sys.stdout.buffer.write(output)
         # Retain the original signal in metadata and use its conventional shell status.
         return 128 - known_exit if known_exit < 0 else known_exit
-    except PublicationError as failure:
-        output = (json.dumps({'status': 'capture_failed', 'error': 'publication_failed',
-            'reason': failure.reason, 'capture_complete': capture_complete,
-            'instruction': 'Read full_file; correct publication conditions without rerunning the producer.',
-            'output_complete': False, 'exit_code': known_exit, 'full_file': failure.recovery_file},
-            ensure_ascii=True) + '\n').encode('ascii')
-        if len(output) > budget:
+    except (OSError, ValueError) as failure:
+        if rendered is None or not args.publish_full:
+            return error(str(failure))
+        recovery_file = getattr(failure, 'recovery_file', None)
+        metadata = {'status': 'capture_failed', 'error': 'publication_failed',
+            'reason': getattr(failure, 'reason', f'{type(failure).__name__}:{getattr(failure, "errno", None)}'),
+            'capture_complete': capture_complete,
+            'instruction': ('Read full_file; correct publication conditions without rerunning the producer.' if recovery_file else
+                            'No saved copy exists. Correct storage conditions; do not rerun the producer without authority.'),
+            'output_complete': False, 'exit_code': known_exit,
+            'full_file': recovery_file}
+        if failure_kind:
+            metadata['capture_error'] = failure_kind
+            if failure_kind.endswith('_cleanup_incomplete'):
+                metadata['process_id'] = process.pid
+        output = (json.dumps(metadata, ensure_ascii=True) + '\n').encode('ascii')
+        if not fits(output):
             return error('budget cannot fit publication recovery metadata')
         sys.stderr.buffer.write(output)
         return 125
-    except (OSError, ValueError) as failure:
-        return error(str(failure))
 
 
 def main():
@@ -278,7 +295,7 @@ def main():
     parser.add_argument('--max-output-tokens', type=int,
                         help='actual smallest applicable command/outer tool-output limit, from the tool declaration or explicit override')
     parser.add_argument('--publish-full', action='store_true',
-                        help="with --run, save complete output only if it cannot fit; with --file, explicitly publish complete unchanged text")
+                        help="with --run, save complete output if it cannot fit or no limit is supplied; with --file, explicitly publish complete unchanged text")
     parser.add_argument('--project-root', type=Path,
                         help='existing absolute workspace, required only with --publish-full')
     parser.add_argument('--timeout-seconds', type=float,
@@ -287,8 +304,8 @@ def main():
     # the native argv explicitly so child options never become checker options.
     args = parser.parse_args(options[1:])
     args.run = sys.argv[sys.argv.index('--run') + 1:] if args.run else None
-    if args.run is not None and (args.max_output_tokens is None or args.run[:1] != ['--'] or len(args.run) < 2):
-        parser.error('--run requires --max-output-tokens <positive-limit> and -- followed by a complete command argument list')
+    if args.run is not None and (args.run[:1] != ['--'] or len(args.run) < 2):
+        parser.error('--run requires -- followed by a complete command argument list; supply --max-output-tokens <positive-limit> or --publish-full --project-root <existing-absolute-workspace> before --run')
     if args.max_output_tokens is None and not args.publish_full:
         parser.error('--max-output-tokens is required for a size check: --file <text> --max-output-tokens <limit>; for independently required file delivery without a content limit: --file <text> --publish-full --project-root <existing-absolute-workspace>')
     if args.max_output_tokens is not None and args.max_output_tokens < 1:
