@@ -1,61 +1,62 @@
 <!-- helper-fallback: scripts/check_text_size.py -->
 # Text-size check without Python
 
-Use this route only when no suitable Python 3.11+ is available. A missing script or helper error
-does not enable it.
+This is the manual route for a host without suitable Python 3.11+. A missing
+script or a helper error is a defect to report, not a reason to use it. The
+[output-delivery rules](../output-delivery.md) say when a capture, size check
+or publication is due; the [machine-data rules](../machine-data.md) still apply
+to what is shown.
 
-For a permitted command, capture complete stdout, stderr and its original status
-with an available host facility before display. Validate UTF-8 and measure the
-whole rendered output, including labels. Grouped streams do not prove their
-chronological order. Withheld content remains unread even after status 0. For
-effects or nonreproducible required results, prepare permitted complete saving
-before the first execution; never rerun merely to add saving. A reviewer does not
-save source captures. If no safe capture is available, stop the dependent work.
+## Capture a command
 
-For composed output or permitted result delivery, prepare the complete planned output as UTF-8 without displaying
-it. Include every label and combined result. Retain the smallest applicable
-declared or explicitly overridden tool-output limit. Do not guess or increase it.
-The [output-delivery rules](../output-delivery.md) determine whether a limit applies and preserve
-read-only roles. Without an applicable declared limit, no numeric check is due.
+Capture complete stdout, stderr and the original exit status with a host
+facility before anything is displayed. Keep the original bytes and status
+before decoding and check that both streams are valid UTF-8: on invalid UTF-8,
+hold text-dependent work, use only an encoding the producer establishes and do
+not rerun the producer. Grouped streams do not show their time order. For a command with an effect or a result that cannot be repeated,
+arrange the saving before the first execution, because rerunning it only to
+add saving repeats the effect. Stdin receives EOF. Where a deadline is needed,
+use the host's bounded wait and process-family termination; output from a
+timed-out command is incomplete, and a process whose termination is
+unconfirmed is reported with its identity rather than restarted. Content that
+was withheld stays unread even after status 0. A read-only reviewer does not
+save source captures. If no complete capture is possible, report that and
+leave the dependent work open.
 
-Apply the [machine-data rules](../machine-data.md) to captured output before display: process
-machine data in code and emit checked results, not raw or reformatted data.
-Fitting a limit does not change that rule. Return eligible complete output
-directly when it fits; save it from the same execution only when necessary. Explicit composed-file delivery remains
-permitted by its transfer contract.
+## Check size
 
-When a limit applies, count the file's bytes with an available file-size tool. Use at most
-`floor(limit_in_tokens * 4 / 5)` UTF-8 bytes as the same conservative target.
-This is not an exact token count or proof of a token overflow. At or below the
-target, the size check passes. Above it, compact wording and remove only irrelevant
-material while preserving every required fact and safeguard. Never truncate.
+A numeric check is due only for a declared or explicitly overridden output
+limit; use the smallest applicable one as given, without guessing or raising
+it. Prepare the complete planned
+output as UTF-8, including labels and combined results, and count its bytes
+with a file-size tool. At or below `floor(limit_in_tokens * 4 / 5)` bytes the
+check passes; this is a conservative proxy, not a token count. Above it,
+shorten wording and remove irrelevant material while keeping every required
+fact and safeguard. Cutting text off is never the fix.
 
-If the complete necessary text still cannot fit, or the active role's transfer
-contract independently permits file delivery, use the publication procedure
-below. Without a content limit, omit the size check and make no fit claim.
-1. Resolve the existing workspace and `.scoville/temp` before creating anything.
-   The resolved directory must stay inside that workspace. Create its missing
-   `.gitignore` with `*` without replacing or following an existing file.
-2. Compute SHA-256 over the complete unchanged UTF-8 bytes; use `<hash>.txt` there.
+## Publish complete text
+
+Publish when necessary text still cannot fit or the role's transfer contract
+permits or asks for a file. Without a limit, skip the size check and make no fit claim.
+
+1. Resolve the existing workspace and `.scoville/temp` before creating
+   anything; the resolved directory must stay inside the workspace. Create its
+   missing `.gitignore` containing `*` without replacing or following an
+   existing file.
+2. Compute SHA-256 over the complete unchanged UTF-8 bytes and use
+   `<hash>.txt` in that directory.
 3. Reject a symlink or non-file at that name. Reuse an existing regular file
-   only if its bytes are identical.
-4. Otherwise write and close a separate temporary file in that directory.
-   Publish it atomically without overwriting an existing target.
-5. Remove only the temporary file you created after successful publication.
+   only when its bytes are identical.
+4. Otherwise write and close a separate temporary file in that directory, then
+   publish it atomically without overwriting an existing target.
+5. After successful publication, remove only the temporary file you created.
 
-If the required byte count, SHA-256, path check or publication operation is
-unavailable or fails, stop with its diagnostic. Keep any complete own temporary
-file and report its recovery path. Do not replace atomic no-overwrite publication
-with direct writing to the final name or report partial content as complete.
+If the byte count, hash, path check or atomic publication is unavailable or
+fails, report its diagnostic and keep any complete temporary file as the
+recovery copy, naming its path. Writing directly to the final name is not a
+substitute, because a partial file there would look complete.
 
-For a size check, return its result. For file publication, return the absolute
-path. Say that the file contains the complete unchanged text. Explicitly instruct the recipient
-to process it as UTF-8 under the [machine-data rules](../machine-data.md) before dependent work:
-machine data in code, required prose in full.
-Existing role, read-stage and transfer gates still apply.
-
-Noninteractive capture supplies EOF on stdin. A required deadline uses the
-host's bounded wait and process-family termination. Preserve available original
-bytes and status before UTF-8 decoding; encoding failure or timeout stops
-dependent work, and timeout output remains incomplete. Report unconfirmed
-termination with the retained process identity; never restart it automatically.
+Return the size-check result, or the absolute path of the published file with
+the statement that it holds the complete unchanged text. Tell the recipient to
+process machine data in code and read required prose in full before work that
+depends on it.

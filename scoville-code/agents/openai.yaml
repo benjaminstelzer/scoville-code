@@ -1,4 +1,4 @@
 interface:
   display_name: "Scoville Code"
-  short_description: "Implement, debug and review code with focused checks"
+  short_description: "Implement, debug, diagnose and review code with focused checks"
   default_prompt: "Use $scoville-code to complete the requested code task, preserve existing guarantees and check the affected behavior."

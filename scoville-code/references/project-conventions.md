@@ -1,9 +1,9 @@
 # Conventions for a wholly new project
 
-Use only for initial organization of a wholly new project. Read applicable
-instructions and inspect its root for an existing layout. New modules, empty
-subfolders, refactors and missing individual rules retain their project's
-established organization.
+These conventions organize a wholly new project. Read the applicable
+instructions and inspect the root for an existing layout first: new modules,
+empty subfolders, refactors and individual missing rules follow the
+organization their project already has.
 
 ## Choose the applicable convention
 
@@ -13,12 +13,12 @@ conventions, then the general fallback for remaining choices.
 If an already applicable global or project `AGENTS.md` or
 `CLAUDE.md` explicitly
 directs you to user conventions, read that exact file; resolve relative paths
-from the directing file's directory. Do not search personal files or treat an
-incidental mention as an instruction. User conventions customize organization
-and naming, not permissions, loading requirements or the greenfield boundary.
-Project-specific rules override personal defaults unless the user directs
-otherwise. If required conventions are unreadable, report their exact path
-and stop dependent choices; do not substitute bundled defaults.
+from the directing file's directory. Read only that named file; an incidental
+mention of conventions is not such a direction. User conventions shape
+organization and naming only. Project-specific rules override personal
+defaults unless the user directs otherwise. If required conventions are
+unreadable, report their exact path and leave the choices that depend on them
+open, because the bundled defaults are what the user chose to replace.
 
 ## Follow the ecosystem
 
@@ -45,8 +45,7 @@ project/
 ```
 
 Create directories with their first needed content. Keep manifests at required
-locations and planning records with their existing owner; this fallback creates
-no planning system.
+locations and planning records with their existing owner.
 
 Group related source by feature or domain, preserving real responsibility
 boundaries and test discovery conventions. Use descriptive English `kebab-case`

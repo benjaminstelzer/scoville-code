@@ -1,58 +1,55 @@
-# Machine-data evaluation
+# Machine data
 
-Apply this rule before reading or displaying machine reports, logs or structured
-state from any producer: direct native results, saved captures and files,
-failures, and structured data embedded in strings. It grants no command or
-write permission. Instructions, assignments, native finals, binding records and
-needed source text remain required prose and must be read completely.
+Machine data is output written for programs: test, build and coverage reports,
+logs, JSON or YAML state, and structured strings embedded in them, whether it
+arrives as a tool result, a saved file or failure output. Evaluate it
+in code and show the checked result, because raw records fill the context with
+values nobody reads and bury the few that decide something.
 
-Classify by purpose and content, not filename or size: a needed `package.json`
-or YAML configuration is source; a report in that format is result data.
-Source excerpts, source-search matches, source diffs, targeted Git status and
-plain-text diagnostics may be read directly. Evaluate
-embedded objects and report records before display, even in a short result.
-Renaming or editing a report does not turn its stored payloads into source.
+Classify by purpose and content, not by filename or size. Illustration:
 
-When commands are permitted:
+| Item | Treat as |
+| --- | --- |
+| A `package.json` or YAML configuration the change depends on | Source: read it directly. |
+| Source excerpts, search matches, a source diff, targeted `git status` | Source: read it directly. |
+| A compiler error or stack trace for the failure being fixed | Prose diagnostic: read it in full. |
+| A JUnit XML, a JSON lint or coverage report, a tool's saved state, a log | Machine data: parse, check and report the checked result. |
+| A JSON object inside a log line or message string | Machine data, even in a short result. |
 
-1. Parse the complete relevant scope in code. Establish fields and types from
-   the records and producer contract. For schema discovery, display field names,
-   types and collection sizes, not records or values. Establish actual values
-   from the data and their meaning from the schema, producer or binding contract
-   before writing filters or assertions; do not guess literals. Display a control
-   value only when its established meaning is needed for the check or explanation.
-   Stored payloads are not control values.
-2. Extract and read required prose fully, including diagnostics, messages and
-   schema descriptions whose wording matters. Objects, arrays and serialized
-   state remain data even inside strings; inspect and compare them in code.
-   Parse strings as embedded data only when their established format requires
-   it. Catch parser failures before display and report location and reason
-   without echoing input or state.
-3. Run the required semantic checks over the entire checked scope. Parsing is
-   not a result. Unknown or contradictory meanings remain unresolved and prove
-   neither success nor permission. Different wording with the same established
-   meaning is no defect unless exact values are binding. Parse errors, missing
-   required fields, wrong types and unsupported formats prevent a pass.
-4. Before executing display code, check its output expressions and emitted
-   values against these rules. Compare structured values, including before/after
-   state, in code. Emit checked collection/field names, decisive control values,
-   results and all relevant deviations, not selected report subtrees or state
-   strings. For each deviation, include its identity or property, decisive
-   expected/actual values and complete necessary diagnostic text as applicable.
-   Group identical diagnostics by count and affected scope; preserve distinct
-   conditions. Collection checks report processed and expected counts instead
-   of every passing entry. Correct overbroad output expressions before execution
-   without printing this self-check.
+A report stays machine data when someone renames or edits the file.
 
-Do not substitute sampling for a complete check. The relevant scope is what the
-next decision requires; narrowing to it is not sampling. Retain the complete
-result in evaluating code before emitting checked output. If a native tool
-cannot be evaluated in code before display, use its supported filters to obtain
-the required scope without raw dumps. Broaden only for a concrete uncertainty.
-Without command permission, obtain evaluation from a permitted caller or report
-the missing capability; read required prose fully.
+When you can run commands:
 
-Capture and size checks govern transport, not eligibility for display. For
-potentially large output, limited transfers or nonrepeatable effects, use
-[output-delivery.md](output-delivery.md). Preserve the original result before
-evaluation so evaluator failure never requires repeating an effect.
+1. Parse the whole scope the next decision needs. Take field names, types and
+   actual values from the data and the producer's contract before writing a
+   filter or assertion, because a guessed literal silently matches nothing. For
+   an unfamiliar schema, print field names, types and collection sizes first,
+   not records or values. Parse a string as embedded data only where its established
+   format requires it.
+2. Run the required checks over that whole scope rather than a sample; a
+   sample cannot show absence, and a successful parse is not a result.
+   Narrowing to what the decision needs is not sampling. A parse error, missing
+   required field, wrong type, unsupported format or unknown or contradictory
+   meaning leaves the check unresolved, which is neither a pass nor a
+   permission. Different wording with the same established meaning is a defect
+   only where exact values are binding.
+3. Print what was checked, processed and expected counts, and every deviation
+   with its identity, expected and actual value and its complete diagnostic
+   text. Group identical diagnostics with their count and scope and keep
+   distinct ones apart, rather than report subtrees or state strings. Show a
+   control value only where its established meaning is needed for the check or
+   its explanation; stored payloads are not control values. Compare structured
+   values, including before and after state, in code rather than printing
+   both. On a parser failure report the location and reason, not the input.
+
+Prose inside the data still counts as prose: read messages, diagnostics and
+schema descriptions in full where their wording matters.
+
+When a native tool returns data that cannot pass through code before it is
+shown, use the tool's own filters to fetch only the needed scope. Without
+command permission, ask a caller that has it or report the missing capability.
+
+When the producing command has an effect or cannot be repeated, save its
+original output before evaluating it, so that a bug in the evaluation never
+forces a rerun; [output delivery](output-delivery.md) has the capture call.
+Fitting the display limit does not turn machine data into prose.

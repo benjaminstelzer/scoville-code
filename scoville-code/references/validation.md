@@ -7,7 +7,7 @@ and credible failure consequences. A pass proves only what the check exercised.
 
 - Select proportional checks
 - Handle failures
-- Stop repetition
+- Reuse results and end repair loops
 - Inspect the final change
 - Report the evidence
 
@@ -93,22 +93,21 @@ framework merely to create evidence.
 
 ## Handle failures
 
-Evaluate each check's own exit status and diagnostic under the shared
-[shell rules](shell-commands.md); a later success must not hide a failure.
+Evaluate each check's own exit status and diagnostic; a later success must not
+hide an earlier failure.
 
 Diagnose failed checks against the contract and relevant baseline. Correct
-change-caused failures; keep unresolved causes explicit. Apply SKILL.md's
-integrity rule to assertions and validators, distinguishing replaced contracts
-from unmet ones. If requirements conflict or the goal is infeasible, explain
+change-caused failures; keep unresolved causes explicit. Apply SKILL.md's rule
+on tests, validators and guards to assertions and validators, distinguishing
+replaced contracts from unmet ones. If requirements conflict or the goal is infeasible, explain
 the evidence and stop that path instead of presenting a substitute as success.
 
 For infrastructure failure, use the project's documented setup when relevant.
 
-Retain the first complete diagnostic. Report the stable failure and meaningful
-delta on repetition under the shared [data evaluation](machine-data.md) and
-[output capture](output-delivery.md) rules.
+Keep the first complete diagnostic. When a failure repeats, report the stable
+failure and the meaningful delta instead of every run.
 
-## Stop repetition
+## Reuse results and end repair loops
 
 Reuse reviewed content and complete passing results while requirements, inputs,
 files, dependencies, runtime, configuration and environment remain relevantly
@@ -120,14 +119,15 @@ flaky claim needs them.
 | Correction state | Next action |
 | --- | --- |
 | Correction failed | Reassess the cause against owner, contract and evidence. Continue only with a supported next diagnosis or an approach substantiated by changed evidence or conditions; another symptom patch or additional output alone is insufficient. |
-| No supported next approach | Stop that repair path, report blocker and continue independent work. |
+| No supported next approach | End that repair path, report the blocker and continue independent work. |
 | Decisive evidence passes | Record the concise result once and continue or complete the requested work. |
 
-Do not weaken acceptance or bypass host attempt limits.
+However many corrections failed, acceptance stays as required and the host's
+attempt limits apply.
 
 Before more checks, reviews or records, use available evidence and identify the
 open question, changed condition or binding requirement. If no authorized check
-can decide it, stop probing and report the required behavior as unverified.
+can decide it, end the probing and report the required behavior as unverified.
 
 Group required reviews at completed scope unless their protocol requires an
 earlier review. Keep results, open limits and independently required records;
@@ -138,8 +138,8 @@ An earlier aggregate pass becomes stale when related production code
 or tests change afterward; rerun the smallest aggregate check covering the final
 tree or narrow the completion claim.
 
-Do not fix unrelated suite failures unless they block the requested outcome or
-the user expands scope.
+Leave unrelated suite failures alone unless they block the requested outcome or
+the user expands the scope; report them when they affect the next action.
 
 ## Inspect the final change
 

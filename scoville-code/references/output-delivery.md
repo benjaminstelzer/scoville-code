@@ -1,9 +1,14 @@
 # Output capture and delivery
 
-Apply [shell-command rules](shell-commands.md) for commands and
-[machine-data.md](machine-data.md) for machine output. This route governs
-transport; a capture or size pass does not permit raw-data display.
-File readers choose their permitted method and read required prose completely.
+Run commands and emit text directly unless one of these holds. Then use the
+bundled checker, which with `--publish-full` keeps output complete where a
+display limit would cut it.
+
+| Situation | Call |
+| --- | --- |
+| A command's output may exceed the tool's display limit, or the command has an effect or result that cannot be repeated | Capture |
+| Composed text must fit a known output limit | Size check |
+| Complete text would not fit, or the role's transfer contract permits or asks for a file | Publish |
 
 ## Runtime helpers
 
@@ -20,105 +25,93 @@ not their source, unless diagnosing a failure.
 | --- | --- |
 | `scripts/check_text_size.py` | [check_text_size](fallbacks/check_text_size-fallback.md) |
 
-## Capture before execution
+## The three calls
 
-For potentially large command output, including diagnostics, use:
-`<verified-python> -X utf8 "<skill-directory>/scripts/check_text_size.py" --max-output-tokens <limit> --run -- <command> <arguments>`.
+**Capture.** Choose it before the first execution, because output lost to a
+display limit cannot be recovered from a command that must not run twice.
 
-The checker executes argv without a shell, captures both streams completely,
-validates UTF-8 and measures rendered status and labels. Grouped streams do not
-prove chronological order. It preserves child exit status; signals use
-`128 + signal` and report the original status. Checker failures use 125 and
-stop dependent work. A child may also exit 125: complete `exit=125` output
-identifies its status; checker failure metadata identifies capture failure.
-Start Python producers with `-X utf8`, including after
-`--run --`; the outer Python runs only the checker.
+```text
+<verified-python> -X utf8 "<skill-directory>/scripts/check_text_size.py" [--max-output-tokens <limit>] [--publish-full --project-root "<workspace>"] [--timeout-seconds <seconds>] --run -- <command> <arguments>
+```
 
-Run machine-data producers inside evaluating code that retains the complete
-result or opens its `full_file` before emitting checked output. The checker
-can capture that evaluator. For effects or nonreproducible output, preserve
-the producer's identity, complete stdout, stderr and exit status in permitted
-temporary files before evaluation; evaluator failure must not require rerunning it.
+- Put checker options before `--run`. The checker runs the argv without a
+  shell, so it expands no wildcards or pipes; start a Python child as
+  `<verified-python> -X utf8 <script>`. Keep quoted paths as single arguments
+  and launcher tokens such as `py -3` separate.
+- `<limit>` is the smallest applicable declared output limit or an explicit
+  override. Omit it when none is known; a guessed budget produces a false fit.
+- Where writing is permitted, add `--publish-full --project-root` whenever the
+  output may exceed the limit or the command must not run twice; a limit alone
+  discards output that does not fit. At least one of the two is required.
+- With a limit, fitting output returns inline and, with `--publish-full`,
+  larger output is saved from the same execution. Without a limit,
+  `--publish-full` always saves and returns metadata only.
+- Stdin gives EOF and there is no default deadline. Add `--timeout-seconds`
+  when the host cannot bound the wait.
+- Machine data still goes through code before display. Run a repeatable
+  producer inside the evaluating script, which the checker can capture; for a
+  command with an effect, capture first and evaluate the saved file.
 
-| Operation or role | Required capture choice |
+**Size check** for the complete composed text, labels and combined results
+included, against the smallest applicable known limit:
+
+```text
+<verified-python> -X utf8 "<skill-directory>/scripts/check_text_size.py" --file "<text>" --max-output-tokens <limit>
+```
+
+Without a limit, emit the complete text directly. The check compares UTF-8
+bytes with `floor(limit * 4 / 5)`; text held in memory can be compared the same
+way without saving. It is a conservative proxy, not a token count, and does
+not see host framing.
+
+**Publish** complete unchanged text as a file and send its absolute path:
+
+```text
+<verified-python> -X utf8 "<skill-directory>/scripts/check_text_size.py" --file "<text>" --publish-full --project-root "<workspace>"
+```
+
+Published files live in `.scoville/temp`, where the checker adds a `.gitignore`
+when none exists. They are temporary, stay out of commits and are never
+overwritten. Publishing without a limit makes no fit claim. Tell the recipient
+to process machine data in code and read required prose in full before work
+that depends on the file.
+
+A role that may not write files, such as a read-only reviewer, does not
+capture to files: it narrows the command to the facts it needs or asks the
+assigning agent for the input.
+
+## Read the result
+
+| Result | Meaning and next step |
 | --- | --- |
-| Potentially large output, including diagnostics | Configure UTF-8 and allowed `--publish-full --project-root "<workspace>"` before the first `--run`. |
-| Effect or nonreproducible output | Preserve complete original streams and status from the first execution; never repeat to recover output. |
-| Saving forbidden | Narrow while preserving all required facts, or report the missing input. |
-| Reviewer reading sources | Read completely without saving source captures; the assigning agent supplies large inputs. |
+| `exit=<n> stdout_bytes=<n> stderr_bytes=<n>`, then `stdout:\n`, stdout, `\nstderr:\n` and stderr | Complete capture. `exit` is the child's status and the checker exits with it (a signal as `128 + signal`). The two streams are grouped, not interleaved in time. |
+| JSON `"status": "complete_file"` from a capture | The complete output is in `full_file`, in the same layout; parse it by the header's byte counts, without decoding invalid bytes. Evaluate it there before dependent work. `output_complete: false` only says the inline copy was omitted. |
+| `output_complete=false exit=<n>` without a file | The output was not delivered and stays unread. Narrow the command, or rerun with `--publish-full` when the command is safe to repeat. |
+| Exit 125 with JSON `"status": "capture_failed"` on stderr | The checker could not complete the capture. Follow `instruction`. `error` names the cause, `full_file` holds what was saved (as `.bin`), `capture_complete` says whether that is the whole output, `process_id` names a process whose termination is unconfirmed. After `publication_failed`, `reason` gives the filesystem error and `capture_error` an earlier capture failure. |
+| Exit 125 with a line `output_complete=false error=<cause> exit=<n>` | The same failure without a saved copy: the output is lost or incomplete, and `exit` is no result after `timeout` or `interrupted`. Do not guess an encoding. Rerun only a command that is safe to repeat. |
+| `exit=125` or `"exit_code": 125` without `capture_failed` or `error=` | The child itself exited 125; the capture is complete. |
+| JSON `"status": "fits_conservative_budget"` | Emit the text. |
+| JSON `"status": "compact_required"` | Follow `instruction`: shorten wording and drop irrelevant material while keeping every required fact and safeguard; publish the complete text if it still cannot fit. Cutting text off is never the fix, because the reader cannot tell what is missing. |
+| JSON `"status": "complete_file"` from a publish | Send `full_file` as described under Publish. |
+| JSON `"status": "publication_failed"` | Follow `instruction`; `full_file`, when present, is a complete recovery copy. |
 
-With a supplied token limit, `--run` returns fitting output directly even with
-`--publish-full`; larger output is saved from that execution. Without a limit,
-`--run --publish-full --project-root "<workspace>"` always saves the streams and
-returns compact `exit_code`, `capture_complete` and `full_file` metadata without
-inline content or a fit claim. Direct machine output still needs
-evaluation before display. Capture supplies EOF on stdin. When native waiting
-cannot bound a command, an explicit `--timeout-seconds <positive-seconds>` before
-`--run` terminates its process family at that deadline; there is no default
-deadline or automatic retry. Invalid UTF-8 and timeout fail with 125. With
-`--publish-full`, available original bytes are saved as `.bin`; failure metadata
-on stderr gives `error`, `capture_complete`, `exit_code` and `full_file`.
-Timeout output remains incomplete. Invalid UTF-8 leaves text interpretation open,
-not the recorded process outcome or complete original-byte capture. Stop work
-that depends on interpreting that text; independent authorized work may continue.
-Decode another encoding only when established by the producer contract, never
-by guessing or silently replacing bytes. Do not repeat the producer to recover text.
-`timeout_cleanup_incomplete` also identifies a process whose termination is
-unconfirmed. Preserve it and resolve the process state before further work.
-Caught SIGINT/SIGTERM and POSIX SIGHUP use the same bounded cleanup and report `interrupted`
-or `interrupted_cleanup_incomplete`. SIGKILL, Windows TerminateProcess and an
-uncontrolled host termination cannot be caught; a tool yield is no deadline.
-Atomic publication failure retains a complete own temporary file when writing
-finished; `publication_failed` gives its `full_file` and filesystem `reason`.
-An additional capture failure remains in `capture_error`, with `process_id` when cleanup is unconfirmed.
-Read that recovery source; do not repeat the producer. A storage failure before
-complete saving proves no recovery copy.
-Replacement characters introduced relative to the source also stop text-dependent work.
-
-A saved command capture contains `exit=<n> stdout_bytes=<n> stderr_bytes=<n>`,
-then `stdout:\n`, stdout, `\nstderr:\n` and stderr. Parse using the byte counts
-without decoding invalid bytes. JSON `"status": "complete_file"` with `full_file` identifies complete
-saved output; `"output_complete": false` describes its omitted inline portion.
-Open `full_file` and process the contents before dependent work. Without this
-route, missing output or `output_complete=false` leaves required content unread.
-A running command requires its handle, all chunks and final exit status.
+Exit 0 does not make missing, unread or undecodable output usable: work that
+needs that output waits until it is recovered, while independent work goes on.
+Replacement characters that the source does not contain mean the text was
+damaged on the way and count like invalid UTF-8. A command that is still
+running has no result yet: keep its handle and collect every chunk and the
+final exit status.
 
 
-### Claude Code character windows
+## Claude Code output limits
 
-Check effective host settings. `bashOutputMaxChars` overrides
-`BASH_MAX_OUTPUT_LENGTH`; the latter controls read-back characters, not inline
-tokens. Success and failure have different inline ceilings; large failure
-excerpts need not include a file path. Host framing also consumes space.
-Do not convert that variable alone into `--max-output-tokens` or claim an
-inline fit. Without a known suitable limit and with write permission, use
-`<verified-python> -X utf8 "<skill-directory>/scripts/check_text_size.py" --publish-full --project-root "<workspace>" --run -- <command> <arguments>`.
-Read the saved streams before emitting a compact evaluated result; existing
-`--file --publish-full` can deliver required text without a numeric fit claim. Read the own complete
-capture, not a host preview. See [Claude Code output limits](https://code.claude.com/docs/en/tools-reference#output-limits).
+Claude Code limits Bash output in characters (`BASH_MAX_OUTPUT_LENGTH`,
+overridden by the setting `bashOutputMaxChars`), with different ceilings for
+success and failure and with host framing on top. Check the effective
+settings; that value is not a `--max-output-tokens` limit and supports no
+claim of an inline fit. Without a known token limit and with write permission,
+capture with `--publish-full` and no limit, then read the saved file rather
+than the host's preview. See
+[Claude Code output limits](https://code.claude.com/docs/en/tools-reference#output-limits).
 
-
-## Prepare complete text
-
-1. Finish the entire rendered output, including labels and combined results.
-2. Without a declared or explicitly selected limit, emit complete UTF-8 directly;
-   invent no budget or numeric check.
-3. With a limit, use the smallest applicable one. In memory compare UTF-8 bytes
-   with `floor(limit_in_tokens * 4 / 5)` without saving. For an existing or
-   permissibly prepared file use:
-   `<verified-python> -X utf8 "<skill-directory>/scripts/check_text_size.py" --file "<text>" --max-output-tokens <limit>`.
-   Keep quoted paths as single arguments and launcher tokens such as `py -3`
-   separate. This measures complete emitted text, not opaque host framing or
-   exact provider token counts.
-4. If exceeded, compact wording and remove irrelevant material while preserving
-   required facts and safeguards; never truncate.
-5. If necessary text still cannot fit, publish complete unchanged text with
-   `--publish-full --project-root "<workspace>"`. Send the absolute path and
-   instruct the recipient to process machine data in code and required prose
-   in full before dependent work. Published files are never overwritten.
-
-If the role's transfer contract independently permits file delivery, publish
-without a size check when no limit applies; omit `--max-output-tokens` and make
-no fit claim. These artifacts are temporary: never stage or commit them. Use
-another agent's artifact as evidence only when explicitly supplied.
 

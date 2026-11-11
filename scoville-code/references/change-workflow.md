@@ -17,12 +17,12 @@ with requested paths; otherwise discover candidate paths before searching
 contents. Read the owner and relevant callers, contracts, tests and configuration
 to resolve named uncertainties. Read known small files directly.
 
-Keep browser profiles, generated artifacts and raw traces outside ordinary
-searches unless named or implicated. Use targeted, bounded queries and the shared
-[data evaluation](machine-data.md) and [output capture](output-delivery.md) rules
-for large sources. Expand when evidence identifies another
-affected input, consumer or boundary, not merely nearby code or similar symptoms.
-Stop exploration when ownership, affected behavior and decisive checks are clear.
+Keep browser profiles, generated artifacts and raw traces out of ordinary
+searches unless they are named or implicated, and query large sources with
+targeted, bounded searches. Expand when evidence identifies another affected
+input, consumer or boundary, not merely for nearby code or similar symptoms.
+Exploration is finished when ownership, affected behavior and the decisive
+checks are clear.
 
 ## Implement for the outcome
 
@@ -42,9 +42,10 @@ Stop exploration when ownership, affected behavior and decisive checks are clear
 Recommend broader structural changes with their benefit and cost;
 implement them only within authorized scope.
 
-Each hunk must serve the outcome or a named risk. Preserve unrelated formatting,
-encoding and line endings; a whitespace warning does not authorize whole-file
-normalization or Git configuration changes.
+Each hunk serves the outcome or a named risk. Preserve unrelated formatting,
+encoding and line endings; a whitespace warning justifies neither normalizing
+whole files, which would bury the real change in the diff, nor changing Git
+configuration.
 
 ## Handle dependencies and boundaries
 
@@ -67,18 +68,17 @@ evidence. A local runtime version alone does not choose the target version.
 Trace relevant untrusted inputs to the operation they could affect and use a safe
 interface at that concrete boundary. Rely on properties already guaranteed by
 the caller, type or boundary validation while the value and trust conditions
-remain unchanged; do not revalidate them internally. A type annotation alone
-does not validate external data. Assess the actual possible consequence.
+remain unchanged, without validating them again internally. A type annotation
+alone does not validate external data. Assess the actual possible consequence.
 
 For a changed symbol or public behavior, locate directly affected callers,
 registrations, and test doubles. Cover each independently affected contract
 variant; one representative real consumer is sufficient when inspection finds
-only one variant. Do not inventory unrelated callers or neighboring modules.
-For destructive behavior, verify scope and reversibility before the action,
-not after it.
+only one variant; unrelated callers and neighboring modules need no inventory.
+For destructive behavior, verify scope and reversibility before the action.
 
 ## Review implementation
 
 When reviewing the resulting implementation, including your final scoped diff,
-apply [Code quality](code-quality.md) and Validation. Independent review remains
-subject to the task's authority and cadence; this reference adds no review phase.
+apply [Code quality](code-quality.md) and Validation. Whether an independent
+review also takes place follows the task's authority and cadence.

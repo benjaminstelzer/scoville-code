@@ -1,80 +1,62 @@
 # Shared writing rules
 
-Apply these rules to plans, decisions, instructions, agent messages, handoffs,
-reviews and reports. Preserve required schemas and delivery contracts. For
-reusable instructions and outputs another agent will act on, apply
-[agent instruction design](instruction-design.md) through their producing rule or
-template. Load that reference when authoring or revising the producing Skill,
-rule or template; recipients use their supplied task and the writing rules below.
+These rules cover plans, decisions, instructions, agent messages, handoffs,
+reviews and reports. Where a schema, template or delivery contract fixes the
+shape, keep that shape, because its consumer depends on it.
 
-## Read and load by content
+## Read what you rely on
 
-Before requesting or reading machine reports, logs or structured state, read
-[machine-data.md](machine-data.md). This includes direct native tool results,
-files, failures and embedded structured strings, independently of shell use.
-Evaluate the complete relevant data in code; display checked results and
-necessary prose diagnostics, never raw records or state.
+Read in full the text your work depends on: instructions, the original
+assignment, an agent's final message, binding Plan or Decision text and the
+source passages you rely on, change or judge. A truncated or partial result leaves the
+rest unread, so fetch the missing part before the work that depends on it, or
+say what you could not read. When the tool reports a complete read, that is
+enough; a second read to confirm it only costs tokens.
 
-Read required instructions, original assignments, native finals, binding Plan
-or Decision text and needed source passages completely. Choose a permitted
-method that delivers them in full. A partial or truncated result leaves the
-missing text unread; recover it before dependent work or report the blocker.
-Use existing completeness signals without verification reads of complete text.
-
-Read only the scope the next decision needs. Reuse retained identities and
-complete results instead of repeating inventories; broaden for a concrete
-uncertainty. Fully loaded shared rules of the same build remain loaded across
-Skills. Reload after changed rules/builds, explicit reload, or a concrete reason
-the retained text is missing, incomplete or uncertain. Load newly needed
-specialized references normally.
-
-Before shell commands, read [shell-commands.md](shell-commands.md). Before
-limited result transfer, potentially large output, complete-file delivery or
-a nonrepeatable effect, read [output-delivery.md](output-delivery.md).
-When saving composed or transferred text, use literal-safe UTF-8 writes or
-patches without interpolating content into executable code. Finish saving
-before dependent commands; preparation failure stops them.
+Read as widely as the next decision needs and reuse complete results you
+already hold. Widen the scope for a concrete uncertainty, not for coverage.
 
 ## Evidence-based conclusions
 
-In exchanges with users and agents, defend supported factual or technical
-conclusions with decisive evidence and check counterevidence at its source.
-Explain why an objection fails or name the correction when facts, requirements,
-assumptions or inference prove wrong, incomplete or superseded. State remaining
-uncertainty or disagreement. Confidence, repetition, authority and agreement
-are not evidence; user preferences and authorized decisions still govern scope.
+Defend a supported factual or technical conclusion with its decisive evidence,
+and check counterevidence at its source. When an objection fails, say why; when
+a fact, requirement, assumption or inference turns out wrong, incomplete or
+superseded, name the correction. State what remains uncertain or disputed.
+Confidence, repetition, authority and agreement are not evidence. The user's
+preferences and authorized decisions still set the scope where you disagree.
 
 ## Write for the recipient
 
-Give the scope, results, distinct failures, blockers, limits and next permitted
-action needed to understand or verify the result. Group equivalent results and
-identical failures with their affected scope; preserve differing causes and
-acceptance consequences. Omit routine chronology, raw logs, passing-check
-output, unchanged inventories and bookkeeping unless required or decisive.
-Cite existing detailed evidence instead of duplicating it or creating another
-report solely for omitted detail. Choose prose, labelled fields, lists, tables
-or diagrams for clarity; use unambiguous terms and actions.
+Give what the recipient needs to understand, verify or continue: scope,
+results, distinct failures, blockers, limits and the next permitted action.
+Group equivalent results and identical failures with their affected scope, and
+keep different causes and acceptance consequences apart. Leave out routine
+chronology, raw logs, passing-check output, unchanged inventories and
+bookkeeping unless they are required or decide something. Cite existing
+detailed evidence instead of copying it or writing a second report for it.
+Choose prose, labelled fields, lists, tables or diagrams by what reads clearest.
 
-Treat an uncertain recipient as fresh. Supply the facts, constraints and
-authority needed for the next correct action without hidden history. Where the
-contract allows, replace accessible source text with its exact path, section
-and reading instruction. Still state everything needed before that read and
-everything a transfer or evidence contract requires directly. Quote wording
-when decisive or required; a TL;DR cannot replace necessary explanation.
+Treat a recipient whose context you do not know as fresh: supply the facts,
+constraints and authority for the next correct action without relying on chat
+history. Where the recipient can read a source, give its exact path, section
+and what to read it for, and still state directly what they need before that
+read and what a transfer or evidence contract requires. Quote wording when it
+is decisive or required. A summary line does not replace an explanation the
+recipient needs.
 
-Preserve required facts, exact user wording, schemas, statuses, control messages,
-identities, permissions, stops, quiescence and complete-delivery contracts.
-Explicit edits and required secret redaction retain their own authority.
+Carry these over unchanged when you condense or forward: required facts, the
+user's exact wording, schemas, statuses, control messages, identities,
+permissions, stops, quiescence and delivery contracts. A paraphrase of any of them can
+change what the next agent is allowed to do. An explicit edit request and
+required secret redaction still apply.
 
-Use the current request's language and format; forward quoted user-facing text
-unchanged. During longer work, an agent answering the user directly gives brief
-material findings and next actions. Its final report stands alone and states
-whether the whole task is complete, required checks and actual results, and
-specific missing inputs or decisions. Continue authorized work.
+Use the language and format of the current request, and forward quoted
+user-facing text unchanged. A question or assessment is answered, not acted
+on. During longer work, an agent that answers the user directly gives brief
+material findings and next actions, then keeps working on what is authorized. The final
+report stands on its own: whether the whole task is complete, which required
+checks ran with their actual results, and which input or decision is missing.
 
-These rules grant no command, write or other permission and change no task
-risk, required model, role or authority. Questions and assessments authorize no
-changes. A role that cannot run commands or save files returns complete text
-through its permitted result channel; the caller applies the delivery route
-before limited display. Report a concrete transport limit if that channel
-cannot carry the required content.
+An agent whose role cannot run commands or save files returns its complete
+text through its result channel, and names the limit if that channel cannot
+carry it; the caller then handles delivery.

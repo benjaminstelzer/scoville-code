@@ -25,6 +25,23 @@ class CaptureInterrupted(Exception):
     pass
 
 
+RERUN = 'Rerun only a command that is safe to repeat.'
+UNCONFIRMED = ('Termination of process_id is unconfirmed; saved output is incomplete and exit_code is no result. '
+               'Keep process_id and resolve the state of that process before further work.')
+# The reader acts on these without the reference; each names what was kept and what is open.
+CAPTURE_INSTRUCTIONS = {
+    'invalid_utf8': ('Original bytes and child exit retained; UTF-8 interpretation is open. '
+                     'Stop text-dependent work. Use only producer-established encoding; no replacement or producer retry.'),
+    'timeout': 'The deadline ended the process family; saved output is incomplete and exit_code is no result. ' + RERUN,
+    'interrupted': 'A signal ended the capture; saved output is incomplete and exit_code is no result. ' + RERUN,
+    'timeout_cleanup_incomplete': 'The deadline was reached. ' + UNCONFIRMED,
+    'interrupted_cleanup_incomplete': 'A signal ended the capture. ' + UNCONFIRMED,
+    'capture_read_failed': 'Reading an output stream failed; saved output may be incomplete. ' + RERUN,
+}
+SAVED_CAPTURE = ('Complete output is in full_file: a header line, then stdout and stderr. '
+                 'Evaluate it there before dependent work; process machine data in code.')
+
+
 class TextParser(argparse.ArgumentParser):
     output_budget = None
     capture_mode = False
@@ -184,7 +201,7 @@ def capture_command(args):
             'capture_error': 'timeout_cleanup_incomplete',
             'capture_complete': False, 'output_complete': False, 'process_id': 2147483647,
             'exit_code': -2147483648, 'reason': 'PermissionError:123456789',
-            'instruction': 'Read full_file; correct publication conditions without rerunning the producer.',
+            'instruction': max(CAPTURE_INSTRUCTIONS.values(), key=len),
             'full_file': str(directory / ('0' * 64 + '.txt'))},
             ensure_ascii=True) + '\n').encode('ascii')
     if not fits(minimum):
@@ -223,9 +240,7 @@ def capture_command(args):
                     'capture_complete': failure_kind == 'invalid_utf8', 'output_complete': False,
                     'exit_code': known_exit,
                     'full_file': publish_full(args.project_root, rendered, '.bin')}
-                if failure_kind == 'invalid_utf8':
-                    metadata['instruction'] = ('Original bytes and child exit retained; UTF-8 interpretation is open. '
-                        'Stop text-dependent work. Use only producer-established encoding; no replacement or producer retry.')
+                metadata['instruction'] = CAPTURE_INSTRUCTIONS[failure_kind]
                 if failure_kind.endswith('_cleanup_incomplete'):
                     metadata['process_id'] = process.pid
                 output = (json.dumps(metadata,
@@ -239,7 +254,8 @@ def capture_command(args):
             output = rendered
         elif args.publish_full:
             metadata = {'status': 'complete_file', 'output_complete': False,
-                'exit_code': known_exit, 'full_file': publish_full(args.project_root, rendered)}
+                'exit_code': known_exit, 'full_file': publish_full(args.project_root, rendered),
+                'instruction': SAVED_CAPTURE}
             if budget is None:
                 metadata['capture_complete'] = True
             output = (json.dumps(metadata, ensure_ascii=True) + '\n').encode('ascii')

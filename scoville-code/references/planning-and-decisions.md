@@ -29,8 +29,8 @@ Acceptance names necessary outcome conditions and required results. Keep methods
 in steps unless independently required for acceptance. Scoville Plan owns native
 field and granularity rules.
 
-Continue to the next authorized in-scope item when its dependencies are met; do
-not treat every checkpoint as a new task.
+Continue to the next authorized in-scope item when its dependencies are met; a
+checkpoint is not a new task that needs a new go-ahead.
 
 Keep current results, remaining work, binding constraints and material decisions.
 In native Plans, Steps own actions; Instructions add
@@ -44,8 +44,9 @@ For an assigned review of native Plan or Decision fields, use Scoville Plan only
 already independently available and applicable; otherwise use the repository's
 existing field owner. For Scoville Plan, read its read-only route
 and applicable field rules; otherwise read the existing owner's applicable field
-rules. Code's engineering criteria alone do not suffice. Stay within the assigned
-source boundary; this grants no maintenance, selectors, tests or record writes.
+rules, since Code's engineering criteria do not define those fields. Stay
+within the assigned source boundary: a field review reads, and leaves
+maintenance, selectors, tests and record writes to their owner.
 
 Apply SKILL.md's material-choice criteria. Preserve each decision, its source
 and status in the existing plan, ADR, decision log, authorized commit or
@@ -53,15 +54,15 @@ pull-request mechanism; without one, use a handoff only when future work depends
 on it. Keep authorization distinct from observation.
 When `scoville-plan` is already independently available and applicable, it owns
 canonical Plan, Work Item, and Decision mutation; this reference supplies only
-Code's implementation analysis. This mention does not require loading or
-searching for that Skill. Without independent availability, keep using the
-repository's existing owner and do not require or simulate Scoville Plan.
+Code's implementation analysis. Otherwise keep using the repository's existing
+owner; nothing here requires finding or imitating that Skill.
 
 ## Resolve decision ambiguity
 
 Follow SKILL.md's choice and permission rules. In unattended work, choose within
-the explicitly authorized decision space; preserve unresolved material choices
-as proposals and stop dependent work while continuing independent authorized work.
+the explicitly authorized decision space. Record an unresolved material choice
+as a proposal, hold only the work that depends on it and continue the
+independent authorized work.
 
 ## Hand off and resume
 
@@ -72,10 +73,9 @@ restrict that prompt.
 For existing project records, or a requested handoff when Scoville Handoff is
 inactive, retain the requested outcome, binding constraints, current state,
 decisive evidence, next concrete step, and any material decision not already
-recorded canonically. This requires neither another Skill nor a new record
-system.
+recorded canonically.
 
 On resume, treat the handoff as a snapshot rather than current truth: re-read
 applicable instructions, inspect repository and plan state, and reconcile any
-mismatch before continuing. Do not repeat completed work whose evidence still
-matches the current tree.
+mismatch before continuing. Reuse completed work whose evidence still matches
+the current tree.
