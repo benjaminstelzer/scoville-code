@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased - 2026-11-11 - Size check for placed components and tested models
+
+- Name the tested models and the minimum reasoning effort in the README.
+
 ## Unreleased - 2026-11-10 - Leaner instructions and Plan validator fixes
 
 - Link the shared writing, machine-data, shell, output-delivery and Python references directly from SKILL.md, each with its reading condition, instead of chained read-first rules.
