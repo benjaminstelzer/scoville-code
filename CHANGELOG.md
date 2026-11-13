@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-11-13 - Review corrections
+
+- Ask for a test that fails without the change only for new or corrected behavior. A refactoring keeps the existing tests green before and after, and a change without runtime behavior gets the fitting source, type, lint or build check instead of a test.
+
 ## 2026-11-12 - Concrete instructions and release command
 
 - Replace the mode table and general advice with 16 steps for maintainable changes: reuse what the project has, keep one path, use other modules through their public interface, keep one source for each fact, read every loop for work repeated per item, and size safeguards, structure and tests to the request. The loop check is a reading check; it asks for no timing or profiling.

@@ -69,7 +69,7 @@ interface to use instead.
 | Each loop | Does its body walk a collection or do input/output per item while the outer collection can be large? | Yes, and a set, dict, single pass or batch call would do. |
 | Each validation, guard, retry, fallback and special case | Which real input or failure reaches it in this application? | None can; it repeats what the caller guarantees; it swallows an error or returns a default. |
 | Structure the change adds | Does the request need it? | A base class, registry, option or layer with one use; recursion or deep nesting where one pass would do. |
-| Each test | Would it fail without the change, and did it run? | It repeats the implementation or only asserts that a mock was called; the behavior that matters is untested; the relevant test is skipped or not collected. |
+| Each test | Would it fail if the behavior it covers broke, and did it run? For new or corrected behavior: does it fail without the change? | It repeats the implementation or only asserts that a mock was called; the behavior that matters is untested; the relevant test is skipped or not collected. |
 | What is left over | Is anything dead? | Commented-out or unreachable code, unused parameters, debug output; configuration, documentation or tests of a removed feature. |
 | The next reader | Can a person follow it without the chat history, and find it later? | Names that hide what a thing does, a function with several jobs, a new setting or module missing where the project documents them. |
 

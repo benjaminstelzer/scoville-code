@@ -176,25 +176,34 @@ Tests:
 
 12. **Test what the request changes, and prove the test bites.** Before
     implementing, name the observable behavior that shows the request is met
-    and the test that checks it: an existing one, or a new one in the place
-    and style of the existing tests. Test a rule where it lives: a rule added
-    to a service or domain module gets its test in that module's tests, and a
-    test through the command line or the interface then only shows the
-    wiring. That test fails without your change and passes with it. See both:
-    run it before you implement, or undo your edit in the working tree for
-    one run; do not stash, reset or check out for this. Write no test that
-    only repeats the implementation, a trivial accessor, the framework or the
-    standard library, and none for a failure that Protection in proportion
-    rules out. One test per distinct behavior or boundary of the request is
-    enough.
+    and the check for it. The kind of change decides the check:
+    - New or corrected behavior: a test, an existing one or a new one in the
+      place and style of the existing tests. Test a rule where it lives: a
+      rule added to a service or domain module gets its test in that module's
+      tests, and a test through the command line or the interface then only
+      shows the wiring. That test fails without your change and passes with
+      it. See both: run it before you implement, or undo your edit in the
+      working tree for one run; do not stash, reset or check out for this.
+    - Behavior that must stay the same, as in a refactoring or a removal: the
+      existing tests that cover it pass before and after. Write no test just
+      to have one that fails first; where no test covers the behavior, say so
+      in the report.
+    - No runtime behavior, as in documentation, comments or formatting: the
+      source, type, lint or build check that fits; no test.
+
+    Write no test that only repeats the implementation, a trivial accessor,
+    the framework or the standard library, and none for a failure that
+    Protection in proportion rules out. One test per distinct behavior or
+    boundary of the request is enough.
 13. **Read each check's own result and report tests by name.** Evaluate every
     command's exit status and diagnostic; a later success does not cancel an
-    earlier failure. Name the test that proves the request the way the test
-    runner prints it, such as `test_dates.test_two_digit_year`, with its
-    result; "the new tests" names nothing. Say which checks you ran and which
-    relevant ones you did not or could not run. "All tests pass" is no result
-    when the test that covers the change was not among them. Run the tests the way the project runs them, with its
-    documented command or CI call, and confirm from that output that the
+    earlier failure. Name the test that proves the request, or that covers
+    the behavior a refactoring keeps, the way the test runner prints it, such
+    as `test_dates.test_two_digit_year`, with its result; "the new tests"
+    names nothing. Say which checks you ran and which relevant ones you did
+    not or could not run. "All tests pass" is no result when the test that
+    covers the change was not among them. Run the tests the way the project
+    runs them, with its documented command or CI call, and confirm from that output that the
     proving test was collected and executed, not skipped or deselected. A
     test that only runs when you call it by name is not part of the suite:
     when a small change to the test setup fixes that, such as a file name, a
