@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased - 2026-11-12 - Concrete instructions and release command
+## 2026-11-12 - Concrete instructions and release command
 
 - Replace the mode table and general advice with 16 steps for maintainable changes: reuse what the project has, keep one path, use other modules through their public interface, keep one source for each fact, read every loop for work repeated per item, and size safeguards, structure and tests to the request. The loop check is a reading check; it asks for no timing or profiling.
 - Require the test that proves a change to fail without it, to sit where the changed rule lives and to run in the project's own test command. The report names that test; "all tests pass" does not count when it was not among them.
@@ -11,11 +11,11 @@
 - Cut the member references to half. An ordinary change now reads SKILL.md only.
 - Reword the shared writing, machine-data, shell and output-delivery rules the same way.
 
-## Unreleased - 2026-11-11 - Size check for placed components and tested models
+## 2026-11-11 - Size check for placed components and tested models
 
 - Name the tested models and the minimum reasoning effort in the README.
 
-## Unreleased - 2026-11-10 - Leaner instructions and Plan validator fixes
+## 2026-11-10 - Leaner instructions and Plan validator fixes
 
 - Link the shared writing, machine-data, shell, output-delivery and Python references directly from SKILL.md, each with its reading condition, instead of chained read-first rules.
 - Shorten the shared rules: drop permission disclaimers that have no recorded incident and state scope and reason for the stop rules that remain.
@@ -23,36 +23,36 @@
 - Add short illustrated examples for material choices, needed protection and machine data, and show in one table what each kind of request authorizes.
 - Name diagnosis of failing tests, builds and commands in the description so the Skill activates for them.
 
-## Unreleased - 2026-10-30 - Source reading and UTF-8 diagnostics
+## 2026-10-30 - Source reading and UTF-8 diagnostics
 
 - Clarify direct source reading and producer-owned instruction-design loading while preserving report evaluation.
 - Explain retained bytes, child status and unresolved text interpretation after invalid UTF-8.
 - Remove redundant layout wording without changing activation or sibling requirements.
 
-## Unreleased - 2026-10-30 - Capture and diagnostic follow-up
+## 2026-10-30 - Capture and diagnostic follow-up
 
 - Load Code quality for implementation recommendations as well as implementation and review.
 - Capture complete command output without a guessed token limit and preserve primary failure details.
 
-## Unreleased - 2026-10-30 - Shared criteria and focused helper fixes
+## 2026-10-30 - Shared criteria and focused helper fixes
 
 - Use one Code quality standard before design and acceptance, including justified safeguards, encapsulation and costly loops or recursion.
 - Keep standalone family owners explicitly optional and describe the development cycle without individual test reports.
 
-## Unreleased - 2026-10-29 - Capture and rule boundaries
+## 2026-10-29 - Capture and rule boundaries
 
 - Preserve original failed capture bytes, use noninteractive EOF and offer an explicit bounded command timeout with honest cleanup status.
 - Distinguish source contracts from result data and retain user resolution of equally authoritative rule conflicts in both profiles.
 
-## Unreleased - 2026-10-29 - Development records
+## 2026-10-29 - Development records
 
 - Remove an obsolete research report and its development-index link; retain current Skill and test sources.
 
-## Unreleased - 2026-10-29 - Follow-up corrections
+## 2026-10-29 - Follow-up corrections
 
 - Restore disputed-conclusion and shell/data reading routes; limit new protection to justified needs and retain scope, idioms and explicit authorization in reviews.
 
-## Unreleased - 2026-10-29
+## 2026-10-29
 
 - Focus implementation on the simplest sound solution at the responsible owner,
   including shared causes behind recurring workarounds. Scope required review
@@ -64,7 +64,7 @@
   through their conditional routes. Preserve complete required text, checked
   report output and existing permission boundaries.
 
-## Unreleased - 2026-10-28
+## 2026-10-28
 
 - Consolidate outcome guidance, distinguish wording checks from behavior tests,
   and keep unknown check failures unresolved until the evidence identifies their
@@ -77,31 +77,31 @@
 - Count failures observed during normal supported use, normal-use failures and reachable attack paths as credible; treat other injected faults, constructed interleavings and worst-case inputs only as possible failures, not as a reason for new safeguards. Prefer narrowing a claim or removing the risky state, remove replaced paths in the same change, and require reproduction or a trace through normal supported use or a reachable attack path before fixing audit or review findings.
 - Count an unnecessary mechanism with added state, work or maintenance as a concrete review defect.
 
-## Unreleased - 2026-10-27
+## 2026-10-27
 
 - Require code reviews to inspect simplicity, maintainability, foreseeable extension and clarity for later agents. Trace loops, recursion and scanning calls for avoidable nonlinear repeated work without requiring benchmarks.
 
-## Unreleased - 2026-10-20
+## 2026-10-20
 
 - Keep required text complete when choosing how to read it. File size and metadata remain optional, and completed reads need no verification reread.
 - Ground defect claims in requested behavior or an independent contract. Reuse valid evidence, check meaningful preconditions and update superseded result summaries.
 
-## Unreleased - 2026-10-19
+## 2026-10-19
 
 - Write reports as compact lists of checked scope, results and relevant gaps. Group equivalent outcomes and refer to existing evidence instead of retelling the run.
 - Apply one shared evidence rule in user and agent exchanges: defend supported conclusions, correct demonstrated errors, and respect user decisions without treating them as factual proof.
 - Define when an existing pathway fits the requested operation. Preserve shared guarantees without importing conditions from a different purpose.
 - Apply the same scope in reviews. Defend supported findings with decisive facts and revise them only for a demonstrated correction to their basis.
 
-## Unreleased - 2026-10-18
+## 2026-10-18
 
 - Reuse known results and request only the scope the next decision needs. Narrow direct tool requests before display when code preprocessing is unavailable.
 
-## Unreleased - 2026-10-15
+## 2026-10-15
 
 - Process complete reports in code, including saved captures and failures. Load the rules before data, preserve required original text, and keep parser errors from echoing stored state. Evaluate producer output before display, retain one-time results, and distinguish saved captures from missing output.
 
-## Unreleased - 2026-10-14
+## 2026-10-14
 
 - Compare nested report data in code and display only decisive results and necessary diagnostics, including structured state stored in text fields.
 
@@ -110,7 +110,7 @@
 - Process machine reports through code before displaying results. Avoid redundant shared-rule reads and keep check reports focused on decisive evidence.
 - Parse machine reports completely and display checked facts and all in-scope deviations. Reuse fully read shared rules across Skills without hiding required inputs.
 
-## Unreleased - 2026-10-13
+## 2026-10-13
 
 - Load detailed command capture and full-file delivery only when needed. Keep complete output, failure diagnostics and role permissions.
 
@@ -125,7 +125,7 @@
 - Simplify shared writing rules; command-specific size details now live in the
   shell-command rules.
 
-## Unreleased - 2026-10-12
+## 2026-10-12
 
 - Return complete command output directly when it fits; save only oversized
   captures. Verify supplied artifacts once and compare saved native Finals
@@ -137,11 +137,11 @@
 - Derive test expectations from the required behavior. Use justified bounds for
   internal work and valid measurement; preserve exact contractual guarantees.
 
-## Unreleased - 2026-10-11
+## 2026-10-11
 
 - Read required files completely with an agent-chosen method. Remove the document-reading helper and multipart protocol; keep output capture and result delivery separate.
 
-## Unreleased - 2026-10-10
+## 2026-10-10
 
 - Load command capture and large-result delivery only when needed; preserve complete outputs and role permissions.
 - Remove the obsolete Workflow runner restriction; keep normal Skill selection and role permissions. Load material cost/cache and implementation-review guidance only when relevant.
