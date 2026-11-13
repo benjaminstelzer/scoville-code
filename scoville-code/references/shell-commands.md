@@ -1,7 +1,7 @@
 # Shell commands
 
-Facts that commonly break commands in agent shells. Apply those that match the
-shell in use.
+Facts that commonly break commands in agent shells. Apply those that match
+your shell.
 
 - **Shell and quoting:** Run commands in the current tool shell; when another
   shell is necessary, use its known launcher. Keep generated commands and their
@@ -11,8 +11,8 @@ shell in use.
 - **Composed text and complex logic:** Write them to a file with a literal-safe
   UTF-8 write or patch, then run or pass that file. Shells rewrite backslashes,
   quotes and `$` inside nested inline code, so interpolated content arrives
-  changed. Finish the write before the commands that depend on it; a failed
-  write holds them.
+  changed. Finish the write before commands that depend on it; if the write
+  fails, do not run them.
 - **Exact bytes:** PowerShell `Out-String` formats objects and POSIX command
   substitution strips trailing newlines; capture raw output when bytes matter.
 - **PowerShell to Python:** Before piping text into Python, set

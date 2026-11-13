@@ -3,42 +3,32 @@
 A complete copy of these rules from this build already in your context,
 including one embedded in your assignment, is this reference; do not reread it.
 
-Apply these criteria when choosing or recommending an implementation and before
-accepting a change or reporting no findings. Judge simplicity, algorithmic
-cost, maintainability and clarity against the requested result, the guarantees
-that must keep holding and the authorized scope. An audit uses its assigned
-scope. New code or a change includes the executable logic and the callers, data
-flows, dependencies and configuration whose behavior, input sizes or guarantees
-it can alter. For pure text or formatting changes, check content and unintended
-effects, and examine unchanged algorithms only for a behavioral reason.
+Authors choosing an implementation and reviewers judging it apply the same
+criteria to the authorized scope: the changed logic and the callers, data
+flows, dependencies and configuration it can alter. A pure text or formatting
+change needs no algorithm review.
 
 ## Simplest sound solution
 
-Choose the simplest sound solution at the responsible owner for the project's
-maintenance and development intent. Without established intent, the author
-derives expected lifespan and evolution from the request and asks only when the
-uncertainty materially changes the design; a read-only reviewer reports it as
-an open decision. Encapsulate real responsibilities and state boundaries, even
-with one caller when that makes independent change clearer. Keep dependencies
-free of cycles and of shortcuts into another module's internals. Avoid
-duplicated policy, recurring workarounds, speculative variants, arbitrary
-splits and hidden coupling. Owners, contracts and data flow must be
-understandable without chat history. Unnecessary behavior, state or layers
-with a concrete work or maintenance cost can be defects; a different style,
-fewer lines or a hypothetical extension need is not one.
+Choose the simplest sound solution at the source that owns the behavior, for
+the project's maintenance and development intent. Defects: a second
+implementation of logic the project already has; a workaround repeated where
+its shared cause could be fixed; a variant, layer, state or abstraction for a
+need nobody has stated; code only understandable from the chat history. Not
+defects: a different style, a shorter possible version, a missing
+hypothetical extension, or a real responsibility or state boundary
+encapsulated for one caller.
 
 ## When protection is needed
 
-Missing protection is a defect only against a requirement or a credible failure
-reachable in supported use or through a concrete attack path; no prior incident
-is needed. Added protection needs the same basis and a named gap in existing
-behavior. Prefer removing unnecessary risky state or narrowing an unsupported
-claim to adding machinery. An existing visible exception or failed command is
-enough when it causes no material harm and keeps the contract; visibility alone
-cannot undo damage or satisfy a broken guarantee. Fault injection supports
-protection only when it models such a path, and an attribution whose
-preconditions cannot occur on the claimed path is rejected. Risk tells you what
-to examine, not how much hardening to add.
+Missing protection is a defect only against a requirement or a failure
+reachable in supported use or through a concrete attack path; no prior
+incident is needed. Added protection needs the same basis and a named gap in
+existing behavior. A visible exception or failed command is enough when it
+causes no material harm; visibility cannot undo damage. Prefer removing risky
+state or narrowing an unsupported claim to adding machinery. Reject a failure
+attribution whose preconditions or input bounds cannot occur on the claimed
+path.
 
 Illustration:
 
@@ -51,34 +41,52 @@ Illustration:
 
 ## Algorithmic cost
 
-Trace relevant loops, collection scans and recursion in the code: reachable
-inputs, bounds, what grows and what repeats. Look for avoidable quadratic,
-exponential or comparable work, and prefer an equivalent lookup, single pass or
-reuse when it removes meaningful cost without disproportionate complexity.
-Nested syntax alone proves nothing; disjoint traversals, fixed bounds or
-required output can justify the work, and a failure attribution that the
-actual bounds exclude is rejected. This is a static check: it needs no
-benchmark or extra test run and is not a request for general performance or
-cache tuning.
+Read the loops, collection scans and recursion the change touches: which
+inputs reach them, what grows, what repeats. Replace avoidable quadratic or
+exponential work with a lookup, single pass or reuse when that removes
+meaningful cost without disproportionate complexity; fixed bounds or disjoint
+traversals justify nested loops. No benchmark or general performance tuning
+is asked.
 
-For material runtime, memory or I/O tradeoffs, establish expected or explicitly
-assumed input sizes and the affected call paths. An asymptotic improvement
-alone does not justify extra complexity or memory; compare direct computation
-or reuse before proposing a cache. Use an existing cache through its canonical
-access path only when its contract fits: keys, context or tenant separation,
-lifetime and invalidation. Add a cache only for a concrete benefit that
-justifies its state, memory and validity rules. Resolve a material cost or
-behavior choice with the user; a read-only reviewer reports it without making
-the choice.
+Add a cache only for a concrete benefit that justifies its state, memory and
+validity rules, after comparing direct computation or reuse. Use an existing
+cache through its own access path, and only when its keys, tenant or context
+separation, lifetime and invalidation fit.
+
+## Reviewing a change
+
+Read the whole change, then look beyond it: most maintainability defects show
+only against the rest of the codebase. Go through the change with these
+questions. Judge from the code; run no benchmark or profiler for this. A
+finding names the place, the problem and the existing function, path or
+interface to use instead.
+
+| Look at | Ask | Defect when |
+| --- | --- | --- |
+| Each function, class and constant table the change adds | Does the codebase already have this? Search by what it does, not by its name. | An existing function or table does the same job. |
+| Each new or changed call path | Is there now a second way to do the same thing? | A copied pipeline, a fallback to the old path, a flag nobody asked for, or callers left on a replaced path. |
+| Each use of another module | Does it go through that module's public interface, from the right layer? | It reads private names, the storage file or table or internal data structures; a business rule sits in a handler or template; new module-level mutable state. |
+| Each loop | Does its body walk a collection or do input/output per item while the outer collection can be large? | Yes, and a set, dict, single pass or batch call would do. |
+| Each validation, guard, retry, fallback and special case | Which real input or failure reaches it in this application? | None can; it repeats what the caller guarantees; it swallows an error or returns a default. |
+| Structure the change adds | Does the request need it? | A base class, registry, option or layer with one use; recursion or deep nesting where one pass would do. |
+| Each test | Would it fail without the change, and did it run? | It repeats the implementation or only asserts that a mock was called; the behavior that matters is untested; the relevant test is skipped or not collected. |
+| What is left over | Is anything dead? | Commented-out or unreachable code, unused parameters, debug output; configuration, documentation or tests of a removed feature. |
+| The next reader | Can a person follow it without the chat history, and find it later? | Names that hide what a thing does, a function with several jobs, a new setting or module missing where the project documents them. |
+
+Not defects: a different style; a nested loop over two fixed small
+collections; a guard on a value that really comes from outside at that point;
+a helper that resembles an existing one but means something else in the
+domain; a real responsibility encapsulated for one caller.
 
 ## Findings
 
-Preserve required guarantees and diagnostics. Authors resolve material findings
-within their authority before acceptance; read-only reviewers report them
-without editing. Name missing necessary sources as evidence gaps. Optional
-improvements are not defects: they neither block acceptance nor authorize
-implementation, and they appear only where the role's result contract permits
-them and they help a relevant decision. Report actionable findings or concrete
-evidence limits in the existing result fields; no per-aspect checklist, minimum
-finding count or additional review phase is expected. Roles keep their own
-permissions and output schemas.
+Authors resolve material findings within their authority before acceptance;
+a material design, cost or behavior choice goes to the user. Read-only
+reviewers report findings, open decisions and missing sources without editing
+or choosing. Optional improvements are not defects: they neither block
+acceptance nor authorize implementation. Report findings in the role's
+existing result fields, each defect as its own finding: a maintainability
+defect stays in the report when a more severe finding exists, and two defects
+in one function are two findings. The review table is how you look, not a
+form to fill in: no entry per question, no minimum finding count and no extra
+review phase.

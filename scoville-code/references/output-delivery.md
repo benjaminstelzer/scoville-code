@@ -1,14 +1,13 @@
 # Output capture and delivery
 
-Run commands and emit text directly unless one of these holds. Then use the
-bundled checker, which with `--publish-full` keeps output complete where a
-display limit would cut it.
+Run commands and emit text directly unless a row of this table applies. Then
+use the bundled checker; with `--publish-full` it saves the complete output where a display limit would cut it.
 
 | Situation | Call |
 | --- | --- |
 | A command's output may exceed the tool's display limit, or the command has an effect or result that cannot be repeated | Capture |
 | Composed text must fit a known output limit | Size check |
-| Complete text would not fit, or the role's transfer contract permits or asks for a file | Publish |
+| Complete text would not fit, or the role's delivery contract permits or asks for a file | Publish |
 
 ## Runtime helpers
 
@@ -42,7 +41,7 @@ display limit cannot be recovered from a command that must not run twice.
   override. Omit it when none is known; a guessed budget produces a false fit.
 - Where writing is permitted, add `--publish-full --project-root` whenever the
   output may exceed the limit or the command must not run twice; a limit alone
-  discards output that does not fit. At least one of the two is required.
+  discards output that does not fit. Pass the limit, `--publish-full` or both.
 - With a limit, fitting output returns inline and, with `--publish-full`,
   larger output is saved from the same execution. Without a limit,
   `--publish-full` always saves and returns metadata only.

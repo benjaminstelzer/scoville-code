@@ -9,34 +9,38 @@ to what is shown.
 
 ## Capture a command
 
-Capture complete stdout, stderr and the original exit status with a host
-facility before anything is displayed. Keep the original bytes and status
-before decoding and check that both streams are valid UTF-8: on invalid UTF-8,
-hold text-dependent work, use only an encoding the producer establishes and do
-not rerun the producer. Grouped streams do not show their time order. For a command with an effect or a result that cannot be repeated,
-arrange the saving before the first execution, because rerunning it only to
-add saving repeats the effect. Stdin receives EOF. Where a deadline is needed,
-use the host's bounded wait and process-family termination; output from a
-timed-out command is incomplete, and a process whose termination is
-unconfirmed is reported with its identity rather than restarted. Content that
-was withheld stays unread even after status 0. A read-only reviewer does not
-save source captures. If no complete capture is possible, report that and
-leave the dependent work open.
+1. For a command with an effect or a result that cannot be repeated, arrange
+   saving before the first execution. Rerunning it to add saving repeats the
+   effect.
+2. Capture complete stdout, stderr and the original exit status with a host
+   facility before anything is displayed. Stdin receives EOF. Grouped streams
+   do not show their time order.
+3. Keep the original bytes and status before decoding and check that both
+   streams are valid UTF-8. On invalid UTF-8, hold text-dependent work, use
+   only an encoding the producer establishes and do not rerun the producer.
+4. Where a deadline is needed, use the host's bounded wait and process-family
+   termination. Output from a timed-out command is incomplete. Report a
+   process whose termination is unconfirmed with its identity; do not restart
+   it.
+
+Content that was withheld stays unread even after status 0. A read-only
+reviewer does not save source captures. If no complete capture is possible,
+report that and leave dependent work open.
 
 ## Check size
 
-A numeric check is due only for a declared or explicitly overridden output
-limit; use the smallest applicable one as given, without guessing or raising
-it. Prepare the complete planned
-output as UTF-8, including labels and combined results, and count its bytes
-with a file-size tool. At or below `floor(limit_in_tokens * 4 / 5)` bytes the
-check passes; this is a conservative proxy, not a token count. Above it,
-shorten wording and remove irrelevant material while keeping every required
-fact and safeguard. Cutting text off is never the fix.
+Run a numeric check only for a declared or explicitly overridden output
+limit. Use the smallest applicable one as given; do not guess or raise it.
+Prepare the complete planned output as UTF-8, including labels and combined
+results, and count its bytes with a file-size tool. At or below
+`floor(limit_in_tokens * 4 / 5)` bytes the check passes; this is a
+conservative proxy, not a token count. Above it, shorten wording and remove
+irrelevant material while keeping every required fact and safeguard. Cutting
+text off is never the fix.
 
 ## Publish complete text
 
-Publish when necessary text still cannot fit or the role's transfer contract
+Publish when necessary text still cannot fit or the role's delivery contract
 permits or asks for a file. Without a limit, skip the size check and make no fit claim.
 
 1. Resolve the existing workspace and `.scoville/temp` before creating
@@ -57,6 +61,4 @@ recovery copy, naming its path. Writing directly to the final name is not a
 substitute, because a partial file there would look complete.
 
 Return the size-check result, or the absolute path of the published file with
-the statement that it holds the complete unchanged text. Tell the recipient to
-process machine data in code and read required prose in full before work that
-depends on it.
+the statement that it holds the complete unchanged text.

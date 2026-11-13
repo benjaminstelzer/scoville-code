@@ -5,34 +5,21 @@ instructions and inspect the root for an existing layout first: new modules,
 empty subfolders, refactors and individual missing rules follow the
 organization their project already has.
 
-## Choose the applicable convention
-
-Apply user and project requirements first, then the chosen ecosystem's official
-conventions, then the general fallback for remaining choices.
+Apply user and project requirements first, then the chosen ecosystem's
+official conventions for entry points, manifests, configuration names and
+casing, then the fallback below.
 
 If an already applicable global or project `AGENTS.md` or
 `CLAUDE.md` explicitly
 directs you to user conventions, read that exact file; resolve relative paths
-from the directing file's directory. Read only that named file; an incidental
-mention of conventions is not such a direction. User conventions shape
-organization and naming only. Project-specific rules override personal
-defaults unless the user directs otherwise. If required conventions are
-unreadable, report their exact path and leave the choices that depend on them
-open, because the bundled defaults are what the user chose to replace.
-
-## Follow the ecosystem
-
-Preserve required entry points, manifests, configuration names and casing.
-Use the selected stack's official guide when conventions are needed; if
-unavailable, use authoritative local guidance and state material uncertainty.
-Choose target runtime and dependencies from the request and stack requirements,
-not merely the installed runtime. Respect lockfiles or pinning; prefer native
-or existing checks and provide one usable check. Keep or create a README with
-actual prerequisites, setup, usage, startup and check commands when needed.
+from the directing file's directory. An incidental mention of conventions is
+no such direction. User conventions shape organization and naming only;
+project-specific rules override them unless the user directs otherwise. If the
+named file is unreadable, report its exact path and leave the choices that
+depend on it open, because the bundled defaults are what the user chose to
+replace.
 
 ## Minimal general fallback
-
-When no project or ecosystem requirement determines layout, use:
 
 ```text
 project/
@@ -44,16 +31,28 @@ project/
   .gitignore
 ```
 
-Create directories with their first needed content. Keep manifests at required
-locations and planning records with their existing owner.
+Create a directory with its first needed content. Name freely chosen
+directories and documents in descriptive English `kebab-case`; keep ecosystem
+casing and conventional names such as `README.md`. Avoid spaces, case-only
+distinctions and names such as `new`, `final` or numbered backups. Create no
+`development/` or `releases/` wrapper.
 
-Group related source by feature or domain, preserving real responsibility
-boundaries and test discovery conventions. Use descriptive English `kebab-case`
-for freely chosen general directories/documents; retain ecosystem casing and
-conventional names such as `README.md`. Avoid spaces, reserved names, case-only
-distinctions and names such as `new`, `final` or numbered backup fragments.
+## Structure a person and an agent can extend
 
-Use conventional build outputs and exclude generated output, secrets, caches
-and temporary evidence from source/version control unless distribution requires
-them. Create no universal `development/` or `releases/` wrapper. Record only
-non-obvious conventions needed by later work in existing project documentation.
+Size the structure to the project: a script of a hundred lines stays one file,
+and a tool with several concerns gets one module per concern.
+
+- Keep the entry point thin. It reads arguments or the request, calls a
+  function and prints or returns the result.
+- Put rules and calculations in modules that take data and return data. They
+  import without side effects: no reading of input, argument parsing or output
+  at import time, so a test or another agent can call them directly.
+- Put file, network and database access in its own module at the edge, and
+  pass its results to the rules.
+- Read configuration in one place and pass the values in.
+- For a small command line tool that means, for example, `cli.py`, `rules.py`,
+  `storage.py` and `report.py`. Split a file when it starts to mix parsing,
+  rules and output, not before.
+- Write tests for the rules in the ecosystem's conventional place, and a
+  README that says how to run the program, how to run the tests and, in one
+  line per module, what lives where.

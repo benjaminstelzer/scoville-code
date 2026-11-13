@@ -10,25 +10,36 @@ fix acquires its own framework.
 
 ## How it works
 
-- Establish the requested result and find the code responsible for it.
-- Fix the cause at its responsible owner, including shared causes behind
-  recurring workarounds, within your authorized scope.
-- Review affected behavior, guarantees and algorithmic costs. Derive checks
-  from the required result rather than incidental implementation details.
-- Continue failed repairs only with a supported next approach. Report evidenced
-  limits and stop a repair path when no viable diagnosis remains.
+- Before writing, the agent looks for what the project already has: the
+  function that does the job, the module it belongs in and the way the project
+  builds that kind of thing.
+- It names the simplest approach in one sentence and holds its code to it.
+- While writing, it keeps one path, uses other modules through their public
+  interfaces, keeps each fact in one place and reads its own loops for work
+  that repeats per item. That is a reading check, not a benchmark.
+- It names the test that proves the request, sees it fail without the change
+  and pass with it, and reports it by name.
+- It ends by checking its diff against these rules and puts the proof in the
+  report: what it reused, which guard covers which real case, which test ran.
+- A review goes through the same points in someone else's change and names
+  the existing function, path or interface to use instead.
 
 ## What it enforces
 
-- **Work that serves the request.** Refactors, safeguards and tests need a
-  concrete purpose. The agent asks about material choices and settles routine
-  details from the project. It explains conflicting requirements or evidenced
-  feasibility limits without substituting a different result.
+- **Code the next reader can extend.** No second implementation of logic the
+  project already has, no parallel path beside the one that works, no reaching
+  into another module's internals and nothing left behind.
+- **Effort in proportion.** A safeguard, an abstraction or a test needs a real
+  case in this application. A local script is not hardened like a payment
+  service, and a small request stays a small diff.
+- **Tests that prove something.** The test for a change fails without it and
+  actually runs. "All tests pass" does not count when the relevant test was
+  not among them.
 - **Your conventions.** Existing architecture and project rules take precedence.
   New projects start with a small structure organized by responsibility.
-- **Evidence that fits the change.** Check the behavior, preserve guarantees and
-  distinguish observed results from what remains unverified. Code review traces
-  relevant loops, scans and recursion; nested syntax alone is not a defect.
+- **Honest evidence.** The report keeps what was observed apart from what
+  remains unverified. The agent asks about material choices and explains
+  conflicting requirements instead of substituting a different result.
 
 Keep personal conventions outside the installed Skill so updates preserve them.
 See the [customization guide](https://github.com/benjaminstelzer/scoville-code#your-own-conventions)

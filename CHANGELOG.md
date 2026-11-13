@@ -1,5 +1,16 @@
 # Changelog
 
+## Unreleased - 2026-11-12 - Concrete instructions and release command
+
+- Replace the mode table and general advice with 16 steps for maintainable changes: reuse what the project has, keep one path, use other modules through their public interface, keep one source for each fact, read every loop for work repeated per item, and size safeguards, structure and tests to the request. The loop check is a reading check; it asks for no timing or profiling.
+- Require the test that proves a change to fail without it, to sit where the changed rule lives and to run in the project's own test command. The report names that test; "all tests pass" does not count when it was not among them.
+- End every change with a check of the diff against the steps and a short proof in the report: what was reused, which guard covers which real case, which test ran.
+- Add a review table to the code quality reference that looks for the same defects in someone else's change, with a list of what is not a defect. Each defect is its own finding.
+- Lay out a new project by responsibility, with a README that says in one line per module what lives where.
+- Activate for building a new tool or project and for adding a feature.
+- Cut the member references to half. An ordinary change now reads SKILL.md only.
+- Reword the shared writing, machine-data, shell and output-delivery rules the same way.
+
 ## Unreleased - 2026-11-11 - Size check for placed components and tested models
 
 - Name the tested models and the minimum reasoning effort in the README.
