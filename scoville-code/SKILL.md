@@ -85,11 +85,12 @@ with that evidence; do not quietly switch goal or method.
 
 The aim is code a person can follow and another agent can extend: a change
 that reads as if it had always been part of the codebase and is sized to the
-request. Work through these steps for every change. Each ends in something you
-can check, and the last one puts the proof in the report. They are conditions,
-not commands for every line: where the project has nothing to reuse, write it;
-where the request asks for the safeguard, the option or the second path, build
-it.
+request. Go through these steps for a change. Each ends in something you can
+check. They are conditions, not a procedure to document: a step whose subject
+the change does not touch needs no action and no line in the report, so a
+small change passes most of them at a glance. Where the project has nothing to
+reuse, write it; where the request asks for the safeguard, the option or the
+second path, build it.
 
 Before writing:
 
@@ -101,20 +102,18 @@ Before writing:
    parses, formats, calculates, decides a business rule, loads configuration
    or retries, search the codebase for code that already does it. Search by
    what it does, not by the name you would give it: the domain words
-   (`discount`, `working day`, `canonical`), what the neighbouring features
+   (`tax rate`, `opening hours`, `slug`), what the neighbouring features
    import, the module overview. If it exists, call it. If it almost fits,
    extend it where it lives instead of copying it. A second implementation of
-   a rule the project already has is a defect, because the two drift apart: a
-   reminder that computes "two years gives 10%" itself promises a discount the
-   invoice does not grant.
+   a rule the project already has is a defect, because the two drift apart: a product page that rounds prices itself shows a total the checkout does not charge.
 3. **Find where it belongs and how such things are built here.** Put the code
    in the module responsible for the concern and build it the way the project
-   builds that kind of thing. A new export format is a new writer in the
-   existing registry, not a copy of the export function.
-4. **Say the simplest approach in one sentence** before coding, for example
-   "one pass over the orders with a dict by customer id". If the code you then
-   write has more nested loops, recursion, classes or state than the sentence,
-   simplify it or name what forces the extra part. Use the standard library or
+   builds that kind of thing. A new notification channel is one more sender registered beside the existing ones, not a copy of the send function.
+4. **Start from the simplest approach that solves the request**, for example
+   one pass over the log lines with a counter per host. When the code you
+   write needs more nested loops, recursion, classes or state than that
+   approach, simplify it, unless a requirement you can point to forces the
+   extra part. Use the standard library or
    an existing helper before a hand-written algorithm, and recursion only for
    recursive data.
 
@@ -147,15 +146,16 @@ While writing:
    builds a collection, and concatenation that copies a growing string or
    list. Where the outer collection can be large, take that work out of the
    loop: build a set or dict once before it, sort once and scan, or fetch in
-   one batch. `if item.id in [o.id for o in orders]` inside a loop over items
-   becomes `order_ids = {o.id for o in orders}` before it. A nested loop over
-   two fixed small collections, such as twelve months by five regions, is
-   fine. You do this check by reading the code. Do not time, benchmark or
+   one batch. `if user.email in [m.email for m in members]` inside a loop
+   over users becomes `member_emails = {m.email for m in members}` before it. A nested loop over
+   two fixed small collections, such as seven weekdays by three shifts, is fine. You do this check by reading the code. Do not time, benchmark or
    profile for it; measuring belongs to a request about performance.
 9. **Protection in proportion.** Add a validation, guard, retry, lock,
    fallback or special case only for an input or failure that can actually
-   reach this code in this application, and name it: "the file comes from
-   customers, so a missing column is real". A local script for one user does
+   reach this code in this application. Find where it comes from first: an
+   upload from end users can be empty, a value your own module just built
+   cannot. Where you can point to no caller, file or user that produces the
+   case, leave the guard out; a sentence that justifies it is not a source. A local script for one user does
    not get the safeguards of a payment service. Guarantees the system already
    has stay, as the section below says. Do not check again what the caller or
    the type already guarantees. An error you cannot handle surfaces
@@ -174,20 +174,25 @@ While writing:
 
 Tests:
 
-12. **Test what the request changes, and prove the test bites.** Before
-    implementing, name the observable behavior that shows the request is met
-    and the check for it. The kind of change decides the check:
-    - New or corrected behavior: a test, an existing one or a new one in the
-      place and style of the existing tests. Test a rule where it lives: a
-      rule added to a service or domain module gets its test in that module's
-      tests, and a test through the command line or the interface then only
-      shows the wiring. That test fails without your change and passes with
-      it. See both: run it before you implement, or undo your edit in the
-      working tree for one run; do not stash, reset or check out for this.
+12. **Test what the request changes.** Name the observable behavior that shows
+    the request is met and the check for it. The kind of change decides the
+    check:
+    - New behavior: a test, an existing one or a new one in the place and
+      style of the existing tests. Test a rule where it lives: a rule added
+      to a service or domain module gets its test in that module's tests, and
+      a test through the command line or the interface then only shows the
+      wiring. Read the test once against the request: it asserts the
+      requested result on the code path the application uses, not a mock and
+      not the implementation's own steps.
+    - A bug fix, or behavior whose failure is costly, such as money,
+      permissions, data loss or security: also see the test fail first. For a
+      bug, the failing test is the reproduction of the defect, written before
+      the fix. For costly new behavior, run the test before you implement, or
+      undo your edit in the working tree for one run; do not stash, reset or
+      check out for this. Other changes need no failing run.
     - Behavior that must stay the same, as in a refactoring or a removal: the
-      existing tests that cover it pass before and after. Write no test just
-      to have one that fails first; where no test covers the behavior, say so
-      in the report.
+      existing tests that cover it pass before and after. Where no test
+      covers the behavior, say so in the report.
     - No runtime behavior, as in documentation, comments or formatting: the
       source, type, lint or build check that fits; no test.
 
@@ -199,12 +204,12 @@ Tests:
     command's exit status and diagnostic; a later success does not cancel an
     earlier failure. Name the test that proves the request, or that covers
     the behavior a refactoring keeps, the way the test runner prints it, such
-    as `test_dates.test_two_digit_year`, with its result; "the new tests"
-    names nothing. Say which checks you ran and which relevant ones you did
+    as `test_slugs.test_umlauts_are_transliterated`, with its result, taken
+    from a run whose output you read; "the new tests" names nothing. Say which checks you ran and which relevant ones you did
     not or could not run. "All tests pass" is no result when the test that
     covers the change was not among them. Run the tests the way the project
-    runs them, with its documented command or CI call, and confirm from that output that the
-    proving test was collected and executed, not skipped or deselected. A
+    runs them, with its documented command or CI call, and confirm from that
+    output that the proving test was collected and executed, not skipped or deselected. A
     test that only runs when you call it by name is not part of the suite:
     when a small change to the test setup fixes that, such as a file name, a
     discovery pattern or a stale skip marker, make it and say so; otherwise
@@ -221,13 +226,14 @@ When finishing:
     project documents such things, so the next agent finds it instead of
     building it again. In a new project, the README says how to run the
     program, how to run the tests and, in one line per module such as
-    `rules.py: rounding and overlap rules`, what lives where.
-16. **Check the diff against this list and report the proof** in a few lines:
-    for each function, class, constant table and configuration key the
-    change adds, the existing one you checked against or "none exists"; for
-    each loop whose body still walks a collection, why that is needed; for
-    each added guard, the real case it covers; the test that proves the
-    request and its result.
+    `pricing.py: price and tax calculation`, what lives where.
+16. **Check the diff against this list, then report what matters.** Read
+    your diff once with these steps in mind and correct what you find. In the
+    report, name only what applies: existing code you reused or extended; a
+    guard you added and the real case it covers; a loop that still walks a
+    collection inside and why it has to; the test that proves the request
+    and its result. Write no line for a step with nothing to say and no entry
+    per function.
 
 ## References
 
@@ -297,8 +303,8 @@ output.
 ## Evidence and report
 
 Report the observable result, the decisive checks and what remains unverified.
-Say for each statement whether you observed it, read it in the source or
-inferred it. A passing check proves only what it exercised; a
-mocked test is not the real integration. Add the proof lines of rule 16.
+Mark a statement that rests only on reading the source or on inference; an
+unmarked one is something you observed. A passing check proves only what it
+exercised; a mocked test is not the real integration. Add what rule 16 names.
 Claim behavior, scope, safety, success, publication or completion only as far
 as current evidence reaches.

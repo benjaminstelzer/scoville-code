@@ -2,7 +2,11 @@
 
 ## 2026-11-13 - Review corrections
 
-- Ask for a test that fails without the change only for new or corrected behavior. A refactoring keeps the existing tests green before and after, and a change without runtime behavior gets the fitting source, type, lint or build check instead of a test.
+- Review: name an unneeded abstraction by what it is for, a second variant nobody asked for, not by a list of forms.
+- Ask for a test that fails first only for a bug fix and for behavior whose failure is costly, such as money, permissions, data loss or security. Other new behavior gets a test that is read against the request; a refactoring keeps the existing tests green before and after, and a change without runtime behavior gets the fitting source, type, lint or build check instead of a test.
+- Report only what applies: reused code, added guards with their real case, the proving test. No line per function and no label on every statement.
+- Ask for the thing instead of a sentence about it: start from the simplest approach and find where a guarded case comes from before adding the guard.
+- Replace rule examples that came from our own test tasks with examples from other domains.
 
 ## 2026-11-12 - Concrete instructions and release command
 

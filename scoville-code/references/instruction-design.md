@@ -31,10 +31,15 @@ provider-specific advice. These writing rules grant no task permissions.
   how the recipient can tell it is done, naming the concrete thing: "list every
   size the change adds and search the project for the same value", not "ensure
   consistency with the system". Where a rule needs judgment, add one worked
-  example with real values, such as "a 13px font where the page uses 12px and
-  14px". A model that reasons little follows a concrete step and skips an
+  example with real values, such as "an 18px icon where the page uses 16px and 20px". A model that reasons little follows a concrete step and skips an
   abstract principle. A rule every task needs belongs in the file that is
-  always loaded.
+  always loaded. Checkable does not mean documented: require a list, a report
+  line or an extra run only where a recorded or measured failure shows that
+  the recipient otherwise skips the step, and say when it applies. A duty that every change must document turns the rule into a procedure.
+  Ask for the thing, not for a statement about it: a rule that is met by
+  writing a sentence gets the sentence. Take a rule's examples from outside
+  the tasks used to measure it; an example copied from a test task makes the
+  test pass without showing that the rule works.
 - **Stable wording:** Use one term per meaning. Describe current behavior, not
   removed rules, previous versions or expiring dates.
 - **Facts:** State what must be factual and where invented content is allowed.
