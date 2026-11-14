@@ -19,14 +19,15 @@ fix acquires its own framework.
   interfaces, keeps each fact in one place and reads its own loops for work
   that repeats per item. That is a reading check, not a benchmark.
 - It names the test that proves the request and reports it by name. For a
-  bug fix or costly behavior, such as money, permissions or data loss, it
-  sees that test fail first. A refactoring keeps the existing tests green
+  bug fix, or new behavior whose failure would charge a wrong amount, grant
+  access, lose data or open a security hole, it sees that test fail first. A refactoring keeps the existing tests green
   before and after; a change without runtime behavior gets the fitting source
   or build check, not a test.
-- It ends by checking its diff against these rules and reports only what
-  applies: what it reused, which guard covers which real case, which test ran.
+- It ends by reading its diff against these rules and reports the test that
+  proves the request.
 - A review goes through the same points in someone else's change and names
-  the existing function, path or interface to use instead.
+  the place, the problem and, where one exists, the function, path or
+  interface to use instead.
 
 ## What it enforces
 

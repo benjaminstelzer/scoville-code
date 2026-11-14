@@ -9,7 +9,7 @@ situation.
 | --- | --- |
 | Correction failed | Reassess the cause against the responsible source, the contract and the evidence. Continue only with a diagnosis the evidence supports or an approach that changed evidence or conditions justify; another symptom patch or more output is not progress. |
 | No supported next approach | End that repair path, report the blocker and continue independent work. |
-| Decisive evidence passes | Record the result once and continue. |
+| Decisive evidence passes | Continue with that result. |
 
 However many corrections failed, acceptance stays as required and the host's
 attempt limits apply. Keep the first complete diagnostic; when a failure
@@ -19,16 +19,17 @@ Leave unrelated failing tests alone unless they block the requested outcome.
 
 ## Before another check, review or record
 
-Name the open question, changed condition or binding requirement the new
-check would settle; without one, the evidence you have is enough. Reuse
+Run another check, review or record only for an open question, changed
+condition or binding requirement it would settle; otherwise the evidence you
+have is enough. Reuse
 reviewed content and passing results while requirements, files, dependencies,
 runtime and configuration are unchanged; a new step, role or phase alone
 requires no rerun. A required independent review of unreviewed content still
 takes place, at completed scope unless its protocol asks earlier. After edits
 to related code or tests an earlier aggregate pass is stale: rerun the
 smallest check covering the final tree or narrow the claim.
-When a result changes, replace the outdated status in the summary you
-maintain instead of appending a new one.
+When a result changes, replace the outdated status in your running summary or
+report instead of appending a new one.
 
 ## What decides a claim
 

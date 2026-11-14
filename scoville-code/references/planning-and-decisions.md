@@ -21,8 +21,9 @@ completion, not review text or history.
 ## Decisions and field reviews
 
 Record each material decision with its source and status in the existing
-plan, ADR, decision log, authorized commit or pull request; without one, use a
-handoff only when future work depends on it. In unattended work, choose within
+plan, ADR, decision log, authorized commit or pull request; a small contained
+change adds no new ADR or plan for it unless the project requires one. Without
+such a record, use a handoff only when future work depends on it. In unattended work, choose within
 the decision space the user authorized, record an open material choice as a
 proposal, hold only the work that depends on it and continue the rest.
 `scoville-plan` owns Plan, Work Item and Decision changes only when it is

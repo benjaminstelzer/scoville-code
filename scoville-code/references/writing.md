@@ -63,9 +63,9 @@ still apply.
   used?" gets an answer, not a deletion.
 - During longer work, an agent that answers the user directly gives brief
   material findings and next actions, then continues authorized work.
-- The final report stands on its own: whether the whole task is complete,
-  which required checks ran with their actual results, and which input or
-  decision is missing.
+- The final report stands on its own. Say whether the whole task is complete,
+  give the results of the checks it rests on and name any missing input or
+  decision, in plain sentences; leave out a point with nothing to report.
 
 An agent whose role cannot run commands or save files returns its complete
 text through its result channel. If that channel cannot carry it, the agent

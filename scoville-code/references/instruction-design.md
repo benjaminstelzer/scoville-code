@@ -28,11 +28,10 @@ provider-specific advice. These writing rules grant no task permissions.
 - **Positive and specific:** State the wanted behavior and its condition. Name
   concrete patterns to avoid when necessary; add an example for real ambiguity.
 - **Executable and checkable:** Write a rule as what to look at, what to do and
-  how the recipient can tell it is done, naming the concrete thing: "list every
-  size the change adds and search the project for the same value", not "ensure
-  consistency with the system". Where a rule needs judgment, add one worked
-  example with real values, such as "an 18px icon where the page uses 16px and 20px". A model that reasons little follows a concrete step and skips an
-  abstract principle. A rule every task needs belongs in the file that is
+  how the recipient can tell it is done, naming the concrete thing: "write each
+  new timeout in the unit the project's other timeouts use", not "ensure
+  consistency with the system". A model that reasons little follows a concrete
+  rule and skips an abstract principle. A rule every task needs belongs in the file that is
   always loaded. Checkable does not mean documented: require a list, a report
   line or an extra run only where a recorded or measured failure shows that
   the recipient otherwise skips the step, and say when it applies. A duty that every change must document turns the rule into a procedure.

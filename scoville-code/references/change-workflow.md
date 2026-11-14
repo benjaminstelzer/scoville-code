@@ -7,10 +7,9 @@ review of the result uses [Code quality](code-quality.md).
 
 For a changed symbol, format or public behavior, locate the directly affected
 callers, registrations and test doubles. Exercise each contract variant the
-change affects independently, for example both registered consumers of a
-renamed field and the stale test double. One real consumer is enough when
-inspection finds a single variant. Unrelated callers and neighbouring modules
-need no inventory.
+change affects independently; one real consumer is enough when inspection
+finds a single variant. Unrelated callers and neighbouring modules need no
+inventory.
 
 ## Reusing a path built for another operation
 

@@ -5,7 +5,7 @@ use the bundled checker; with `--publish-full` it saves the complete output wher
 
 | Situation | Call |
 | --- | --- |
-| A command's output may exceed the tool's display limit, or the command has an effect or result that cannot be repeated | Capture |
+| A command's output may exceed the tool's display limit | Capture |
 | Composed text must fit a known output limit | Size check |
 | Complete text would not fit, or the role's delivery contract permits or asks for a file | Publish |
 
@@ -75,8 +75,7 @@ overwritten. Publishing without a limit makes no fit claim. Tell the recipient
 to process machine data in code and read required prose in full before work
 that depends on the file.
 
-A role that may not write files, such as a read-only reviewer, does not
-capture to files: it narrows the command to the facts it needs or asks the
+A role that may not write files does not capture to files: it narrows the command to the facts it needs or asks the
 assigning agent for the input.
 
 ## Read the result

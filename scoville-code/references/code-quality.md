@@ -1,6 +1,6 @@
 # Code quality
 
-A complete copy of these rules from this build already in your context,
+A complete copy of these rules already in your context,
 including one embedded in your assignment, is this reference; do not reread it.
 
 Authors choosing an implementation and reviewers judging it apply the same
@@ -35,7 +35,7 @@ Illustration:
 | Situation | Protection |
 | --- | --- |
 | An internal function receives a list its only caller has just validated | None: the precondition cannot fail on this path. |
-| An export overwrites the user's file and can fail halfway | Needed: write a temporary file and rename it, because a partial overwrite loses data that a visible error cannot bring back. |
+| An importer deletes the photos on a camera card after copying them | Needed: delete a source only after its copy is confirmed complete, because a failed copy followed by the deletion loses the only original, which a visible error cannot bring back. |
 | A CLI crashes with a clear traceback on a malformed config file | The visible failure suffices: nothing is damaged and the user can correct the file. |
 | An HTTP handler builds a file path from a request parameter | Needed: a concrete attack path reaches files outside the intended directory. |
 
@@ -58,25 +58,24 @@ separation, lifetime and invalidation fit.
 Read the whole change, then look beyond it: most maintainability defects show
 only against the rest of the codebase. Go through the change with these
 questions. Judge from the code; run no benchmark or profiler for this. A
-finding names the place, the problem and the existing function, path or
-interface to use instead.
+finding names the place and the problem and, where one exists, the function,
+path or interface to use instead.
 
 | Look at | Ask | Defect when |
 | --- | --- | --- |
 | Each function, class and constant table the change adds | Does the codebase already have this? Search by what it does, not by its name. | An existing function or table does the same job. |
 | Each new or changed call path | Is there now a second way to do the same thing? | A copied pipeline, a fallback to the old path, a flag nobody asked for, or callers left on a replaced path. |
 | Each use of another module | Does it go through that module's public interface, from the right layer? | It reads private names, the storage file or table or internal data structures; a business rule sits in a handler or template; new module-level mutable state. |
-| Each loop | Does its body walk a collection or do input/output per item while the outer collection can be large? | Yes, and a set, dict, single pass or batch call would do. |
-| Each validation, guard, retry, fallback and special case | Which real input or failure reaches it in this application? | None can; it repeats what the caller guarantees; it swallows an error or returns a default. |
-| Structure the change adds | Does the request need it, or does it only prepare for a variant nobody asked for? | Anything built for a second variant when there is one: an interface or base type with a single implementation, a parameter or option no caller sets, a registry with one entry. Recursion or deep nesting where one pass would do. |
+| Each loop | Does its body do work that grows with the data, or input/output, per item while the outer collection can be large? | Yes, and a set, dict, single pass or batch call would do. |
+| Each validation, guard, retry, fallback and special case | Which input or failure reaches it in supported use or through a concrete attack path? | None does; it repeats what code on the same side of a process or network boundary, or a type the runtime enforces, already guarantees; it swallows an error or returns a default. |
+| Structure the change adds | Does the request need it, or does it only prepare for a variant nobody asked for? | Anything built for a second variant while only one exists. Recursion or deep nesting where one pass would do. |
 | Each test | Would it fail if the behavior it covers broke, and did it run? | It repeats the implementation or only asserts that a mock was called; the behavior that matters is untested; the relevant test is skipped or not collected. |
-| What is left over | Is anything dead? | Commented-out or unreachable code, unused parameters, debug output; configuration, documentation or tests of a removed feature. |
+| What is left over | Is anything dead? | Commented-out or unreachable code, unused parameters, debug output; configuration, documentation or tests that cover only a removed feature. |
 | The next reader | Can a person follow it without the chat history, and find it later? | Names that hide what a thing does, a function with several jobs, a new setting or module missing where the project documents them. |
 
-Not defects: a different style; a nested loop over two fixed small
-collections; a guard on a value that really comes from outside at that point;
-a helper that resembles an existing one but means something else in the
-domain; a real responsibility encapsulated for one caller.
+Not defects: a different style; code that looks like an existing function but
+answers a different question; a real responsibility encapsulated for one
+caller.
 
 ## Findings
 

@@ -1,9 +1,12 @@
 # Machine data
 
-Machine data is output written for programs: test, build and coverage reports,
-logs, JSON or YAML state, and structured strings embedded in them. This holds whether it arrives as a tool result, a saved file or failure output. Evaluate it in code and show
+Machine data is output written for programs: test, build and coverage reports
+in a structured format such as JUnit XML or JSON, log files, JSON or YAML
+state, and structured strings embedded in them. This holds whether it arrives as a tool result, a saved file or failure output. Evaluate it in code and show
 the checked result. Raw records fill the context with values nobody reads and
-bury the few that decide something.
+bury the few that decide something. A test runner's console summary, such as
+its pass and fail counts with the failure messages, is written for people:
+read it directly.
 
 Classify by purpose and content, not by filename or size. Illustration:
 
@@ -12,7 +15,7 @@ Classify by purpose and content, not by filename or size. Illustration:
 | A `package.json` or YAML configuration the change depends on | Source: read it directly. |
 | Source excerpts, search matches, a source diff, targeted `git status` | Source: read it directly. |
 | A compiler error or stack trace for the failure being fixed | Prose diagnostic: read it in full. |
-| A JUnit XML, a JSON lint or coverage report, a tool's saved state, a log | Machine data: parse, check and report the checked result. |
+| A JUnit XML, a JSON lint or coverage report, a tool's saved state, a log file | Machine data: parse, check and report the checked result. |
 | A JSON object inside a log line or message string | Machine data, even in a short result. |
 
 A report stays machine data when someone renames or edits the file.
@@ -33,7 +36,8 @@ When you can run commands:
    a permission. Different
    wording with the same established meaning is a defect only where exact values are
    binding.
-3. Print what was checked, the processed and expected counts, and every
+3. Print what was checked, the processed count and, where the producer
+   states one, the expected count, and every
    deviation with its identity, expected and actual value and complete
    diagnostic text. Print identical diagnostics once with their count and
    scope; keep distinct ones apart. Do not print subtrees or state strings

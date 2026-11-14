@@ -1,5 +1,15 @@
 # Changelog
 
+## 2026-11-14 - Goodhart corrections
+
+- Remove examples that repeated our own test tasks; a rule now stands without one where it reads on its own.
+- Guards: add one for a case that is reachable in supported use or through a concrete attack path, and do not drop a check at a process or network boundary because the caller on the other side already checks.
+- Fail-first: the test has to fail on its assertion, not on a missing name. It applies to a bug fix and to new behavior whose failure would charge a wrong amount, grant access, lose data or open a security hole.
+- Report: name the test that proves the request and its result. The lines for reused code, guards and loops are gone, and only a claim about runtime behavior that rests on reading is marked as such.
+- Tests: take the proving test's name from the output of the project's own test command, with the runner's verbose flag where needed.
+- New projects: keep concerns apart as functions first; a concern gets its own module once it outgrows a few functions.
+- Shared rules: a final report after a small change no longer loads the writing reference, a test runner's console summary is not machine data, and a complete copy of a reference in context counts as read.
+
 ## 2026-11-13 - Review corrections
 
 - Review: name an unneeded abstraction by what it is for, a second variant nobody asked for, not by a list of forms.

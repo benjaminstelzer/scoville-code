@@ -39,20 +39,19 @@ distinctions and names such as `new`, `final` or numbered backups. Create no
 
 ## Structure a person and an agent can extend
 
-Size the structure to the project: a script of a hundred lines stays one file,
-and a tool with several concerns gets one module per concern.
+Size the structure to the project. Keep the concerns below apart in any
+project; a small tool keeps them as functions in one file, and a concern gets
+its own module once it outgrows a few functions.
 
 - Keep the entry point thin. It reads arguments or the request, calls a
   function and prints or returns the result.
-- Put rules and calculations in modules that take data and return data. They
-  import without side effects: no reading of input, argument parsing or output
-  at import time, so a test or another agent can call them directly.
-- Put file, network and database access in its own module at the edge, and
-  pass its results to the rules.
+- Put rules and calculations in functions that take data and return data.
+  Their module imports without side effects: no reading of input, argument
+  parsing or output at import time, so a test or another agent can call them
+  directly.
+- Keep file, network and database access at the edge and pass its results to
+  the rules.
 - Read configuration in one place and pass the values in.
-- For a small command line tool that means, for example, `cli.py`, `rules.py`,
-  `storage.py` and `report.py`. Split a file when it starts to mix parsing,
-  rules and output, not before.
 - Write tests for the rules in the ecosystem's conventional place, and a
-  README that says how to run the program, how to run the tests and, in one
-  line per module, what lives where.
+  README that says how to run the program and the tests and, where there is
+  more than one module, what each module holds in one line.
