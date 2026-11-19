@@ -39,6 +39,9 @@ distinctions and names such as `new`, `final` or numbered backups. Create no
 
 ## Structure a person and an agent can extend
 
+A new project's README says how to run it and its tests and, where it has
+several modules, what each is responsible for.
+
 Size the structure to the project. Keep the concerns below apart in any
 project; a small tool keeps them as functions in one file, and a concern gets
 its own module once it outgrows a few functions.
@@ -52,6 +55,4 @@ its own module once it outgrows a few functions.
 - Keep file, network and database access at the edge and pass its results to
   the rules.
 - Read configuration in one place and pass the values in.
-- Write tests for the rules in the ecosystem's conventional place, and a
-  README that says how to run the program and the tests and, where there is
-  more than one module, what each module holds in one line.
+- Write tests for the rules in the ecosystem's conventional place.

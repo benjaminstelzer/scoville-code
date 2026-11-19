@@ -14,7 +14,7 @@ Classify by purpose and content, not by filename or size. Illustration:
 | --- | --- |
 | A `package.json` or YAML configuration the change depends on | Source: read it directly. |
 | Source excerpts, search matches, a source diff, targeted `git status` | Source: read it directly. |
-| A compiler error or stack trace for the failure being fixed | Prose diagnostic: read it in full. |
+| A compiler error or stack trace for the failure being fixed, also inside a log | Prose diagnostic: read it in full. |
 | A JUnit XML, a JSON lint or coverage report, a tool's saved state, a log file | Machine data: parse, check and report the checked result. |
 | A JSON object inside a log line or message string | Machine data, even in a short result. |
 
@@ -53,7 +53,6 @@ When a native tool shows its data before any code can process it, use the
 tool's own filters to fetch only what you need. Without command permission,
 ask a caller that has it or report the missing capability.
 
-When the producing command has an effect or cannot be repeated, save its
-original output before evaluating it, so that a bug in the evaluation never
-forces a rerun; [output delivery](output-delivery.md) has the capture call.
+When the producing command has an effect or cannot be repeated, capture its
+output under [output delivery](output-delivery.md) before evaluating it.
 Fitting the display limit does not turn machine data into prose.

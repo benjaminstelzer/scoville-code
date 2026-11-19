@@ -19,15 +19,12 @@ Leave unrelated failing tests alone unless they block the requested outcome.
 
 ## Before another check, review or record
 
-Run another check, review or record only for an open question, changed
-condition or binding requirement it would settle; otherwise the evidence you
-have is enough. Reuse
-reviewed content and passing results while requirements, files, dependencies,
-runtime and configuration are unchanged; a new step, role or phase alone
-requires no rerun. A required independent review of unreviewed content still
+SKILL.md's rule for reusing evidence and running another check applies to
+reviews and records too; a new step, role or phase alone requires no rerun.
+A required independent review of unreviewed content still
 takes place, at completed scope unless its protocol asks earlier. After edits
 to related code or tests an earlier aggregate pass is stale: rerun the
-smallest check covering the final tree or narrow the claim.
+checks that establish the required behavior on the final tree.
 When a result changes, replace the outdated status in your running summary or
 report instead of appending a new one.
 
@@ -42,11 +39,11 @@ cannot tell the claimed result from the failure.
 | Stored state works in the application | The actual factory, configuration and call path to the observed store, including participating processes | An isolated instance or separate snapshot |
 | Compatible with another component | That component's contract or the real consumer | Constants copied into the test; the producer's own round trip |
 | A protection rejects the failure | Preconditions completed, target operation reached and failed, aftermath observed | An earlier rejection: a database fault that stops the state read before the cache read under test |
-| Bounded internal work | A justified bound, validly measured; lock, rollback and no-write assertions stay | An exact count of today's reads or queries, or incidental source text, unless contractual |
+| Bounded internal work | A source trace of the whole operation's work, including helpers and intermediate results; where a measurement is explicitly required, observations of the work that bound covers; lock, rollback and no-write assertions stay | An exact count of today's reads or queries, or incidental source text, unless contractual |
 | Instruction, documentation or error text | Meaning against the baseline; a behavior test where required behavior changed; for an error its status, named input and correction | Exact wording, unless the wording is binding |
 | Generated or copied output | Successful current creation and the expected outputs; exact comparison only where an unchanged transfer is the contract | Content or hash comparison without a task, contract or concrete defect requiring it |
 
-Fault injection must model a credible path under [Code quality](code-quality.md).
-An existing unambiguous return, state or call observation suffices; add no
-instrumentation to create evidence. Report a count only when it affects
-acceptance or a decision.
+Fault injection must model a credible path under the [Code criteria](../SKILL.md#2-design-and-write).
+An existing return, state or call observation suffices when it distinguishes
+the required behavior from the failure; add no instrumentation to create
+evidence the request or the project does not ask for.

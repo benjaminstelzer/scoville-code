@@ -1,15 +1,16 @@
 # Change Workflow
 
-SKILL.md covers an ordinary change. Read the section for your situation. A
-review of the result uses [Code quality](code-quality.md).
+SKILL.md covers an ordinary change. Read the section for your situation.
 
 ## Changing something other code consumes
 
 For a changed symbol, format or public behavior, locate the directly affected
-callers, registrations and test doubles. Exercise each contract variant the
-change affects independently; one real consumer is enough when inspection
-finds a single variant. Unrelated callers and neighbouring modules need no
-inventory.
+callers, registrations and test doubles, including independently deployed
+readers or writers of shared data. Exercise the affected contract directions
+with those consumers: preserve meaning and data, or reject unsupported use
+before damage. A producer's own round trip does not check an older consumer.
+One real consumer is enough when inspection finds a single contract variant;
+unrelated callers and neighbouring modules need no inventory.
 
 ## Reusing a path built for another operation
 
@@ -24,7 +25,7 @@ only served displaying that feature.
 ## Adding a package
 
 Before installing a new direct package, verify its exact name and source
-against the official project documentation.
+against the package's official documentation.
 
 ## Helpers, scripts and prompts for agents
 

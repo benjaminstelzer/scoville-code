@@ -40,7 +40,8 @@ provider-specific advice. These writing rules grant no task permissions.
   the tasks used to measure it; an example copied from a test task makes the
   test pass without showing that the rule works.
 - **Stable wording:** Use one term per meaning. Describe current behavior, not
-  removed rules, previous versions or expiring dates.
+  removed rules or previous versions. A rule that holds only until something
+  happens states that end in the rule.
 - **Facts:** State what must be factual and where invented content is allowed.
   Keep literal user text, fixed schemas, field names and helper contracts intact.
 - **Structure:** Use numbered steps for required order, a table for a simple
@@ -55,6 +56,7 @@ Preserve useful existing diagrams.
 
 Supply the context needed without hidden history. Where the recipient can read
 a required source, give its exact path and reading condition rather than
-duplicating it. An output schema governs shape; do not add fields merely to
+duplicating it. Still state directly the permissions and stops that govern the
+recipient's work and the facts it needs before that read. An output schema governs shape; do not add fields merely to
 apply this guidance. Detailed Skill-authoring workflow and validation belong
 to Scoville Skillwriter and the host's Skill Creator.

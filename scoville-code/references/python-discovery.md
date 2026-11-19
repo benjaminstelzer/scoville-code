@@ -1,6 +1,7 @@
 # Python interpreter
 
-For Python commands and bundled helpers:
+The project's own commands, such as its tests, use the interpreter the
+project sets up. For bundled helpers and other Python you run:
 
 1. Reuse a Python 3.11+ interpreter already verified in this session.
 2. Otherwise try `py -3` on Windows or `python3` elsewhere, then `python`.

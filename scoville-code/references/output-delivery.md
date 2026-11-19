@@ -6,6 +6,7 @@ use the bundled checker; with `--publish-full` it saves the complete output wher
 | Situation | Call |
 | --- | --- |
 | A command's output may exceed the tool's display limit | Capture |
+| A command produces needed evidence that cannot be reproduced, and no complete durable capture already exists for that execution | Capture |
 | Composed text must fit a known output limit | Size check |
 | Complete text would not fit, or the role's delivery contract permits or asks for a file | Publish |
 
@@ -45,8 +46,14 @@ display limit cannot be recovered from a command that must not run twice.
 - With a limit, fitting output returns inline and, with `--publish-full`,
   larger output is saved from the same execution. Without a limit,
   `--publish-full` always saves and returns metadata only.
-- Stdin gives EOF and there is no default deadline. Add `--timeout-seconds`
-  when the host cannot bound the wait.
+- When the execution must produce a durable complete copy, use `--publish-full`
+  without the limit. Arrange the permitted capture destination before running.
+- The checker gives its child EOF on stdin. When the command needs input,
+  serialize it to a permitted file and capture a wrapper that opens that file
+  as the command's stdin, forwards stdout and stderr and returns its exit
+  status. Verify the input file and argv before the only execution. The
+  checker has no default deadline. Add `--timeout-seconds` when the host cannot
+  bound the wait.
 - Machine data still goes through code before display. Run a repeatable
   producer inside the evaluating script, which the checker can capture; for a
   command with an effect, capture first and evaluate the saved file.
@@ -69,9 +76,10 @@ not see host framing.
 <verified-python> -X utf8 "<skill-directory>/scripts/check_text_size.py" --file "<text>" --publish-full --project-root "<workspace>"
 ```
 
-Published files live in `.scoville/temp`, where the checker adds a `.gitignore`
-when none exists. They are temporary, stay out of commits and are never
-overwritten. Publishing without a limit makes no fit claim. Tell the recipient
+Files saved with `--publish-full` live in `.scoville/temp`, where the checker
+adds a `.gitignore` when none exists. They stay out of commits and are never
+overwritten. They are delivered output, not scratch files of the work: cleanup
+leaves them and that `.gitignore` in place. Publishing without a limit makes no fit claim. Tell the recipient
 to process machine data in code and read required prose in full before work
 that depends on the file.
 
@@ -105,9 +113,8 @@ final exit status.
 
 Claude Code limits Bash output in characters (`BASH_MAX_OUTPUT_LENGTH`,
 overridden by the setting `bashOutputMaxChars`), with different ceilings for
-success and failure and with host framing on top. Check the effective
-settings; that value is not a `--max-output-tokens` limit and supports no
-claim of an inline fit. Without a known token limit and with write permission,
+success and failure and with host framing on top. That character limit is not
+a `--max-output-tokens` limit and supports no claim of an inline fit. Without a known token limit and with write permission,
 capture with `--publish-full` and no limit, then read the saved file rather
 than the host's preview. See
 [Claude Code output limits](https://code.claude.com/docs/en/tools-reference#output-limits).

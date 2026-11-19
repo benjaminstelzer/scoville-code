@@ -1,5 +1,100 @@
 # Changelog
 
+## 2026-11-19 - Protection nobody asked for is a defect
+
+- Rule 2 opens with the prohibition again: protection, options and bookkeeping nobody asked for are defects, and that something could go wrong is not a need. A use nobody described (a second writer at the same moment, a second window, another process) is a question for the user, neither built nor reported as a defect. In a greenfield test, reviewers reported such cases and authors built locks and stale-data checks for them.
+- A remedy for repeated work must not change what the user sees or add state to keep in step: no paging, cache with invalidation or change-tracking flag where once per action is enough.
+- "Check, then load again" is about two reads within one operation.
+- A review finding is a breach of a rule; further protection or an undescribed case is left out or listed apart as a question. The author holds each finding against the rules and declines one that asks for what rule 2 keeps out.
+- A write, a request or a file read can fail in the described use, and its failure reaches the user or the caller. The wording before it ("a failure that does occur") let Opus leave storage write failures unhandled in the recheck. With this sentence both Opus chains of a further run report failed writes and file reads to the user again; Sol was not rerun with it.
+- The README shows the test results per model in two tables and describes the independent review as it now applies to every change of code behavior.
+
+## 2026-11-19 - How much structure the code gets
+
+- Rule 2 says what a need is: the request, an input that can reach the code now, another rule, or what the plan and the existing code show is coming.
+- Rule 4 now decides both directions of structure in one place, and the author judges it: a shared helper, class, component or interface is wanted where several places do the same thing now or will by the plan, and it keeps module details out of shared code; for a single use the direct code is right. Before, rule 2 read as if generalisation were forbidden and could contradict the module rule. 
+- One source of truth is spelled out: a default value, limit, status, list of codes or message is defined in one place, also across server and client and across code and configuration.
+- A file, class or function keeps its one responsibility as it grows; a second pattern for a job the project already solves one way counts as a second implementation; a failure that can occur is handled or reported, not swallowed or hidden behind a default. Not tested with models yet.
+
+## 2026-11-18 - Reviewers answer every question
+
+- A reviewer goes through the questions for the finished change in order and states for each one the defects it shows or that it shows none. In a review test on 23 real project changes, reviewers with the Skill listed bugs and repeated work but left the module question unanswered: no review reported module keys in shared code that a change had moved there unchanged.
+- The module rule and its question cover code a change adds, moves or extends, also where it lands in shared code or a file that registers and wires. Before, they named new code only.
+- The review section names the rules and questions by their headings; "above" pointed at nothing in this package.
+
+## 2026-11-18 - Five rules and a general independent review
+
+- The code rules are five: work that grows, nothing without a need, one implementation, a value loaded again after its check, and state and effects across a change. The first one now says directly that added code is linear only if neither its caller nor what it calls repeats per item, and has the author read upward to the caller and downward into the helpers before adding a loop.
+- Compatibility is the user's decision. When a change replaces something, the old form goes in the same change; no fallback, adapter, migration or version switch unless the request or a project rule asks for it. Where something outside the codebase may still depend on the old form and that is open, the author asks.
+- When Code runs alone, each change to code behavior gets one independent review by a separate agent that checks it against these rules, starting with repeated work. Under a workflow that already reviews each change, no second review starts.
+- Removed: the case traces before the design, the detailed storage rules, the narrow reader with its two questions, and the review table that repeated every rule. Not tested with models yet.
+
+## 2026-11-17 - A reader finding is resolved in full
+
+- A missing check or assignment is added at every place the reader's finding covers. A case the reader describes is one example of the finding. In a measured run an author added the assignment only for the case the reader had described, and the selection was lost in the other.
+- What the old path kept and the change drops is restored unless the request or a project rule removes it. Calling the difference deliberate settles no finding; one author had declined a finding that way.
+- Not measured yet.
+
+## 2026-11-17 - Shorter workspace rules; a bug fix needs evidence of the defect, not a red run
+
+- The section on commands and workspace boundaries is five sentences. It keeps what a limit covers (redirected output, tool defaults, child processes), the scratch directory chosen before the first command, and cleaning up only the paths the work created.
+- A bug fix needs evidence that shows the defect on the supported path, existing or reproduced, and a test that passes with the fix and covers the case. The test no longer has to be written and seen failing first: in three compared tasks that order brought no better result than runs without the Skill. Behavior whose failure is costly still sees its assertion fail without the change.
+- A refactoring may reuse a matching result from before the change. A test the project runs separately stays separate and is not wired into another suite.
+- The Planning reference is no longer read for an open choice about the product, only for planning records and work across an interruption. References are read in the part that applies.
+- Two sentences that only explained where a rule came from are gone, and the README duty for a new project stands once, in the Skill itself.
+- None of this is measured yet.
+
+## 2026-11-17 - Findings follow the requested result; rules without a recorded failure removed
+
+- A reader finding is corrected where the requested result relies on the missing check or assignment. Otherwise the author names the line, the guarantee, or the consumer and behavior that show the result does not rely on it, and reports a finding outside the change. That the gap existed before settles nothing. On a fresh task an author had rebuilt a signature for a gap the reader itself called older than the change.
+- The written answer on repeated work also names where the final path shares that work, or the code, contract or project rule behind the exception. An author had named a query per item and left it as the existing pattern.
+- A test takes its expected result from the request, the project's contract or the established path. A test the author wrote does not turn its expectation into a requirement.
+- Removed, because over all compared tasks both models did this right without the Skill or no task ever touched it: the rules on caches and on one source for each fact, the advice on names, single-purpose functions and comments, the test rows for documentation-only changes and for requested failing-first tests, the paragraph on saving durable state, and two report details. The rule against leftovers stays.
+- Shared code rules: an unchecked reload is still a defect where the old code had the same gap; whether this change corrects or reports it follows from the affected path.
+- None of this is measured yet.
+
+## 2026-11-17 - No paragraph on line endings
+
+- The paragraph on encoding, line endings and Git's conversion notice is removed. On two tasks Sol kept the line endings in all four runs without the Skill and converted files in three of six runs with it, once after the paragraph had been sharpened for exactly that notice. The paragraph made line endings a subject that the models otherwise leave alone. The effect of the removal is not measured yet.
+
+## 2026-11-16 - One independent reading for reloaded values and assigned state
+
+- Where a change reloads a checked value or replaces how state is kept, and the host can start a separate agent, an author has the finished change read once by a reader that knows only the diff and the two questions on reloaded values and on state across a change, and waits for its answer without a timed wakeup. A missing check or assignment is added, or the line or guarantee that covers it is named. Under a workflow that already reviews each change by the shared review rules, no reader starts. This is a trial after measured runs in which authors named the place and argued the check away. A reader with the full review rules was measured as well: authors then also acted on remarks outside the two questions, and two such corrections damaged a correct change.
+- No test is handed over failing on purpose unless the request asks for that. An open question about the expected result is asked or reported with the case that shows it.
+- Shared review rules: a reviewer answers the questions on reloaded values and on state across a change first, by file and line. A missing line is a finding; a comment or an argument is not such a line.
+- Shared code rules: the rule on assigned state names its holder, an element, list or record whose content the new path changes, also when the item the state points to stays untouched.
+
+## 2026-11-16 - Assigned state is set again; a named bound for few items
+
+- Shared code rules: where the old path assigned a selection, a value, the focus or a flag, the new path sets the same value after each of its steps. The author no longer has to judge whether that state can change.
+- Shared code rules: a query, request, read or parse per item stays only where code, the contract or a project rule that the author names bounds the real callers to a few items.
+
+## 2026-11-16 - Test the check on a reloaded value
+
+- Where the changed path loads a value again after checking it, a test now covers the check the report names, whether it was found or added: the later load returns a value the first check rejects, and the consumer must not use it. A named guarantee that excludes a change replaces the test.
+- For state held by something the new path changes, the test covers the result of the operation that keeps it. A passing test does not replace that operation.
+- Shared code rules: the question about a value that is loaded again also covers loads inside the helpers the path calls.
+
+## 2026-11-15 - Reading checks and located questions
+
+- The code criteria are thirteen short rules that are checked by reading the code. They replace the procedure that asked for a proof of the work a whole operation does. Code does not time, benchmark, profile or instrument unless the request or a project rule asks for it.
+- Repeated work is judged at the sizes the application's actual callers can pass (ADR-0237). A query, request, file read or parse per item is removed already at modest numbers; work in memory over a few items stays as it is.
+- Existing logic is preferred until using it makes the work quadratic on a large collection, repeats a query, read or parse per item, or needs more wrapping than a plain implementation. Then Code writes the simpler implementation, or improves the helper at its owner where a project rule names it.
+- State and effects of a path that a change replaces are kept unless the request removes them. State held by something the new path changes, such as a selection or focus, is preserved or restored at each change, and the test covers it also where the author concludes it cannot change.
+- A value that is loaded again after a check is checked where it is used, also where the old code had the same gap.
+- A filter that narrows candidates before an exact check admits every form the exact check accepts; those forms are read from the check's own parser or matcher.
+- An author answers three questions in the final report, each with file and line: work that repeats, values loaded again, and state and effects of a replaced path. In our measured runs these three defects stayed when the questions were only read.
+- A defect on the affected path that the requested result depends on is part of the change. Other defects need your go-ahead.
+- A change whose result only a rendered interface shows gets no automated test from Code; Scoville UI decides its rendered checks.
+- Shared rules: a reply uses the language of the request, while a record or file you edit keeps the language it is written in. Files saved with `--publish-full` are delivered output, so cleanup leaves them in place. A rule that holds only until something happens states that end in the rule.
+
+## 2026-11-14 - Decisions already covered by the request
+
+- Decide routine implementation details within the requested outcome. Ask only for material choices the request and project leave open, including in the shared review rules.
+- An explicit contract change supplies its own authority; preserve other guarantees and separate action permissions.
+- Correct a known violation of a required guarantee before treating the change as complete. Reporting it does not resolve it.
+- Keep the existing test policy; add development cases for these decision boundaries without claiming measured model improvement.
+
 ## 2026-11-14 - Goodhart corrections
 
 - Remove examples that repeated our own test tasks; a rule now stands without one where it reads on its own.
