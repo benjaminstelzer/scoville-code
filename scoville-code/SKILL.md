@@ -53,10 +53,12 @@ Use the request, project rules, documents, tests and established conventions
 to resolve implementation choices. Interpret general guidance in light of the
 specific required behavior and preserve explicit constraints. Ask only if
 equally authoritative requirements remain incompatible or the sources leave
-a material choice open about the requested outcome, public contract, data or
-security treatment, reversibility, external authority, meaningful operating or
-external cost, or evidence that needs access, authority or cost the request
-does not provide.
+a material choice open about:
+
+- the outcome, public contract or treatment of data or security;
+- reversibility, authority for external actions or meaningful operating or external cost;
+- required evidence whose access, authority or cost the request does not cover.
+
 Ask one specific question before dependent work and continue work that does
 not depend on the answer.
 
@@ -132,8 +134,9 @@ write: fix it at its owner. Other defects are unrelated cleanup: report them.
 The rules are checks you make by reading the code on the affected path. A
 rule whose subject does not occur there needs no action.
 
-1. **Work that grows.** Code you add is linear only if neither its caller
-   nor what it calls repeats. Before you add or accept a loop, a lookup, a
+1. **Work that grows.** Judge total work by how often the caller runs the code
+   and how much work each call performs, including work inside the functions
+   it calls. Before you add or accept a loop, a lookup, a
    query or a call to a helper, read upward to where the application runs
    it more than once (the batch call, the outer loop, the handler that runs
    per row, per event, per request, per poll or per timer tick) and
@@ -298,8 +301,9 @@ occur. Authors correct what is part of this change, reviewers report it.
 ## 3. Test what the request changes
 
 Use the project's test place, style and commands. Test observable results
-and preserved guarantees at their owner using the deciding cases from
-section 1. Exercise the consumer's path when loading, state, wiring or
+and preserved guarantees at their owner, using section 1's affected path,
+its callers and the behavior the request changes or preserves.
+Exercise the consumer's path when loading, state, wiring or
 repeated calls determine the outcome.
 
 | Change | Required evidence |

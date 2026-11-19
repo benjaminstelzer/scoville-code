@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-11-19 - Count the work across calls
+
+Rule 1 counts how often the caller runs and what each call does. Reviewers go through the questions in order and write down the defects they find.
+
 ## 2026-11-19 - Compatibility before release
 
 - Rule 3 says when a break in compatibility is usually wanted: while a product has not been released. "During development" also described released software that is still being developed.

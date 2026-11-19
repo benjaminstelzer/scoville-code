@@ -1,8 +1,8 @@
 # Agent instruction design
 
-Write reusable instructions and agent-facing prompts for current frontier
-models of OpenAI and Anthropic unless the request or project names other target
-models. Give them what they lack and constrain only what must not vary. Mark
+Write reusable instructions and agent-facing prompts for Claude Opus 5.5,
+Claude Fable 5.1+, GPT-6.1 Sol and GPT Astra 6+ unless the request or
+project names other target models. Give them what they lack and constrain only what must not vary. Mark
 provider-specific advice. These writing rules grant no task permissions.
 
 - **Outcome and done:** State the goal, context the recipient cannot infer,
@@ -30,13 +30,14 @@ provider-specific advice. These writing rules grant no task permissions.
 - **Executable and checkable:** Write a rule as what to look at, what to do and
   how the recipient can tell it is done, naming the concrete thing: "write each
   new timeout in the unit the project's other timeouts use", not "ensure
-  consistency with the system". A model that reasons little follows a concrete
-  rule and skips an abstract principle. A rule every task needs belongs in the file that is
-  always loaded. Checkable does not mean documented: require a list, a report
-  line or an extra run only where a recorded or measured failure shows that
-  the recipient otherwise skips the step, and say when it applies. A duty that every change must document turns the rule into a procedure.
-  Ask for the thing, not for a statement about it: a rule that is met by
-  writing a sentence gets the sentence. Take a rule's examples from outside
+  consistency with the system". A rule every task needs belongs in the file that
+  is always loaded.
+
+  Ask for the action itself. Require a list, report line or extra run only
+  where a recorded or measured failure shows that the recipient otherwise
+  skips the step, and say when it applies.
+
+  Take a rule's examples from outside
   the tasks used to measure it; an example copied from a test task makes the
   test pass without showing that the rule works.
 - **Stable wording:** Use one term per meaning. Describe current behavior, not
