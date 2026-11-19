@@ -214,8 +214,8 @@ rule whose subject does not occur there needs no action.
    only it needed. Do not keep the old form alive on your own: no fallback,
    adapter, alias, second code path, migration, version switch or check
    whether your own code exists, unless the request or a project rule asks
-   for it. During development a break in compatibility is usually wanted,
-   and such code is dead weight. Compatibility is the user's decision:
+   for it. While a product has not been released, a break in compatibility
+   is usually wanted, and such code is dead weight. Compatibility is the user's decision:
    where something outside this codebase may still depend on the old form
    (other software, or data that real users have already stored) and the
    request and the project rules leave that open, say what breaks

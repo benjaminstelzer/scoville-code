@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-11-19 - Compatibility before release
+
+- Rule 3 says when a break in compatibility is usually wanted: while a product has not been released. "During development" also described released software that is still being developed.
+
 ## 2026-11-19 - Protection nobody asked for is a defect
 
 - Rule 2 opens with the prohibition again: protection, options and bookkeeping nobody asked for are defects, and that something could go wrong is not a need. A use nobody described (a second writer at the same moment, a second window, another process) is a question for the user, neither built nor reported as a defect. In a greenfield test, reviewers reported such cases and authors built locks and stale-data checks for them.
