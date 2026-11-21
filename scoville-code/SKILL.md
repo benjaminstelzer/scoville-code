@@ -1,7 +1,7 @@
 ---
 name: scoville-code
 description: Implement, debug, diagnose and review code with focused checks. Use for new tools or projects, behavior changes, failures, refactors, code reviews and engineering plans. Scoville UI owns interface-only work when active. Use both for work that also affects backend behavior or a contract consumed by other code. Use Plan for its native records. Excludes conceptual questions unrelated to a codebase.
-compatibility: "Agent Skills host with references/ and the project's shell build, test and check commands. Version control optional. No network required. Developed for Codex and Claude Code. Python 3.11+ for the bundled text-size checker; manual fallback only without suitable Python. Helper errors do not enable fallback."
+compatibility: "Agent Skills host with references/ and the project's shell build, test and check commands. Version control optional. No network required. Developed for Codex and Claude Code. Python 3.11+ and the bundled text-size checker are required for output capture, size checks and delivery as a file."
 ---
 
 # Scoville Code
@@ -116,6 +116,19 @@ before. A draft you are asked to complete or correct is judged by the same
 rules as your own code.
 
 ## 2. Design and write
+
+Every byte outside what the complete result needs stays as it was, line
+endings and encoding included, in every file. A script that rewrites a file
+and a Git command that rewrites the working tree can change them, and
+`git diff` hides line endings that Git normalizes. Write a file back with the
+line endings and encoding it had. To see or test the state before your
+change, use a copy, such as the project copied with your change reversed or
+the output of `git show <commit>:<path>` saved in a temporary folder; do not
+stash, reset, check out or restore files in the working tree for that. A
+project check or test that passes before your change still passes after it.
+Change or remove one only where the request changes or removes the guarantee
+it tests, or to keep testing that guarantee another way, and name the edit
+and its reason in the report.
 
 ### What the code has to be
 
@@ -274,30 +287,6 @@ rule whose subject does not occur there needs no action.
    failure, unless the request removes it. That the state "cannot change"
    is no reason to drop the line that set it.
 
-### Questions for the finished change
-
-Answer each by naming the place in the code; skip one whose subject does not
-occur. Authors correct what is part of this change, reviewers report it.
-
-1. **Rule 1.** Starting at the caller that runs the changed code more than
-   once: what runs per item, request, poll or event, what does it walk,
-   load, rebuild or write each time, and does that grow with the data or
-   repeat although nothing changed?
-2. **Rules 2 and 3.** What in the change has no need you can name, what
-   has no caller, and does the codebase now hold two pieces of code for one
-   job or an old form beside the new one?
-3. **Rule 4.** Which uses does each general piece serve, and is the same
-   code written by hand in several places? Does each piece the change adds,
-   moves or extends sit in the module that owns its data or rule, also
-   where it lands in shared code or in a file that registers and wires, and
-   does any code reach past another module's interface?
-4. **Rule 5.** For each value loaded again after a check: which line checks
-   the value that is used?
-5. **Rule 6.** For each call or pass the change replaces: where does the
-   new path set the state and cause the effects the old one did?
-6. **Tests.** Would the decisive test fail if the requested behavior broke,
-   and does the project's command for this kind of test run it?
-
 ## 3. Test what the request changes
 
 Use the project's test place, style and commands. Test observable results
@@ -331,10 +320,13 @@ relevant inputs. Run another check for changed conditions, an open question or a
 
 ## 4. Before you finish
 
-Read the final diff with its callers and consumers and answer the questions
-at the end of section 2. Correct what is part of this change and rerun the
+### The author's final check
+
+Check the final diff against sections 1 to 3. Correct what is part of this change and rerun the
 checks it affects. For each symbol the diff removes or renames, search for
 remaining uses.
+
+### The independent review and the report
 
 A change to code behavior then gets one independent review, because a
 second reader finds what its author reasoned past. Under a workflow that
@@ -343,9 +335,7 @@ review is it: start none. Otherwise, where the host lets you start a
 separate agent, start one that has not seen your reasoning and have it
 review the change with this Skill: tell it what the change is meant to do,
 where the code is and how to see the diff against the starting code, and
-that it reviews read-only, changes nothing and starts no agent. Where that
-agent cannot load Skills, give it the full text of section 2 and of
-[Code review](references/code-quality.md) instead. Wait for its findings before you
+that it reviews read-only, changes nothing and starts no agent. Wait for its findings before you
 report. Hold each finding against the rules before you act on it: one that
 asks for what rule 2 keeps out is declined, with that reason in the report.
 Correct each defect that is part of this change, at every place the
@@ -362,9 +352,9 @@ Read the relevant section when the situation in the table applies.
 
 | Situation | Reference |
 | --- | --- |
-| A requested code review whose deliverable is findings | [Code review](references/code-quality.md) |
-| A check still fails after a correction; a review of the tests themselves; choosing proof of a required guarantee on the affected path for a restore, migration, stored state across processes, protection or another component's compatibility | [Validation](references/validation.md) |
-| Changing a symbol, format or interface other code consumes; reusing a path built for another operation; adding a package; writing a helper or script for agents; searching a large tree | [Change](references/change-workflow.md) |
+| A code review whose deliverable is findings, whether the user requested it or another agent or a workflow assigned it | [Code review](references/code-quality.md) |
+| A check still fails after a correction; writing or reviewing tests; judging whether a supplied check or a generated output proves a claim; choosing proof of a required guarantee on the affected path for a restore, migration, stored state across processes, protection or another component's compatibility | [Validation](references/validation.md) |
+| A changed symbol, format or interface that other code consumes; a path built for another operation that is reused; an added package; a helper or script for agents; a search in a large tree | [Change](references/change-workflow.md) |
 | Writing or reviewing planning or decision records; recording a decision in an existing record; work that continues across an interruption | [Planning](references/planning-and-decisions.md) |
 | Laying out a wholly new project where nothing prescribes structure or naming; an existing project keeps its own organization | [Project conventions](references/project-conventions.md) |
 

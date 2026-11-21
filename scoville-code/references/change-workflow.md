@@ -8,7 +8,7 @@ For a changed symbol, format or public behavior, locate the directly affected
 callers, registrations and test doubles, including independently deployed
 readers or writers of shared data. Exercise the affected contract directions
 with those consumers: preserve meaning and data, or reject unsupported use
-before damage. A producer's own round trip does not check an older consumer.
+before damage.
 One real consumer is enough when inspection finds a single contract variant;
 unrelated callers and neighbouring modules need no inventory.
 

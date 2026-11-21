@@ -13,17 +13,13 @@ use the bundled checker; with `--publish-full` it saves the complete output wher
 ## Runtime helpers
 
 Use the bundled helpers for their operations. Read their invocation instructions,
-not their source, unless diagnosing a failure.
+not their source, unless diagnosing a failure. They require Python 3.11+.
+When Python discovery finds no suitable interpreter, a script or dependency is
+missing, or a helper reports an error its operation's instructions do not
+resolve, stop the affected operation and report the cause, with the
+helper's diagnostic where there is one. Never do a helper's work by hand.
 
-| Condition | Required route |
-| --- | --- |
-| Suitable Python 3.11+ is available | Use the bundled helper; do not load manual references. |
-| No suitable Python 3.11+ | Read only the matching optional reference below. |
-| Missing script, missing dependency or helper error | Stop the affected operation; this never enables the manual route. |
-
-| Helper | Optional no-Python reference |
-| --- | --- |
-| `scripts/check_text_size.py` | [check_text_size](fallbacks/check_text_size-fallback.md) |
+Helpers: `scripts/check_text_size.py`.
 
 ## The three calls
 
@@ -54,8 +50,8 @@ display limit cannot be recovered from a command that must not run twice.
   status. Verify the input file and argv before the only execution. The
   checker has no default deadline. Add `--timeout-seconds` when the host cannot
   bound the wait.
-- Machine data still goes through code before display. Run a repeatable
-  producer inside the evaluating script, which the checker can capture; for a
+- For [machine data](machine-data.md), run a repeatable producer inside the
+  evaluating script, which the checker can capture; for a
   command with an effect, capture first and evaluate the saved file.
 
 **Size check** for the complete composed text, labels and combined results

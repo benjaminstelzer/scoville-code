@@ -10,5 +10,4 @@ project sets up. For bundled helpers and other Python you run:
 
 Use that executable wherever an example says `python` or `<verified-python>`,
 including after `--run --`. Report a missing runtime only after finding no
-suitable installed interpreter; the helper policy of the operation then says
-whether a manual route exists.
+suitable installed interpreter; the Runtime helpers rule then applies.

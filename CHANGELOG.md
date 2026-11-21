@@ -1,5 +1,29 @@
 # Changelog
 
+## 2026-11-21 - Existing files and project checks stay intact
+
+Every byte outside what the complete result needs stays as it was, line endings and encoding included. To look at or test the state before a change, the agent uses a copy, such as the project copied with the change reversed or the output of `git show` saved in a temporary folder, and does not stash, reset, check out or restore files in the working tree. A project check or test that passed before the change still passes after it; it is changed or removed only where the request changes or removes the guarantee it tests, or to keep testing that guarantee another way, and the report names the edit and its reason.
+
+In my tests one model converted whole files from LF to CRLF, through `git stash` under `core.autocrlf=true` and through scripts that rewrote files, and `git diff` hid it. Another replaced an assertion of a project check to fit its own change without reporting it. Both happened in implementation runs with UI. A first wording that only named the cause changed neither; a wording that names what to do stopped both in one run per model on that case. The rule is a short part of its own that Code and UI both always load.
+
+On 2026-11-17 I removed a paragraph on line endings from this Skill because one model converted files more often with it than without. That paragraph described Git's conversion notice; this rule says how to look at an earlier state instead. With Code loaded and this wording, six runs on a small project converted no file and used no stash: four with one model, two with the other. In one of them the model rewrote an existing test to check the same error more strictly and did not name the edit in its report.
+
+## 2026-11-20 - Lean Plan
+
+The planning reference points to Plan's new References table, its authoring reference for Work Item and Step boundaries, and the Plan reference that owns the fields under review. Not tested with models yet.
+
+## 2026-11-20 - Python is required
+
+The bundled text-size checker now always needs Python 3.11+. The manual no-Python route and its reference file are gone: without a suitable Python the size check stops and says so, as it already did after a helper error. I removed the manual route because a host without Python is rare, an agent following a prose copy of a helper makes mistakes the program does not, and every copy was one more wording of the same rules to keep in step.
+
+## 2026-11-20 - Clearer structure
+
+The final section is split into the author's final check and the independent review, so a reviewer sees which part is not for it. The final check covers sections 1 to 3, the same scope a reviewer checks. The review reference also loads for a review that another agent or a workflow assigned.
+
+## 2026-11-19 - One wording per rule
+
+Each rule is now written once and holds for the author and the reviewer alike. The questions for the finished change are gone: they repeated rules 1 to 6 in other words and left parts of them out, so a review that followed the questions skipped those parts. A reviewer checks every rule in order. The review section no longer restates rules 1 and 2. The separate reviewer loads this Skill itself; the fallback that handed it the rules as text is removed.
+
 ## 2026-11-19 - Count the work across calls
 
 Rule 1 counts how often the caller runs and what each call does. Reviewers go through the questions in order and write down the defects they find.

@@ -34,7 +34,7 @@ existing record owner does.
 
 For an assigned review of native Plan or Decision fields, read the existing
 field owner's rules; with Scoville Plan already available and applicable,
-those are its read-only route and field rules. Code's engineering
+those are the Plan references that own the reviewed fields. Code's engineering
 criteria do not define those fields. The review reads; maintenance, selectors,
 tests and record writes stay with their owner.
 

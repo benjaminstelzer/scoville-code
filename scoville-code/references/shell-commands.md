@@ -15,6 +15,9 @@ your shell.
   fails, do not run them.
 - **Exact bytes:** PowerShell `Out-String` formats objects and POSIX command
   substitution strips trailing newlines; capture raw output when bytes matter.
+  Windows PowerShell 5.1 and PowerShell before 7.4 re-encode a native
+  command's output on `>` and `|`; write it to a file through `cmd /c` or a
+  program that writes bytes.
 - **PowerShell to Python:** Before piping text into Python, set
   `$OutputEncoding = [System.Text.UTF8Encoding]::new($false)` and start Python
   with `-X utf8`.
