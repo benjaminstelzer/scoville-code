@@ -59,6 +59,15 @@ class TextParser(argparse.ArgumentParser):
         self.exit(2)
 
 
+def name_new_file(temporary, target):
+    """Give a complete file its final name; fail when that name exists."""
+    # A Windows sandbox refuses hard links. rename refuses an existing target there, as link does elsewhere.
+    if os.name == 'nt':
+        os.rename(temporary, target)
+    else:
+        os.link(temporary, target)
+
+
 def publish_full(root, data, suffix='.txt'):
     root = root.resolve()
     directory = (root / '.scoville' / 'temp').resolve()
@@ -83,11 +92,11 @@ def publish_full(root, data, suffix='.txt'):
             with os.fdopen(marker, 'wb') as stream:
                 stream.write(b'*\n')
         try:
-            os.link(temporary, target)
+            name_new_file(temporary, target)
         except FileExistsError:
             if target.is_symlink() or not target.is_file() or target.read_bytes() != data:
                 raise ValueError(f'the hash-named target "{target}" is not the same regular file; do not overwrite it')
-        temporary.unlink()
+        temporary.unlink(missing_ok=True)
     except (OSError, ValueError) as error:
         if complete:
             raise PublicationError(error, temporary) from error

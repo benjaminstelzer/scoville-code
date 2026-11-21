@@ -127,8 +127,8 @@ the output of `git show <commit>:<path>` saved in a temporary folder; do not
 stash, reset, check out or restore files in the working tree for that. A
 project check or test that passes before your change still passes after it.
 Change or remove one only where the request changes or removes the guarantee
-it tests, or to keep testing that guarantee another way, and name the edit
-and its reason in the report.
+it tests, or to keep testing that guarantee another way. Name every edit to
+an existing check or test, and its reason, in the report.
 
 ### What the code has to be
 

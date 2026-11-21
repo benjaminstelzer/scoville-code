@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-11-21 - Edited tests are named; the size checker works in a Windows sandbox
+
+Naming an edit to an existing check or test, with its reason, is now a sentence of its own. It stood at the end of the sentence that says when such a test may change, and in two runs in Codex one model made an existing test stricter without naming the edit. In two later runs on the same tasks the model edited no existing test, so the new sentence is not shown to work.
+
+The size checker gives a complete file its final name by rename on Windows. Codex's Windows sandbox refuses hard links in the project and in a temporary folder a helper creates, so saving a complete output as a file failed there. On Windows rename refuses an existing name, as the hard link does elsewhere. Checked inside that sandbox: the file is saved, and a second file under the same name is refused.
+
 ## 2026-11-21 - Existing files and project checks stay intact
 
 Every byte outside what the complete result needs stays as it was, line endings and encoding included. To look at or test the state before a change, the agent uses a copy, such as the project copied with the change reversed or the output of `git show` saved in a temporary folder, and does not stash, reset, check out or restore files in the working tree. A project check or test that passed before the change still passes after it; it is changed or removed only where the request changes or removes the guarantee it tests, or to keep testing that guarantee another way, and the report names the edit and its reason.
