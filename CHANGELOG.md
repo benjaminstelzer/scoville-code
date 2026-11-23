@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-11-23 - A shorter README
+
+I rewrote the README. It now says what the Skill does, how to call it, what it needs and where it stops, and leaves out how the suite is built. The Skill itself is unchanged. The requirements name `gpt-6.2-sol` instead of `gpt-6.1-sol`. The test tables and the source list moved to the development notes.
+
 ## 2026-11-23 - The rule against unrequested safeguards names no scenarios
 
 The rule against safeguards for a use nobody described no longer lists three such uses: a second writer at the same moment, a second open window, another process on the same data. They came from the runs that measured the rule, where sessions had assumed such uses unasked; the tasks did not name them. The rule still says that such a use is a question for the user, named in the report, and neither a mechanism to build nor a defect to report. Its effect was measured with the list and not again without it.
