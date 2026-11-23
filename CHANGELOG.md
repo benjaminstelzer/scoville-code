@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-11-23 - The rule against unrequested safeguards names no scenarios
+
+The rule against safeguards for a use nobody described no longer lists three such uses: a second writer at the same moment, a second open window, another process on the same data. They were the scenarios of the tasks that measured the rule. The rule still says that such a use is a question for the user, named in the report, and neither a mechanism to build nor a defect to report. Its effect was measured with the list and not again without it.
+
+The size checker names the process ID when a capture was interrupted and its cleanup is unconfirmed, as it did after a timeout. The delivery reference now says what that ID is for: resolve the state of that process before a rerun.
+
 ## 2026-11-21 - Edited tests are named; the size checker works in a Windows sandbox
 
 Naming an edit to an existing check or test, with its reason, is now a sentence of its own. It stood at the end of the sentence that says when such a test may change, and in two runs in Codex one model made an existing test stricter without naming the edit. In two later runs on the same tasks the model edited no existing test, so the new sentence is not shown to work.

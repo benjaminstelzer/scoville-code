@@ -258,7 +258,7 @@ def capture_command(args):
                     return error('budget cannot fit complete failure metadata')
                 sys.stderr.buffer.write(output)
                 return 125
-            return error(f'{failure_kind} process_id={process.pid}' if failure_kind == 'timeout_cleanup_incomplete' else failure_kind)
+            return error(f'{failure_kind} process_id={process.pid}' if failure_kind.endswith('_cleanup_incomplete') else failure_kind)
         if budget is not None and fits(rendered):
             output = rendered
         elif args.publish_full:

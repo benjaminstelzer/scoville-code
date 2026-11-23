@@ -201,10 +201,9 @@ rule whose subject does not occur there needs no action.
    - no guard, lock, retry, check, repeated validation or recovery path
      against a failure an existing guarantee excludes, against an actor who
      already has full rights, of a value this code just built or checked,
-     or for a use nobody described: a second actor writing at the same
-     moment, a second open window, another process on the same data. Such a
-     use is a question for the user, named in the report: not a mechanism
-     to build and not a defect to report;
+     or for a use nobody described. Such a use is a question for the user,
+     named in the report: not a mechanism to build and not a defect to
+     report;
    - no code without a caller in the product: a helper nothing calls, a
      method kept only for tests, a branch for an error nothing produces, an
      interface method implemented empty.
