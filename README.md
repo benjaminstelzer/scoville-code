@@ -106,9 +106,9 @@ elaborate proof that added little to the result. The useful shift was toward
 the actual problem, a maintainable solution and tests that protect real
 behavior.
 
-Against no Skill, on 18 real changes that each hid a defect, Claude Opus 5.5
-found 16 with Code and 10 without. That comes from one or two runs with an
-earlier revision of the rules - a direction, not an effect size.
+In a review of 18 real changes that each hid a defect, Claude Opus 5.5 found
+16 with Code and 10 without, `gpt-6.2-sol` 12 and 10 - one or two runs with
+an earlier revision of the rules, so a direction and not an effect size.
 
 The [full instructions](https://github.com/benjaminstelzer/scoville-code/blob/main/scoville-code/SKILL.md) are what the agent reads.
 The [development notes](https://github.com/benjaminstelzer/scoville-suite/blob/main/members/scoville-code/development/README.md)

@@ -1,5 +1,9 @@
 # Changelog
 
+## 2026-11-24 - The test result names both models
+
+The README states the test result in one sentence for Claude Opus 5.5 and Sol. Since yesterday it had named only Opus.
+
 ## 2026-11-23 - A shorter README
 
 I rewrote the README. It now says what the Skill does, how to call it, what it needs and where it stops, and leaves out how the suite is built. The Skill itself is unchanged. The requirements name `gpt-6.2-sol` instead of `gpt-6.1-sol`. The test tables and the source list moved to the development notes.
